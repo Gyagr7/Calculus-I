@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Everything after the last chapter. -->
+<backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
+  <title>Backmatter</title>
+
+  <!-- Uncomment once you have exercises with hints/solutions you want
+       collected at the back rather than shown inline:
+  <solutions divisional="hint"> <title>Selected Hints</title> </solutions>
+  <solutions divisional="solution"> <title>Selected Solutions</title> </solutions>
+  -->
+
+  <colophon>
+    <p>These notes were authored in <pretext />.</p>
+  </colophon>
+</backmatter>

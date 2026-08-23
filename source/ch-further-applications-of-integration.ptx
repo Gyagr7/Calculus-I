@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-further-applications-of-integration" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Further Applications of Integration</title>
+  <introduction>
+    <p>[TODO: overview -- more integral setups, capping the semester before the group board presentations (Nov 17 &amp; 19) and final review. Stewart Sec. 8.1-8.3.]</p>
+  </introduction>
+
+  <section xml:id="sec-8-1-arc-length">
+    <title>Arc Length</title>
+    <!-- Session 23 . Thu Nov 12 . Stewart Sec. 8.1 . Quiz 6 (Skills 23-24); board presentations follow on Nov 17 & 19 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-8-2-surface-area">
+    <title>Area of a Surface of Revolution</title>
+    <!-- Session 26 . Tue Nov 24 . Stewart Sec. 8.2 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-8-3-applications-physics-engineering">
+    <title>Applications to Physics and Engineering</title>
+    <!-- Session 27 . Tue Dec 1 . Stewart Sec. 8.3 . Session 28 (Dec 3) is cumulative review for the final -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+</chapter>

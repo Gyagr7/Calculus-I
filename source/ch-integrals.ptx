@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Integrals</title>
+  <introduction>
+    <p>[TODO: overview -- this chapter builds the definite integral from scratch and connects it back to antiderivatives via the Fundamental Theorem of Calculus. Stewart Sec. 5.1-5.5.]</p>
+  </introduction>
+
+  <section xml:id="sec-5-1-areas-distances">
+    <title>Areas and Distances</title>
+    <!-- Session 7 . Tue Sep 15 . Stewart Sec. 5.1 . Quiz 2 on Sep 15 (Skills 5-6) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-5-2-definite-integral">
+    <title>The Definite Integral</title>
+    <!-- Session 8 . Thu Sep 17 . Stewart Sec. 5.2 . HW3 assigned -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-5-3-ftc">
+    <title>The Fundamental Theorem of Calculus</title>
+    <!-- Sessions 9-10 . Tue Sep 22 & Thu Sep 24 . Stewart Sec. 5.3 . Quiz 3 on Sep 24 (Skills 10-11) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-5-4-indefinite-net-change">
+    <title>Indefinite Integrals and the Net Change Theorem</title>
+    <!-- Session 11 . Tue Sep 29 . Stewart Sec. 5.4 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-5-5-substitution">
+    <title>The Substitution Rule</title>
+    <!-- Sessions 12-13 . Thu Oct 1 & Tue Oct 6 . Stewart Sec. 5.5 . HW4 assigned Oct 1, Quiz 4 on Oct 6 (Skills 14-15) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+</chapter>

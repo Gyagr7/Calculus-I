@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Everything that appears before Chapter 1. -->
+
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
+  <bibinfo>
+    <author>
+      <personname>Gyaneshwar Agrahari</personname>
+      <department>Department of Mathematics</department>
+      <institution>Louisiana State University</institution>
+    </author>
+    <date>Fall 2026</date>
+  </bibinfo>
+
+  <titlepage>
+    <titlepage-items/>
+  </titlepage>
+
+  <preface xml:id="preface">
+    <title>Preface</title>
+    <p>
+      [TODO: a short note to students -- what this course covers, how
+      these notes are organized (each section moves from a motivating
+      question, to a worked problem, to the general rule or theorem),
+      and how the notes connect to the skills you'll be assessed on
+      this semester.]
+    </p>
+  </preface>
+</frontmatter>

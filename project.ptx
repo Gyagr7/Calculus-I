@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Project manifest for the PreTeXt-CLI (`pretext build`, `pretext view`). -->
+<!-- Source/publication/output-dir are left unset so they use the standard -->
+<!-- conventional paths: source/main.ptx, publication/publication.ptx, and -->
+<!-- output/<target-name>. See -->
+<!-- https://pretextbook.org/doc/guide/html/processing-CLI.html#cli-project-manifest -->
+<project ptx-version="2">
+  <targets>
+    <!-- Web/HTML version: what students will read online -->
+    <target name="web" format="html" />
+    <!-- Print/PDF version: a printable or downloadable copy -->
+    <target name="print" format="pdf" />
+  </targets>
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!-- Book-wide settings (macros, asset paths) -->
+  <xi:include href="./docinfo.ptx" />
+
+  <book xml:id="math1540">
+    <title>Integral Calculus</title>
+    <subtitle>Lecture Notes for MATH 1540</subtitle>
+
+    <xi:include href="./frontmatter.ptx" />
+
+    <!--
+      Chapters live in their own files and are pulled in here with
+      xi:include, so no single file gets too big to comfortably edit.
+      Add new xi:include lines as you add chapters; the order here is
+      the order they appear in the book.
+    -->
+    <xi:include href="./ch-derivatives-recap.ptx"/>
+    <xi:include href="./ch-optimization-approximation.ptx"/>
+    <xi:include href="./ch-integrals.ptx"/>
+    <xi:include href="./ch-applications-of-integration.ptx"/>
+    <xi:include href="./ch-further-applications-of-integration.ptx"/>
+
+    <xi:include href="./backmatter.ptx" />
+
+  </book>
+</pretext>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The docinfo block is the analogue to a LaTeX preamble: book-wide -->
+<!-- settings live here (macros, external asset location, etc.). -->
+<docinfo xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <directories external="../assets" />
+
+  <!-- LaTeX math macro shortcuts, used throughout the book. -->
+  <macros>
+    \newcommand{\R}{\mathbb{R}}
+    \newcommand{\dx}{\,dx}
+  </macros>
+
+</docinfo>

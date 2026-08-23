@@ -1,0 +1,4 @@
+# Pin the PreTeXt-CLI version this project was set up and tested against.
+# Run `pip install -r requirements.txt` (ideally in a virtual environment)
+# before running any `pretext` commands.
+pretext == 2.49.1

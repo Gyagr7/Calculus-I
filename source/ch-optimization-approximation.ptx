@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-optimization-approximation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Optimization and Approximation</title>
+  <introduction>
+    <p>[TODO: overview -- this chapter finishes the applications of differentiation before we turn to integration. Stewart Sec. 4.7-4.9.]</p>
+  </introduction>
+
+  <section xml:id="sec-4-7-optimization">
+    <title>Optimization Problems</title>
+    <!-- Sessions 3-4 . Tue Sep 1 & Thu Sep 3 . Stewart Sec. 4.7 . Quiz 1 on Sep 3 (Skills 3-4) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-4-8-newtons-method">
+    <title>Newton's Method</title>
+    <!-- Session 5 . Tue Sep 8 . Stewart Sec. 4.8 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-4-9-antiderivatives">
+    <title>Antiderivatives</title>
+    <!-- Session 6 . Thu Sep 10 . Stewart Sec. 4.9 . HW2 assigned -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+</chapter>

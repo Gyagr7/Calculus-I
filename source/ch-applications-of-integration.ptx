@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-applications-of-integration" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Applications of Integration</title>
+  <introduction>
+    <p>[TODO: overview -- each section here is the same move: translate a geometric or physical description into a definite integral, then evaluate it. Stewart Sec. 6.1-6.5. Note: the Oct 27 midterm covers everything through Sec. 5.5 (Skills 1-20) -- plan a review session before it.]</p>
+  </introduction>
+
+  <section xml:id="sec-6-1-areas-between-curves">
+    <title>Areas Between Curves</title>
+    <!-- Session 14 . Tue Oct 13 . Stewart Sec. 6.1 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-6-2-volumes">
+    <title>Volumes (Disks and Washers)</title>
+    <!-- Sessions 15-16 . Thu Oct 15 & Tue Oct 20 . Stewart Sec. 6.2 . Quiz 5 on Oct 20 (Skills 18-19) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-6-3-cylindrical-shells">
+    <title>Volumes by Cylindrical Shells</title>
+    <!-- Sessions 19-20 . Thu Oct 29 & Tue Nov 3 . Stewart Sec. 6.3 . HW6 assigned Nov 3 (right after the Oct 27 midterm) -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-6-4-work">
+    <title>Work</title>
+    <!-- Session 21 . Thu Nov 5 . Stewart Sec. 6.4 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <section xml:id="sec-6-5-average-value">
+    <title>Average Value of a Function</title>
+    <!-- Session 22 . Tue Nov 10 . Stewart Sec. 6.5 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+</chapter>

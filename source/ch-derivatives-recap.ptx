@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-derivatives-recap" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>A Derivatives Refresher</title>
+  <introduction>
+    <p>[TODO: why we pause here before starting integral calculus -- which tools from differential calculus this chapter refreshes.]</p>
+  </introduction>
+
+  <section xml:id="sec-derivatives-refresher">
+    <title>Derivative Rules and Critical Points</title>
+    <!-- Sessions 1-2 (of 28) . Tue Aug 25 & Thu Aug 27 -->
+    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
+    <p>[Problem -- TODO: a guiding worked example]</p>
+    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+</chapter>
