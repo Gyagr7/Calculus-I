@@ -2,15 +2,261 @@
 <chapter xml:id="ch-derivatives-recap" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>A Derivatives Refresher</title>
   <introduction>
-    <p>[TODO: why we pause here before starting integral calculus -- which tools from differential calculus this chapter refreshes.]</p>
+    <p>
+      This course is about <term>integral</term> calculus, but every technique
+      in it leans on <term>differential</term> calculus you've already seen.
+      Rather than assume that's all still fresh, we spend our first two class
+      meetings reminding ourselves what a derivative actually is, and getting
+      the rules for computing one back into your hands quickly.
+    </p>
   </introduction>
 
   <section xml:id="sec-derivatives-refresher">
     <title>Derivative Rules and Critical Points</title>
-    <!-- Sessions 1-2 (of 28) . Tue Aug 25 & Thu Aug 27 -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+    <!-- Sessions 1-2 . Tue Aug 25 & Thu Aug 27 -->
 
+    <subsection xml:id="subsec-what-is-a-derivative">
+      <title>What does a derivative actually mean?</title>
+
+      <p>
+        Before any rules: what problem is the derivative actually solving?
+        Picture a curve <m>y = f(x)</m> and a point on it. You want to know
+        how steep the curve is <em>right at that point</em> &#8212; not the
+        average steepness between two far-apart points, but the steepness at
+        one exact instant. That's the whole idea. Everything else is
+        machinery for computing it.
+      </p>
+
+      <p>
+        A first attempt: pick a second, nearby point on the curve and find
+        the slope of the line connecting the two (a <term>secant line</term>).
+        If the two points are <m>(x, f(x))</m> and <m>(x+h, f(x+h))</m>, that
+        slope is
+        <md>
+          \frac{f(x+h) - f(x)}{h}.
+        </md>
+        This is only an <em>average</em> rate of change over the gap between
+        the two points &#8212; not what we wanted. But if we let the gap
+        <m>h</m> shrink toward <m>0</m>, the secant line swings around and
+        settles onto the <term>tangent line</term> at <m>x</m>: the line that
+        just grazes the curve at that single point. That limiting slope is
+        the derivative.
+      </p>
+
+      <definition xml:id="def-derivative">
+        <title>The derivative</title>
+        <statement>
+          <p>
+            The <term>derivative</term> of <m>f</m> at <m>x</m>, written
+            <m>f'(x)</m>, is
+            <md>
+              f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h},
+            </md>
+            provided the limit exists. Geometrically, <m>f'(x)</m> is the
+            slope of the tangent line to <m>y=f(x)</m> at the point <m>x</m>.
+            Just as often, we read it as a <term>rate of change</term>: how
+            fast <m>f</m> is changing, per unit change in <m>x</m>, at that
+            instant.
+          </p>
+        </statement>
+      </definition>
+
+      <p>
+        Both readings matter all semester. "Slope of the tangent line" is
+        the picture to keep in your head; "instantaneous rate of change" is
+        how derivatives show up in every applied problem &#8212; velocity is
+        the derivative of position, marginal cost is the derivative of total
+        cost, and so on.
+      </p>
+
+      <example xml:id="example-derivative-from-definition">
+        <title>Computing a derivative directly from the definition</title>
+        <statement>
+          <p>Let <m>f(x) = x^2</m>. Find <m>f'(x)</m> using
+          <xref ref="def-derivative"/>.</p>
+        </statement>
+        <solution>
+          <p>Set up the difference quotient and simplify before taking the
+          limit &#8212; plugging in <m>h=0</m> too early gives <m>0/0</m>.</p>
+          <md>
+            <mrow> f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} </mrow>
+            <mrow> &amp;= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h} </mrow>
+            <mrow> &amp;= \lim_{h \to 0} \frac{2xh + h^2}{h} </mrow>
+            <mrow> &amp;= \lim_{h \to 0} (2x + h) </mrow>
+            <mrow> &amp;= 2x. </mrow>
+          </md>
+          <p>
+            Now <m>h</m> can safely go to <m>0</m>, since it's no longer in
+            a denominator. This confirms something you likely remember:
+            the derivative of <m>x^2</m> is <m>2x</m>.
+          </p>
+        </solution>
+      </example>
+
+      <p>
+        This works, but imagine doing that algebra for something like
+        <m>f(x) = x^{10}</m>, or <m>f(x) = \sin(x)\cos(x)</m>. The definition
+        is the <em>truth</em> of what a derivative is, but it's a slow way to
+        compute one. That's what the rules below are for: they're all
+        theorems you could prove from the limit definition, packaged so you
+        never have to run that limit by hand again.
+      </p>
+    </subsection>
+
+    <subsection xml:id="subsec-differentiation-rules">
+      <title>The differentiation toolkit</title>
+
+      <p>
+        These are the rules you built up over Calc I. Skim them to see what
+        comes back on its own, and flag anything that doesn't &#8212; we'll
+        move fast, but we'll use every one of these repeatedly for the rest
+        of the semester.
+      </p>
+
+      <fact xml:id="fact-basic-rules">
+        <title>Basic differentiation rules</title>
+        <statement>
+          <p>
+            For differentiable functions <m>f</m> and <m>g</m>, and a
+            constant <m>c</m>:
+          </p>
+          <md>
+            <mrow> \text{Constant Rule:} \qquad &amp; \frac{d}{dx}[c] = 0 </mrow>
+            <mrow> \text{Power Rule:} \qquad &amp; \frac{d}{dx}[x^n] = n x^{n-1} </mrow>
+            <mrow> \text{Constant Multiple Rule:} \qquad &amp; \frac{d}{dx}[c \, f(x)] = c \, f'(x) </mrow>
+            <mrow> \text{Sum/Difference Rule:} \qquad &amp; \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) </mrow>
+            <mrow> \text{Product Rule:} \qquad &amp; \frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x) </mrow>
+            <mrow> \text{Quotient Rule:} \qquad &amp; \frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} </mrow>
+            <mrow> \text{Chain Rule:} \qquad &amp; \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x) </mrow>
+          </md>
+        </statement>
+      </fact>
+
+      <p>
+        The Chain Rule is the one people are rustiest on, and it's the one
+        we'll lean on hardest this semester (substitution, our main
+        integration technique in Chapter <xref ref="ch-integrals"/>, is
+        really the Chain Rule run backwards). The pattern to recognize: a
+        function <term>inside</term> another function. Differentiate the
+        outside function, leave the inside alone, then multiply by the
+        derivative of the inside.
+      </p>
+
+      <p>
+        Alongside these, you'll need the derivatives of a handful of
+        specific functions on recall:
+      </p>
+
+      <fact xml:id="fact-standard-derivatives">
+        <title>Standard derivatives</title>
+        <statement>
+          <md>
+            <mrow> \frac{d}{dx}[\sin x] &amp;= \cos x
+              &amp; \frac{d}{dx}[\cos x] &amp;= -\sin x </mrow>
+            <mrow> \frac{d}{dx}[\tan x] &amp;= \sec^2 x
+              &amp; \frac{d}{dx}[e^x] &amp;= e^x </mrow>
+            <mrow> \frac{d}{dx}[\ln x] &amp;= \frac{1}{x} </mrow>
+          </md>
+        </statement>
+      </fact>
+
+      <example xml:id="example-product-chain">
+        <title>Product Rule and Chain Rule together</title>
+        <statement>
+          <p>Differentiate <m>f(x) = x^2 e^{3x}</m>.</p>
+        </statement>
+        <solution>
+          <p>
+            This is a product of two functions, <m>x^2</m> and <m>e^{3x}</m>,
+            so start with the Product Rule. The second factor needs the
+            Chain Rule on its own: the "outside" function is
+            <m>e^{(\,\cdot\,)}</m> and the "inside" function is <m>3x</m>,
+            whose derivative is <m>3</m>.
+          </p>
+          <md>
+            <mrow> f'(x) &amp;= \frac{d}{dx}[x^2]\cdot e^{3x} + x^2 \cdot \frac{d}{dx}[e^{3x}] </mrow>
+            <mrow> &amp;= 2x\,e^{3x} + x^2 \cdot 3e^{3x} </mrow>
+            <mrow> &amp;= e^{3x}(2x + 3x^2) </mrow>
+            <mrow> &amp;= x e^{3x}(2 + 3x). </mrow>
+          </md>
+        </solution>
+      </example>
+
+      <example xml:id="example-quotient">
+        <title>Quotient Rule</title>
+        <statement>
+          <p>Differentiate <m>g(x) = \dfrac{x^2 + 1}{x - 3}</m>.</p>
+        </statement>
+        <solution>
+          <md>
+            <mrow> g'(x) &amp;= \frac{(2x)(x-3) - (x^2+1)(1)}{(x-3)^2} </mrow>
+            <mrow> &amp;= \frac{2x^2 - 6x - x^2 - 1}{(x-3)^2} </mrow>
+            <mrow> &amp;= \frac{x^2 - 6x - 1}{(x-3)^2}. </mrow>
+          </md>
+        </solution>
+      </example>
+    </subsection>
+
+    <subsection xml:id="subsec-critical-points">
+      <title>Critical points</title>
+
+      <p>
+        One more piece of vocabulary we'll need immediately in the next
+        chapter. Where a smooth curve has a local peak or valley, its
+        tangent line is flat &#8212; slope zero. That observation is worth
+        naming.
+      </p>
+
+      <definition xml:id="def-critical-point">
+        <title>Critical point</title>
+        <statement>
+          <p>
+            A <term>critical point</term> of <m>f</m> is a value <m>c</m> in
+            the domain of <m>f</m> where either <m>f'(c) = 0</m> or
+            <m>f'(c)</m> does not exist.
+          </p>
+        </statement>
+      </definition>
+
+      <p>
+        Critical points are exactly the <em>candidates</em> for where a
+        function reaches a local maximum or minimum &#8212; not every
+        critical point is one, but every local max or min (away from the
+        endpoints of an interval) has to be one. That's the entire engine
+        behind optimization, which is where we're headed next.
+      </p>
+
+      <example xml:id="example-critical-points">
+        <title>Finding critical points</title>
+        <statement>
+          <p>Find the critical points of <m>f(x) = x^3 - 3x</m>.</p>
+        </statement>
+        <solution>
+          <p>
+            <m>f</m> is a polynomial, so <m>f'</m> is defined everywhere;
+            the only critical points come from <m>f'(x) = 0</m>.
+          </p>
+          <md>
+            <mrow> f'(x) &amp;= 3x^2 - 3 </mrow>
+            <mrow> 0 &amp;= 3x^2 - 3 </mrow>
+            <mrow> 0 &amp;= 3(x^2-1) </mrow>
+            <mrow> x &amp;= \pm 1. </mrow>
+          </md>
+          <p>
+            So <m>f</m> has critical points at <m>x=-1</m> and <m>x=1</m>.
+            (Sketch <m>f(x)=x^3-3x</m> if you want to see why: it has a
+            local max at <m>x=-1</m> and a local min at <m>x=1</m>.)
+          </p>
+        </solution>
+      </example>
+
+      <p>
+        With the mechanics of differentiation and the idea of a critical
+        point back in hand, we're ready for Chapter <xref
+        ref="ch-optimization-approximation"/>, where "find the critical
+        points" becomes the key step in solving real optimization problems.
+      </p>
+    </subsection>
+
+  </section>
 </chapter>

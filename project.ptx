@@ -10,5 +10,8 @@
     <target name="web" format="html" />
     <!-- Print/PDF version: a printable or downloadable copy -->
     <target name="print" format="pdf" />
+    <!-- SCORM package: upload the resulting zip straight into Moodle's -->
+    <!-- "SCORM package" activity for an embedded, self-contained copy. -->
+    <target name="scorm" format="html" compression="scorm" />
   </targets>
 </project>
