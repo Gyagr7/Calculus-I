@@ -1,0 +1,75 @@
+<title>Pre-Assignment: Rescue Mission -- Fencing for Pancake the Alpaca</title>
+
+<p>
+  Emergency at the farm! Pancake the alpaca has broken out of her old pen
+  three times this week, and the farmer (that's you) has decided enough is
+  enough: it's time to build the biggest pen the fencing budget can buy.
+  Before we meet Tuesday, help solve Pancake's housing crisis -- it's exactly
+  the kind of "best choice" problem we'll be tackling together in class.
+</p>
+
+<p>
+  You have <m>40</m> meters of fencing and a rectangular pen to build. All
+  four sides need fencing, so if one side (the width) is <m>x</m> meters,
+  the other side (the length) has to be <m>20-x</m> meters, since the total
+  perimeter is <m>40</m>.
+</p>
+
+<p>
+  <alert>Question 1.</alert> Pancake likes to pace, so more area means a
+  happier alpaca. If you make the width <m>x=8</m> meters, the length is
+  <m>20-8=12</m> meters. How many square meters of stomping room does
+  Pancake get?
+</p>
+
+<answer>
+  <label>Area when the width is 8 meters</label>
+  <award>96</award>
+</answer>
+
+<p>
+  Try a few more widths in your head: width <m>5</m> gives area <m>75</m>;
+  width <m>15</m> gives area <m>75</m> again (same number, totally
+  different-shaped pen); width <m>10</m> gives area <m>100</m> -- Pancake's
+  favorite so far. The area climbs, peaks, then falls back down. Somewhere
+  in there is the <em>best possible</em> pen.
+</p>
+
+<p>
+  <alert>Question 2.</alert> Before you spend all night guessing widths one
+  at a time, let's write down the pattern. For a width of <m>x</m> meters,
+  which expression actually gives Pancake's area as a function of <m>x</m>?
+</p>
+
+<answer>
+  <label>Which expression gives the area as a function of x?</label>
+  <choice credit="1"><m>x(20-x)</m></choice>
+  <choice credit="0"><m>x + (20-x)</m></choice>
+  <choice credit="0"><m>2x + 2(20-x)</m></choice>
+  <choice credit="0"><m>x^2(20-x)</m></choice>
+</answer>
+
+<p>
+  So Pancake's area function is <m>A(x) = x(20-x) = 20x - x^2</m>.
+</p>
+
+<p>
+  <alert>Question 3.</alert> Here's the twist: you already have the tool to
+  find the very best width, and you built it last week. A function's rate
+  of change is <m>0</m> exactly at its peaks and valleys -- that's the
+  critical-point idea. Treat <m>A(x) = 20x - x^2</m> the same way you
+  treated last week's functions: find the value of <m>x</m> where
+  <m>A'(x) = 0</m>.
+</p>
+
+<answer>
+  <label>The critical point of A(x)</label>
+  <award>10</award>
+</answer>
+
+<p>
+  Hold onto that number -- it's Pancake's dream pen width. On Tuesday
+  we'll see exactly why the critical point of the area function gives the
+  biggest possible pen, and we'll turn this one-off rescue mission into a
+  general method you can use for any "best choice" problem.
+</p>

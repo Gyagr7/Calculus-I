@@ -5,6 +5,30 @@
     <p>[TODO: overview -- this chapter finishes the applications of differentiation before we turn to integration. Stewart Sec. 4.7-4.9.]</p>
   </introduction>
 
+  <!-- Pre-assignment for Session 3 (Tue Sep 1), added 2026-08-31, moved into
+       its own section and switched to a direct link 2026-08-31 (v2).
+       This links straight to the graded Doenet assignment (Quick-Assign-style
+       code) in the instructor's own account, rather than an ungraded embedded
+       copy; students sign in there and their work is recorded in the
+       instructor's Doenet gradebook. If this assignment is ever recreated in
+       Doenet, the code in the href below will change and needs updating here
+       too; the source content for re-pasting into Doenet lives at
+       source/doenet/optimization-preassignment-session3.doenetml. -->
+  <section xml:id="sec-pre-assignment-optimization">
+    <title>Pre-Assignment: Before Tuesday's Class</title>
+    <p>
+      Complete the short warm-up below before we meet Tuesday. It connects
+      the critical-point skill from <xref ref="ch-derivatives-recap"/> to the
+      idea of optimization, and takes about 10 minutes.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/189251" visual="doenet.org/code/189251">Open the pre-assignment</url>
+      and sign in (your own Doenet account, or create a free one) before you
+      start, so your work is recorded for completion credit. It opens in a
+      new tab.
+    </p>
+  </section>
+
   <section xml:id="sec-4-7-optimization">
     <title>Optimization Problems</title>
     <!-- Sessions 3-4 . Tue Sep 1 & Thu Sep 3 . Stewart Sec. 4.7 . Quiz 1 on Sep 3 (Skills 3-4) -->

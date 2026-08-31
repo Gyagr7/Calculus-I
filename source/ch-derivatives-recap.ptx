@@ -7,7 +7,10 @@
       in it leans on <term>differential</term> calculus you've already seen.
       Rather than assume that's all still fresh, we spend our first two class
       meetings reminding ourselves what a derivative actually is, and getting
-      the rules for computing one back into your hands quickly.
+      the rules for computing one back into your hands quickly. The goal here
+      isn't to re-teach a topic from scratch &#8212; it's to reload the
+      <em>picture</em> in your head, so the mechanics you already learned once
+      make sense again instead of feeling like memorized symbol-pushing.
     </p>
   </introduction>
 
@@ -19,28 +22,117 @@
       <title>What does a derivative actually mean?</title>
 
       <p>
-        Before any rules: what problem is the derivative actually solving?
-        Picture a curve <m>y = f(x)</m> and a point on it. You want to know
-        how steep the curve is <em>right at that point</em> &#8212; not the
-        average steepness between two far-apart points, but the steepness at
-        one exact instant. That's the whole idea. Everything else is
-        machinery for computing it.
+        Picture yourself driving. The odometer racks up total distance, and
+        dividing that by elapsed time gives your <term>average speed</term>
+        for the whole trip &#8212; one honest number, easy to compute. The
+        speedometer is answering a stranger question: how fast are you going
+        <em>right now</em>, at this exact instant? There's no stretch of time
+        to divide by here &#8212; time isn't passing at an instant. And yet
+        the needle gives a real, meaningful number. Figuring out what that
+        number even <em>means</em>, and how to compute it for any changing
+        quantity &#8212; not just a car's position, but a population, a
+        temperature, an account balance &#8212; is the entire point of a
+        derivative.
       </p>
 
       <p>
-        A first attempt: pick a second, nearby point on the curve and find
-        the slope of the line connecting the two (a <term>secant line</term>).
-        If the two points are <m>(x, f(x))</m> and <m>(x+h, f(x+h))</m>, that
-        slope is
-        <md>
-          \frac{f(x+h) - f(x)}{h}.
-        </md>
-        This is only an <em>average</em> rate of change over the gap between
-        the two points &#8212; not what we wanted. But if we let the gap
-        <m>h</m> shrink toward <m>0</m>, the secant line swings around and
-        settles onto the <term>tangent line</term> at <m>x</m>: the line that
-        just grazes the curve at that single point. That limiting slope is
-        the derivative.
+        Here's the trick that makes "speed right now" computable: you can't
+        measure it directly, but you <em>can</em> measure average speed over
+        a short window of time, and see what happens as that window shrinks
+        toward nothing. Say your position after <m>t</m> seconds is
+        <m>f(t) = t^2</m> (in some units), and you want your speed exactly at
+        <m>t=1</m>. Average speed over <m>[1, 1+h]</m> is
+        <m>\dfrac{f(1+h)-f(1)}{h}</m>. Watch what happens as <m>h</m> shrinks:
+      </p>
+
+      <md>
+        <mrow> h = 1: \qquad \dfrac{f(2)-f(1)}{1} = \dfrac{4-1}{1} = 3 </mrow>
+        <mrow> h = 0.1: \qquad \dfrac{f(1.1)-f(1)}{0.1} = \dfrac{1.21-1}{0.1} = 2.1 </mrow>
+        <mrow> h = 0.01: \qquad \dfrac{f(1.01)-f(1)}{0.01} = \dfrac{1.0201-1}{0.01} = 2.01 </mrow>
+      </md>
+
+      <p>
+        The average speeds aren't jumping around &#8212; they're homing in on
+        <m>2</m>. That limiting number, the one the average settles toward as
+        the time window shrinks to a single instant, <em>is</em> the
+        instantaneous speed at <m>t=1</m>. Nothing mystical is happening;
+        we're just squeezing an average over a smaller and smaller window
+        until, in the limit, it stops being an average of two points and
+        becomes a property of one.
+      </p>
+
+      <exercise xml:id="check-numeric-squeeze" label="check-numeric-squeeze">
+        <title>Try it yourself</title>
+        <statement>
+          <p>
+            Push the squeeze one step further than the table above. For
+            <m>f(t) = t^2</m>, what is the average speed on the interval
+            <m>[1, 1.001]</m>?
+          </p>
+          <p>
+            Average speed <m>=</m> <fillin answer="2.001" mode="number"/>
+          </p>
+        </statement>
+        <evaluation>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes" tolerance="0.001"/>
+              <feedback>
+                <p>
+                  Right on the money &#8212; and this is even closer to
+                  <m>2</m> than the <m>h=0.01</m> row was. Shrink <m>h</m>
+                  further and this number keeps sliding toward <m>2</m>.
+                </p>
+              </feedback>
+            </test>
+          </evaluate>
+        </evaluation>
+      </exercise>
+
+      <p>
+        The same squeeze has a geometric picture, and it's the one worth
+        keeping in your head all semester. Take any curve <m>y=f(x)</m> and a
+        point on it. Pick a second, nearby point, and draw the line through
+        both &#8212; a <term>secant line</term>. Its slope is exactly the
+        average rate of change we computed above,
+        <m>\dfrac{f(x+h)-f(x)}{h}</m>. Now let that second point slide back
+        toward the first, so <m>h \to 0</m>. The secant line swings around
+        and settles onto the <term>tangent line</term>: the line that just
+        grazes the curve at that single point, tilted at exactly the curve's
+        own steepness there. That settling slope is the derivative.
+      </p>
+
+      <figure xml:id="fig-secant-to-tangent">
+        <caption>Dragging <m>Q</m> toward <m>P</m> turns the secant line into
+        the tangent line.</caption>
+        <interactive xml:id="interactive-secant-tangent" label="interactive-secant-tangent"
+                     platform="jsxgraph" width="100%" aspect="4:3"
+                     source="jsxgraph/secant-to-tangent.js">
+          <slate xml:id="interactive-secant-tangent-slate" surface="jsxboard" aspect="4:3"/>
+          <instructions>
+            <p>
+              <m>P=(1,1)</m> is fixed on <m>y=x^2</m>. Drag the orange point
+              <m>Q</m> along the curve toward <m>P</m> and watch the secant
+              slope shown above the graph. What number does it approach?
+            </p>
+          </instructions>
+        </interactive>
+      </figure>
+
+      <insight>
+        <title>The big idea</title>
+        <p>
+          A derivative is nothing more than: <term>the slope an average rate
+          of change settles into as the interval it's averaged over shrinks
+          to a single point.</term> Everything in this subsection &#8212; the
+          formula below, the rules in the next subsection, all of it &#8212;
+          is just bookkeeping built on top of that one idea.
+        </p>
+      </insight>
+
+      <p>
+        Writing that squeeze down symbolically, instead of re-deriving it
+        with a table of numbers every time, gives the formal definition:
       </p>
 
       <definition xml:id="def-derivative">
@@ -52,32 +144,56 @@
             <md>
               f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h},
             </md>
-            provided the limit exists. Geometrically, <m>f'(x)</m> is the
-            slope of the tangent line to <m>y=f(x)</m> at the point <m>x</m>.
-            Just as often, we read it as a <term>rate of change</term>: how
-            fast <m>f</m> is changing, per unit change in <m>x</m>, at that
-            instant.
+            provided the limit exists.
           </p>
         </statement>
       </definition>
 
       <p>
-        Both readings matter all semester. "Slope of the tangent line" is
-        the picture to keep in your head; "instantaneous rate of change" is
-        how derivatives show up in every applied problem &#8212; velocity is
-        the derivative of position, marginal cost is the derivative of total
-        cost, and so on.
+        You'll hear <m>f'(x)</m> described two ways, and both readings trace
+        straight back to the picture above. Geometrically, it's the
+        <term>slope of the tangent line</term> to <m>y=f(x)</m> at <m>x</m>
+        &#8212; useful whenever you care about steepness. Physically, it's an
+        <term>instantaneous rate of change</term> &#8212; useful whenever you
+        care about how fast something is happening right now. Velocity is
+        the derivative of position; marginal cost is the derivative of total
+        cost; the rate an epidemic spreads is the derivative of case count.
+        Same computation, different story attached to it depending on what
+        <m>f</m> represents.
       </p>
+
+      <exercise xml:id="check-derivative-meaning" label="check-derivative-meaning">
+        <title>True or false?</title>
+        <statement correct="no">
+          <p>
+            <m>f'(x)</m> tells you the <em>average</em> rate of change of
+            <m>f</m> over the interval from <m>x</m> to <m>x+1</m>.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            False. <m>f'(x)</m> is the <em>instantaneous</em> rate of
+            change at the single point <m>x</m> &#8212; there's no interval
+            left to average over once the limit has been taken. The average
+            rate of change over <m>[x,x+1]</m> is the different number
+            <m>\dfrac{f(x+1)-f(x)}{1}</m>, and generally won't match
+            <m>f'(x)</m> at all.
+          </p>
+        </feedback>
+      </exercise>
 
       <example xml:id="example-derivative-from-definition">
         <title>Computing a derivative directly from the definition</title>
         <statement>
           <p>Let <m>f(x) = x^2</m>. Find <m>f'(x)</m> using
-          <xref ref="def-derivative"/>.</p>
+          <xref ref="def-derivative"/>, and check it against the numerical
+          squeeze above.</p>
         </statement>
         <solution>
-          <p>Set up the difference quotient and simplify before taking the
-          limit &#8212; plugging in <m>h=0</m> too early gives <m>0/0</m>.</p>
+          <p>Set up the difference quotient and simplify <em>before</em>
+          taking the limit &#8212; plugging in <m>h=0</m> too early gives the
+          meaningless <m>0/0</m>, since we need the algebra to cancel that
+          <m>h</m> out of the denominator first.</p>
           <md>
             <mrow> f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} </mrow>
             <mrow> &amp;= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h} </mrow>
@@ -86,20 +202,25 @@
             <mrow> &amp;= 2x. </mrow>
           </md>
           <p>
-            Now <m>h</m> can safely go to <m>0</m>, since it's no longer in
-            a denominator. This confirms something you likely remember:
-            the derivative of <m>x^2</m> is <m>2x</m>.
+            Now <m>h</m> can safely go to <m>0</m>, since it's no longer sitting
+            in a denominator. At <m>x=1</m> this gives <m>f'(1) = 2</m> &#8212;
+            exactly the number our shrinking-window table was homing in on.
+            The definition isn't just abstract machinery; it's the same
+            squeeze, done symbolically instead of numerically, for every
+            <m>x</m> at once.
           </p>
         </solution>
       </example>
 
       <p>
-        This works, but imagine doing that algebra for something like
+        That algebra worked fine for <m>x^2</m>, but imagine repeating it for
         <m>f(x) = x^{10}</m>, or <m>f(x) = \sin(x)\cos(x)</m>. The definition
-        is the <em>truth</em> of what a derivative is, but it's a slow way to
-        compute one. That's what the rules below are for: they're all
-        theorems you could prove from the limit definition, packaged so you
-        never have to run that limit by hand again.
+        is the <em>truth</em> of what a derivative is &#8212; you should
+        always be able to fall back on it &#8212; but it's a slow way to
+        compute one. The rules below exist purely so you never have to run
+        that limit by hand again; every single one of them is just this same
+        limit, worked out once and in general, for a whole family of
+        functions at a time.
       </p>
     </subsection>
 
@@ -107,44 +228,169 @@
       <title>The differentiation toolkit</title>
 
       <p>
-        These are the rules you built up over Calc I. Skim them to see what
-        comes back on its own, and flag anything that doesn't &#8212; we'll
-        move fast, but we'll use every one of these repeatedly for the rest
-        of the semester.
+        Rather than list these as symbols to memorize, here's the intuition
+        behind each one &#8212; the picture that makes the formula feel
+        inevitable rather than arbitrary. A clean reference table for all of
+        them sits at the end of this subsection once the ideas are back in
+        place.
       </p>
 
-      <fact xml:id="fact-basic-rules">
-        <title>Basic differentiation rules</title>
+      <p>
+        Three of the rules are close to obvious once you see them stated. A
+        <term>constant</term> function never changes, so its rate of change
+        is <m>0</m>. Scaling a function by a constant factor scales its rate
+        of change by that same factor &#8212; if you triple every output,
+        you triple how fast it's changing too. And if two quantities change
+        <em>independently</em> and you add them together (two separate
+        savings accounts, each earning its own interest), the combined total
+        changes at the combined rate &#8212; you just add the two rates.
+      </p>
+
+      <md>
+        <mrow> \text{Constant Rule:} \qquad &amp; \frac{d}{dx}[c] = 0 </mrow>
+        <mrow> \text{Constant Multiple Rule:} \qquad &amp; \frac{d}{dx}[c \, f(x)] = c \, f'(x) </mrow>
+        <mrow> \text{Sum/Difference Rule:} \qquad &amp; \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) </mrow>
+      </md>
+
+      <p>
+        The <term>Power Rule</term> takes a little more picturing. Think of
+        <m>x^n</m> as <m>n</m> copies of <m>x</m> multiplied together. Nudge
+        <m>x</m> up by a tiny amount, and each of those <m>n</m> copies gets
+        nudged &#8212; each contributing its own small sliver to the product.
+        With <m>n</m> nudges each worth roughly <m>x^{n-1}</m> stacking up,
+        the total rate of change comes out to <m>n</m> times <m>x^{n-1}</m>:
+      </p>
+
+      <md>
+        \text{Power Rule:} \qquad \frac{d}{dx}[x^n] = n\,x^{n-1}
+      </md>
+
+      <p>
+        (That picture is easiest to see for a whole number <m>n</m>, but the
+        formula itself holds for any real exponent &#8212; negative,
+        fractional, whatever you throw at it.)
+      </p>
+
+      <exercise xml:id="check-power-rule-negative" label="check-power-rule-negative">
+        <title>Quick check: Power Rule</title>
+        <statement>
+          <p>Which of these is <m>\dfrac{d}{dx}\left[x^{-2}\right]</m>?</p>
+        </statement>
+        <choices>
+          <choice correct="no">
+            <statement><p><m>-2x^{-1}</m></p></statement>
+            <feedback><p>Careful with the exponent step: the Power Rule
+            drops the exponent by <m>1</m>, so <m>-2</m> becomes
+            <m>-2-1=-3</m>, not <m>-1</m>.</p></feedback>
+          </choice>
+          <choice correct="yes">
+            <statement><p><m>-2x^{-3}</m></p></statement>
+            <feedback><p>Right &#8212; bring the <m>-2</m> down as a
+            coefficient, then drop the exponent by one: <m>-2</m> becomes
+            <m>-3</m>.</p></feedback>
+          </choice>
+          <choice correct="no">
+            <statement><p><m>2x^{-3}</m></p></statement>
+            <feedback><p>The exponent change is right, but the sign of the
+            coefficient should carry over from the original <m>-2</m>.</p></feedback>
+          </choice>
+          <choice correct="no">
+            <statement><p><m>-2x^{-1}\cdot(-2)</m></p></statement>
+            <feedback><p>That mixes up two different rules. The Power Rule
+            just brings the exponent down as a coefficient and lowers it by
+            <m>1</m> &#8212; nothing gets multiplied twice.</p></feedback>
+          </choice>
+        </choices>
+      </exercise>
+
+      <exercise xml:id="check-power-rule-more" label="check-power-rule-more">
+        <title>Two more Power Rule reflexes</title>
         <statement>
           <p>
-            For differentiable functions <m>f</m> and <m>g</m>, and a
-            constant <m>c</m>:
+            Use the Power Rule to differentiate, then evaluate at the given
+            point.
           </p>
-          <md>
-            <mrow> \text{Constant Rule:} \qquad &amp; \frac{d}{dx}[c] = 0 </mrow>
-            <mrow> \text{Power Rule:} \qquad &amp; \frac{d}{dx}[x^n] = n x^{n-1} </mrow>
-            <mrow> \text{Constant Multiple Rule:} \qquad &amp; \frac{d}{dx}[c \, f(x)] = c \, f'(x) </mrow>
-            <mrow> \text{Sum/Difference Rule:} \qquad &amp; \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) </mrow>
-            <mrow> \text{Product Rule:} \qquad &amp; \frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x) </mrow>
-            <mrow> \text{Quotient Rule:} \qquad &amp; \frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} </mrow>
-            <mrow> \text{Chain Rule:} \qquad &amp; \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x) </mrow>
-          </md>
+          <p>
+            If <m>f(x)=x^5</m>, then <m>f'(2) =</m>
+            <fillin answer="80" mode="number"/>
+          </p>
+          <p>
+            If <m>g(x)=\sqrt{x}</m>, then <m>g'(4) =</m>
+            <fillin answer="0.25" mode="number"/>
+          </p>
         </statement>
-      </fact>
+        <evaluation>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes"/>
+              <feedback><p>Yes &#8212; <m>f'(x)=5x^4</m>, and
+              <m>5\cdot 2^4 = 80</m>.</p></feedback>
+            </test>
+          </evaluate>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes" tolerance="0.001"/>
+              <feedback><p>Yes &#8212; rewrite <m>\sqrt{x}</m> as
+              <m>x^{1/2}</m> first, so <m>g'(x)=\tfrac12 x^{-1/2}</m>, and
+              <m>g'(4) = \tfrac12 \cdot 4^{-1/2} = \tfrac14</m>.</p></feedback>
+            </test>
+          </evaluate>
+        </evaluation>
+      </exercise>
 
       <p>
-        The Chain Rule is the one people are rustiest on, and it's the one
-        we'll lean on hardest this semester (substitution, our main
-        integration technique in Chapter <xref ref="ch-integrals"/>, is
-        really the Chain Rule run backwards). The pattern to recognize: a
-        function <term>inside</term> another function. Differentiate the
-        outside function, leave the inside alone, then multiply by the
-        derivative of the inside.
+        The <term>Product Rule</term> has a nice picture too. Imagine a
+        rectangle whose width is <m>u(x)</m> and whose height is <m>v(x)</m>,
+        so its area is <m>u(x)v(x)</m>. Nudge <m>x</m> slightly, and
+        <em>both</em> sides grow a little. The extra area shows up as two
+        thin strips &#8212; one along the top from the width growing (worth
+        <m>u' \cdot v</m>) and one along the side from the height growing
+        (worth <m>u \cdot v'</m>) &#8212; plus a tiny corner sliver so small
+        it vanishes in the limit. Add the two strips and you have the whole
+        rule: differentiate one factor at a time, holding the other one
+        fixed, and add the results.
       </p>
 
       <p>
-        Alongside these, you'll need the derivatives of a handful of
-        specific functions on recall:
+        The <term>Quotient Rule</term> isn't really a separate idea &#8212;
+        it's the Product Rule wearing a disguise. Write
+        <m>\dfrac{f(x)}{g(x)}</m> as <m>f(x)\cdot g(x)^{-1}</m> and apply the
+        Product Rule (plus the Chain Rule, below, to differentiate
+        <m>g(x)^{-1}</m>), and the familiar formula falls out on its own
+        &#8212; which is also why the minus sign and the <m>g^2</m> in the
+        denominator show up right where they do.
+      </p>
+
+      <p>
+        The <term>Chain Rule</term> is usually the rustiest one, and it's
+        the one we'll lean on hardest all semester &#8212; substitution, our
+        main integration technique in Chapter <xref ref="ch-integrals"/>, is
+        really the Chain Rule run backwards. Picture two gears meshed
+        together: turn the first one, and it turns the second at a rate
+        scaled by the gear ratio between them. A composed function
+        <m>f(g(x))</m> works the same way &#8212; an "outer" function
+        <m>f</m> wrapped around an "inner" function <m>g</m>. Nudging
+        <m>x</m> nudges <m>g(x)</m> at rate <m>g'(x)</m>, and that nudge to
+        <m>g(x)</m> in turn nudges <m>f(g(x))</m> at rate <m>f'</m>
+        (evaluated at <m>g(x)</m>, not at <m>x</m>). The two rates multiply,
+        gear-ratio style:
+      </p>
+
+      <md>
+        \text{Chain Rule:} \qquad \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x)
+      </md>
+
+      <p>
+        Alongside these rules for <em>combining</em> functions, you'll need
+        the rates of a handful of specific functions on recall. Two are
+        worth a quick word rather than bare memorization. <m>e^x</m> is the
+        unique function that is <em>its own</em> rate of change &#8212; at
+        every instant it's already growing exactly as fast as its current
+        size demands, the way an account under continuous compounding grows
+        faster the bigger it gets. And differentiating a wave produces
+        another wave, a quarter-cycle out of step: the slope of
+        <m>\sin x</m> traces out <m>\cos x</m>, whose own slope traces out
+        <m>-\sin x</m>, and so on around.
       </p>
 
       <fact xml:id="fact-standard-derivatives">
@@ -195,35 +441,81 @@
           </md>
         </solution>
       </example>
+
+      <p>
+        For quick reference once the intuition above has done its job:
+      </p>
+
+      <fact xml:id="fact-basic-rules">
+        <title>Basic differentiation rules, all in one place</title>
+        <statement>
+          <p>
+            For differentiable functions <m>f</m> and <m>g</m>, and a
+            constant <m>c</m>:
+          </p>
+          <md>
+            <mrow> \text{Constant Rule:} \qquad &amp; \frac{d}{dx}[c] = 0 </mrow>
+            <mrow> \text{Power Rule:} \qquad &amp; \frac{d}{dx}[x^n] = n x^{n-1} </mrow>
+            <mrow> \text{Constant Multiple Rule:} \qquad &amp; \frac{d}{dx}[c \, f(x)] = c \, f'(x) </mrow>
+            <mrow> \text{Sum/Difference Rule:} \qquad &amp; \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) </mrow>
+            <mrow> \text{Product Rule:} \qquad &amp; \frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x) </mrow>
+            <mrow> \text{Quotient Rule:} \qquad &amp; \frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} </mrow>
+            <mrow> \text{Chain Rule:} \qquad &amp; \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x) </mrow>
+          </md>
+        </statement>
+      </fact>
     </subsection>
 
     <subsection xml:id="subsec-critical-points">
       <title>Critical points</title>
 
       <p>
-        One more piece of vocabulary we'll need immediately in the next
-        chapter. Where a smooth curve has a local peak or valley, its
-        tangent line is flat &#8212; slope zero. That observation is worth
-        naming.
+        One more piece of vocabulary, and it follows straight from the
+        tangent-line picture. Imagine hiking along the graph of <m>f</m> like
+        a trail. At most points the ground under your feet is tilted &#8212;
+        you're climbing or descending. But right at the top of a hill, or the
+        bottom of a valley, the ground goes momentarily flat: for that one
+        instant, slope zero, before it tips the other way. That flatness is
+        exactly <m>f'(c) = 0</m>, and it's worth naming.
       </p>
+
+      <figure xml:id="fig-hiking-trail">
+        <caption>Drag the hiker along the trail and watch the slope underfoot
+        hit <m>0</m> at the hilltop and the valley bottom.</caption>
+        <interactive xml:id="interactive-hiking-trail" label="interactive-hiking-trail"
+                     platform="jsxgraph" width="100%" aspect="4:3"
+                     source="jsxgraph/hiking-trail.js">
+          <slate xml:id="interactive-hiking-trail-slate" surface="jsxboard" aspect="4:3"/>
+          <instructions>
+            <p>
+              Drag the red point along the trail. The green line is the
+              tangent line at your feet, and its slope is printed above the
+              graph. Find both spots where that slope is <m>0</m>.
+            </p>
+          </instructions>
+        </interactive>
+      </figure>
 
       <definition xml:id="def-critical-point">
         <title>Critical point</title>
         <statement>
           <p>
             A <term>critical point</term> of <m>f</m> is a value <m>c</m> in
-            the domain of <m>f</m> where either <m>f'(c) = 0</m> or
-            <m>f'(c)</m> does not exist.
+            the domain of <m>f</m> where either <m>f'(c) = 0</m> (flat
+            ground) or <m>f'(c)</m> does not exist (a sharp corner or break,
+            where "the slope" isn't even well-defined).
           </p>
         </statement>
       </definition>
 
       <p>
-        Critical points are exactly the <em>candidates</em> for where a
-        function reaches a local maximum or minimum &#8212; not every
-        critical point is one, but every local max or min (away from the
-        endpoints of an interval) has to be one. That's the entire engine
-        behind optimization, which is where we're headed next.
+        Critical points are exactly the <em>candidates</em> for a hilltop or
+        valley bottom &#8212; not every flat spot turns out to be one (a
+        trail can flatten briefly and keep climbing, like a switchback), but
+        every genuine peak or valley in the interior of the trail has to be a
+        critical point first. That's the entire engine behind optimization,
+        which is where we're headed next: find the flat spots, then work out
+        which ones are actually the top or bottom.
       </p>
 
       <example xml:id="example-critical-points">
@@ -245,10 +537,42 @@
           <p>
             So <m>f</m> has critical points at <m>x=-1</m> and <m>x=1</m>.
             (Sketch <m>f(x)=x^3-3x</m> if you want to see why: it has a
-            local max at <m>x=-1</m> and a local min at <m>x=1</m>.)
+            local max at <m>x=-1</m> and a local min at <m>x=1</m>, exactly
+            the two flat spots on that curve's trail.)
           </p>
         </solution>
       </example>
+
+      <exercise xml:id="check-critical-points" label="check-critical-points">
+        <title>Try it yourself</title>
+        <statement>
+          <p>
+            Find the critical points of <m>f(x) = x^3 - 12x</m>. Enter the
+            smaller value first.
+          </p>
+          <p>
+            Smaller critical point: <fillin answer="-2" mode="number"/>
+            &#160;&#160;&#160; Larger critical point:
+            <fillin answer="2" mode="number"/>
+          </p>
+        </statement>
+        <evaluation>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes"/>
+              <feedback><p>Right &#8212; <m>f'(x)=3x^2-12=0</m> gives
+              <m>x^2=4</m>, and the smaller root is <m>x=-2</m>.</p></feedback>
+            </test>
+          </evaluate>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes"/>
+              <feedback><p>Right &#8212; the other solution of
+              <m>x^2=4</m> is <m>x=2</m>.</p></feedback>
+            </test>
+          </evaluate>
+        </evaluation>
+      </exercise>
 
       <p>
         With the mechanics of differentiation and the idea of a critical
