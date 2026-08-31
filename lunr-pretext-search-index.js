@@ -235,11 +235,20 @@ var ptx_lunr_docs = [
   "body": " Try it yourself   Find the critical points of . Enter the smaller value first.  Smaller critical point:     Larger critical point:        Right — gives , and the smaller root is .       Right — the other solution of is .     "
 },
 {
+  "id": "sec-pre-assignment-optimization",
+  "level": "1",
+  "url": "sec-pre-assignment-optimization.html",
+  "type": "Section",
+  "number": "2.1",
+  "title": "Pre-Assignment: Before Tuesday’s Class",
+  "body": " Pre-Assignment: Before Tuesday's Class  Complete the short warm-up below before we meet Tuesday. It connects the critical-point skill from to the idea of optimization, and takes about 10 minutes.   Open the pre-assignment and sign in (your own Doenet account, or create a free one) before you start, so your work is recorded for completion credit. It opens in a new tab.  "
+},
+{
   "id": "sec-4-7-optimization",
   "level": "1",
   "url": "sec-4-7-optimization.html",
   "type": "Section",
-  "number": "2.1",
+  "number": "2.2",
   "title": "Optimization Problems",
   "body": " Optimization Problems   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
 },
@@ -248,7 +257,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-4-8-newtons-method.html",
   "type": "Section",
-  "number": "2.2",
+  "number": "2.3",
   "title": "Newton’s Method",
   "body": " Newton's Method   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
 },
@@ -257,7 +266,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-4-9-antiderivatives.html",
   "type": "Section",
-  "number": "2.3",
+  "number": "2.4",
   "title": "Antiderivatives",
   "body": " Antiderivatives   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
 },
