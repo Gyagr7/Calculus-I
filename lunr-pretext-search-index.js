@@ -262,11 +262,20 @@ var ptx_lunr_docs = [
   "body": " Newton's Method   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
 },
 {
+  "id": "sec-pre-assignment-antiderivatives",
+  "level": "1",
+  "url": "sec-pre-assignment-antiderivatives.html",
+  "type": "Section",
+  "number": "2.4",
+  "title": "Pre-Assignment: Before Thursday’s Class",
+  "body": " Pre-Assignment: Before Thursday's Class  Complete the short warm-up below before we meet Thursday. It runs the differentiation rules from in reverse, and takes about 10 minutes.   Open the pre-assignment and sign in (your own Doenet account, or create a free one) before you start, so your work is recorded for completion credit. It opens in a new tab.  "
+},
+{
   "id": "sec-4-9-antiderivatives",
   "level": "1",
   "url": "sec-4-9-antiderivatives.html",
   "type": "Section",
-  "number": "2.4",
+  "number": "2.5",
   "title": "Antiderivatives",
   "body": " Antiderivatives   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
 },
