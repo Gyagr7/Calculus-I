@@ -1,0 +1,74 @@
+<title>Pre-Assignment: Pancake's Pace Tracker -- Running the Rules in Reverse</title>
+
+<p>
+  Pancake the alpaca has a new hobby: training for the Great Pasture Race.
+  The farmer (that's you) strapped a fitness tracker to her harness, and now
+  you've got speed data streaming in. Before we meet Thursday, let's see
+  what you can figure out just by thinking backwards -- it's exactly the
+  kind of reverse-engineering we'll be doing together in class.
+</p>
+
+<p>
+  <alert>Question 1.</alert> Pancake starts her warm-up lap running at a
+  steady, constant speed of <m>5</m> meters per second. If she keeps that
+  pace for <m>12</m> seconds, how many meters does she cover?
+</p>
+
+<answer>
+  <label>Distance at constant speed</label>
+  <award>60</award>
+</answer>
+
+<p>
+  Easy enough: speed times time. But Pancake doesn't stay at a constant
+  pace for long -- she's a racer, so she accelerates. Once her speed is a
+  changing function of time instead of a fixed number, you can't just
+  multiply anymore. Here's the puzzle hiding underneath: is there some
+  <em>position</em> function whose rate of change matches Pancake's speed
+  function exactly?
+</p>
+
+<p>
+  <alert>Question 2.</alert> Suppose Pancake's speed at time <m>t</m>
+  seconds into her sprint is <m>v(t) = 3t^2</m> meters per second. Coach
+  wants a position function <m>s(t)</m> whose derivative is exactly
+  <m>v(t)</m>. Check each option below using the differentiation rules you
+  already know -- take the derivative of each one and see which actually
+  matches <m>3t^2</m>.
+</p>
+
+<answer>
+  <label>Which expression has derivative v(t) = 3t^2?</label>
+  <choice credit="1"><m>t^3</m></choice>
+  <choice credit="0"><m>6t</m></choice>
+  <choice credit="0"><m>t^3/3</m></choice>
+  <choice credit="0"><m>3t^3</m></choice>
+</answer>
+
+<p>
+  Here's a fun wrinkle: <m>t^3 + 100</m> also has derivative <m>3t^2</m>.
+  So does <m>t^3 - 7</m>. Once you find one correct position function, you
+  can shift it up or down by any constant and the rate of change never
+  notices. Hang onto that observation -- it's going to matter a lot on
+  Thursday.
+</p>
+
+<p>
+  <alert>Question 3.</alert> Here's the general pattern: you already know
+  that the derivative of <m>x^n</m> is <m>n x^{n-1}</m> (that's the power
+  rule from the differentiation toolkit). Reversing that rule tells you
+  exactly how to build a function whose derivative is any power of
+  <m>x</m>. Use the reverse pattern now: what is a function whose
+  derivative is <m>4x^3</m>?
+</p>
+
+<answer>
+  <label>A function whose derivative is 4x^3</label>
+  <award>x^4</award>
+</answer>
+
+<p>
+  Hold onto that reverse trick -- on Thursday we'll give it a name
+  (antiderivative), a symbol, and a full toolkit for running every
+  derivative rule you know backwards.
+</p>

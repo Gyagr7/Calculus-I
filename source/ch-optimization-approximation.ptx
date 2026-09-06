@@ -13,7 +13,13 @@
        instructor's Doenet gradebook. If this assignment is ever recreated in
        Doenet, the code in the href below will change and needs updating here
        too; the source content for re-pasting into Doenet lives at
-       source/doenet/optimization-preassignment-session3.doenetml. -->
+       source/doenet/optimization-preassignment-session3.doenetml.
+       OPEN ISSUE (2026-09-04): this link currently shows "Assignment is
+       closed" and students have reported being asked for a "class code"
+       they were never given; investigate on doenet.org before assigning
+       again (check the activity's open/close status and whether it now
+       requires being linked to a Doenet "class" separately from the
+       assignment code) and update this note once resolved. -->
   <section xml:id="sec-pre-assignment-optimization">
     <title>Pre-Assignment: Before Tuesday's Class</title>
     <p>
@@ -43,6 +49,36 @@
     <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
     <p>[Problem -- TODO: a guiding worked example]</p>
     <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+  </section>
+
+  <!-- Pre-assignment for Session 6 (Thu Sep 10), added 2026-09-04. This is
+       the FIRST time integration appears in the course; Antiderivatives
+       (Stewart 4.9) precedes the area/Riemann-sum treatment in Chapter 5.
+       Same pattern as the Session 3 pre-assignment: links to a graded
+       Doenet activity in the instructor's own account. Source content for
+       pasting into Doenet lives at
+       source/doenet/antiderivatives-preassignment-session6.doenetml (a
+       pure-ASCII .txt twin sits alongside it as a paste-safety net; see
+       the paste-target gotcha note from the Session 3 build).
+       ACTION NEEDED before assigning: this activity does not exist on
+       doenet.org yet. Create/Quick-Assign it from the .doenetml source
+       above, then replace PASTE_CODE_HERE below with the real code.
+       While there, also check the open issue on the Session 3 activity
+       noted above (closed status / unexplained "class code" prompt) so
+       this new activity doesn't hit the same problem. -->
+  <section xml:id="sec-pre-assignment-antiderivatives">
+    <title>Pre-Assignment: Before Thursday's Class</title>
+    <p>
+      Complete the short warm-up below before we meet Thursday. It runs the
+      differentiation rules from <xref ref="ch-derivatives-recap"/> in
+      reverse, and takes about 10 minutes.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/PASTE_CODE_HERE" visual="doenet.org/code/PASTE_CODE_HERE">Open the pre-assignment</url>
+      and sign in (your own Doenet account, or create a free one) before you
+      start, so your work is recorded for completion credit. It opens in a
+      new tab.
+    </p>
   </section>
 
   <section xml:id="sec-4-9-antiderivatives">
