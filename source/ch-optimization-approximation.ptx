@@ -60,12 +60,8 @@
        source/doenet/antiderivatives-preassignment-session6.doenetml (a
        pure-ASCII .txt twin sits alongside it as a paste-safety net; see
        the paste-target gotcha note from the Session 3 build).
-       ACTION NEEDED before assigning: this activity does not exist on
-       doenet.org yet. Create/Quick-Assign it from the .doenetml source
-       above, then replace PASTE_CODE_HERE below with the real code.
-       While there, also check the open issue on the Session 3 activity
-       noted above (closed status / unexplained "class code" prompt) so
-       this new activity doesn't hit the same problem. -->
+       Live on the instructor's Doenet account as assignment code 065250
+       (created 2026-09-06; note the leading zero is part of the code). -->
   <section xml:id="sec-pre-assignment-antiderivatives">
     <title>Pre-Assignment: Before Thursday's Class</title>
     <p>
@@ -74,7 +70,7 @@
       reverse, and takes about 10 minutes.
     </p>
     <p>
-      <url href="https://doenet.org/code/PASTE_CODE_HERE" visual="doenet.org/code/PASTE_CODE_HERE">Open the pre-assignment</url>
+      <url href="https://doenet.org/code/065250" visual="doenet.org/code/065250">Open the pre-assignment</url>
       and sign in (your own Doenet account, or create a free one) before you
       start, so your work is recorded for completion credit. It opens in a
       new tab.
