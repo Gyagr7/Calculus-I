@@ -277,7 +277,115 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.2",
   "title": "Optimization Problems",
-  "body": " Optimization Problems   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Optimization Problems     Today's Question  You have a fixed amount of something: fence, cardboard, money. How do you get the best possible outcome out of it?   Best possible could mean the largest area. The largest volume. The lowest cost. The shortest distance.  Here is the good news. You already own the tool. In , the flat spots on a graph were the candidates for peaks and valleys. A peak is a maximum. A valley is a minimum. So best possible is really a derivative question.  The hard part is not the calculus. The hard part is getting from a paragraph of words to a function you can differentiate. So that is where we start.    Word problems are translation problems  A word problem is not asking you to guess a trick. It is asking you to translate.   So when you see one, do not start differentiating. Ask these questions first, in order:  What am I trying to find? Look for words like largest , smallest , maximum , minimum , least , greatest .  What quantities are changing? Give them names and units.  What is fixed? That usually gives you the constraint.  Can I draw a picture? Even a rough sketch helps a lot.  Can I write an equation for what I want? Something like , , or .  Can I rewrite it using just one variable?  Which values actually make sense? That gives the feasible domain.  Only now do we differentiate.     Rule of thumb  Do not differentiate a sentence. First turn the sentence into mathematics. Then differentiate.    Warm-up: no calculus allowed   Just translate. Do not solve anything yet.  A rectangle has perimeter cm. Its length is and its width is . Write the constraint. Then write the quantity you would maximize to get the largest area.  A farmer has m of fencing for three sides of a rectangular field. A river forms the fourth side. The two sides touching the river are each long, and the side across from the river is . Write the constraint and the area.        Constraint: . Maximize the area .  Constraint: (only one , because the river covers the other side). Area: .        Two ingredients: objective and constraint  Look back at the warm-up. Both problems had the same two pieces. Every optimization problem does.   Objective and constraint   The objective is the quantity we want to maximize or minimize.  The constraint is what limits our choices.   Optimization means finding the maximum or minimum value of the objective, subject to the constraint.     Quick check   A rectangular garden uses exactly meters of fencing. We want the biggest garden possible. Which one is the constraint ?     The perimeter:  Right. The amount of fence is fixed, so it limits our choices.    The area:  That is what we want to make as big as possible. It is the objective, not the constraint.    The length:  Nobody told us the length. The length is one of the things we get to choose.       The largest possible rectangle  A farmer has meters of fencing and wants a rectangular pen. (If you did the pre-assignment, you already met Pancake the alpaca. This is her pen.)  Before any calculus, make a prediction. Which will hold more: a long, skinny rectangle, or a more balanced one?  Now test your prediction. Drag the slider.   Every rectangle here uses exactly meters of fence.     What do you notice?   Which width gave the most area? What shape was the pen?    A width of m gives square meters, the most of any width. The pen is a square. Skinny pens spend fence on length without gaining much area.     Why do derivatives help?  Watch the area as you drag from left to right. It climbs, reaches a peak, then falls.  Climbing means . Falling means . Right at the top, it switches. So the peak sits where .  Dragging a slider found the answer this time. Calculus finds it every time, even when there is no slider.    We do: prove the square wins   With m of fence, find the dimensions of the rectangle with the largest area.     Objective:  . Constraint:  .   Step 1: Get down to one variable. Solve the constraint for : . Substitute:    Step 2: Which values make sense? A side cannot be negative, so .   Step 3: Differentiate and find the critical point.  Then , and .   Step 4: Is it really a maximum? Test a number on each side. , so the area is increasing before . , so it is decreasing after. Increasing, then decreasing: a peak.  So the best pen is a m by m square, with area square meters.      The optimization routine  That example had a shape. The same shape works every time.   The optimization routine    Draw and label a picture, when it helps.  Identify the objective.  Identify the constraint.  Rewrite the objective using one variable.  Find the feasible domain.  Differentiate and find the critical points.  Decide which candidate gives the maximum or minimum.  Answer the original question, with units.     Step 7 is the one people skip. Remember: a critical point is a candidate , not automatically an answer.   How do we know we found the best value?  Two ways. Use whichever fits the problem.   First Derivative Test. Check the sign of on each side of the critical point. then means a maximum. then means a minimum. That is what we did for the pen.   Closed Interval Method. If the domain is a closed interval , plug the endpoints and every critical point into . The biggest output is the maximum. The smallest is the minimum. For the pen: , , . Same answer.    We do: an open-top box   A piece of cardboard measures inches by inches. Cut a square of side from each corner, then fold up the sides to make an open-top box. What value of gives the largest volume?     Picture it. After folding, the height is the size of the cut: . The long side lost at both ends, so the length is . Same for the short side: the width is .   Objective.     What makes sense? If is tiny, the box is flat. If is too big, there is no cardboard left. The width has to stay positive: , so . The feasible domain is .   Differentiate.  Set it equal to and use the quadratic formula on : So or .   Which candidate?  is outside the domain. You cannot cut -inch squares from a -inch side. That leaves . Check the signs: and . Increasing, then decreasing: a maximum.   Answer. Cut squares about inches on a side. The box holds about cubic inches.     You do: your own box   Now the cardboard is cm by cm. Cut squares of side cm from the corners and fold. Follow the routine.  The feasible domain is  .  The best cut is  cm (two decimal places).  The largest volume is about cubic cm.       Yes. The width is , and it has to stay positive, so .       Yes. , so . The roots are about and , and is outside the domain.       Yes. cubic cm.        Your turn   Fencing along a river   A farmer has meters of fencing and wants a rectangular field next to a straight river. No fence is needed along the river. Let be each of the two sides touching the river, and the side across from it.  Constraint: . You take it from here.  Best : m. Best : m. Largest area: square meters.       Yes. , so gives .       Yes. . Notice the best field is not a square this time. The river does some of the fencing for free.       Yes. square meters.       Less scaffolding   A rectangle has perimeter cm. What is its largest possible area?  Largest area: square cm       Yes. A by square. With all four sides fenced, the square wins again.       Conceptual check     Why do we use the constraint to eliminate a variable?  Why do we need the feasible domain?  Is every solution of a maximum or a minimum?        Our derivative tools work on functions of one variable. The constraint is how we trade two variables for one.  The algebra does not know the problem is about cardboard. It happily hands you answers like that cannot happen. The domain throws those out.  No. It is only a candidate. You still have to check, with the First Derivative Test or the Closed Interval Method.       Exit ticket     In one sentence, what is an optimization problem?  What is the difference between an objective and a constraint?  What should you do before differentiating a word problem?        Finding the best possible value of some quantity, like the largest area or the lowest cost, when something limits your choices.  The objective is what you want to make as big or as small as possible. The constraint is what is fixed.  Translate: name the variables, draw a picture, write the objective and the constraint, and get down to one variable.       Big picture  Optimization is mostly modeling first and calculus second.  The derivative finds the spot where a quantity stops getting better and starts getting worse.    "
+},
+{
+  "id": "warmup-no-calculus",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#warmup-no-calculus",
+  "type": "Checkpoint",
+  "number": "2.2.1",
+  "title": "Warm-up: no calculus allowed.",
+  "body": " Warm-up: no calculus allowed   Just translate. Do not solve anything yet.  A rectangle has perimeter cm. Its length is and its width is . Write the constraint. Then write the quantity you would maximize to get the largest area.  A farmer has m of fencing for three sides of a rectangular field. A river forms the fourth side. The two sides touching the river are each long, and the side across from the river is . Write the constraint and the area.        Constraint: . Maximize the area .  Constraint: (only one , because the river covers the other side). Area: .     "
+},
+{
+  "id": "def-objective-constraint",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#def-objective-constraint",
+  "type": "Definition",
+  "number": "2.2.2",
+  "title": "Objective and constraint.",
+  "body": " Objective and constraint   The objective is the quantity we want to maximize or minimize.  The constraint is what limits our choices.   Optimization means finding the maximum or minimum value of the objective, subject to the constraint.   "
+},
+{
+  "id": "check-objective-constraint",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#check-objective-constraint",
+  "type": "Checkpoint",
+  "number": "2.2.3",
+  "title": "Quick check.",
+  "body": " Quick check   A rectangular garden uses exactly meters of fencing. We want the biggest garden possible. Which one is the constraint ?     The perimeter:  Right. The amount of fence is fixed, so it limits our choices.    The area:  That is what we want to make as big as possible. It is the objective, not the constraint.    The length:  Nobody told us the length. The length is one of the things we get to choose.    "
+},
+{
+  "id": "fig-fence-rectangle",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#fig-fence-rectangle",
+  "type": "Figure",
+  "number": "2.2.4",
+  "title": "",
+  "body": " Every rectangle here uses exactly meters of fence.   "
+},
+{
+  "id": "notice-fence-best",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#notice-fence-best",
+  "type": "Checkpoint",
+  "number": "2.2.5",
+  "title": "What do you notice?",
+  "body": " What do you notice?   Which width gave the most area? What shape was the pen?    A width of m gives square meters, the most of any width. The pen is a square. Skinny pens spend fence on length without gaining much area.   "
+},
+{
+  "id": "example-largest-rectangle",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#example-largest-rectangle",
+  "type": "Example",
+  "number": "2.2.6",
+  "title": "We do: prove the square wins.",
+  "body": " We do: prove the square wins   With m of fence, find the dimensions of the rectangle with the largest area.     Objective:  . Constraint:  .   Step 1: Get down to one variable. Solve the constraint for : . Substitute:    Step 2: Which values make sense? A side cannot be negative, so .   Step 3: Differentiate and find the critical point.  Then , and .   Step 4: Is it really a maximum? Test a number on each side. , so the area is increasing before . , so it is decreasing after. Increasing, then decreasing: a peak.  So the best pen is a m by m square, with area square meters.   "
+},
+{
+  "id": "example-open-box",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#example-open-box",
+  "type": "Example",
+  "number": "2.2.7",
+  "title": "We do: an open-top box.",
+  "body": " We do: an open-top box   A piece of cardboard measures inches by inches. Cut a square of side from each corner, then fold up the sides to make an open-top box. What value of gives the largest volume?     Picture it. After folding, the height is the size of the cut: . The long side lost at both ends, so the length is . Same for the short side: the width is .   Objective.     What makes sense? If is tiny, the box is flat. If is too big, there is no cardboard left. The width has to stay positive: , so . The feasible domain is .   Differentiate.  Set it equal to and use the quadratic formula on : So or .   Which candidate?  is outside the domain. You cannot cut -inch squares from a -inch side. That leaves . Check the signs: and . Increasing, then decreasing: a maximum.   Answer. Cut squares about inches on a side. The box holds about cubic inches.   "
+},
+{
+  "id": "check-open-box-your-turn",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#check-open-box-your-turn",
+  "type": "Checkpoint",
+  "number": "2.2.8",
+  "title": "You do: your own box.",
+  "body": " You do: your own box   Now the cardboard is cm by cm. Cut squares of side cm from the corners and fold. Follow the routine.  The feasible domain is  .  The best cut is  cm (two decimal places).  The largest volume is about cubic cm.       Yes. The width is , and it has to stay positive, so .       Yes. , so . The roots are about and , and is outside the domain.       Yes. cubic cm.     "
+},
+{
+  "id": "check-river-fence",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#check-river-fence",
+  "type": "Checkpoint",
+  "number": "2.2.9",
+  "title": "Fencing along a river.",
+  "body": " Fencing along a river   A farmer has meters of fencing and wants a rectangular field next to a straight river. No fence is needed along the river. Let be each of the two sides touching the river, and the side across from it.  Constraint: . You take it from here.  Best : m. Best : m. Largest area: square meters.       Yes. , so gives .       Yes. . Notice the best field is not a square this time. The river does some of the fencing for free.       Yes. square meters.     "
+},
+{
+  "id": "check-perimeter-100",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#check-perimeter-100",
+  "type": "Checkpoint",
+  "number": "2.2.10",
+  "title": "Less scaffolding.",
+  "body": " Less scaffolding   A rectangle has perimeter cm. What is its largest possible area?  Largest area: square cm       Yes. A by square. With all four sides fenced, the square wins again.     "
+},
+{
+  "id": "conceptual-check-optimization",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#conceptual-check-optimization",
+  "type": "Checkpoint",
+  "number": "2.2.11",
+  "title": "Conceptual check.",
+  "body": " Conceptual check     Why do we use the constraint to eliminate a variable?  Why do we need the feasible domain?  Is every solution of a maximum or a minimum?        Our derivative tools work on functions of one variable. The constraint is how we trade two variables for one.  The algebra does not know the problem is about cardboard. It happily hands you answers like that cannot happen. The domain throws those out.  No. It is only a candidate. You still have to check, with the First Derivative Test or the Closed Interval Method.     "
+},
+{
+  "id": "exit-ticket-optimization",
+  "level": "2",
+  "url": "sec-4-7-optimization.html#exit-ticket-optimization",
+  "type": "Checkpoint",
+  "number": "2.2.12",
+  "title": "Exit ticket.",
+  "body": " Exit ticket     In one sentence, what is an optimization problem?  What is the difference between an objective and a constraint?  What should you do before differentiating a word problem?        Finding the best possible value of some quantity, like the largest area or the lowest cost, when something limits your choices.  The objective is what you want to make as big or as small as possible. The constraint is what is fixed.  Translate: name the variables, draw a picture, write the objective and the constraint, and get down to one variable.     "
 },
 {
   "id": "sec-4-8-newtons-method",
@@ -286,7 +394,70 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.3",
   "title": "Newton’s Method",
-  "body": " Newton's Method   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Newton's Method     Today's Question  Some equations have no formula for their solution. How do we solve them anyway?   You can solve . Factor it, or use the quadratic formula.  Now try . Or .  For the first one, a formula does exist, but it is so messy that almost nobody uses it. For the second one, there is no formula at all. Yet both equations have a solution, and a calculator can find it in a blink. Let's see how.    Curves are hard, lines are easy  Here is the one idea behind this whole section.  Finding where a curve crosses the -axis is hard. Finding where a line crosses it is easy.  And near any point, a smooth curve looks almost exactly like its tangent line. Zoom in far enough, and the curve straightens out.  So here is the plan. Replace the curve with its tangent line. Find where the line crosses the axis. Use that as a better guess. Repeat.   Warm-up: where does a line cross?   A line passes through the point with slope . Where does it cross the -axis?           Yes. The line has to rise unit to reach the axis. With slope , that takes a run of . So .      Hold onto that . It is about to matter.    One step at a time  Let . We want to solve .   Make a first guess.  and . The output changes sign between and , so a solution lives in there. And is much closer to than is. So start with .   Draw the tangent line at . A line needs a point and a slope. The point is . The slope is . Since , the slope is .  That is exactly the line from the warm-up! It crosses the axis at . That is our new guess.   Is it better?  . Much closer to than was.  So do it again, starting from .   You do: take the next step   Keep going with and . You already know .  Slope of the tangent line:    Where that line crosses the axis:  (four decimal places)       Yes. .       Yes. The line drops at slope , so it moves left by . That gives .      Look how fast that went: , , . The true solution is Two steps, and the first four decimal places already match.   Each colored segment is a tangent line. Where it hits the axis is the next guess.      Now give the idea a name  Let's do one step with letters instead of numbers.  The tangent line at goes through the point with slope : (That is the tangent line approximation, or linearization, from Calculus I.)  We want where it crosses the axis. So set and solve for : That is our next guess, .   Newton's Method   To solve , start with a guess . Then repeat until the guesses stop changing, to the accuracy you need.     Say it out loud  New guess equals old guess, minus height over slope.  The height says how far you are from zero. The slope says how fast you are heading there.    Less scaffolding: where does cos x = x?   Solve with Newton's method. Use radians.  First rewrite it as with . Then . Start at .          (four decimal places)       Yes. and , so .       Yes. One more step lands on . The next step barely moves it, so we have found the solution to four decimal places.        What could go wrong?  Newton's method is fast when it works. But it can fail. Think about the picture before you open the solution.   A flat tangent line   Suppose your guess lands where . Sketch the tangent line there. What happens to the next guess?    A flat tangent line never crosses the -axis (unless you were already on it). In the formula, you would divide by . There is no next guess.  Even a nearly flat tangent is trouble. It crosses the axis very far away, and the next guess can land nowhere near the solution. That is what you saw when you started the interactive near , where is close to . The fix: pick a better first guess.     Remember  A good first guess matters. Check where changes sign, and start close.    Exit ticket     In your own words, what does one step of Newton's method do?  Why do we use the tangent line instead of the curve?  Give one way Newton's method can fail.        It replaces the curve with its tangent line at the current guess, and uses the spot where that line crosses the axis as the next guess.  We cannot solve for where the curve crosses, but we can always solve for where a line crosses. And near the guess, the line is a good stand-in for the curve.  If , the tangent line is flat and never crosses the axis. A bad first guess can also send the guesses far away.       Main idea  When we cannot solve an equation, we solve an easier one instead: the tangent line. Repeat, and the answers close in on the real solution, fast.    "
+},
+{
+  "id": "check-line-crossing",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#check-line-crossing",
+  "type": "Checkpoint",
+  "number": "2.3.1",
+  "title": "Warm-up: where does a line cross?",
+  "body": " Warm-up: where does a line cross?   A line passes through the point with slope . Where does it cross the -axis?           Yes. The line has to rise unit to reach the axis. With slope , that takes a run of . So .     "
+},
+{
+  "id": "check-newton-step-two",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#check-newton-step-two",
+  "type": "Checkpoint",
+  "number": "2.3.2",
+  "title": "You do: take the next step.",
+  "body": " You do: take the next step   Keep going with and . You already know .  Slope of the tangent line:    Where that line crosses the axis:  (four decimal places)       Yes. .       Yes. The line drops at slope , so it moves left by . That gives .     "
+},
+{
+  "id": "fig-newton-steps",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#fig-newton-steps",
+  "type": "Figure",
+  "number": "2.3.3",
+  "title": "",
+  "body": " Each colored segment is a tangent line. Where it hits the axis is the next guess.   "
+},
+{
+  "id": "fact-newtons-method",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#fact-newtons-method",
+  "type": "Fact",
+  "number": "2.3.4",
+  "title": "Newton’s Method.",
+  "body": " Newton's Method   To solve , start with a guess . Then repeat until the guesses stop changing, to the accuracy you need.   "
+},
+{
+  "id": "check-newton-cosine",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#check-newton-cosine",
+  "type": "Checkpoint",
+  "number": "2.3.5",
+  "title": "Less scaffolding: where does cos x = x?",
+  "body": " Less scaffolding: where does cos x = x?   Solve with Newton's method. Use radians.  First rewrite it as with . Then . Start at .          (four decimal places)       Yes. and , so .       Yes. One more step lands on . The next step barely moves it, so we have found the solution to four decimal places.     "
+},
+{
+  "id": "notice-newton-flat-tangent",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#notice-newton-flat-tangent",
+  "type": "Checkpoint",
+  "number": "2.3.6",
+  "title": "A flat tangent line.",
+  "body": " A flat tangent line   Suppose your guess lands where . Sketch the tangent line there. What happens to the next guess?    A flat tangent line never crosses the -axis (unless you were already on it). In the formula, you would divide by . There is no next guess.  Even a nearly flat tangent is trouble. It crosses the axis very far away, and the next guess can land nowhere near the solution. That is what you saw when you started the interactive near , where is close to . The fix: pick a better first guess.   "
+},
+{
+  "id": "exit-ticket-newton",
+  "level": "2",
+  "url": "sec-4-8-newtons-method.html#exit-ticket-newton",
+  "type": "Checkpoint",
+  "number": "2.3.7",
+  "title": "Exit ticket.",
+  "body": " Exit ticket     In your own words, what does one step of Newton's method do?  Why do we use the tangent line instead of the curve?  Give one way Newton's method can fail.        It replaces the curve with its tangent line at the current guess, and uses the spot where that line crosses the axis as the next guess.  We cannot solve for where the curve crosses, but we can always solve for where a line crosses. And near the guess, the line is a good stand-in for the curve.  If , the tangent line is flat and never crosses the axis. A bad first guess can also send the guesses far away.     "
 },
 {
   "id": "sec-pre-assignment-antiderivatives",
@@ -304,7 +475,223 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.5",
   "title": "Antiderivatives",
-  "body": " Antiderivatives   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Antiderivatives     Today's Question  If we know how something is changing, can we recover the thing itself?   For most of your calculus life, you have traveled in one direction: Today we turn around:   Why would anyone care? Suppose you know a car's velocity, but you want its position. Or you know how fast water is leaking from a tank, but you want to know how much has been lost.  In both cases, you know a rate of change , and you want the quantity that produced it.    Can we run a derivative backward?  Start with something familiar. Suppose . Without any new formula, can you find a function that works?   Find one   Which function has derivative ?      That is the derivative of  . We need to go the other way.     Yes. Check it: the derivative of is .     Check by differentiating: you get , not .     Check by differentiating: you get . Close, but the went missing.     Easy enough. But now differentiate each of these:    What do you notice?   Find all four derivatives. What do you notice? So does knowing pin down exactly one function?    All four have the same derivative: . The constant disappears when you differentiate. So no. Knowing does not tell us which one we started with.      What did the derivative forget?  Let's look at the whole family at once. Drag the slider. Then drag the slider and watch the slope.   Gray curves: a few members of the family . Blue: the one you picked.     Discuss with a neighbor     What changes when you move ?  What stays the same about the shape?  At a fixed , how do the slopes of the different curves compare?    Then finish the sentence: the derivative remembers the ________ but forgets the ________.      The curve slides up and down.  The shape does not change at all. Every curve is the same curve, shifted.  They are identical. The slope depends on , not on .    The derivative remembers the shape (the slope at every point) but forgets the vertical position .      Now give the idea a name   Antiderivative   A function is an antiderivative of on an interval if for every in that interval.    So is an antiderivative of . So is . So is .  To describe all of them at once, we write the most general antiderivative : , where can be any constant.   The family principle   If is one antiderivative of on an interval, then every antiderivative of on that interval has the form .    Why must we include the ? Because leaving it off throws away most of the family. You would be naming one curve, when the derivative only told you the shape.   A note on notation  You may have seen antiderivatives written with a special symbol somewhere. We are not using it yet, on purpose. That symbol has a deeper meaning, and we want you to see where it comes from first. It shows up in . For now, we write with , and that is all we need.     Running the derivative rules backward  Start with the Power Rule. Differentiating does two things: it multiplies by the exponent, then lowers the exponent by one.   To go backward, undo both steps in reverse order. Raise the exponent by one. Then divide by the new exponent.    Why does this work?   Differentiate . Do you get back ?     Yes. The cancels, and the constant disappears.     The one exception  What happens when ? The formula would divide by . That breaks.  So for , we lean on a derivative we already know: . So an antiderivative of is , on any interval that does not contain .    Build the toolkit yourself   Every derivative you know is secretly an antiderivative too. Find the most general antiderivative of each function. Then open the solution.   ,   ,   ,   ,   ,   ,   ,          Most general antiderivative            The one people miss is . The derivative of is , so we need the minus sign: .    Two more rules come along for free, because they work the same way for derivatives: constants stay put, and sums split into pieces.   The antiderivative toolkit   If and , and is a constant, then:      Best error check today  Differentiate your answer. If you get back the function you started with, you are right.     Finding the whole family   We do: one term at a time   Find the most general antiderivative of .    Work backward one term at a time. Raise the exponent, divide by the new exponent.   One covers the whole thing: .   Check.  . It matches.     Try one   Find the most general antiderivative of . Check your answer by differentiating before you open the solution.     . Check: .      A family is not always enough  Suppose . Then . A whole family.  Now suppose we are also told .  On a graph, that says: pick the one member of the family that passes through . Go back to the family graph above. Set , then hunt with the slider.  In algebra, plug in : .   Pick the family member            Yes. , so , and the one function we want is .       Remember  Derivative information one condition one particular function.   A problem like this, with a derivative plus a starting value, is called an initial value problem .   You do: select the right member of the family   Find if and .   Step 1: find the family. Step 2: use the condition to find . Step 3: check both conditions.        and then         Yes. The family is , and .       Yes. , so .       What if we are given the second derivative?  Then we have to run backward twice . And every trip backward brings its own constant.    Two steps back   Suppose , with and .  First recover . Then go back again: .  Now use the two conditions.              Yes. Every term except vanishes at , so .       Yes. . Setting that equal to gives . So .      Why two constants? Each time we undo a derivative, we lose track of one vertical shift. Two derivatives, two lost shifts, two conditions to pin them down.    Can we recover a function without a formula?  This is an important shift. Sometimes there is no formula, only a graph.  Below is the graph of , and . So the graph of tells you the slope of . Also, . Leave the checkbox alone for now.   The graph of . It gives the slope of at every .     Read the slopes     Where is increasing?  Where is decreasing?  Where does have horizontal tangents?  Where should have a local minimum? A local maximum?    Now sketch one possible on paper, starting at the point .      increases where : between and .  decreases where : from to , and from to .  Where : at and .  A local minimum at (decreasing, then increasing) and a local maximum at (increasing, then decreasing).       Reading a graph of the slope  If , then means increases, and means decreases.  Zeros of are where has horizontal tangents.     Our running example: a car  Now back to a physical situation. A car has velocity meters per second. It starts at position .  Velocity is the derivative of position: . So position is an antiderivative of velocity.   Recover the family.  .   Use the starting position.  , so and .  So where is the car at seconds?   Where is the car?     meters       Yes. . Since the car started at , it moved meters.       Remember this number: 8  The car traveled meters.  We will meet this same car again.    From acceleration all the way to position  Velocity is the derivative of position. Acceleration is the derivative of velocity. So we can run backward twice:     You do: a particle   A particle has acceleration . Its initial velocity is and its initial position is .   Step 1: recover and use . Step 2: recover and use .                Yes. , and gives . So .       Yes. , and gives . So .        Putting it together   Less scaffolding     Find the most general antiderivative of .  Find if and .  A particle has velocity and . Find its position function.        .  The family is . Then , so .  .       Error analysis: who is most general?   A class is asked for the most general antiderivative of . Three students answer. Who gives the most general answer?     Student A:  Student A found an antiderivative, and it is correct. But it is only one member of the family. The is missing.    Student B:  Right. Correct function, and the captures the whole family.    Student C:  Differentiate it: you get . Student C raised the exponent but forgot to divide by the new exponent.      Exit ticket     In your own words, what is an antiderivative? Explain it using a car's velocity and position.  Why does the general answer contain ?  If and on an interval, is increasing or decreasing there?  Why does an initial condition matter?        An antiderivative of is a function whose derivative is . If is a car's velocity, an antiderivative is its position: you recover where the car is from how fast it is going.  Differentiating erases constants. So running backward can only recover the function up to a vertical shift.  Increasing. The slope of is positive.  It picks out the one member of the family we actually want, like knowing where the car started.       Main idea  Knowing a rate of change lets us work backward, but only to a family of functions.  The derivative remembers how the function changes. It forgets the vertical position. An initial condition tells us which member of the family we need.    "
+},
+{
+  "id": "check-find-one-f",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-find-one-f",
+  "type": "Checkpoint",
+  "number": "2.5.1",
+  "title": "Find one.",
+  "body": " Find one   Which function has derivative ?      That is the derivative of  . We need to go the other way.     Yes. Check it: the derivative of is .     Check by differentiating: you get , not .     Check by differentiating: you get . Close, but the went missing.    "
+},
+{
+  "id": "notice-same-derivative",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#notice-same-derivative",
+  "type": "Checkpoint",
+  "number": "2.5.2",
+  "title": "What do you notice?",
+  "body": " What do you notice?   Find all four derivatives. What do you notice? So does knowing pin down exactly one function?    All four have the same derivative: . The constant disappears when you differentiate. So no. Knowing does not tell us which one we started with.   "
+},
+{
+  "id": "fig-antiderivative-family",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#fig-antiderivative-family",
+  "type": "Figure",
+  "number": "2.5.3",
+  "title": "",
+  "body": " Gray curves: a few members of the family . Blue: the one you picked.   "
+},
+{
+  "id": "notice-family",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#notice-family",
+  "type": "Checkpoint",
+  "number": "2.5.4",
+  "title": "Discuss with a neighbor.",
+  "body": " Discuss with a neighbor     What changes when you move ?  What stays the same about the shape?  At a fixed , how do the slopes of the different curves compare?    Then finish the sentence: the derivative remembers the ________ but forgets the ________.      The curve slides up and down.  The shape does not change at all. Every curve is the same curve, shifted.  They are identical. The slope depends on , not on .    The derivative remembers the shape (the slope at every point) but forgets the vertical position .   "
+},
+{
+  "id": "def-antiderivative",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#def-antiderivative",
+  "type": "Definition",
+  "number": "2.5.5",
+  "title": "Antiderivative.",
+  "body": " Antiderivative   A function is an antiderivative of on an interval if for every in that interval.   "
+},
+{
+  "id": "subsec-4-9-name-4",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#subsec-4-9-name-4",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "most general antiderivative "
+},
+{
+  "id": "fact-family-principle",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#fact-family-principle",
+  "type": "Fact",
+  "number": "2.5.6",
+  "title": "The family principle.",
+  "body": " The family principle   If is one antiderivative of on an interval, then every antiderivative of on that interval has the form .   "
+},
+{
+  "id": "remark-antiderivative-notation",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#remark-antiderivative-notation",
+  "type": "Remark",
+  "number": "2.5.7",
+  "title": "A note on notation.",
+  "body": " A note on notation  You may have seen antiderivatives written with a special symbol somewhere. We are not using it yet, on purpose. That symbol has a deeper meaning, and we want you to see where it comes from first. It shows up in . For now, we write with , and that is all we need.  "
+},
+{
+  "id": "check-power-backward-why",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-power-backward-why",
+  "type": "Checkpoint",
+  "number": "2.5.8",
+  "title": "Why does this work?",
+  "body": " Why does this work?   Differentiate . Do you get back ?     Yes. The cancels, and the constant disappears.   "
+},
+{
+  "id": "toolkit-backward",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#toolkit-backward",
+  "type": "Checkpoint",
+  "number": "2.5.9",
+  "title": "Build the toolkit yourself.",
+  "body": " Build the toolkit yourself   Every derivative you know is secretly an antiderivative too. Find the most general antiderivative of each function. Then open the solution.   ,   ,   ,   ,   ,   ,   ,          Most general antiderivative            The one people miss is . The derivative of is , so we need the minus sign: .   "
+},
+{
+  "id": "fact-antiderivative-toolkit",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#fact-antiderivative-toolkit",
+  "type": "Fact",
+  "number": "2.5.10",
+  "title": "The antiderivative toolkit.",
+  "body": " The antiderivative toolkit   If and , and is a constant, then:    "
+},
+{
+  "id": "example-antiderivative-polynomial",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#example-antiderivative-polynomial",
+  "type": "Example",
+  "number": "2.5.11",
+  "title": "We do: one term at a time.",
+  "body": " We do: one term at a time   Find the most general antiderivative of .    Work backward one term at a time. Raise the exponent, divide by the new exponent.   One covers the whole thing: .   Check.  . It matches.   "
+},
+{
+  "id": "try-antiderivative-polynomial",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#try-antiderivative-polynomial",
+  "type": "Checkpoint",
+  "number": "2.5.12",
+  "title": "Try one.",
+  "body": " Try one   Find the most general antiderivative of . Check your answer by differentiating before you open the solution.     . Check: .   "
+},
+{
+  "id": "check-find-c",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-find-c",
+  "type": "Checkpoint",
+  "number": "2.5.13",
+  "title": "Pick the family member.",
+  "body": " Pick the family member            Yes. , so , and the one function we want is .     "
+},
+{
+  "id": "subsec-4-9-initial-conditions-8",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#subsec-4-9-initial-conditions-8",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "initial value problem "
+},
+{
+  "id": "check-ivp-you-do",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-ivp-you-do",
+  "type": "Checkpoint",
+  "number": "2.5.14",
+  "title": "You do: select the right member of the family.",
+  "body": " You do: select the right member of the family   Find if and .   Step 1: find the family. Step 2: use the condition to find . Step 3: check both conditions.        and then         Yes. The family is , and .       Yes. , so .     "
+},
+{
+  "id": "check-second-derivative-ivp",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-second-derivative-ivp",
+  "type": "Checkpoint",
+  "number": "2.5.15",
+  "title": "Two steps back.",
+  "body": " Two steps back   Suppose , with and .  First recover . Then go back again: .  Now use the two conditions.              Yes. Every term except vanishes at , so .       Yes. . Setting that equal to gives . So .     "
+},
+{
+  "id": "fig-graph-to-antiderivative",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#fig-graph-to-antiderivative",
+  "type": "Figure",
+  "number": "2.5.16",
+  "title": "",
+  "body": " The graph of . It gives the slope of at every .   "
+},
+{
+  "id": "notice-graph-to-antiderivative",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#notice-graph-to-antiderivative",
+  "type": "Checkpoint",
+  "number": "2.5.17",
+  "title": "Read the slopes.",
+  "body": " Read the slopes     Where is increasing?  Where is decreasing?  Where does have horizontal tangents?  Where should have a local minimum? A local maximum?    Now sketch one possible on paper, starting at the point .      increases where : between and .  decreases where : from to , and from to .  Where : at and .  A local minimum at (decreasing, then increasing) and a local maximum at (increasing, then decreasing).     "
+},
+{
+  "id": "check-car-position",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-car-position",
+  "type": "Checkpoint",
+  "number": "2.5.18",
+  "title": "Where is the car?",
+  "body": " Where is the car?     meters       Yes. . Since the car started at , it moved meters.     "
+},
+{
+  "id": "check-acceleration-to-position",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-acceleration-to-position",
+  "type": "Checkpoint",
+  "number": "2.5.19",
+  "title": "You do: a particle.",
+  "body": " You do: a particle   A particle has acceleration . Its initial velocity is and its initial position is .   Step 1: recover and use . Step 2: recover and use .                Yes. , and gives . So .       Yes. , and gives . So .     "
+},
+{
+  "id": "less-scaffolding-antiderivatives",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#less-scaffolding-antiderivatives",
+  "type": "Checkpoint",
+  "number": "2.5.20",
+  "title": "Less scaffolding.",
+  "body": " Less scaffolding     Find the most general antiderivative of .  Find if and .  A particle has velocity and . Find its position function.        .  The family is . Then , so .  .     "
+},
+{
+  "id": "check-error-analysis-plus-c",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#check-error-analysis-plus-c",
+  "type": "Checkpoint",
+  "number": "2.5.21",
+  "title": "Error analysis: who is most general?",
+  "body": " Error analysis: who is most general?   A class is asked for the most general antiderivative of . Three students answer. Who gives the most general answer?     Student A:  Student A found an antiderivative, and it is correct. But it is only one member of the family. The is missing.    Student B:  Right. Correct function, and the captures the whole family.    Student C:  Differentiate it: you get . Student C raised the exponent but forgot to divide by the new exponent.    "
+},
+{
+  "id": "exit-ticket-antiderivatives",
+  "level": "2",
+  "url": "sec-4-9-antiderivatives.html#exit-ticket-antiderivatives",
+  "type": "Checkpoint",
+  "number": "2.5.22",
+  "title": "Exit ticket.",
+  "body": " Exit ticket     In your own words, what is an antiderivative? Explain it using a car's velocity and position.  Why does the general answer contain ?  If and on an interval, is increasing or decreasing there?  Why does an initial condition matter?        An antiderivative of is a function whose derivative is . If is a car's velocity, an antiderivative is its position: you recover where the car is from how fast it is going.  Differentiating erases constants. So running backward can only recover the function up to a vertical shift.  Increasing. The slope of is positive.  It picks out the one member of the family we actually want, like knowing where the car started.     "
 },
 {
   "id": "sec-5-1-areas-distances",
