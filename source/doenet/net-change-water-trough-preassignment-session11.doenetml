@@ -1,0 +1,90 @@
+<title>Pre-Assignment: The Mystery of Pancake's Water Trough</title>
+
+<p>
+  All that painting made Pancake the alpaca very thirsty. A hose is
+  filling her water trough. There is just one problem: nobody checked how
+  much water was in the trough this morning.
+</p>
+
+<p>
+  Can we still figure out how much water was <em>added</em>? Before
+  Tuesday, let's find out. About 10 minutes. Wrong answers are fine.
+</p>
+
+<p>
+  <alert>Question 1.</alert> The hose pours in a steady <m>5</m> liters
+  per minute for <m>6</m> minutes. How many liters were added to the
+  trough?
+</p>
+
+<answer>
+  <label>Liters added at a steady rate</label>
+  <award>30</award>
+</answer>
+
+<p>
+  Notice what you did not need: the amount of water that was there to
+  begin with. Hold that thought.
+</p>
+
+<p>
+  Now the farmer opens the valve slowly, so the water flows faster and
+  faster. The flow rate is <m>r(t) = 2t + 1</m> liters per minute. If
+  <m>W(t)</m> is the amount of water in the trough, then
+  <m>W'(t) = r(t)</m>. One antiderivative of the rate is
+  <m>F(t) = t^2 + t</m>.
+</p>
+
+<p>
+  <alert>Question 2.</alert> How many liters were added between
+  <m>t = 0</m> and <m>t = 4</m> minutes? (Hint: compute
+  <m>F(4) - F(0)</m>.)
+</p>
+
+<answer>
+  <label>Liters added from t = 0 to t = 4</label>
+  <award>20</award>
+</answer>
+
+<p>
+  <alert>Question 3.</alert> Suppose we find out the trough actually
+  started with <m>50</m> liters, so <m>W(t) = t^2 + t + 50</m>. Compute
+  <m>W(4) - W(0)</m>. What happens to your answer from Question 2?
+</p>
+
+<answer>
+  <label>What happens to the amount added?</label>
+  <choice credit="1">It is still 20 liters. The 50 cancels out.</choice>
+  <choice credit="0">It becomes 70 liters.</choice>
+  <choice credit="0">It becomes 50 liters.</choice>
+  <choice credit="0">We can't tell without more information.</choice>
+</answer>
+
+<p>
+  That is the big idea for Tuesday. To find how much something
+  <em>changed</em>, you only need its rate of change. Take any
+  antiderivative and compute end minus start. The unknown starting amount
+  cancels every time.
+</p>
+
+<p>
+  <alert>Question 4 (bonus round).</alert> Oh no. Pancake knocks the hose
+  loose and the trough springs a leak. Now the rate is
+  <m>r(t) = 4 - 2t</m> liters per minute, from <m>t = 0</m> to
+  <m>t = 4</m>. A positive rate means filling. A negative rate means
+  leaking. Using <m>F(t) = 4t - t^2</m>, the net change is
+  <m>F(4) - F(0) = 0</m>. What does a net change of <m>0</m> mean?
+</p>
+
+<answer>
+  <label>What does a net change of 0 mean?</label>
+  <choice credit="1">The trough ended with the same amount of water it started with.</choice>
+  <choice credit="0">No water flowed in or out at any time.</choice>
+  <choice credit="0">The trough is now empty.</choice>
+</answer>
+
+<p>
+  Water poured in for the first 2 minutes and leaked out for the next 2.
+  Lots happened, but the <em>net</em> change was zero. On Tuesday we give
+  this idea a name: the Net Change Theorem.
+</p>

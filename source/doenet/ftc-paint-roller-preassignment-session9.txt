@@ -1,0 +1,102 @@
+<title>Pre-Assignment: Pancake Paints the Barn</title>
+
+<p>
+  Pancake the alpaca has been banned from racing (long story), so the
+  farmer gave her a new job: painting the side of the barn. She pushes a
+  paint roller from left to right. The top edge of the paint follows a
+  curve <m>y = f(t)</m>.
+</p>
+
+<p>
+  When Pancake reaches position <m>x</m>, the painted area behind her is
+  <m>A(x)</m>. Before Tuesday, let's figure out how fast that painted
+  area grows. About 10 minutes. A wrong guess is completely fine.
+</p>
+
+<p>
+  <alert>Question 1.</alert> On the first wall, the paint is a steady
+  <m>3</m> meters tall, so <m>f(t) = 3</m>. The painted region is a
+  rectangle. When Pancake reaches <m>x = 4</m>, how many square meters
+  has she painted?
+</p>
+
+<answer>
+  <label>Painted area at x = 4</label>
+  <award>12</award>
+</answer>
+
+<p>
+  In general, on this wall <m>A(x) = 3x</m>. Every meter Pancake moves
+  adds <m>3</m> more square meters. Keep that <m>3</m> in mind.
+</p>
+
+<p>
+  On the second wall, the paint gets taller as Pancake goes:
+  <m>f(t) = 2t</m>. Now the painted region is a triangle. Drag the slider
+  to move Pancake and watch the painted area change.
+</p>
+
+<p>Pancake's position: <slider name="x" from="0" to="4" step="0.5" initialValue="2" /></p>
+
+<graph xmin="-0.5" xmax="4.5" ymin="-0.5" ymax="9">
+  <function>2x</function>
+  <polygon vertices="(0,0) ($x,0) ($x,2$x)" />
+  <point>($x, 0)</point>
+</graph>
+
+<p>
+  At <m>x =</m> <number>$x</number>, the painted area is
+  <number>$x^2</number> square meters.
+</p>
+
+<p>
+  <alert>Question 2.</alert> Use the triangle, or use the numbers from the
+  slider. Which formula gives the painted area <m>A(x)</m> on the second
+  wall?
+</p>
+
+<answer>
+  <label>Which formula gives A(x)?</label>
+  <choice credit="1"><m>A(x) = x^2</m></choice>
+  <choice credit="0"><m>A(x) = 2x</m></choice>
+  <choice credit="0"><m>A(x) = 2x^2</m></choice>
+  <choice credit="0"><m>A(x) = x^2/2</m></choice>
+</answer>
+
+<p>
+  <alert>Question 3.</alert> How fast is the painted area growing? Take the
+  derivative of the area function. If <m>A(x) = x^2</m>, what is
+  <m>A'(x)</m>?
+</p>
+
+<answer>
+  <label>The derivative of the area function</label>
+  <award>2x</award>
+</answer>
+
+<p>
+  Now look back. On the first wall, the paint height was <m>3</m> and the
+  area grew at rate <m>3</m>. On the second wall, the paint height was
+  <m>2x</m> and the area grew at rate <m>2x</m>. Suspicious...
+</p>
+
+<p>
+  <alert>Question 4.</alert> Make a guess. What do you think is always
+  true about the painted area <m>A(x)</m> and the paint height
+  <m>f(x)</m>?
+</p>
+
+<answer>
+  <label>Your conjecture</label>
+  <choice credit="1"><m>A'(x) = f(x)</m>: the area grows exactly as fast as the paint is tall</choice>
+  <choice credit="0"><m>A(x) = f(x)</m>: the area equals the height</choice>
+  <choice credit="0"><m>A'(x) = A(x)</m>: the area grows as fast as the area itself</choice>
+  <choice credit="0">There is no pattern, it was a coincidence</choice>
+</answer>
+
+<p>
+  Remember the car with speed <m>v(t) = 3t^2</m>? You found that it
+  traveled <m>8</m> meters by running a derivative backward, and
+  <m>8</m> again by adding up rectangles. Your answer to Question 4 is the
+  reason those matched. On Tuesday we find out why it has to be true.
+</p>

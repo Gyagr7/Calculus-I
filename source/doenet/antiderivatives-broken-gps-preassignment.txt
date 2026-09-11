@@ -1,0 +1,80 @@
+<title>Pre-Assignment: Pancake and the Case of the Broken GPS</title>
+
+<p>
+  Disaster at the Great Pasture Race! Pancake the alpaca's GPS collar
+  glitched in the middle of her run. It stopped recording <em>where</em>
+  she was. The only thing still working is her speedometer.
+</p>
+
+<p>
+  Your job, detective: figure out where Pancake went, using nothing but
+  her speed. About 10 minutes. Wrong answers are fine. Detectives guess
+  all the time.
+</p>
+
+<p>
+  <alert>Question 1.</alert> For the first 5 seconds, the speedometer
+  reads a steady <m>4</m> meters per second. How many meters did Pancake
+  cover?
+</p>
+
+<answer>
+  <label>Distance in the first 5 seconds</label>
+  <award>20</award>
+</answer>
+
+<p>
+  Then Pancake speeds up. The speedometer now says her speed at time
+  <m>t</m> is <m>v(t) = 2t</m> meters per second. Speed is changing, so
+  you can't just multiply anymore. Time to interview some suspects.
+</p>
+
+<p>
+  <alert>Question 2.</alert> Each suspect below claims to be Pancake's
+  position function <m>s(t)</m>. Remember: velocity is the derivative of
+  position. Differentiate each suspect. Which one could be telling the
+  truth?
+</p>
+
+<answer>
+  <label>Which suspect could be the position function?</label>
+  <choice credit="1"><m>s(t) = t^2 + 7</m></choice>
+  <choice credit="0"><m>s(t) = 2</m></choice>
+  <choice credit="0"><m>s(t) = 2t^2</m></choice>
+  <choice credit="0"><m>s(t) = t^2/2</m></choice>
+</answer>
+
+<p>
+  Plot twist: <m>t^2</m>, <m>t^2 + 7</m>, and <m>t^2 - 5</m> all match
+  the speedometer. Drag the slider and watch the whole family move. Every
+  curve has the same steepness at every moment. They only disagree about
+  where Pancake <em>started</em>.
+</p>
+
+<p>Shift the curve up or down: <slider name="C" from="-10" to="10" step="1" initialValue="0" /></p>
+
+<graph xmin="-0.5" xmax="5" ymin="-12" ymax="36">
+  <function>x^2 + $C</function>
+</graph>
+
+<p>
+  So the speedometer alone can't crack the case. We need one more clue.
+</p>
+
+<p>
+  <alert>Question 3.</alert> A witness saw Pancake at the barn door when
+  the race began, <m>3</m> meters past the starting post. So
+  <m>s(0) = 3</m>, and her speed is still <m>v(t) = 2t</m>. Where was
+  Pancake, in meters past the starting post, at <m>t = 4</m> seconds?
+</p>
+
+<answer>
+  <label>Position at t = 4</label>
+  <award>19</award>
+</answer>
+
+<p>
+  Case closed. Speed data gives you a whole family of possible paths.
+  One clue about where she started picks out the real one. That is the
+  whole idea behind antiderivatives and initial conditions.
+</p>
