@@ -32,7 +32,7 @@ function iterate(n) {
 }
 
 var colors = ['#009933', '#cc7a00', '#8e44ad'];
-var names = ['x2', 'x3', 'x4'];
+var names = ['x2', 'x3', ''];
 
 for (var k = 0; k < 3; k++) {
     (function (k) {
@@ -57,8 +57,8 @@ for (var k = 0; k < 3; k++) {
 }
 
 board.create('text', [0.6, 16.3, function () {
-    return 'x1 = ' + iterate(0).toFixed(4) + '    x2 = ' + iterate(1).toFixed(4) +
-           '    x3 = ' + iterate(2).toFixed(4) + '    x4 = ' + iterate(3).toFixed(4);
+    return 'x1 = ' + iterate(0).toFixed(4) + '  |  x2 = ' + iterate(1).toFixed(4) +
+           '  |  x3 = ' + iterate(2).toFixed(4) + '  |  x4 = ' + iterate(3).toFixed(4);
 }], {fontSize: 14, fixed: true, cssStyle: 'font-weight:bold;'});
 
 board.create('text', [0.6, 14.3, 'Drag the red point x1 along the axis to change the first guess.'], {

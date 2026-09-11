@@ -8,10 +8,10 @@ var board = JXG.JSXGraph.initBoard('interactive-antiderivative-family-slate', {
     keepAspectRatio: false
 });
 
-var cS = board.create('slider', [[0.5, -8.5], [2.1, -8.5], [-6, 0, 6]], {
+var cS = board.create('slider', [[-0.2, -8.5], [1.3, -8.5], [-6, 0, 6]], {
     name: 'C', snapWidth: 0.5, precision: 1
 });
-var xS = board.create('slider', [[0.5, -10.5], [2.1, -10.5], [-1.8, 1, 1.8]], {
+var xS = board.create('slider', [[-0.2, -10.5], [1.3, -10.5], [-1.8, 1, 1.8]], {
     name: 'x', snapWidth: 0.1, precision: 1
 });
 
@@ -38,7 +38,7 @@ board.create('line', [P, [function () { return X() + 1; }, function () { var x =
 });
 
 board.create('text', [-2.35, 10.8, function () {
-    return 'C = ' + cS.Value().toFixed(1) + '     F(' + X().toFixed(1) + ') = ' + Y().toFixed(2);
+    return 'C = ' + cS.Value().toFixed(1) + '   |   F(' + X().toFixed(1) + ') = ' + Y().toFixed(2);
 }], {fontSize: 14, fixed: true});
 
 board.create('text', [-2.35, 9.3, function () {
