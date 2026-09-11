@@ -98,7 +98,7 @@
     </p>
     <assemblage>
       <title>Think about this</title>
-      <p>Our car from Section 4.9 is back. Its velocity is <m>v(t) = 3t^2</m> meters per second, from <m>t = 0</m> to <m>t = 2</m>. Suppose you did not have the formula, only a table of speeds, one reading every half second. How would you estimate how far the car went?</p>
+      <p>The car from <xref ref="subsec-4-9-car" text="custom">the antiderivatives section</xref> is back. Its velocity is <m>v(t) = 3t^2</m> meters per second, from <m>t = 0</m> to <m>t = 2</m>. Suppose you did not have the formula, only a table of speeds, one reading every half second. How would you estimate how far the car went?</p>
       <p>Make a guess before you compute anything. Would your estimate be too high or too low?</p>
     </assemblage>
     <p>
