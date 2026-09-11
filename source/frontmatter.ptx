@@ -16,13 +16,37 @@
   </titlepage>
 
   <preface xml:id="preface">
-    <title>Preface</title>
+    <title>Before You Start</title>
     <p>
-      [TODO: a short note to students -- what this course covers, how
-      these notes are organized (each section moves from a motivating
-      question, to a worked problem, to the general rule or theorem),
-      and how the notes connect to the skills you'll be assessed on
-      this semester.]
+      Welcome to Math 1540.
+    </p>
+    <p>
+      These notes go with our class. They are not meant to be read like a novel.
+      They are meant to be <em>worked through</em>, with a pencil in your hand.
+    </p>
+    <p>
+      Every section is built the same way:
+      <ol>
+        <li><p><alert>A question.</alert> Something worth caring about, in plain language.</p></li>
+        <li><p><alert>You try something.</alert> A computation, a prediction, or a graph to play with.</p></li>
+        <li><p><alert>Then we give it a name.</alert> The definition or rule comes <em>after</em> you have seen why we need it.</p></li>
+      </ol>
+    </p>
+    <p>
+      Along the way you will see a few kinds of boxes:
+      <ul>
+        <li><p><alert>Checkpoints</alert> ask you to do something right now. Some check your answer instantly. Others have a solution you can open. Try first, then check.</p></li>
+        <li><p><alert>We do</alert> examples are worked out step by step, with the thinking written down.</p></li>
+        <li><p><alert>You do</alert> problems are your turn to try the same kind of problem.</p></li>
+        <li><p><alert>Pre-assignments</alert> link to short warm-ups on Doenet. Do them before class.</p></li>
+      </ul>
+    </p>
+    <p>
+      Getting a checkpoint wrong costs you nothing. It is exactly how learning starts.
+    </p>
+    <p>
+      One last thing. If a sentence in here does not make sense, that is on the notes,
+      not on you. Tell me, and I will fix it.
     </p>
   </preface>
 </frontmatter>

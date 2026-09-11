@@ -14,24 +14,27 @@
        Doenet, the code in the href below will change and needs updating here
        too; the source content for re-pasting into Doenet lives at
        source/doenet/optimization-preassignment-session3.doenetml.
-       OPEN ISSUE (2026-09-04): this link currently shows "Assignment is
-       closed" and students have reported being asked for a "class code"
-       they were never given; investigate on doenet.org before assigning
-       again (check the activity's open/close status and whether it now
-       requires being linked to a Doenet "class" separately from the
-       assignment code) and update this note once resolved. -->
+       Earlier class-code issue (2026-09-04) resolved 2026-09-06: the
+       assignment had closed; closed Doenet assignments send students to
+       the generic enter-a-code page. Reopen it in Doenet to reuse. -->
   <section xml:id="sec-pre-assignment-optimization">
     <title>Pre-Assignment: Before Tuesday's Class</title>
     <p>
-      Complete the short warm-up below before we meet Tuesday. It connects
-      the critical-point skill from <xref ref="ch-derivatives-recap"/> to the
-      idea of optimization, and takes about 10 minutes.
+      Pancake the alpaca keeps breaking out of her pen. You have <m>40</m> meters
+      of fencing. How do you build her the biggest pen possible?
     </p>
     <p>
-      <url href="https://doenet.org/code/189251" visual="doenet.org/code/189251">Open the pre-assignment</url>
-      and sign in (your own Doenet account, or create a free one) before you
-      start, so your work is recorded for completion credit. It opens in a
-      new tab.
+      That is your warm-up before Tuesday. It takes about 10 minutes,
+      and it counts for completion, so a wrong answer is completely fine.
+    </p>
+    <p>
+      Here is the twist: you already own the tool that solves it.
+      You built it in <xref ref="ch-derivatives-recap"/>.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/189251" visual="doenet.org/code/189251">Open the pre-assignment</url>.
+      Sign in first (your Doenet account, or a free new one) so your work counts.
+      It opens in a new tab.
     </p>
   </section>
 
@@ -65,15 +68,22 @@
   <section xml:id="sec-pre-assignment-antiderivatives">
     <title>Pre-Assignment: Before Thursday's Class</title>
     <p>
-      Complete the short warm-up below before we meet Thursday. It runs the
-      differentiation rules from <xref ref="ch-derivatives-recap"/> in
-      reverse, and takes about 10 minutes.
+      So far, you have always gone one direction: from a function to its derivative.
     </p>
     <p>
-      <url href="https://doenet.org/code/065250" visual="doenet.org/code/065250">Open the pre-assignment</url>
-      and sign in (your own Doenet account, or create a free one) before you
-      start, so your work is recorded for completion credit. It opens in a
-      new tab.
+      Can you go backward? If you know how fast Pancake is running,
+      can you figure out how far Pancake has gone?
+    </p>
+    <p>
+      That is your warm-up before Thursday. It takes about 10 minutes,
+      and it counts for completion, so a wrong answer is completely fine.
+      Keep the differentiation toolkit (<xref ref="fact-basic-rules"/>) handy.
+      You will be running it in reverse.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/065250" visual="doenet.org/code/065250">Open the pre-assignment</url>.
+      Sign in first (your Doenet account, or a free new one) so your work counts.
+      It opens in a new tab.
     </p>
   </section>
 
