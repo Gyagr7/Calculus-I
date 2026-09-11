@@ -43,7 +43,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.4",
   "title": "Tue Sep 15: Riemann Sums",
-  "body": " Tue Sep 15: Riemann Sums  Today in class: (Stewart 5.1).   Think about this  Our car from Section 4.9 is back. Its velocity is meters per second, from to . Suppose you did not have the formula, only a table of speeds, one reading every half second. How would you estimate how far the car went?  Make a guess before you compute anything. Would your estimate be too high or too low?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "body": " Tue Sep 15: Riemann Sums  Today in class: (Stewart 5.1).   Think about this  The car from the antiderivatives section is back. Its velocity is meters per second, from to . Suppose you did not have the formula, only a table of speeds, one reading every half second. How would you estimate how far the car went?  Make a guess before you compute anything. Would your estimate be too high or too low?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-sep-17",
