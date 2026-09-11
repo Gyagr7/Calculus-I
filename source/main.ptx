@@ -16,6 +16,7 @@
       Add new xi:include lines as you add chapters; the order here is
       the order they appear in the book.
     -->
+    <xi:include href="./ch-pre-assignments.ptx"/>
     <xi:include href="./ch-derivatives-recap.ptx"/>
     <xi:include href="./ch-optimization-approximation.ptx"/>
     <xi:include href="./ch-integrals.ptx"/>

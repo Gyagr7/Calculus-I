@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter xml:id="ch-pre-assignments" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Pre-Assignments</title>
+  <!-- Created 2026-09-11. One section per class day, following
+       Math_1540_Course_Schedule_Revised.docx (Sep 7). When a Doenet assignment
+       is created for a day, replace that section's "Link coming soon" paragraph
+       with the url to https://doenet.org/code/NNNNNN (keep leading zeros).
+       The first two sections were moved here from Chapter 2; their xml:ids are
+       unchanged so the old page URLs still work. -->
+  <introduction>
+    <p>
+      Every class starts with a short warm-up that you do <em>before</em> you walk in.
+    </p>
+    <p>
+      <ul>
+        <li><p><alert>Find today's date</alert> in the list below.</p></li>
+        <li><p><alert>Think about the question</alert> for a minute. Make a guess.</p></li>
+        <li><p><alert>Open the link</alert> and do the warm-up. About 10 minutes.</p></li>
+      </ul>
+    </p>
+    <p>
+      These count for completion. Being wrong is completely fine. It is exactly how we start.
+    </p>
+    <p>
+      The dates follow the course schedule. If the schedule shifts, this list shifts with it.
+    </p>
+  </introduction>
+
+  <section xml:id="sec-pre-assignment-optimization">
+    <title>Optimization (Stewart 4.7)</title>
+    <p>
+      Pancake the alpaca keeps breaking out of her pen. You have <m>40</m> meters
+      of fencing. How do you build her the biggest pen possible?
+    </p>
+    <p>
+      This was the warm-up before our first optimization class. It takes about 10 minutes,
+      and it counts for completion, so a wrong answer is completely fine.
+    </p>
+    <p>
+      Here is the twist: you already own the tool that solves it.
+      You built it in <xref ref="ch-derivatives-recap"/>.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/189251" visual="doenet.org/code/189251">Open the pre-assignment</url>.
+      Sign in first (your Doenet account, or a free new one) so your work counts.
+      It opens in a new tab.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-antiderivatives">
+    <title>Antiderivatives (Stewart 4.9)</title>
+    <p>
+      So far, you have always gone one direction: from a function to its derivative.
+    </p>
+    <p>
+      Can you go backward? If you know how fast Pancake is running,
+      can you figure out how far Pancake has gone?
+    </p>
+    <p>
+      This was the warm-up before antiderivatives. It takes about 10 minutes,
+      and it counts for completion, so a wrong answer is completely fine.
+      Keep the differentiation toolkit (<xref ref="fact-basic-rules"/>) handy.
+      You will be running it in reverse.
+    </p>
+    <p>
+      <url href="https://doenet.org/code/065250" visual="doenet.org/code/065250">Open the pre-assignment</url>.
+      Sign in first (your Doenet account, or a free new one) so your work counts.
+      It opens in a new tab.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-integration-warmup">
+    <title>Thu Sep 10: What Is Integration?</title>
+    <p>
+      Before we spent a whole chapter on integration, we wanted to know what
+      <em>you</em> already think it means.
+    </p>
+    <assemblage>
+      <title>The question</title>
+      <p>
+        Picture a made-up pond with a wiggly edge. There is no formula for its area.
+        How would you figure out how much space it takes up?
+      </p>
+    </assemblage>
+    <p>
+      This one is on paper: a guess first, then pick at least one video, app, article,
+      or AI chat to explore, then a few sentences in your own words.
+    </p>
+    <p>
+      <url href="external/pdf/Math_1540_PreAssignment_Integration.pdf" visual="Math_1540_PreAssignment_Integration.pdf">Open Preassignment-I (PDF)</url>.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-sep-15">
+    <title>Tue Sep 15: Riemann Sums</title>
+    <p>
+      Today in class: <xref ref="sec-5-1-areas-distances" text="title"/> (Stewart 5.1).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Our car from Section 4.9 is back. Its velocity is <m>v(t) = 3t^2</m> meters per second, from <m>t = 0</m> to <m>t = 2</m>. Suppose you did not have the formula, only a table of speeds, one reading every half second. How would you estimate how far the car went?</p>
+      <p>Make a guess before you compute anything. Would your estimate be too high or too low?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-sep-17">
+    <title>Thu Sep 17: The Definite Integral</title>
+    <p>
+      Today in class: <xref ref="sec-5-2-definite-integral" text="title"/> (Stewart 5.2).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>You can estimate an area with 4 rectangles. What happens with 10 rectangles? 100? A million?</p>
+      <p>And one more puzzle: what should <q>area</q> mean when the graph dips below the <m>x</m>-axis?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-sep-22">
+    <title>Tue Sep 22: The Fundamental Theorem, Part 1</title>
+    <p>
+      Today in class: <xref ref="sec-5-3-ftc" text="title"/> (Stewart 5.3).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>You found the number <m>8</m> twice. Once by running a derivative backward. Once by adding up rectangles.</p>
+      <p>Coincidence? Come to class with a guess for why.</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-sep-24">
+    <title>Thu Sep 24: The Fundamental Theorem, Part 2</title>
+    <p>
+      Today in class: <xref ref="sec-5-3-ftc" text="title"/> (Stewart 5.3).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Adding up rectangles and running a derivative backward gave the same answer. So which would you rather do?</p>
+      <p>Is there a catch? Think about a function where running backward might be hard.</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-sep-29">
+    <title>Tue Sep 29: Indefinite Integrals and Net Change</title>
+    <p>
+      Today in class: <xref ref="sec-5-4-indefinite-net-change" text="title"/> (Stewart 5.4).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>A water tank leaks at a rate you know. Can you find how much water was lost between 2 pm and 5 pm, without knowing how much was in the tank to start?</p>
+      <p>What information do you actually need?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-01">
+    <title>Thu Oct 1: The Substitution Rule, Part 1</title>
+    <p>
+      Today in class: <xref ref="sec-5-5-substitution" text="title"/> (Stewart 5.5).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>The Chain Rule turns <m>f(g(x))</m> into <m>f'(g(x)) \cdot g'(x)</m>.</p>
+      <p>If you saw that pattern hiding inside a function, could you run the Chain Rule backward?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-06">
+    <title>Tue Oct 6: The Substitution Rule, Part 2</title>
+    <p>
+      Today in class: <xref ref="sec-5-5-substitution" text="title"/> (Stewart 5.5).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>When you swap one variable for another, the function changes. What should happen to the starting and ending values?</p>
+      <p>Make a prediction. We will test it in class.</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-13">
+    <title>Tue Oct 13: Areas Between Curves</title>
+    <p>
+      Today in class: <xref ref="sec-6-1-areas-between-curves" text="title"/> (Stewart 6.1).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>You know how to find the area under one curve. How would you find the area trapped <em>between</em> two curves?</p>
+      <p>Sketch two curves that cross, and shade the region you mean.</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-15">
+    <title>Thu Oct 15: Volumes: The Disk Method</title>
+    <p>
+      Today in class: <xref ref="sec-6-2-volumes" text="title"/> (Stewart 6.2).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Slice a loaf of bread. Each slice is almost a thin cylinder.</p>
+      <p>If you know the volume of one slice, how do you get the volume of the whole loaf?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-20">
+    <title>Tue Oct 20: Volumes: The Washer Method</title>
+    <p>
+      Today in class: <xref ref="sec-6-2-volumes" text="title"/> (Stewart 6.2).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Now slice a bagel. Every slice has a hole in the middle.</p>
+      <p>How would you change your loaf-of-bread idea to handle the hole?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-22">
+    <title>Thu Oct 22: Midterm Review</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No new topic today, so no Doenet warm-up.</p>
+      <p>Look back over everything since the start of the semester. Bring the two topics you feel least sure about.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-27">
+    <title>Tue Oct 27: Midterm</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No pre-assignment today.</p>
+      <p>Get some sleep. You have been practicing every one of these ideas since August.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-29">
+    <title>Thu Oct 29: Volumes: The Shell Method, Part 1</title>
+    <p>
+      Today in class: <xref ref="sec-6-3-cylindrical-shells" text="title"/> (Stewart 6.3).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?</p>
+      <p>Could that ever be easier?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-03">
+    <title>Tue Nov 3: Volumes: The Shell Method, Part 2</title>
+    <p>
+      Today in class: <xref ref="sec-6-3-cylindrical-shells" text="title"/> (Stewart 6.3).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Disks or shells? For the same solid, you can often do either.</p>
+      <p>What would make you pick one over the other?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-05">
+    <title>Thu Nov 5: Work: Springs</title>
+    <p>
+      Today in class: <xref ref="sec-6-4-work" text="title"/> (Stewart 6.4).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Stretching a spring gets harder the farther you pull.</p>
+      <p>If the force keeps changing, how can you measure the total effort?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-10">
+    <title>Tue Nov 10: Work: Pumping Liquids</title>
+    <p>
+      Today in class: <xref ref="sec-6-4-work" text="title"/> (Stewart 6.4).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>You need to pump all the water out over the top of a full tank.</p>
+      <p>Why is the water at the bottom harder to pump out than the water at the top?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-12">
+    <title>Thu Nov 12: Average Value of a Function</title>
+    <p>
+      Today in class: <xref ref="sec-6-5-average-value" text="title"/> (Stewart 6.5).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>What does <q>the average temperature today</q> mean, when the temperature changes every second?</p>
+      <p>How would you compute it from a graph of temperature over the day?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-17">
+    <title>Tue Nov 17: Board Presentations, Day 1</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No Doenet warm-up today. It is presentation day.</p>
+      <p>If your group presents today, rehearse once out loud. If not, come ready to ask one good question.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-19">
+    <title>Thu Nov 19: Board Presentations, Day 2</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No Doenet warm-up today. It is presentation day.</p>
+      <p>If your group presents today, rehearse once out loud. If not, come ready to ask one good question.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-pre-assignment-nov-24">
+    <title>Tue Nov 24: Arc Length and Surface Area</title>
+    <p>
+      Today in class: <xref ref="sec-8-1-arc-length" text="title"/> (Stewart 8.1 and 8.2).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>How long is a curvy road? You can measure straight lines easily.</p>
+      <p>Could lots of tiny straight pieces do the job?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-dec-01">
+    <title>Tue Dec 1: Fluid Pressure and Center of Mass</title>
+    <p>
+      Today in class: <xref ref="sec-8-3-applications-physics-engineering" text="title"/> (Stewart 8.3).
+    </p>
+    <assemblage>
+      <title>Think about this</title>
+      <p>Why is a dam built thicker at the bottom than at the top?</p>
+      <p>And where would you put your finger to balance a flat, oddly shaped plate?</p>
+    </assemblage>
+    <p>
+      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
+      About 10 minutes, completion credit.
+    </p>
+  </section>
+
+  <section xml:id="sec-pre-assignment-dec-03">
+    <title>Thu Dec 3: Cumulative Review</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No new topic today, so no Doenet warm-up.</p>
+      <p>Bring the one topic from the whole semester you most want to see again.</p>
+    </assemblage>
+  </section>
+
+</chapter>
