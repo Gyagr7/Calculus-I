@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-4-7-optimization" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Optimization Problems</title>
+  <!-- Stewart 4.7 . Skills 3-4 . Built from Handout 2 (Optimization, Aug 26) in the
+       conversational handout voice. Written 2026-09-11. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-optimization">
+      <title>Today's Question</title>
+      <p>
+        You have a fixed amount of something: fence, cardboard, money.
+        How do you get the <em>best possible</em> outcome out of it?
+      </p>
+    </assemblage>
+    <p>
+      Best possible could mean the largest area. The largest volume.
+      The lowest cost. The shortest distance.
+    </p>
+    <p>
+      Here is the good news. You already own the tool.
+      In <xref ref="subsec-critical-points"/>, the flat spots on a graph were the
+      candidates for peaks and valleys. A peak is a maximum. A valley is a minimum.
+      So <q>best possible</q> is really a derivative question.
+    </p>
+    <p>
+      The hard part is not the calculus. The hard part is getting from a paragraph
+      of words to a function you can differentiate. So that is where we start.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-4-7-translation">
+    <title>Word problems are translation problems</title>
+
+    <p>
+      A word problem is not asking you to guess a trick. It is asking you to translate.
+    </p>
+    <md>
+      \text{words} \;\longrightarrow\; \text{picture} \;\longrightarrow\; \text{equations} \;\longrightarrow\; \text{calculus}
+    </md>
+    <p>
+      So when you see one, do not start differentiating. Ask these questions first, in order:
+      <ol>
+        <li><p><alert>What am I trying to find?</alert> Look for words like <em>largest</em>, <em>smallest</em>, <em>maximum</em>, <em>minimum</em>, <em>least</em>, <em>greatest</em>.</p></li>
+        <li><p><alert>What quantities are changing?</alert> Give them names and units.</p></li>
+        <li><p><alert>What is fixed?</alert> That usually gives you the constraint.</p></li>
+        <li><p><alert>Can I draw a picture?</alert> Even a rough sketch helps a lot.</p></li>
+        <li><p><alert>Can I write an equation for what I want?</alert> Something like <m>A = xy</m>, <m>V = lwh</m>, or <m>P = 2l + 2w</m>.</p></li>
+        <li><p><alert>Can I rewrite it using just one variable?</alert></p></li>
+        <li><p><alert>Which values actually make sense?</alert> That gives the feasible domain.</p></li>
+        <li><p><alert>Only now</alert> do we differentiate.</p></li>
+      </ol>
+    </p>
+
+    <assemblage>
+      <title>Rule of thumb</title>
+      <p>
+        Do not differentiate a sentence. First turn the sentence into mathematics. Then differentiate.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="warmup-no-calculus">
+      <title>Warm-up: no calculus allowed</title>
+      <statement>
+        <p>
+          Just translate. Do not solve anything yet.
+          <ol>
+            <li><p>A rectangle has perimeter <m>60</m> cm. Its length is <m>x</m> and its width is <m>y</m>. Write the constraint. Then write the quantity you would maximize to get the largest area.</p></li>
+            <li><p>A farmer has <m>300</m> m of fencing for three sides of a rectangular field. A river forms the fourth side. The two sides touching the river are each <m>x</m> long, and the side across from the river is <m>y</m>. Write the constraint and the area.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Constraint: <m>2x + 2y = 60</m>. Maximize the area <m>A = xy</m>.</p></li>
+            <li><p>Constraint: <m>2x + y = 300</m> (only one <m>y</m>, because the river covers the other side). Area: <m>A = xy</m>.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-7-objective-constraint">
+    <title>Two ingredients: objective and constraint</title>
+
+    <p>
+      Look back at the warm-up. Both problems had the same two pieces.
+      Every optimization problem does.
+    </p>
+
+    <definition xml:id="def-objective-constraint">
+      <title>Objective and constraint</title>
+      <statement>
+        <p>The <term>objective</term> is the quantity we want to maximize or minimize.</p>
+        <p>The <term>constraint</term> is what limits our choices.</p>
+        <p>
+          <term>Optimization</term> means finding the maximum or minimum value of the
+          objective, subject to the constraint.
+        </p>
+      </statement>
+    </definition>
+
+    <exercise xml:id="check-objective-constraint" label="check-objective-constraint">
+      <title>Quick check</title>
+      <statement>
+        <p>
+          A rectangular garden uses exactly <m>40</m> meters of fencing.
+          We want the biggest garden possible. Which one is the <em>constraint</em>?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>The perimeter: <m>2x + 2y = 40</m></p></statement>
+          <feedback><p>Right. The amount of fence is fixed, so it limits our choices.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>The area: <m>A = xy</m></p></statement>
+          <feedback><p>That is what we want to make as big as possible. It is the objective, not the constraint.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>The length: <m>x = 10</m></p></statement>
+          <feedback><p>Nobody told us the length. The length is one of the things we get to choose.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-7-largest-rectangle">
+    <title>The largest possible rectangle</title>
+
+    <p>
+      A farmer has <m>40</m> meters of fencing and wants a rectangular pen.
+      (If you did the pre-assignment, you already met Pancake the alpaca. This is her pen.)
+    </p>
+    <p>
+      Before any calculus, make a prediction. Which will hold more:
+      a long, skinny rectangle, or a more balanced one?
+    </p>
+    <p>
+      Now test your prediction. Drag the slider.
+    </p>
+
+    <figure xml:id="fig-fence-rectangle">
+      <caption>Every rectangle here uses exactly <m>40</m> meters of fence.</caption>
+      <interactive xml:id="interactive-fence-rectangle" label="interactive-fence-rectangle"
+                   platform="jsxgraph" width="80%" aspect="1:1"
+                   source="jsxgraph/fence-rectangle.js">
+        <slate xml:id="interactive-fence-rectangle-slate" surface="jsxboard" aspect="1:1"/>
+        <instructions>
+          <p>
+            Drag the <q>width</q> slider. The length adjusts so the fence
+            always adds up to <m>40</m> meters. Watch the area.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="notice-fence-best">
+      <title>What do you notice?</title>
+      <statement>
+        <p>Which width gave the most area? What shape was the pen?</p>
+      </statement>
+      <solution>
+        <p>
+          A width of <m>10</m> m gives <m>100</m> square meters, the most of any width.
+          The pen is a square. Skinny pens spend fence on length without gaining much area.
+        </p>
+      </solution>
+    </exercise>
+
+    <paragraphs>
+      <title>Why do derivatives help?</title>
+      <p>
+        Watch the area as you drag from left to right. It climbs, reaches a peak, then falls.
+      </p>
+      <p>
+        Climbing means <m>A'(x) \gt 0</m>. Falling means <m>A'(x) \lt 0</m>.
+        Right at the top, it switches. So the peak sits where <m>A'(x) = 0</m>.
+      </p>
+      <p>
+        Dragging a slider found the answer this time. Calculus finds it every time,
+        even when there is no slider.
+      </p>
+    </paragraphs>
+
+    <example xml:id="example-largest-rectangle">
+      <title>We do: prove the square wins</title>
+      <statement>
+        <p>With <m>40</m> m of fence, find the dimensions of the rectangle with the largest area.</p>
+      </statement>
+      <solution>
+        <p>
+          <alert>Objective:</alert> <m>A = xy</m>.
+          <alert>Constraint:</alert> <m>2x + 2y = 40</m>.
+        </p>
+        <p>
+          <alert>Step 1: Get down to one variable.</alert>
+          Solve the constraint for <m>y</m>: <m>y = 20 - x</m>. Substitute:
+          <md>
+            A(x) = x(20 - x) = 20x - x^2.
+          </md>
+        </p>
+        <p>
+          <alert>Step 2: Which values make sense?</alert>
+          A side cannot be negative, so <m>0 \le x \le 20</m>.
+        </p>
+        <p>
+          <alert>Step 3: Differentiate and find the critical point.</alert>
+          <md>
+            <mrow> A'(x) &amp;= 20 - 2x = 0 </mrow>
+            <mrow> x &amp;= 10. </mrow>
+          </md>
+          Then <m>y = 20 - 10 = 10</m>, and <m>A(10) = 100</m>.
+        </p>
+        <p>
+          <alert>Step 4: Is it really a maximum?</alert>
+          Test a number on each side. <m>A'(5) = 10 \gt 0</m>, so the area is increasing
+          before <m>x = 10</m>. <m>A'(15) = -10 \lt 0</m>, so it is decreasing after.
+          Increasing, then decreasing: a peak.
+        </p>
+        <p>
+          So the best pen is a <m>10</m> m by <m>10</m> m square, with area <m>100</m> square meters.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection xml:id="subsec-4-7-routine">
+    <title>The optimization routine</title>
+
+    <p>
+      That example had a shape. The same shape works every time.
+    </p>
+
+    <assemblage xml:id="assemblage-optimization-routine">
+      <title>The optimization routine</title>
+      <p>
+        <ol>
+          <li><p>Draw and label a picture, when it helps.</p></li>
+          <li><p>Identify the objective.</p></li>
+          <li><p>Identify the constraint.</p></li>
+          <li><p>Rewrite the objective using one variable.</p></li>
+          <li><p>Find the feasible domain.</p></li>
+          <li><p>Differentiate and find the critical points.</p></li>
+          <li><p>Decide which candidate gives the maximum or minimum.</p></li>
+          <li><p>Answer the original question, with units.</p></li>
+        </ol>
+      </p>
+    </assemblage>
+
+    <p>
+      Step 7 is the one people skip. Remember: a critical point is a
+      <em>candidate</em>, not automatically an answer.
+    </p>
+
+    <paragraphs>
+      <title>How do we know we found the best value?</title>
+      <p>
+        Two ways. Use whichever fits the problem.
+      </p>
+      <p>
+        <alert>First Derivative Test.</alert> Check the sign of <m>f'</m> on each side of
+        the critical point. <m>+</m> then <m>-</m> means a maximum.
+        <m>-</m> then <m>+</m> means a minimum. That is what we did for the pen.
+      </p>
+      <p>
+        <alert>Closed Interval Method.</alert> If the domain is a closed interval
+        <m>[a, b]</m>, plug the endpoints <em>and</em> every critical point into <m>f</m>.
+        The biggest output is the maximum. The smallest is the minimum.
+        For the pen: <m>A(0) = 0</m>, <m>A(20) = 0</m>, <m>A(10) = 100</m>. Same answer.
+      </p>
+    </paragraphs>
+
+    <example xml:id="example-open-box">
+      <title>We do: an open-top box</title>
+      <statement>
+        <p>
+          A piece of cardboard measures <m>20</m> inches by <m>12</m> inches.
+          Cut a square of side <m>x</m> from each corner, then fold up the sides
+          to make an open-top box. What value of <m>x</m> gives the largest volume?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <alert>Picture it.</alert> After folding, the height is the size of the cut: <m>x</m>.
+          The long side lost <m>x</m> at both ends, so the length is <m>20 - 2x</m>.
+          Same for the short side: the width is <m>12 - 2x</m>.
+        </p>
+        <p>
+          <alert>Objective.</alert>
+          <md>
+            V(x) = x(20 - 2x)(12 - 2x) = 4x^3 - 64x^2 + 240x.
+          </md>
+        </p>
+        <p>
+          <alert>What makes sense?</alert> If <m>x</m> is tiny, the box is flat.
+          If <m>x</m> is too big, there is no cardboard left. The width has to stay
+          positive: <m>12 - 2x \gt 0</m>, so <m>x \lt 6</m>.
+          The feasible domain is <m>0 \lt x \lt 6</m>.
+        </p>
+        <p>
+          <alert>Differentiate.</alert>
+          <md>
+            V'(x) = 12x^2 - 128x + 240 = 4(3x^2 - 32x + 60).
+          </md>
+          Set it equal to <m>0</m> and use the quadratic formula on <m>3x^2 - 32x + 60 = 0</m>:
+          <md>
+            x = \frac{32 \pm \sqrt{32^2 - 4(3)(60)}}{2(3)} = \frac{32 \pm \sqrt{304}}{6}.
+          </md>
+          So <m>x \approx 2.43</m> or <m>x \approx 8.24</m>.
+        </p>
+        <p>
+          <alert>Which candidate?</alert> <m>x \approx 8.24</m> is outside the domain.
+          You cannot cut <m>8</m>-inch squares from a <m>12</m>-inch side.
+          That leaves <m>x \approx 2.43</m>. Check the signs:
+          <m>V'(1) = 124 \gt 0</m> and <m>V'(3) = -36 \lt 0</m>.
+          Increasing, then decreasing: a maximum.
+        </p>
+        <p>
+          <alert>Answer.</alert> Cut squares about <m>2.43</m> inches on a side.
+          The box holds about <m>262.7</m> cubic inches.
+        </p>
+      </solution>
+    </example>
+
+    <exercise xml:id="check-open-box-your-turn" label="check-open-box-your-turn">
+      <title>You do: your own box</title>
+      <statement>
+        <p>
+          Now the cardboard is <m>30</m> cm by <m>20</m> cm.
+          Cut squares of side <m>x</m> cm from the corners and fold. Follow the routine.
+        </p>
+        <p>
+          The feasible domain is <m>0 \lt x \lt</m> <fillin answer="10" mode="number"/>.
+        </p>
+        <p>
+          The best cut is <m>x \approx</m> <fillin answer="3.92" mode="number"/> cm
+          (two decimal places).
+        </p>
+        <p>
+          The largest volume is about <fillin answer="1056.3" mode="number"/> cubic cm.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. The width is <m>20 - 2x</m>, and it has to stay positive, so <m>x \lt 10</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.01"/>
+            <feedback><p>Yes. <m>V(x) = x(30-2x)(20-2x) = 4x^3 - 100x^2 + 600x</m>, so <m>V'(x) = 4(3x^2 - 50x + 150)</m>. The roots are about <m>3.92</m> and <m>12.74</m>, and <m>12.74</m> is outside the domain.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="1.5"/>
+            <feedback><p>Yes. <m>V(3.92) \approx 3.92 \times 22.16 \times 12.16 \approx 1056.3</m> cubic cm.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-7-practice">
+    <title>Your turn</title>
+
+    <exercise xml:id="check-river-fence" label="check-river-fence">
+      <title>Fencing along a river</title>
+      <statement>
+        <p>
+          A farmer has <m>600</m> meters of fencing and wants a rectangular field
+          next to a straight river. No fence is needed along the river.
+          Let <m>x</m> be each of the two sides touching the river,
+          and <m>y</m> the side across from it.
+        </p>
+        <p>
+          Constraint: <m>2x + y = 600</m>. You take it from here.
+        </p>
+        <p>
+          Best <m>x</m>: <fillin answer="150" mode="number"/> m.
+          Best <m>y</m>: <fillin answer="300" mode="number"/> m.
+          Largest area: <fillin answer="45000" mode="number"/> square meters.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>A(x) = x(600 - 2x) = 600x - 2x^2</m>, so <m>A'(x) = 600 - 4x = 0</m> gives <m>x = 150</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>y = 600 - 2(150) = 300</m>. Notice the best field is <em>not</em> a square this time. The river does some of the fencing for free.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>150 \times 300 = 45{,}000</m> square meters.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <exercise xml:id="check-perimeter-100" label="check-perimeter-100">
+      <title>Less scaffolding</title>
+      <statement>
+        <p>
+          A rectangle has perimeter <m>100</m> cm. What is its largest possible area?
+        </p>
+        <p>
+          Largest area: <fillin answer="625" mode="number"/> square cm
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. A <m>25</m> by <m>25</m> square. With all four sides fenced, the square wins again.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <exercise xml:id="conceptual-check-optimization">
+      <title>Conceptual check</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>Why do we use the constraint to eliminate a variable?</p></li>
+            <li><p>Why do we need the feasible domain?</p></li>
+            <li><p>Is every solution of <m>f'(x) = 0</m> a maximum or a minimum?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Our derivative tools work on functions of <em>one</em> variable. The constraint is how we trade two variables for one.</p></li>
+            <li><p>The algebra does not know the problem is about cardboard. It happily hands you answers like <m>x \approx 8.24</m> that cannot happen. The domain throws those out.</p></li>
+            <li><p>No. It is only a candidate. You still have to check, with the First Derivative Test or the Closed Interval Method.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-optimization">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>In one sentence, what is an optimization problem?</p></li>
+            <li><p>What is the difference between an objective and a constraint?</p></li>
+            <li><p>What should you do <em>before</em> differentiating a word problem?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Finding the best possible value of some quantity, like the largest area or the lowest cost, when something limits your choices.</p></li>
+            <li><p>The objective is what you want to make as big or as small as possible. The constraint is what is fixed.</p></li>
+            <li><p>Translate: name the variables, draw a picture, write the objective and the constraint, and get down to one variable.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Big picture</title>
+      <p>Optimization is mostly modeling first and calculus second.</p>
+      <p>The derivative finds the spot where a quantity stops getting better and starts getting worse.</p>
+    </assemblage>
+  </subsection>
+</section>

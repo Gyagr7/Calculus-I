@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-4-9-antiderivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Antiderivatives</title>
+  <!-- Stewart 4.9 . Tue Sep 8 . Skills 6-8 . Built from Handout 4 (Antiderivatives) in the
+       conversational handout voice. Written 2026-09-11.
+       NOTATION QUARANTINE: no integral sign anywhere in this section. It enters in 5.2
+       (definite) and the indefinite form in 5.4. Antiderivatives are written F with F' = f.
+       Keep the car example exactly as in Handout 4: v(t) = 3t^2, s(0) = 0, s(2) = 8. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-antiderivatives">
+      <title>Today's Question</title>
+      <p>
+        If we know how something is changing, can we recover the thing itself?
+      </p>
+    </assemblage>
+    <p>
+      For most of your calculus life, you have traveled in one direction:
+      <md>
+        \text{function} \;\longrightarrow\; \text{derivative}.
+      </md>
+      Today we turn around:
+      <md>
+        \text{derivative} \;\longrightarrow\; \text{original function?}
+      </md>
+    </p>
+    <p>
+      Why would anyone care? Suppose you know a car's velocity, but you want its position.
+      Or you know how fast water is leaking from a tank, but you want to know how much has been lost.
+    </p>
+    <p>
+      In both cases, you know a <em>rate of change</em>, and you want the quantity that produced it.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-4-9-backward">
+    <title>Can we run a derivative backward?</title>
+
+    <p>
+      Start with something familiar. Suppose <m>F'(x) = 3x^2</m>.
+      Without any new formula, can you find a function <m>F</m> that works?
+    </p>
+
+    <exercise xml:id="check-find-one-f" label="check-find-one-f">
+      <title>Find one</title>
+      <statement>
+        <p>Which function has derivative <m>3x^2</m>?</p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p><m>6x</m></p></statement>
+          <feedback><p>That is the derivative <em>of</em> <m>3x^2</m>. We need to go the other way.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p><m>x^3</m></p></statement>
+          <feedback><p>Yes. Check it: the derivative of <m>x^3</m> is <m>3x^2</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p><m>3x^3</m></p></statement>
+          <feedback><p>Check by differentiating: you get <m>9x^2</m>, not <m>3x^2</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p><m>\dfrac{x^3}{3}</m></p></statement>
+          <feedback><p>Check by differentiating: you get <m>x^2</m>. Close, but the <m>3</m> went missing.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <p>
+      Easy enough. But now differentiate each of these:
+      <md>
+        x^3, \qquad x^3 + 4, \qquad x^3 - 10, \qquad x^3 + 100.
+      </md>
+    </p>
+
+    <exercise xml:id="notice-same-derivative">
+      <title>What do you notice?</title>
+      <statement>
+        <p>
+          Find all four derivatives. What do you notice?
+          So does knowing <m>F'(x) = 3x^2</m> pin down exactly one function?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          All four have the same derivative: <m>3x^2</m>. The constant disappears when you differentiate.
+          So no. Knowing <m>F'(x) = 3x^2</m> does not tell us which one we started with.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-family">
+    <title>What did the derivative forget?</title>
+
+    <p>
+      Let's look at the whole family <m>F(x) = x^3 + C</m> at once.
+      Drag the <m>C</m> slider. Then drag the <m>x</m> slider and watch the slope.
+    </p>
+
+    <figure xml:id="fig-antiderivative-family">
+      <caption>Gray curves: a few members of the family <m>x^3 + C</m>. Blue: the one you picked.</caption>
+      <interactive xml:id="interactive-antiderivative-family" label="interactive-antiderivative-family"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/antiderivative-family.js">
+        <slate xml:id="interactive-antiderivative-family-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            The <m>C</m> slider picks a member of the family. The <m>x</m> slider moves the red
+            point, and the green line is the tangent line there. Does moving <m>C</m> change the slope?
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="notice-family">
+      <title>Discuss with a neighbor</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>What changes when you move <m>C</m>?</p></li>
+            <li><p>What stays the same about the shape?</p></li>
+            <li><p>At a fixed <m>x</m>, how do the slopes of the different curves compare?</p></li>
+          </ol>
+        </p>
+        <p>
+          Then finish the sentence: the derivative remembers the ________ but forgets the ________.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>The curve slides up and down.</p></li>
+            <li><p>The shape does not change at all. Every curve is the same curve, shifted.</p></li>
+            <li><p>They are identical. The slope depends on <m>x</m>, not on <m>C</m>.</p></li>
+          </ol>
+        </p>
+        <p>
+          The derivative remembers the <em>shape</em> (the slope at every point) but forgets the
+          <em>vertical position</em>.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-name">
+    <title>Now give the idea a name</title>
+
+    <definition xml:id="def-antiderivative">
+      <title>Antiderivative</title>
+      <statement>
+        <p>
+          A function <m>F</m> is an <term>antiderivative</term> of <m>f</m> on an interval if
+          <m>F'(x) = f(x)</m> for every <m>x</m> in that interval.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      So <m>x^3</m> is <em>an</em> antiderivative of <m>3x^2</m>. So is <m>x^3 + 4</m>.
+      So is <m>x^3 - 10</m>.
+    </p>
+    <p>
+      To describe all of them at once, we write the <term>most general antiderivative</term>:
+      <m>F(x) = x^3 + C</m>, where <m>C</m> can be any constant.
+    </p>
+
+    <fact xml:id="fact-family-principle">
+      <title>The family principle</title>
+      <statement>
+        <p>
+          If <m>F</m> is one antiderivative of <m>f</m> on an interval, then every antiderivative
+          of <m>f</m> on that interval has the form <m>F(x) + C</m>.
+        </p>
+      </statement>
+    </fact>
+
+    <p>
+      Why must we include the <m>C</m>? Because leaving it off throws away most of the family.
+      You would be naming one curve, when the derivative only told you the shape.
+    </p>
+
+    <remark xml:id="remark-antiderivative-notation">
+      <title>A note on notation</title>
+      <p>
+        You may have seen antiderivatives written with a special symbol somewhere.
+        We are not using it yet, on purpose. That symbol has a deeper meaning,
+        and we want you to see where it comes from first. It shows up in
+        <xref ref="ch-integrals"/>. For now, we write <m>F</m> with <m>F' = f</m>,
+        and that is all we need.
+      </p>
+    </remark>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-rules-backward">
+    <title>Running the derivative rules backward</title>
+
+    <p>
+      Start with the Power Rule. Differentiating <m>x^{n+1}</m> does two things:
+      it multiplies by the exponent, then lowers the exponent by one.
+      <md>
+        \frac{d}{dx}\left[x^{n+1}\right] = (n+1)x^n.
+      </md>
+    </p>
+    <p>
+      To go backward, undo both steps in reverse order.
+      Raise the exponent by one. Then divide by the new exponent.
+      <md>
+        x^n \;\longrightarrow\; \frac{x^{n+1}}{n+1} + C, \qquad n \neq -1.
+      </md>
+    </p>
+
+    <exercise xml:id="check-power-backward-why">
+      <title>Why does this work?</title>
+      <statement>
+        <p>
+          Differentiate <m>\dfrac{x^{n+1}}{n+1} + C</m>. Do you get back <m>x^n</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <md>
+            \frac{d}{dx}\left[\frac{x^{n+1}}{n+1} + C\right] = \frac{(n+1)x^n}{n+1} + 0 = x^n.
+          </md>
+          Yes. The <m>n+1</m> cancels, and the constant disappears.
+        </p>
+      </solution>
+    </exercise>
+
+    <paragraphs>
+      <title>The one exception</title>
+      <p>
+        What happens when <m>n = -1</m>? The formula would divide by <m>n + 1 = 0</m>. That breaks.
+      </p>
+      <p>
+        So for <m>x^{-1} = \dfrac{1}{x}</m>, we lean on a derivative we already know:
+        <m>\dfrac{d}{dx}\big[\ln|x|\big] = \dfrac{1}{x}</m>.
+        So an antiderivative of <m>\dfrac{1}{x}</m> is <m>\ln|x| + C</m>,
+        on any interval that does not contain <m>0</m>.
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="toolkit-backward">
+      <title>Build the toolkit yourself</title>
+      <statement>
+        <p>
+          Every derivative you know is secretly an antiderivative too.
+          Find the most general antiderivative of each function. Then open the solution.
+        </p>
+        <p>
+          <m>x^5</m>, &#160; <m>x^{-3}</m>, &#160; <m>x</m>, &#160; <m>\dfrac{1}{x}</m>, &#160;
+          <m>e^x</m>, &#160; <m>\sin x</m>, &#160; <m>\cos x</m>, &#160; <m>\sec^2 x</m>
+        </p>
+      </statement>
+      <solution>
+        <tabular halign="left">
+          <row header="yes">
+            <cell><m>f(x)</m></cell>
+            <cell>Most general antiderivative</cell>
+          </row>
+          <row><cell><m>x^5</m></cell><cell><m>\dfrac{x^6}{6} + C</m></cell></row>
+          <row><cell><m>x^{-3}</m></cell><cell><m>\dfrac{x^{-2}}{-2} + C = -\dfrac{1}{2x^2} + C</m></cell></row>
+          <row><cell><m>x</m></cell><cell><m>\dfrac{x^2}{2} + C</m></cell></row>
+          <row><cell><m>\dfrac{1}{x}</m></cell><cell><m>\ln|x| + C</m></cell></row>
+          <row><cell><m>e^x</m></cell><cell><m>e^x + C</m></cell></row>
+          <row><cell><m>\sin x</m></cell><cell><m>-\cos x + C</m></cell></row>
+          <row><cell><m>\cos x</m></cell><cell><m>\sin x + C</m></cell></row>
+          <row><cell><m>\sec^2 x</m></cell><cell><m>\tan x + C</m></cell></row>
+        </tabular>
+        <p>
+          The one people miss is <m>\sin x</m>. The derivative of <m>\cos x</m> is
+          <m>-\sin x</m>, so we need the minus sign: <m>-\cos x</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      Two more rules come along for free, because they work the same way for derivatives:
+      constants stay put, and sums split into pieces.
+    </p>
+
+    <fact xml:id="fact-antiderivative-toolkit">
+      <title>The antiderivative toolkit</title>
+      <statement>
+        <p>If <m>F' = f</m> and <m>G' = g</m>, and <m>c</m> is a constant, then:</p>
+        <md>
+          <mrow> c\,f(x) &amp;\;\longrightarrow\; c\,F(x) + C </mrow>
+          <mrow> f(x) \pm g(x) &amp;\;\longrightarrow\; F(x) \pm G(x) + C </mrow>
+          <mrow> x^n &amp;\;\longrightarrow\; \frac{x^{n+1}}{n+1} + C \quad (n \neq -1) </mrow>
+          <mrow> \frac{1}{x} &amp;\;\longrightarrow\; \ln|x| + C </mrow>
+          <mrow> e^x &amp;\;\longrightarrow\; e^x + C </mrow>
+          <mrow> \sin x &amp;\;\longrightarrow\; -\cos x + C </mrow>
+          <mrow> \cos x &amp;\;\longrightarrow\; \sin x + C </mrow>
+          <mrow> \sec^2 x &amp;\;\longrightarrow\; \tan x + C </mrow>
+        </md>
+      </statement>
+    </fact>
+
+    <assemblage>
+      <title>Best error check today</title>
+      <p>Differentiate your answer. If you get back the function you started with, you are right.</p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-whole-family">
+    <title>Finding the whole family</title>
+
+    <example xml:id="example-antiderivative-polynomial">
+      <title>We do: one term at a time</title>
+      <statement>
+        <p>Find the most general antiderivative of <m>f(x) = 6x^2 - 4x + 5</m>.</p>
+      </statement>
+      <solution>
+        <p>
+          Work backward one term at a time. Raise the exponent, divide by the new exponent.
+          <md>
+            <mrow> 6x^2 &amp;\;\longrightarrow\; 6 \cdot \frac{x^3}{3} = 2x^3 </mrow>
+            <mrow> -4x &amp;\;\longrightarrow\; -4 \cdot \frac{x^2}{2} = -2x^2 </mrow>
+            <mrow> 5 &amp;\;\longrightarrow\; 5x </mrow>
+          </md>
+        </p>
+        <p>
+          One <m>+C</m> covers the whole thing: <m>F(x) = 2x^3 - 2x^2 + 5x + C</m>.
+        </p>
+        <p>
+          <alert>Check.</alert> <m>F'(x) = 6x^2 - 4x + 5</m>. It matches.
+        </p>
+      </solution>
+    </example>
+
+    <exercise xml:id="try-antiderivative-polynomial">
+      <title>Try one</title>
+      <statement>
+        <p>
+          Find the most general antiderivative of <m>f(x) = 4x - 3x^2</m>.
+          Check your answer by differentiating <em>before</em> you open the solution.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>F(x) = 2x^2 - x^3 + C</m>. Check: <m>F'(x) = 4x - 3x^2</m>.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-initial-conditions">
+    <title>A family is not always enough</title>
+
+    <p>
+      Suppose <m>F'(x) = 3x^2</m>. Then <m>F(x) = x^3 + C</m>. A whole family.
+    </p>
+    <p>
+      Now suppose we are also told <m>F(1) = 5</m>.
+    </p>
+    <p>
+      On a graph, that says: pick the one member of the family that passes through <m>(1, 5)</m>.
+      Go back to the family graph above. Set <m>x = 1</m>, then hunt with the <m>C</m> slider.
+    </p>
+    <p>
+      In algebra, plug in <m>x = 1</m>: <m>\;5 = 1^3 + C</m>.
+    </p>
+
+    <exercise xml:id="check-find-c" label="check-find-c">
+      <title>Pick the family member</title>
+      <statement>
+        <p>
+          <m>C =</m> <fillin answer="4" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>5 = 1 + C</m>, so <m>C = 4</m>, and the one function we want is <m>F(x) = x^3 + 4</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage>
+      <title>Remember</title>
+      <p>Derivative information <m>+</m> one condition <m>\longrightarrow</m> one particular function.</p>
+    </assemblage>
+
+    <p>
+      A problem like this, with a derivative plus a starting value, is called an
+      <term>initial value problem</term>.
+    </p>
+
+    <exercise xml:id="check-ivp-you-do" label="check-ivp-you-do">
+      <title>You do: select the right member of the family</title>
+      <statement>
+        <p>
+          Find <m>F</m> if <m>F'(x) = 8x^3 - 6x</m> and <m>F(0) = 7</m>.
+        </p>
+        <p>
+          <alert>Step 1:</alert> find the family. <alert>Step 2:</alert> use the condition to find <m>C</m>.
+          <alert>Step 3:</alert> check both conditions.
+        </p>
+        <p>
+          <m>C =</m> <fillin answer="7" mode="number"/>
+          &#160;&#160;&#160; and then <m>F(1) =</m> <fillin answer="6" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. The family is <m>F(x) = 2x^4 - 3x^2 + C</m>, and <m>F(0) = C = 7</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>F(x) = 2x^4 - 3x^2 + 7</m>, so <m>F(1) = 2 - 3 + 7 = 6</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <paragraphs>
+      <title>What if we are given the second derivative?</title>
+      <p>
+        Then we have to run backward <em>twice</em>. And every trip backward brings its own constant.
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-second-derivative-ivp" label="check-second-derivative-ivp">
+      <title>Two steps back</title>
+      <statement>
+        <p>
+          Suppose <m>f''(x) = 12x^2 + 6x - 4</m>, with <m>f(0) = 4</m> and <m>f(1) = 1</m>.
+        </p>
+        <p>
+          First recover <m>f'(x) = 4x^3 + 3x^2 - 4x + C</m>.
+          Then go back again: <m>f(x) = x^4 + x^3 - 2x^2 + Cx + D</m>.
+        </p>
+        <p>
+          Now use the two conditions.
+          <m>D =</m> <fillin answer="4" mode="number"/>
+          &#160;&#160;&#160; <m>C =</m> <fillin answer="-3" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. Every term except <m>D</m> vanishes at <m>x = 0</m>, so <m>f(0) = D = 4</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>f(1) = 1 + 1 - 2 + C + 4 = 4 + C</m>. Setting that equal to <m>1</m> gives <m>C = -3</m>. So <m>f(x) = x^4 + x^3 - 2x^2 - 3x + 4</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Why two constants? Each time we undo a derivative, we lose track of one vertical shift.
+      Two derivatives, two lost shifts, two conditions to pin them down.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-without-formula">
+    <title>Can we recover a function without a formula?</title>
+
+    <p>
+      This is an important shift. Sometimes there is no formula, only a graph.
+    </p>
+    <p>
+      Below is the graph of <m>y = f(x)</m>, and <m>F' = f</m>.
+      So the graph of <m>f</m> tells you the <em>slope</em> of <m>F</m>. Also, <m>F(0) = 2</m>.
+      Leave the checkbox alone for now.
+    </p>
+
+    <figure xml:id="fig-graph-to-antiderivative">
+      <caption>The graph of <m>f</m>. It gives the slope of <m>F</m> at every <m>x</m>.</caption>
+      <interactive xml:id="interactive-graph-to-antiderivative" label="interactive-graph-to-antiderivative"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/graph-to-antiderivative.js">
+        <slate xml:id="interactive-graph-to-antiderivative-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            Answer the questions below first. Then check the box to see one possible <m>F</m>
+            and compare it with your sketch.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="notice-graph-to-antiderivative">
+      <title>Read the slopes</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>Where is <m>F</m> increasing?</p></li>
+            <li><p>Where is <m>F</m> decreasing?</p></li>
+            <li><p>Where does <m>F</m> have horizontal tangents?</p></li>
+            <li><p>Where should <m>F</m> have a local minimum? A local maximum?</p></li>
+          </ol>
+        </p>
+        <p>
+          Now sketch one possible <m>F</m> on paper, starting at the point <m>(0, 2)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p><m>F</m> increases where <m>f \gt 0</m>: between <m>x = 1</m> and <m>x = 3</m>.</p></li>
+            <li><p><m>F</m> decreases where <m>f \lt 0</m>: from <m>0</m> to <m>1</m>, and from <m>3</m> to <m>5</m>.</p></li>
+            <li><p>Where <m>f = 0</m>: at <m>x = 1</m> and <m>x = 3</m>.</p></li>
+            <li><p>A local minimum at <m>x = 1</m> (decreasing, then increasing) and a local maximum at <m>x = 3</m> (increasing, then decreasing).</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Reading a graph of the slope</title>
+      <p>If <m>F' = f</m>, then <m>f \gt 0</m> means <m>F</m> increases, and <m>f \lt 0</m> means <m>F</m> decreases.</p>
+      <p>Zeros of <m>f</m> are where <m>F</m> has horizontal tangents.</p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-car">
+    <title>Our running example: a car</title>
+
+    <p>
+      Now back to a physical situation. A car has velocity <m>v(t) = 3t^2</m> meters per second.
+      It starts at position <m>s(0) = 0</m>.
+    </p>
+    <p>
+      Velocity is the derivative of position: <m>s'(t) = v(t) = 3t^2</m>.
+      So position is an antiderivative of velocity.
+    </p>
+    <p>
+      <alert>Recover the family.</alert> <m>s(t) = t^3 + C</m>.
+    </p>
+    <p>
+      <alert>Use the starting position.</alert> <m>s(0) = 0^3 + C = 0</m>, so <m>C = 0</m> and <m>s(t) = t^3</m>.
+    </p>
+    <p>
+      So where is the car at <m>t = 2</m> seconds?
+    </p>
+
+    <exercise xml:id="check-car-position" label="check-car-position">
+      <title>Where is the car?</title>
+      <statement>
+        <p>
+          <m>s(2) =</m> <fillin answer="8" mode="number"/> meters
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>s(2) = 2^3 = 8</m>. Since the car started at <m>0</m>, it moved <m>8</m> meters.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage xml:id="assemblage-remember-8">
+      <title>Remember this number: 8</title>
+      <p>The car traveled <m>s(2) - s(0) = 8</m> meters.</p>
+      <p>We will meet this same car again.</p>
+    </assemblage>
+
+    <paragraphs>
+      <title>From acceleration all the way to position</title>
+      <p>
+        Velocity is the derivative of position. Acceleration is the derivative of velocity.
+        So we can run backward twice:
+        <md>
+          a(t) \;\xrightarrow{\text{antidifferentiate}}\; v(t) \;\xrightarrow{\text{antidifferentiate}}\; s(t).
+        </md>
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-acceleration-to-position" label="check-acceleration-to-position">
+      <title>You do: a particle</title>
+      <statement>
+        <p>
+          A particle has acceleration <m>a(t) = 6t + 4</m>. Its initial velocity is
+          <m>v(0) = -6</m> and its initial position is <m>s(0) = 9</m>.
+        </p>
+        <p>
+          <alert>Step 1:</alert> recover <m>v(t)</m> and use <m>v(0) = -6</m>.
+          <alert>Step 2:</alert> recover <m>s(t)</m> and use <m>s(0) = 9</m>.
+        </p>
+        <p>
+          <m>v(1) =</m> <fillin answer="1" mode="number"/>
+          &#160;&#160;&#160; <m>s(1) =</m> <fillin answer="6" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>v(t) = 3t^2 + 4t + C</m>, and <m>v(0) = -6</m> gives <m>v(t) = 3t^2 + 4t - 6</m>. So <m>v(1) = 1</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>s(t) = t^3 + 2t^2 - 6t + D</m>, and <m>s(0) = 9</m> gives <m>s(t) = t^3 + 2t^2 - 6t + 9</m>. So <m>s(1) = 6</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-9-practice">
+    <title>Putting it together</title>
+
+    <exercise xml:id="less-scaffolding-antiderivatives">
+      <title>Less scaffolding</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>Find the most general antiderivative of <m>f(x) = 5x^4 - 3x^2 + 7</m>.</p></li>
+            <li><p>Find <m>F</m> if <m>F'(x) = 4x^3 + 2x</m> and <m>F(1) = 3</m>.</p></li>
+            <li><p>A particle has velocity <m>v(t) = 6t - 4</m> and <m>s(0) = 10</m>. Find its position function.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p><m>F(x) = x^5 - x^3 + 7x + C</m>.</p></li>
+            <li><p>The family is <m>x^4 + x^2 + C</m>. Then <m>F(1) = 2 + C = 3</m>, so <m>F(x) = x^4 + x^2 + 1</m>.</p></li>
+            <li><p><m>s(t) = 3t^2 - 4t + 10</m>.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-error-analysis-plus-c" label="check-error-analysis-plus-c">
+      <title>Error analysis: who is most general?</title>
+      <statement>
+        <p>
+          A class is asked for the most general antiderivative of <m>F'(x) = 4x^3</m>.
+          Three students answer. Who gives the <em>most general</em> answer?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Student A: <m>F(x) = x^4</m></p></statement>
+          <feedback><p>Student A found <em>an</em> antiderivative, and it is correct. But it is only one member of the family. The <m>+C</m> is missing.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>Student B: <m>F(x) = x^4 + C</m></p></statement>
+          <feedback><p>Right. Correct function, and the <m>+C</m> captures the whole family.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Student C: <m>F(x) = 4x^4 + C</m></p></statement>
+          <feedback><p>Differentiate it: you get <m>16x^3</m>. Student C raised the exponent but forgot to divide by the new exponent.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-antiderivatives">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>In your own words, what is an antiderivative? Explain it using a car's velocity and position.</p></li>
+            <li><p>Why does the general answer contain <m>+C</m>?</p></li>
+            <li><p>If <m>F' = f</m> and <m>f \gt 0</m> on an interval, is <m>F</m> increasing or decreasing there?</p></li>
+            <li><p>Why does an initial condition matter?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>An antiderivative of <m>f</m> is a function whose derivative is <m>f</m>. If <m>f</m> is a car's velocity, an antiderivative is its position: you recover where the car is from how fast it is going.</p></li>
+            <li><p>Differentiating erases constants. So running backward can only recover the function up to a vertical shift.</p></li>
+            <li><p>Increasing. The slope of <m>F</m> is positive.</p></li>
+            <li><p>It picks out the one member of the family we actually want, like knowing where the car started.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Main idea</title>
+      <p>Knowing a rate of change lets us work backward, but only to a family of functions.</p>
+      <p>
+        The derivative remembers how the function changes. It forgets the vertical position.
+        An initial condition tells us which member of the family we need.
+      </p>
+    </assemblage>
+  </subsection>
+</section>

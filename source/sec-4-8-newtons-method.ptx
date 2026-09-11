@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-4-8-newtons-method" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Newton's Method</title>
+  <!-- Stewart 4.8 . Skill 5 . No handout exists for this section; written 2026-09-11
+       in the same conversational voice. Running example x^3 - 2x - 5 = 0 from x1 = 2. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-newton">
+      <title>Today's Question</title>
+      <p>
+        Some equations have no formula for their solution. How do we solve them anyway?
+      </p>
+    </assemblage>
+    <p>
+      You can solve <m>x^2 - 5x + 6 = 0</m>. Factor it, or use the quadratic formula.
+    </p>
+    <p>
+      Now try <m>x^3 - 2x - 5 = 0</m>. Or <m>\cos x = x</m>.
+    </p>
+    <p>
+      For the first one, a formula does exist, but it is so messy that almost nobody uses it.
+      For the second one, there is no formula at all.
+      Yet both equations have a solution, and a calculator can find it in a blink.
+      Let's see how.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-4-8-lines-are-easy">
+    <title>Curves are hard, lines are easy</title>
+
+    <p>
+      Here is the one idea behind this whole section.
+    </p>
+    <p>
+      Finding where a <em>curve</em> crosses the <m>x</m>-axis is hard.
+      Finding where a <em>line</em> crosses it is easy.
+    </p>
+    <p>
+      And near any point, a smooth curve looks almost exactly like its tangent line.
+      Zoom in far enough, and the curve straightens out.
+    </p>
+    <p>
+      So here is the plan. Replace the curve with its tangent line.
+      Find where the <em>line</em> crosses the axis. Use that as a better guess. Repeat.
+    </p>
+
+    <exercise xml:id="check-line-crossing" label="check-line-crossing">
+      <title>Warm-up: where does a line cross?</title>
+      <statement>
+        <p>
+          A line passes through the point <m>(2, -1)</m> with slope <m>10</m>.
+          Where does it cross the <m>x</m>-axis?
+        </p>
+        <p>
+          <m>x =</m> <fillin answer="2.1" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.0001"/>
+            <feedback><p>Yes. The line has to rise <m>1</m> unit to reach the axis. With slope <m>10</m>, that takes a run of <m>\tfrac{1}{10} = 0.1</m>. So <m>x = 2 + 0.1 = 2.1</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Hold onto that <m>2.1</m>. It is about to matter.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-4-8-one-step">
+    <title>One step at a time</title>
+
+    <p>
+      Let <m>f(x) = x^3 - 2x - 5</m>. We want to solve <m>f(x) = 0</m>.
+    </p>
+    <p>
+      <alert>Make a first guess.</alert> <m>f(2) = -1</m> and <m>f(3) = 16</m>.
+      The output changes sign between <m>2</m> and <m>3</m>, so a solution lives in there.
+      And <m>-1</m> is much closer to <m>0</m> than <m>16</m> is.
+      So start with <m>x_1 = 2</m>.
+    </p>
+    <p>
+      <alert>Draw the tangent line at <m>x_1</m>.</alert> A line needs a point and a slope.
+      The point is <m>(2, f(2)) = (2, -1)</m>.
+      The slope is <m>f'(2)</m>. Since <m>f'(x) = 3x^2 - 2</m>, the slope is <m>f'(2) = 10</m>.
+    </p>
+    <p>
+      That is exactly the line from the warm-up! It crosses the axis at <m>x_2 = 2.1</m>.
+      That is our new guess.
+    </p>
+    <p>
+      <alert>Is it better?</alert> <m>f(2.1) = 0.061</m>. Much closer to <m>0</m> than <m>-1</m> was.
+    </p>
+    <p>
+      So do it again, starting from <m>2.1</m>.
+    </p>
+
+    <exercise xml:id="check-newton-step-two" label="check-newton-step-two">
+      <title>You do: take the next step</title>
+      <statement>
+        <p>
+          Keep going with <m>f(x) = x^3 - 2x - 5</m> and <m>x_2 = 2.1</m>.
+          You already know <m>f(2.1) = 0.061</m>.
+        </p>
+        <p>
+          Slope of the tangent line: <m>f'(2.1) =</m> <fillin answer="11.23" mode="number"/>
+        </p>
+        <p>
+          Where that line crosses the axis: <m>x_3 \approx</m> <fillin answer="2.0946" mode="number"/>
+          (four decimal places)
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.001"/>
+            <feedback><p>Yes. <m>3(2.1)^2 - 2 = 3(4.41) - 2 = 11.23</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.0001"/>
+            <feedback><p>Yes. The line drops <m>0.061</m> at slope <m>11.23</m>, so it moves left by <m>\tfrac{0.061}{11.23} \approx 0.0054</m>. That gives <m>2.1 - 0.0054 \approx 2.0946</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Look how fast that went: <m>x_1 = 2</m>, <m>x_2 = 2.1</m>, <m>x_3 \approx 2.0946</m>.
+      The true solution is <m>2.09455\ldots</m>
+      Two steps, and the first four decimal places already match.
+    </p>
+
+    <figure xml:id="fig-newton-steps">
+      <caption>Each colored segment is a tangent line. Where it hits the axis is the next guess.</caption>
+      <interactive xml:id="interactive-newton-steps" label="interactive-newton-steps"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/newton-steps.js">
+        <slate xml:id="interactive-newton-steps-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            The blue curve is <m>y = x^3 - 2x - 5</m>. Drag the red point <m>x_1</m>
+            along the axis to pick a first guess, and watch three steps of the method.
+            Try a starting guess close to <m>0.8</m>. What goes wrong?
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+  </subsection>
+
+  <subsection xml:id="subsec-4-8-formula">
+    <title>Now give the idea a name</title>
+
+    <p>
+      Let's do one step with letters instead of numbers.
+    </p>
+    <p>
+      The tangent line at <m>x_n</m> goes through the point <m>(x_n, f(x_n))</m>
+      with slope <m>f'(x_n)</m>:
+      <md>
+        y = f(x_n) + f'(x_n)(x - x_n).
+      </md>
+      (That is the tangent line approximation, or linearization, from Calculus I.)
+    </p>
+    <p>
+      We want where it crosses the axis. So set <m>y = 0</m> and solve for <m>x</m>:
+      <md>
+        <mrow> 0 &amp;= f(x_n) + f'(x_n)(x - x_n) </mrow>
+        <mrow> x - x_n &amp;= -\frac{f(x_n)}{f'(x_n)} </mrow>
+        <mrow> x &amp;= x_n - \frac{f(x_n)}{f'(x_n)}. </mrow>
+      </md>
+      That <m>x</m> is our next guess, <m>x_{n+1}</m>.
+    </p>
+
+    <fact xml:id="fact-newtons-method">
+      <title>Newton's Method</title>
+      <statement>
+        <p>
+          To solve <m>f(x) = 0</m>, start with a guess <m>x_1</m>. Then repeat
+          <md>
+            x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+          </md>
+          until the guesses stop changing, to the accuracy you need.
+        </p>
+      </statement>
+    </fact>
+
+    <assemblage>
+      <title>Say it out loud</title>
+      <p>New guess equals old guess, minus height over slope.</p>
+      <p>
+        The height <m>f(x_n)</m> says how far you are from zero.
+        The slope <m>f'(x_n)</m> says how fast you are heading there.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="check-newton-cosine" label="check-newton-cosine">
+      <title>Less scaffolding: where does cos x = x?</title>
+      <statement>
+        <p>
+          Solve <m>\cos x = x</m> with Newton's method. Use radians.
+        </p>
+        <p>
+          First rewrite it as <m>f(x) = 0</m> with <m>f(x) = \cos x - x</m>.
+          Then <m>f'(x) = -\sin x - 1</m>. Start at <m>x_1 = 1</m>.
+        </p>
+        <p>
+          <m>x_2 \approx</m> <fillin answer="0.7504" mode="number"/>
+          &#160;&#160;&#160; <m>x_3 \approx</m> <fillin answer="0.7391" mode="number"/>
+          &#160;(four decimal places)
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.0002"/>
+            <feedback><p>Yes. <m>f(1) \approx -0.4597</m> and <m>f'(1) \approx -1.8415</m>, so <m>x_2 \approx 1 - \dfrac{-0.4597}{-1.8415} \approx 0.7504</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.0002"/>
+            <feedback><p>Yes. One more step lands on <m>0.7391</m>. The next step barely moves it, so we have found the solution to four decimal places.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-4-8-what-goes-wrong">
+    <title>What could go wrong?</title>
+
+    <p>
+      Newton's method is fast when it works. But it can fail.
+      Think about the picture before you open the solution.
+    </p>
+
+    <exercise xml:id="notice-newton-flat-tangent">
+      <title>A flat tangent line</title>
+      <statement>
+        <p>
+          Suppose your guess lands where <m>f'(x_n) = 0</m>. Sketch the tangent line there.
+          What happens to the next guess?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A flat tangent line never crosses the <m>x</m>-axis (unless you were already on it).
+          In the formula, you would divide by <m>0</m>. There is no next guess.
+        </p>
+        <p>
+          Even a <em>nearly</em> flat tangent is trouble. It crosses the axis very far away,
+          and the next guess can land nowhere near the solution. That is what you saw when
+          you started the interactive near <m>0.8</m>, where <m>f'(x) = 3x^2 - 2</m> is close to <m>0</m>.
+          The fix: pick a better first guess.
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Remember</title>
+      <p>A good first guess matters. Check where <m>f</m> changes sign, and start close.</p>
+    </assemblage>
+
+    <exercise xml:id="exit-ticket-newton">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>In your own words, what does one step of Newton's method do?</p></li>
+            <li><p>Why do we use the tangent line instead of the curve?</p></li>
+            <li><p>Give one way Newton's method can fail.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>It replaces the curve with its tangent line at the current guess, and uses the spot where that line crosses the axis as the next guess.</p></li>
+            <li><p>We cannot solve for where the curve crosses, but we can always solve for where a line crosses. And near the guess, the line is a good stand-in for the curve.</p></li>
+            <li><p>If <m>f'(x_n) = 0</m>, the tangent line is flat and never crosses the axis. A bad first guess can also send the guesses far away.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Main idea</title>
+      <p>
+        When we cannot solve an equation, we solve an easier one instead: the tangent line.
+        Repeat, and the answers close in on the real solution, fast.
+      </p>
+    </assemblage>
+  </subsection>
+</section>
