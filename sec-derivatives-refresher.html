@@ -126,7 +126,7 @@ eBookConfig.enable_chatcodes =  false;
 <div id="ptx-sidebar" role="complementary" class="ptx-sidebar"><nav id="ptx-toc" tabindex="-1" aria-label="Contents" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
 <li class="toc-item toc-frontmatter">
 <div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
-<ul id="ptx-toc-group-frontmatter" class="structural toc-item-list"><li class="toc-item toc-preface"><div class="toc-title-box"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li></ul>
+<ul id="ptx-toc-group-frontmatter" class="structural toc-item-list"><li class="toc-item toc-preface"><div class="toc-title-box"><a href="preface.html" class="internal"><span class="title">Before You Start</span></a></div></li></ul>
 </li>
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="ch-derivatives-recap.html" class="internal"><span class="codenumber">1</span> <span class="title">A Derivatives Refresher</span></a></div>
@@ -195,58 +195,136 @@ eBookConfig.enable_chatcodes =  false;
 <h2 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">What does a derivative actually mean?</span>
 </h2>
-<div class="para" id="subsec-what-is-a-derivative-2">Picture yourself driving. The odometer racks up total distance, and dividing that by elapsed time gives your <dfn class="terminology">average speed</dfn> for the whole trip — one honest number, easy to compute. The speedometer is answering a stranger question: how fast are you going <em class="emphasis">right now</em>, at this exact instant? There’s no stretch of time to divide by here — time isn’t passing at an instant. And yet the needle gives a real, meaningful number. Figuring out what that number even <em class="emphasis">means</em>, and how to compute it for any changing quantity — not just a car’s position, but a population, a temperature, an account balance — is the entire point of a derivative.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="assemblage assemblage-like" id="assemblage-question-speedometer"><h3 class="heading"><span class="title">Today’s Question.</span></h3>
+<div class="para" id="assemblage-question-speedometer-2">Your speedometer says <span class="process-math">\(45\)</span> mph. But at a single instant, no time passes. So what is that <span class="process-math">\(45\)</span> measuring?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#assemblage-question-speedometer-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-what-is-a-derivative-3">Here’s the trick that makes "speed right now" computable: you can’t measure it directly, but you <em class="emphasis">can</em> measure average speed over a short window of time, and see what happens as that window shrinks toward nothing. Say your position after <span class="process-math">\(t\)</span> seconds is <span class="process-math">\(f(t) = t^2\)</span> (in some units), and you want your speed exactly at <span class="process-math">\(t=1\text{.}\)</span> Average speed over <span class="process-math">\([1, 1+h]\)</span> is <span class="process-math">\(\dfrac{f(1+h)-f(1)}{h}\text{.}\)</span> Watch what happens as <span class="process-math">\(h\)</span> shrinks:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Today’s Question"><a tabindex="-1" href="#assemblage-question-speedometer" title="Copy heading and permalink for Assemblage: Today’s Question" aria-label="Copy heading and permalink for Assemblage: Today’s Question">🔗</a></div>
+</article>
+<div class="para" id="subsec-what-is-a-derivative-3">Here is why that is strange. Speed is distance divided by time. At one instant, the time is zero. And you cannot divide by zero.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-derivative.html" id="subsec-what-is-a-derivative-4">
-\begin{gather*}
-h = 1: \qquad \dfrac{f(2)-f(1)}{1} = \dfrac{4-1}{1} = 3 \\
-h = 0.1: \qquad \dfrac{f(1.1)-f(1)}{0.1} = \dfrac{1.21-1}{0.1} = 2.1 \\
-h = 0.01: \qquad \dfrac{f(1.01)-f(1)}{0.01} = \dfrac{1.0201-1}{0.01} = 2.01 
-\end{gather*}
+<div class="para" id="subsec-what-is-a-derivative-4">Yet the needle points at a real number. Where does it come from?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-what-is-a-derivative-5">The average speeds aren’t jumping around — they’re homing in on <span class="process-math">\(2\text{.}\)</span> That limiting number, the one the average settles toward as the time window shrinks to a single instant, <em class="emphasis">is</em> the instantaneous speed at <span class="process-math">\(t=1\text{.}\)</span> Nothing mystical is happening; we’re just squeezing an average over a smaller and smaller window until, in the limit, it stops being an average of two points and becomes a property of one.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="paragraphs" id="subsec-what-is-a-derivative-5"><h3 class="heading"><span class="title">Start with something you can compute.</span></h3>
+<div class="para logical" id="subsec-what-is-a-derivative-5-2">
+<div class="para">You <em class="emphasis">can</em> compute an average speed. Pick a start time and an end time, then divide:</div>
+<div class="displaymath process-math" id="subsec-what-is-a-derivative-5-2-2">
+\begin{equation*}
+\text{average speed} = \frac{\text{change in position}}{\text{change in time}}.
+\end{equation*}
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-5-3">Say your position after <span class="process-math">\(t\)</span> seconds is <span class="process-math">\(f(t) = t^2\)</span> meters. We want your speed at exactly <span class="process-math">\(t = 1\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-what-is-a-derivative-5-4">
+<div class="para">Here is the first average, done for you. From <span class="process-math">\(t = 1\)</span> to <span class="process-math">\(t = 2\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="subsec-what-is-a-derivative-5-4-3">
+\begin{equation*}
+\frac{f(2) - f(1)}{2 - 1} = \frac{4 - 1}{1} = 3 \text{ m/s}.
+\end{equation*}
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-5-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-5-5">A one-second window is pretty wide, though. Let’s shrink it. Your turn.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-5-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: Start with something you can compute"><a tabindex="-1" href="#subsec-what-is-a-derivative-5" title="Copy heading and permalink for Paragraphs: Start with something you can compute" aria-label="Copy heading and permalink for Paragraphs: Start with something you can compute">🔗</a></div>
+</section>
+<details id="check-shrink-window" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Shrink the window.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-shrink-window"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-shrink-window-2-1\">Find the average speed of <span class=\"process-math\">\\(f(t) = t^2\\)<\/span> on each window.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-shrink-window-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-shrink-window-2-2\">From <span class=\"process-math\">\\(t = 1\\)<\/span> to <span class=\"process-math\">\\(t = 1.1\\text{:}\\)<\/span> <input type=\"number\" id=\"check-shrink-window-blank1\"\/> m\/s<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-shrink-window-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-shrink-window-2-3\">From <span class=\"process-math\">\\(t = 1\\)<\/span> to <span class=\"process-math\">\\(t = 1.01\\text{:}\\)<\/span> <input type=\"number\" id=\"check-shrink-window-blank2\"\/> m\/s<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-shrink-window-2-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0, "blank2": 1},
+"feedbackArray": [[{"number": [2.0999,2.1001], "feedback": "\n<div class=\"para\" id=\"check-shrink-window-3-1-1-2-1\">Yes. <span class=\"process-math\">\\(f(1.1) = 1.21\\text{,}\\)<\/span> so the average is <span class=\"process-math\">\\(\\dfrac{1.21 - 1}{0.1} = 2.1\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [2.0099,2.0101], "feedback": "\n<div class=\"para\" id=\"check-shrink-window-3-2-1-2-1\">Yes. <span class=\"process-math\">\\(f(1.01) = 1.0201\\text{,}\\)<\/span> so the average is <span class=\"process-math\">\\(\\dfrac{1.0201 - 1}{0.01} = 2.01\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.1: Shrink the window"><a tabindex="-1" href="#check-shrink-window" title="Copy heading and permalink for Checkpoint 1.1.1: Shrink the window" aria-label="Copy heading and permalink for Checkpoint 1.1.1: Shrink the window">🔗</a></div>
+</article></details>
+<div class="para" id="subsec-what-is-a-derivative-7">See a pattern yet? Push it one more step.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <details id="check-numeric-squeeze" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Try it yourself.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">One more squeeze.</span>
 </h3></summary>
 <article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-numeric-squeeze"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"check-numeric-squeeze-2-1\">Push the squeeze one step further than the table above. For <span class=\"process-math\">\\(f(t) = t^2\\text{,}\\)<\/span> what is the average speed on the interval <span class=\"process-math\">\\([1, 1.001]\\text{?}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-numeric-squeeze-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-numeric-squeeze-2-2\">Average speed <span class=\"process-math\">\\(=\\)<\/span> <input type=\"number\" id=\"check-numeric-squeeze-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-numeric-squeeze-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"check-numeric-squeeze-2-1\">From <span class=\"process-math\">\\(t = 1\\)<\/span> to <span class=\"process-math\">\\(t = 1.001\\text{,}\\)<\/span> the average speed is <input type=\"number\" id=\"check-numeric-squeeze-blank1\"\/> m\/s.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-numeric-squeeze-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"number": [2,2.002], "feedback": "\n<div class=\"para\" id=\"check-numeric-squeeze-3-1-1-2-1\">Right on the money — and this is even closer to <span class=\"process-math\">\\(2\\)<\/span> than the <span class=\"process-math\">\\(h=0.01\\)<\/span> row was. Shrink <span class=\"process-math\">\\(h\\)<\/span> further and this number keeps sliding toward <span class=\"process-math\">\\(2\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"number": [2.0009,2.0011], "feedback": "\n<div class=\"para\" id=\"check-numeric-squeeze-3-1-1-2-1\">Right. Even closer to <span class=\"process-math\">\\(2\\)<\/span> than last time.<\/div>"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.1: Try it yourself"><a tabindex="-1" href="#check-numeric-squeeze" title="Copy heading and permalink for Checkpoint 1.1.1: Try it yourself" aria-label="Copy heading and permalink for Checkpoint 1.1.1: Try it yourself">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.2: One more squeeze"><a tabindex="-1" href="#check-numeric-squeeze" title="Copy heading and permalink for Checkpoint 1.1.2: One more squeeze" aria-label="Copy heading and permalink for Checkpoint 1.1.2: One more squeeze">🔗</a></div>
 </article></details>
-<div class="para" id="subsec-what-is-a-derivative-7">The same squeeze has a geometric picture, and it’s the one worth keeping in your head all semester. Take any curve <span class="process-math">\(y=f(x)\)</span> and a point on it. Pick a second, nearby point, and draw the line through both — a <dfn class="terminology">secant line</dfn>. Its slope is exactly the average rate of change we computed above, <span class="process-math">\(\dfrac{f(x+h)-f(x)}{h}\text{.}\)</span> Now let that second point slide back toward the first, so <span class="process-math">\(h \to 0\text{.}\)</span> The secant line swings around and settles onto the <dfn class="terminology">tangent line</dfn>: the line that just grazes the curve at that single point, tilted at exactly the curve’s own steepness there. That settling slope is the derivative.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<details id="notice-averages-settle" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">What do you notice?</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para" id="notice-averages-settle-2-1">Line up your averages, from the widest window to the narrowest. What is happening to them? Decide before you open the solution.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#notice-averages-settle-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="solutions">
+<details id="notice-averages-settle-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para" id="notice-averages-settle-3-1">They go <span class="process-math">\(3\text{,}\)</span> <span class="process-math">\(2.1\text{,}\)</span> <span class="process-math">\(2.01\text{,}\)</span> <span class="process-math">\(2.001\text{.}\)</span> Each one is closer to <span class="process-math">\(2\text{.}\)</span> They are not jumping around. They are settling down.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#notice-averages-settle-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.3.1"><a tabindex="-1" href="#notice-averages-settle-3" title="Copy heading and permalink for Solution 1.1.3.1" aria-label="Copy heading and permalink for Solution 1.1.3.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.3: What do you notice?"><a tabindex="-1" href="#notice-averages-settle" title="Copy heading and permalink for Checkpoint 1.1.3: What do you notice?" aria-label="Copy heading and permalink for Checkpoint 1.1.3: What do you notice?">🔗</a></div>
+</article></details>
+<article class="assemblage assemblage-like" id="subsec-what-is-a-derivative-10"><h3 class="heading"><span class="title">What just happened.</span></h3>
+<div class="para" id="subsec-what-is-a-derivative-10-2">As the window shrinks, the average speed settles on one number: <span class="process-math">\(2\)</span> m/s. That number is your speed at the instant <span class="process-math">\(t = 1\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-10-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-10-3">Notice what we did <em class="emphasis">not</em> do. We never divided by zero. We just watched where the averages were headed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-10-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: What just happened"><a tabindex="-1" href="#subsec-what-is-a-derivative-10" title="Copy heading and permalink for Assemblage: What just happened" aria-label="Copy heading and permalink for Assemblage: What just happened">🔗</a></div>
+</article>
+<section class="paragraphs" id="subsec-what-is-a-derivative-11"><h3 class="heading"><span class="title">Now see it on a graph.</span></h3>
+<div class="para" id="subsec-what-is-a-derivative-11-2">The same squeeze has a picture. It is the picture to keep in your head all semester.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-11-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-11-3">Pick a point <span class="process-math">\(P\)</span> on a curve. Pick a second point <span class="process-math">\(Q\)</span> nearby. Draw the line through them. That is a <dfn class="terminology">secant line</dfn>. Its slope is an average rate of change, just like the averages you computed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-11-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-11-4">Now slide <span class="process-math">\(Q\)</span> toward <span class="process-math">\(P\text{.}\)</span> Before you touch the graph, predict: what will happen to the line? What will happen to its slope?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-11-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: Now see it on a graph"><a tabindex="-1" href="#subsec-what-is-a-derivative-11" title="Copy heading and permalink for Paragraphs: Now see it on a graph" aria-label="Copy heading and permalink for Paragraphs: Now see it on a graph">🔗</a></div>
+</section>
 <figure class="figure figure-like" id="fig-secant-to-tangent"><div class="interactive-iframe-container"><iframe id="interactive-secant-tangent" style="width:600px; height:450px; display: block; " src="interactive-secant-tangent-if.html"></iframe></div>
 <div class="interactive-iframe-container__opener"><a href="interactive-secant-tangent.html" title="Open in new tab" aria-label="Open in new tab" target="_blank"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe89e;</span></a></div>
 <div class="instructions interactive__instructions">
 <details id="interactive-secant-tangent-2" class="solution-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading"><span class="type">Instructions<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3></summary>
 <div class="solution-like knowl__content">
 <div class="para" id="interactive-secant-tangent-2-1">
-<span class="process-math">\(P=(1,1)\)</span> is fixed on <span class="process-math">\(y=x^2\text{.}\)</span> Drag the orange point <span class="process-math">\(Q\)</span> along the curve toward <span class="process-math">\(P\)</span> and watch the secant slope shown above the graph. What number does it approach?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#interactive-secant-tangent-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<span class="process-math">\(P=(1,1)\)</span> sits on <span class="process-math">\(y=x^2\text{,}\)</span> the same function as before. Drag the orange point <span class="process-math">\(Q\)</span> toward <span class="process-math">\(P\)</span> and watch the slope printed above the graph. Does it head toward the number you found?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#interactive-secant-tangent-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Instructions"><a tabindex="-1" href="#interactive-secant-tangent-2" title="Copy heading and permalink for Instructions" aria-label="Copy heading and permalink for Instructions">🔗</a></div>
 </div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Dragging <span class="process-math">\(Q\)</span> toward <span class="process-math">\(P\)</span> turns the secant line into the tangent line.<div class="autopermalink" aria-hidden="true" data-description="Figure 1.1.2"><a tabindex="-1" href="#fig-secant-to-tangent" title="Copy heading and permalink for Figure 1.1.2" aria-label="Copy heading and permalink for Figure 1.1.2">🔗</a></div></figcaption>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Dragging <span class="process-math">\(Q\)</span> toward <span class="process-math">\(P\)</span> turns the secant line into the tangent line.<div class="autopermalink" aria-hidden="true" data-description="Figure 1.1.4"><a tabindex="-1" href="#fig-secant-to-tangent" title="Copy heading and permalink for Figure 1.1.4" aria-label="Copy heading and permalink for Figure 1.1.4">🔗</a></div></figcaption>
 </figure>
-<article class="insight remark-like" id="subsec-what-is-a-derivative-9"><h3 class="heading">
-<span class="type">Insight</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The big idea.</span>
-</h3>
-<div class="para" id="subsec-what-is-a-derivative-9-2">A derivative is nothing more than: <dfn class="terminology">the slope an average rate of change settles into as the interval it’s averaged over shrinks to a single point.</dfn> Everything in this subsection — the formula below, the rules in the next subsection, all of it — is just bookkeeping built on top of that one idea.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-9-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-13">The secant line swings around and settles onto one line: the line that just touches the curve at <span class="process-math">\(P\text{.}\)</span> That is the <dfn class="terminology">tangent line</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Insight 1.1.3: The big idea"><a tabindex="-1" href="#subsec-what-is-a-derivative-9" title="Copy heading and permalink for Insight 1.1.3: The big idea" aria-label="Copy heading and permalink for Insight 1.1.3: The big idea">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-14">And its slope? <span class="process-math">\(2\text{.}\)</span> The same number you found with the table. That is not a coincidence. The table and the picture are the same squeeze.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="paragraphs" id="subsec-what-is-a-derivative-15"><h3 class="heading"><span class="title">Now give the idea a name.</span></h3>
+<div class="para" id="subsec-what-is-a-derivative-15-2">Twice now, we did the same thing: shrink a window, and watch an average rate of change settle down. That settling number has a name.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-15-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: Now give the idea a name"><a tabindex="-1" href="#subsec-what-is-a-derivative-15" title="Copy heading and permalink for Paragraphs: Now give the idea a name" aria-label="Copy heading and permalink for Paragraphs: Now give the idea a name">🔗</a></div>
+</section>
+<article class="insight remark-like" id="subsec-what-is-a-derivative-16"><h3 class="heading">
+<span class="type">Insight</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The big idea.</span>
+</h3>
+<div class="para" id="subsec-what-is-a-derivative-16-2">A <dfn class="terminology">derivative</dfn> is the number an average rate of change settles on as the window shrinks to a single point.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-16-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-16-3">Everything else in this chapter is bookkeeping on top of that one idea.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-16-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Insight 1.1.5: The big idea"><a tabindex="-1" href="#subsec-what-is-a-derivative-16" title="Copy heading and permalink for Insight 1.1.5: The big idea" aria-label="Copy heading and permalink for Insight 1.1.5: The big idea">🔗</a></div>
 </article>
-<div class="para" id="subsec-what-is-a-derivative-10">Writing that squeeze down symbolically, instead of re-deriving it with a table of numbers every time, gives the formal definition:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-17">Here is the same idea, written in symbols.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="definition definition-like" id="def-derivative"><h3 class="heading">
-<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The derivative.</span>
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The derivative.</span>
 </h3>
 <div class="para logical" id="def-derivative-2-1">
 <div class="para">The <dfn class="terminology">derivative</dfn> of <span class="process-math">\(f\)</span> at <span class="process-math">\(x\text{,}\)</span> written <span class="process-math">\(f'(x)\text{,}\)</span> is</div>
@@ -258,12 +336,23 @@ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h},
 <div class="para">provided the limit exists.</div>
 <div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#def-derivative-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Definition 1.1.4: The derivative"><a tabindex="-1" href="#def-derivative" title="Copy heading and permalink for Definition 1.1.4: The derivative" aria-label="Copy heading and permalink for Definition 1.1.4: The derivative">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Definition 1.1.6: The derivative"><a tabindex="-1" href="#def-derivative" title="Copy heading and permalink for Definition 1.1.6: The derivative" aria-label="Copy heading and permalink for Definition 1.1.6: The derivative">🔗</a></div>
 </article>
-<div class="para" id="subsec-what-is-a-derivative-12">You’ll hear <span class="process-math">\(f'(x)\)</span> described two ways, and both readings trace straight back to the picture above. Geometrically, it’s the <dfn class="terminology">slope of the tangent line</dfn> to <span class="process-math">\(y=f(x)\)</span> at <span class="process-math">\(x\)</span> — useful whenever you care about steepness. Physically, it’s an <dfn class="terminology">instantaneous rate of change</dfn> — useful whenever you care about how fast something is happening right now. Velocity is the derivative of position; marginal cost is the derivative of total cost; the rate an epidemic spreads is the derivative of case count. Same computation, different story attached to it depending on what <span class="process-math">\(f\)</span> represents.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-19">Check that it matches what you did. The fraction <span class="process-math">\(\dfrac{f(x+h) - f(x)}{h}\)</span> is an average rate of change over a window of width <span class="process-math">\(h\text{.}\)</span> The <span class="process-math">\(\displaystyle\lim_{h \to 0}\)</span> part just says: shrink the window.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<section class="paragraphs" id="subsec-what-is-a-derivative-20"><h3 class="heading"><span class="title">Two ways to read <span class="process-math">\(f'(x)\)</span>.</span></h3>
+<div class="para" id="subsec-what-is-a-derivative-20-2">
+<em class="alert">On a graph,</em> <span class="process-math">\(f'(x)\)</span> is the <dfn class="terminology">slope of the tangent line</dfn>. Use this reading when you care about steepness.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-20-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-20-3">
+<em class="alert">In the world,</em> <span class="process-math">\(f'(x)\)</span> is an <dfn class="terminology">instantaneous rate of change</dfn>. Use this reading when you care about how fast something is happening right now.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-20-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-20-4">Velocity is the derivative of position. If <span class="process-math">\(C(t)\)</span> is the concentration of a drug in the bloodstream, then <span class="process-math">\(C'(t)\)</span> tells you how fast that level is rising or falling right now. Same computation. Different story.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-20-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: Two ways to read f'(x)"><a tabindex="-1" href="#subsec-what-is-a-derivative-20" title="Copy heading and permalink for Paragraphs: Two ways to read f'(x)" aria-label="Copy heading and permalink for Paragraphs: Two ways to read f'(x)">🔗</a></div>
+</section>
 <details id="check-derivative-meaning" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">True or false?</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">True or false?</span>
 </h3></summary>
 <article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone multiplechoice_section"><ul data-component="multiplechoice" data-multipleanswers="false" id="rs-check-derivative-meaning">
 <div class="para" id="check-derivative-meaning-2-1">
@@ -271,25 +360,27 @@ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h},
 </div>
 <li data-component="answer" id="rs-check-derivative-meaning_opt_t"><p>True.</p></li>
 <li data-component="feedback" id="rs-check-derivative-meaning_opt_t">
-<div class="para" id="check-derivative-meaning-3-1">False. <span class="process-math">\(f'(x)\)</span> is the <em class="emphasis">instantaneous</em> rate of change at the single point <span class="process-math">\(x\)</span> — there’s no interval left to average over once the limit has been taken. The average rate of change over <span class="process-math">\([x,x+1]\)</span> is the different number <span class="process-math">\(\dfrac{f(x+1)-f(x)}{1}\text{,}\)</span> and generally won’t match <span class="process-math">\(f'(x)\)</span> at all.</div>
+<div class="para" id="check-derivative-meaning-3-1">False. <span class="process-math">\(f'(x)\)</span> is the rate at the single point <span class="process-math">\(x\text{.}\)</span> Once the limit is taken, there is no window left to average over. The average over <span class="process-math">\([x,x+1]\)</span> is a different number, <span class="process-math">\(\dfrac{f(x+1)-f(x)}{1}\text{,}\)</span> and it usually does not match <span class="process-math">\(f'(x)\text{.}\)</span>
+</div>
 </li>
 <li data-component="answer" id="rs-check-derivative-meaning_opt_f" data-correct=""><p>False.</p></li>
 <li data-component="feedback" id="rs-check-derivative-meaning_opt_f">
-<div class="para" id="check-derivative-meaning-3-1">False. <span class="process-math">\(f'(x)\)</span> is the <em class="emphasis">instantaneous</em> rate of change at the single point <span class="process-math">\(x\)</span> — there’s no interval left to average over once the limit has been taken. The average rate of change over <span class="process-math">\([x,x+1]\)</span> is the different number <span class="process-math">\(\dfrac{f(x+1)-f(x)}{1}\text{,}\)</span> and generally won’t match <span class="process-math">\(f'(x)\)</span> at all.</div>
+<div class="para" id="check-derivative-meaning-3-1">False. <span class="process-math">\(f'(x)\)</span> is the rate at the single point <span class="process-math">\(x\text{.}\)</span> Once the limit is taken, there is no window left to average over. The average over <span class="process-math">\([x,x+1]\)</span> is a different number, <span class="process-math">\(\dfrac{f(x+1)-f(x)}{1}\text{,}\)</span> and it usually does not match <span class="process-math">\(f'(x)\text{.}\)</span>
+</div>
 </li>
 </ul></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.5: True or false?"><a tabindex="-1" href="#check-derivative-meaning" title="Copy heading and permalink for Checkpoint 1.1.5: True or false?" aria-label="Copy heading and permalink for Checkpoint 1.1.5: True or false?">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.7: True or false?"><a tabindex="-1" href="#check-derivative-meaning" title="Copy heading and permalink for Checkpoint 1.1.7: True or false?" aria-label="Copy heading and permalink for Checkpoint 1.1.7: True or false?">🔗</a></div>
 </article></details>
 <details id="example-derivative-from-definition" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Computing a derivative directly from the definition.</span>
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">We do: the definition, by hand.</span>
 </h3></summary>
 <article class="example example-like knowl__content">
-<div class="para" id="example-derivative-from-definition-2-1">Let <span class="process-math">\(f(x) = x^2\text{.}\)</span> Find <span class="process-math">\(f'(x)\)</span> using <a href="sec-derivatives-refresher.html#def-derivative" class="xref" data-knowl="./knowl/xref/def-derivative.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.4: The derivative">Definition 1.1.4</a>, and check it against the numerical squeeze above.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="example-derivative-from-definition-2-1">Let <span class="process-math">\(f(x) = x^2\text{.}\)</span> Use <a href="sec-derivatives-refresher.html#def-derivative" class="xref" data-knowl="./knowl/xref/def-derivative.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 1.1.6: The derivative">Definition 1.1.6</a> to find <span class="process-math">\(f'(x)\text{.}\)</span> Then check: does <span class="process-math">\(f'(1)\)</span> match the <span class="process-math">\(2\)</span> we found twice already?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions">
 <details id="example-derivative-from-definition-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
-<div class="para" id="example-derivative-from-definition-3-1">Set up the difference quotient and simplify <em class="emphasis">before</em> taking the limit — plugging in <span class="process-math">\(h=0\)</span> too early gives the meaningless <span class="process-math">\(0/0\text{,}\)</span> since we need the algebra to cancel that <span class="process-math">\(h\)</span> out of the denominator first.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="example-derivative-from-definition-3-1">First, a trap. If we plug in <span class="process-math">\(h = 0\)</span> right away, we get <span class="process-math">\(\dfrac{0}{0}\text{.}\)</span> That tells us nothing. So we simplify <em class="emphasis">first</em> and take the limit <em class="emphasis">last</em>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="displaymath process-math" id="example-derivative-from-definition-3-2">
 \begin{align*}
@@ -300,109 +391,245 @@ f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} \\
 &amp;= 2x. 
 \end{align*}
 </div>
-<div class="para" id="example-derivative-from-definition-3-3">Now <span class="process-math">\(h\)</span> can safely go to <span class="process-math">\(0\text{,}\)</span> since it’s no longer sitting in a denominator. At <span class="process-math">\(x=1\)</span> this gives <span class="process-math">\(f'(1) = 2\)</span> — exactly the number our shrinking-window table was homing in on. The definition isn’t just abstract machinery; it’s the same squeeze, done symbolically instead of numerically, for every <span class="process-math">\(x\)</span> at once.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="example-derivative-from-definition-3-3">Once the <span class="process-math">\(h\)</span> in the denominator cancels, letting <span class="process-math">\(h \to 0\)</span> is safe.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.6.1"><a tabindex="-1" href="#example-derivative-from-definition-3" title="Copy heading and permalink for Solution 1.1.6.1" aria-label="Copy heading and permalink for Solution 1.1.6.1">🔗</a></div>
+<div class="para" id="example-derivative-from-definition-3-4">So <span class="process-math">\(f'(x) = 2x\text{,}\)</span> and <span class="process-math">\(f'(1) = 2\text{.}\)</span> Same number, third time.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-derivative-from-definition-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.8.1"><a tabindex="-1" href="#example-derivative-from-definition-3" title="Copy heading and permalink for Solution 1.1.8.1" aria-label="Copy heading and permalink for Solution 1.1.8.1">🔗</a></div>
 </div></details>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.6: Computing a derivative directly from the definition"><a tabindex="-1" href="#example-derivative-from-definition" title="Copy heading and permalink for Example 1.1.6: Computing a derivative directly from the definition" aria-label="Copy heading and permalink for Example 1.1.6: Computing a derivative directly from the definition">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.8: We do: the definition, by hand"><a tabindex="-1" href="#example-derivative-from-definition" title="Copy heading and permalink for Example 1.1.8: We do: the definition, by hand" aria-label="Copy heading and permalink for Example 1.1.8: We do: the definition, by hand">🔗</a></div>
 </article></details>
-<div class="para" id="subsec-what-is-a-derivative-15">That algebra worked fine for <span class="process-math">\(x^2\text{,}\)</span> but imagine repeating it for <span class="process-math">\(f(x) = x^{10}\text{,}\)</span> or <span class="process-math">\(f(x) = \sin(x)\cos(x)\text{.}\)</span> The definition is the <em class="emphasis">truth</em> of what a derivative is — you should always be able to fall back on it — but it’s a slow way to compute one. The rules below exist purely so you never have to run that limit by hand again; every single one of them is just this same limit, worked out once and in general, for a whole family of functions at a time.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-23">That worked nicely for <span class="process-math">\(x^2\text{.}\)</span> Now imagine doing it for <span class="process-math">\(x^{10}\text{.}\)</span> Or for <span class="process-math">\(\sin x \cos x\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 1.1.1: What does a derivative actually mean?"><a tabindex="-1" href="#subsec-what-is-a-derivative" title="Copy heading and permalink for Subsection 1.1.1: What does a derivative actually mean?" aria-label="Copy heading and permalink for Subsection 1.1.1: What does a derivative actually mean?">🔗</a></div>
+<div class="para" id="subsec-what-is-a-derivative-24">No thanks.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-24" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-25">That is why we have rules. Each rule is this same limit, worked out once, for a whole family of functions.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-25" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="assemblage assemblage-like" id="subsec-what-is-a-derivative-26"><h3 class="heading"><span class="title">Keep these two apart.</span></h3>
+<div class="para" id="subsec-what-is-a-derivative-26-2">The definition tells you what a derivative <em class="emphasis">is</em>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-26-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-what-is-a-derivative-26-3">The rules tell you how to <em class="emphasis">compute</em> one fast.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-what-is-a-derivative-26-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Keep these two apart"><a tabindex="-1" href="#subsec-what-is-a-derivative-26" title="Copy heading and permalink for Assemblage: Keep these two apart" aria-label="Copy heading and permalink for Assemblage: Keep these two apart">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 1.1.1: What does a derivative actually mean?"><a tabindex="-1" href="#subsec-what-is-a-derivative" title="Copy heading and permalink for Subsection 1.1.1: What does a derivative actually mean?" aria-label="Copy heading and permalink for Subsection 1.1.1: What does a derivative actually mean?">🔗</a></div>
 </section>
 <section class="subsection" id="subsec-differentiation-rules">
 <h2 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The differentiation toolkit</span>
 </h2>
-<div class="para" id="subsec-differentiation-rules-2">Rather than list these as symbols to memorize, here’s the intuition behind each one — the picture that makes the formula feel inevitable rather than arbitrary. A clean reference table for all of them sits at the end of this subsection once the ideas are back in place.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-2">You already know these rules. Here is a better question: do you know <em class="emphasis">why</em> they work?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-differentiation-rules-3">Three of the rules are close to obvious once you see them stated. A <dfn class="terminology">constant</dfn> function never changes, so its rate of change is <span class="process-math">\(0\text{.}\)</span> Scaling a function by a constant factor scales its rate of change by that same factor — if you triple every output, you triple how fast it’s changing too. And if two quantities change <em class="emphasis">independently</em> and you add them together (two separate savings accounts, each earning its own interest), the combined total changes at the combined rate — you just add the two rates.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-3">If you know why, you will not mix them up. So for each rule, we start with a guess or a picture. The formula comes second.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-4">
+<section class="paragraphs" id="subsec-differentiation-rules-4"><h3 class="heading"><span class="title">Three rules you could guess.</span></h3>
+<div class="para" id="subsec-differentiation-rules-4-2">Try these before you open the solution. No formulas needed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: Three rules you could guess"><a tabindex="-1" href="#subsec-differentiation-rules-4" title="Copy heading and permalink for Paragraphs: Three rules you could guess" aria-label="Copy heading and permalink for Paragraphs: Three rules you could guess">🔗</a></div>
+</section>
+<details id="predict-first-three-rules" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Predict first.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para logical" id="predict-first-three-rules-2-1">
+<ol class="decimal" id="predict-first-three-rules-2-1-1">
+<li id="predict-first-three-rules-2-1-1-1">
+<div class="para" id="predict-first-three-rules-2-1-1-1-1">The function <span class="process-math">\(f(x) = 7\)</span> never changes. How fast is it changing?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.1"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-1" title="Copy heading and permalink for Item 1.1.9.1" aria-label="Copy heading and permalink for Item 1.1.9.1">🔗</a></div>
+</li>
+<li id="predict-first-three-rules-2-1-1-2">
+<div class="para" id="predict-first-three-rules-2-1-1-2-1">You triple every output of a function. What happens to how fast it changes?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.2"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-2" title="Copy heading and permalink for Item 1.1.9.2" aria-label="Copy heading and permalink for Item 1.1.9.2">🔗</a></div>
+</li>
+<li id="predict-first-three-rules-2-1-1-3">
+<div class="para" id="predict-first-three-rules-2-1-1-3-1">You have two savings accounts, each growing on its own. How fast does the <em class="emphasis">total</em> grow?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.3"><a tabindex="-1" href="#predict-first-three-rules-2-1-1-3" title="Copy heading and permalink for Item 1.1.9.3" aria-label="Copy heading and permalink for Item 1.1.9.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions">
+<details id="predict-first-three-rules-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para logical" id="predict-first-three-rules-3-1">
+<ol class="decimal" id="predict-first-three-rules-3-1-1">
+<li id="predict-first-three-rules-3-1-1-1">
+<div class="para" id="predict-first-three-rules-3-1-1-1-1">Not at all. Its rate of change is <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.1"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-1" title="Copy heading and permalink for Item 1.1.9.1" aria-label="Copy heading and permalink for Item 1.1.9.1">🔗</a></div>
+</li>
+<li id="predict-first-three-rules-3-1-1-2">
+<div class="para" id="predict-first-three-rules-3-1-1-2-1">It triples too. Three times the output means three times the change.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.2"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-2" title="Copy heading and permalink for Item 1.1.9.2" aria-label="Copy heading and permalink for Item 1.1.9.2">🔗</a></div>
+</li>
+<li id="predict-first-three-rules-3-1-1-3">
+<div class="para" id="predict-first-three-rules-3-1-1-3-1">Add the two rates. The total grows at the combined rate.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.9.3"><a tabindex="-1" href="#predict-first-three-rules-3-1-1-3" title="Copy heading and permalink for Item 1.1.9.3" aria-label="Copy heading and permalink for Item 1.1.9.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#predict-first-three-rules-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.9.1"><a tabindex="-1" href="#predict-first-three-rules-3" title="Copy heading and permalink for Solution 1.1.9.1" aria-label="Copy heading and permalink for Solution 1.1.9.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.9: Predict first"><a tabindex="-1" href="#predict-first-three-rules" title="Copy heading and permalink for Checkpoint 1.1.9: Predict first" aria-label="Copy heading and permalink for Checkpoint 1.1.9: Predict first">🔗</a></div>
+</article></details>
+<div class="para" id="subsec-differentiation-rules-6">If you got those, you already know three rules. Here they are in symbols.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-7">
 \begin{align*}
 \text{Constant Rule:} \qquad &amp; \frac{d}{dx}[c] = 0 \\
 \text{Constant Multiple Rule:} \qquad &amp; \frac{d}{dx}[c \, f(x)] = c \, f'(x) \\
 \text{Sum/Difference Rule:} \qquad &amp; \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) 
 \end{align*}
 </div>
-<div class="para" id="subsec-differentiation-rules-5">The <dfn class="terminology">Power Rule</dfn> takes a little more picturing. Think of <span class="process-math">\(x^n\)</span> as <span class="process-math">\(n\)</span> copies of <span class="process-math">\(x\)</span> multiplied together. Nudge <span class="process-math">\(x\)</span> up by a tiny amount, and each of those <span class="process-math">\(n\)</span> copies gets nudged — each contributing its own small sliver to the product. With <span class="process-math">\(n\)</span> nudges each worth roughly <span class="process-math">\(x^{n-1}\)</span> stacking up, the total rate of change comes out to <span class="process-math">\(n\)</span> times <span class="process-math">\(x^{n-1}\text{:}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="paragraphs" id="subsec-differentiation-rules-8"><h3 class="heading"><span class="title">The Power Rule, as a picture.</span></h3>
+<div class="para" id="subsec-differentiation-rules-8-2">Think of <span class="process-math">\(x^3\)</span> as three copies of <span class="process-math">\(x\)</span> multiplied together: <span class="process-math">\(x \cdot x \cdot x\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-8-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-6">
+<div class="para" id="subsec-differentiation-rules-8-3">Now nudge <span class="process-math">\(x\)</span> up a tiny bit. Each of the three copies gets nudged. Each nudge adds about <span class="process-math">\(x^2\)</span> worth of change (the other two copies, multiplied).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-8-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-8-4">Three copies. Three nudges. Total rate of change: <span class="process-math">\(3x^2\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-8-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-8-5">With <span class="process-math">\(n\)</span> copies, you get <span class="process-math">\(n\)</span> nudges, each worth about <span class="process-math">\(x^{n-1}\text{:}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-8-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: The Power Rule, as a picture"><a tabindex="-1" href="#subsec-differentiation-rules-8" title="Copy heading and permalink for Paragraphs: The Power Rule, as a picture" aria-label="Copy heading and permalink for Paragraphs: The Power Rule, as a picture">🔗</a></div>
+</section><div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-9">
 \begin{equation*}
 \text{Power Rule:} \qquad \frac{d}{dx}[x^n] = n\,x^{n-1}
 \end{equation*}
 </div>
-<div class="para" id="subsec-differentiation-rules-7">(That picture is easiest to see for a whole number <span class="process-math">\(n\text{,}\)</span> but the formula itself holds for any real exponent — negative, fractional, whatever you throw at it.)<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-10">The picture works for whole numbers <span class="process-math">\(n\text{.}\)</span> The rule works for <em class="emphasis">any</em> exponent: negative, fractional, anything. Let’s put that to the test.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <details id="check-power-rule-negative" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Quick check: Power Rule.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Error analysis: who is right?</span>
 </h3></summary>
 <article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="check-power-rule-negative-2-1">Which of these is <span class="process-math">\(\dfrac{d}{dx}\left[x^{-2}\right]\text{?}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-power-rule-negative-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="check-power-rule-negative-2-1">Four students differentiated <span class="process-math">\(x^{-2}\text{.}\)</span> Which answer is correct?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-power-rule-negative-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-check-power-rule-negative" data-multipleanswers="false">
 <li data-component="answer" id="rs-check-power-rule-negative_opt_a">
-<div class="para" id="check-power-rule-negative-3-1-1-1"><span class="process-math">\(-2x^{-1}\)</span></div>
+<div class="para" id="check-power-rule-negative-3-1-1-1">Student A: <span class="process-math">\(-2x^{-1}\)</span>
+</div>
 </li>
 <li data-component="feedback" id="rs-check-power-rule-negative_opt_a">
-<div class="para" id="check-power-rule-negative-3-1-2-1">Careful with the exponent step: the Power Rule drops the exponent by <span class="process-math">\(1\text{,}\)</span> so <span class="process-math">\(-2\)</span> becomes <span class="process-math">\(-2-1=-3\text{,}\)</span> not <span class="process-math">\(-1\text{.}\)</span>
+<div class="para" id="check-power-rule-negative-3-1-2-1">Student A lowered the exponent in the wrong direction. Subtract <span class="process-math">\(1\text{:}\)</span> <span class="process-math">\(-2-1=-3\text{,}\)</span> not <span class="process-math">\(-1\text{.}\)</span>
 </div>
 </li>
 <li data-component="answer" id="rs-check-power-rule-negative_opt_b" data-correct="">
-<div class="para" id="check-power-rule-negative-3-2-1-1"><span class="process-math">\(-2x^{-3}\)</span></div>
+<div class="para" id="check-power-rule-negative-3-2-1-1">Student B: <span class="process-math">\(-2x^{-3}\)</span>
+</div>
 </li>
 <li data-component="feedback" id="rs-check-power-rule-negative_opt_b">
-<div class="para" id="check-power-rule-negative-3-2-2-1">Right — bring the <span class="process-math">\(-2\)</span> down as a coefficient, then drop the exponent by one: <span class="process-math">\(-2\)</span> becomes <span class="process-math">\(-3\text{.}\)</span>
+<div class="para" id="check-power-rule-negative-3-2-2-1">Right. Bring the <span class="process-math">\(-2\)</span> down in front. Then lower the exponent by one: <span class="process-math">\(-2\)</span> becomes <span class="process-math">\(-3\text{.}\)</span>
 </div>
 </li>
 <li data-component="answer" id="rs-check-power-rule-negative_opt_c">
-<div class="para" id="check-power-rule-negative-3-3-1-1"><span class="process-math">\(2x^{-3}\)</span></div>
+<div class="para" id="check-power-rule-negative-3-3-1-1">Student C: <span class="process-math">\(2x^{-3}\)</span>
+</div>
 </li>
 <li data-component="feedback" id="rs-check-power-rule-negative_opt_c">
-<div class="para" id="check-power-rule-negative-3-3-2-1">The exponent change is right, but the sign of the coefficient should carry over from the original <span class="process-math">\(-2\text{.}\)</span>
+<div class="para" id="check-power-rule-negative-3-3-2-1">Student C got the exponent right but lost the minus sign. The number in front is the old exponent, <span class="process-math">\(-2\text{.}\)</span>
 </div>
 </li>
 <li data-component="answer" id="rs-check-power-rule-negative_opt_d">
-<div class="para" id="check-power-rule-negative-3-4-1-1"><span class="process-math">\(-2x^{-1}\cdot(-2)\)</span></div>
+<div class="para" id="check-power-rule-negative-3-4-1-1">Student D: <span class="process-math">\(-2x^{-1}\cdot(-2)\)</span>
+</div>
 </li>
 <li data-component="feedback" id="rs-check-power-rule-negative_opt_d">
-<div class="para" id="check-power-rule-negative-3-4-2-1">That mixes up two different rules. The Power Rule just brings the exponent down as a coefficient and lowers it by <span class="process-math">\(1\)</span> — nothing gets multiplied twice.</div>
+<div class="para" id="check-power-rule-negative-3-4-2-1">Student D mixed two rules together. The Power Rule brings the exponent down once and lowers it by <span class="process-math">\(1\text{.}\)</span> Nothing gets multiplied twice.</div>
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.7: Quick check: Power Rule"><a tabindex="-1" href="#check-power-rule-negative" title="Copy heading and permalink for Checkpoint 1.1.7: Quick check: Power Rule" aria-label="Copy heading and permalink for Checkpoint 1.1.7: Quick check: Power Rule">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.10: Error analysis: who is right?"><a tabindex="-1" href="#check-power-rule-negative" title="Copy heading and permalink for Checkpoint 1.1.10: Error analysis: who is right?" aria-label="Copy heading and permalink for Checkpoint 1.1.10: Error analysis: who is right?">🔗</a></div>
 </article></details>
 <details id="check-power-rule-more" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Two more Power Rule reflexes.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">You do: two quick ones.</span>
 </h3></summary>
 <article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-power-rule-more"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"check-power-rule-more-2-1\">Use the Power Rule to differentiate, then evaluate at the given point.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-power-rule-more-2-2\">If <span class=\"process-math\">\\(f(x)=x^5\\text{,}\\)<\/span> then <span class=\"process-math\">\\(f'(2) =\\)<\/span> <input type=\"number\" id=\"check-power-rule-more-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-power-rule-more-2-3\">If <span class=\"process-math\">\\(g(x)=\\sqrt{x}\\text{,}\\)<\/span> then <span class=\"process-math\">\\(g'(4) =\\)<\/span> <input type=\"number\" id=\"check-power-rule-more-blank2\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"check-power-rule-more-2-1\">Differentiate first. Then plug in the point.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-power-rule-more-2-2\">If <span class=\"process-math\">\\(f(x)=x^5\\text{,}\\)<\/span> then <span class=\"process-math\">\\(f'(2) =\\)<\/span> <input type=\"number\" id=\"check-power-rule-more-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-power-rule-more-2-3\">If <span class=\"process-math\">\\(g(x)=\\sqrt{x}\\text{,}\\)<\/span> then <span class=\"process-math\">\\(g'(4) =\\)<\/span> <input type=\"number\" id=\"check-power-rule-more-blank2\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-power-rule-more-2-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0, "blank2": 1},
-"feedbackArray": [[{"number": [80,80], "feedback": "\n<div class=\"para\" id=\"check-power-rule-more-3-1-1-2-1\">Yes — <span class=\"process-math\">\\(f'(x)=5x^4\\text{,}\\)<\/span> and <span class=\"process-math\">\\(5\\cdot 2^4 = 80\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [0.249,0.251], "feedback": "\n<div class=\"para\" id=\"check-power-rule-more-3-2-1-2-1\">Yes — rewrite <span class=\"process-math\">\\(\\sqrt{x}\\)<\/span> as <span class=\"process-math\">\\(x^{1\/2}\\)<\/span> first, so <span class=\"process-math\">\\(g'(x)=\\tfrac12 x^{-1\/2}\\text{,}\\)<\/span> and <span class=\"process-math\">\\(g'(4) = \\tfrac12 \\cdot 4^{-1\/2} = \\tfrac14\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"number": [80,80], "feedback": "\n<div class=\"para\" id=\"check-power-rule-more-3-1-1-2-1\">Yes. <span class=\"process-math\">\\(f'(x)=5x^4\\text{,}\\)<\/span> and <span class=\"process-math\">\\(5\\cdot 2^4 = 80\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [0.249,0.251], "feedback": "\n<div class=\"para\" id=\"check-power-rule-more-3-2-1-2-1\">Yes. The trick is to rewrite <span class=\"process-math\">\\(\\sqrt{x}\\)<\/span> as <span class=\"process-math\">\\(x^{1\/2}\\)<\/span> first. Then <span class=\"process-math\">\\(g'(x)=\\tfrac12 x^{-1\/2}\\text{,}\\)<\/span> and <span class=\"process-math\">\\(g'(4) = \\tfrac12 \\cdot 4^{-1\/2} = \\tfrac14\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.8: Two more Power Rule reflexes"><a tabindex="-1" href="#check-power-rule-more" title="Copy heading and permalink for Checkpoint 1.1.8: Two more Power Rule reflexes" aria-label="Copy heading and permalink for Checkpoint 1.1.8: Two more Power Rule reflexes">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.11: You do: two quick ones"><a tabindex="-1" href="#check-power-rule-more" title="Copy heading and permalink for Checkpoint 1.1.11: You do: two quick ones" aria-label="Copy heading and permalink for Checkpoint 1.1.11: You do: two quick ones">🔗</a></div>
 </article></details>
-<div class="para" id="subsec-differentiation-rules-10">The <dfn class="terminology">Product Rule</dfn> has a nice picture too. Imagine a rectangle whose width is <span class="process-math">\(u(x)\)</span> and whose height is <span class="process-math">\(v(x)\text{,}\)</span> so its area is <span class="process-math">\(u(x)v(x)\text{.}\)</span> Nudge <span class="process-math">\(x\)</span> slightly, and <em class="emphasis">both</em> sides grow a little. The extra area shows up as two thin strips — one along the top from the width growing (worth <span class="process-math">\(u' \cdot v\)</span>) and one along the side from the height growing (worth <span class="process-math">\(u \cdot v'\)</span>) — plus a tiny corner sliver so small it vanishes in the limit. Add the two strips and you have the whole rule: differentiate one factor at a time, holding the other one fixed, and add the results.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="paragraphs" id="subsec-differentiation-rules-13"><h3 class="heading"><span class="title">The Product Rule, as a picture.</span></h3>
+<div class="para" id="subsec-differentiation-rules-13-2">Picture a rectangle. Its width is <span class="process-math">\(u(x)\)</span> and its height is <span class="process-math">\(v(x)\text{.}\)</span> So its area is <span class="process-math">\(u(x)\,v(x)\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-13-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-differentiation-rules-11">The <dfn class="terminology">Quotient Rule</dfn> isn’t really a separate idea — it’s the Product Rule wearing a disguise. Write <span class="process-math">\(\dfrac{f(x)}{g(x)}\)</span> as <span class="process-math">\(f(x)\cdot g(x)^{-1}\)</span> and apply the Product Rule (plus the Chain Rule, below, to differentiate <span class="process-math">\(g(x)^{-1}\)</span>), and the familiar formula falls out on its own — which is also why the minus sign and the <span class="process-math">\(g^2\)</span> in the denominator show up right where they do.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-13-3">Now nudge <span class="process-math">\(x\text{.}\)</span> Both sides grow a little. Where does the new area show up?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-13-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="subsec-differentiation-rules-12">The <dfn class="terminology">Chain Rule</dfn> is usually the rustiest one, and it’s the one we’ll lean on hardest all semester — substitution, our main integration technique in Chapter <a href="ch-integrals.html" class="internal" title="Chapter 3: Integrals">Chapter 3</a>, is really the Chain Rule run backwards. Picture two gears meshed together: turn the first one, and it turns the second at a rate scaled by the gear ratio between them. A composed function <span class="process-math">\(f(g(x))\)</span> works the same way — an "outer" function <span class="process-math">\(f\)</span> wrapped around an "inner" function <span class="process-math">\(g\text{.}\)</span> Nudging <span class="process-math">\(x\)</span> nudges <span class="process-math">\(g(x)\)</span> at rate <span class="process-math">\(g'(x)\text{,}\)</span> and that nudge to <span class="process-math">\(g(x)\)</span> in turn nudges <span class="process-math">\(f(g(x))\)</span> at rate <span class="process-math">\(f'\)</span> (evaluated at <span class="process-math">\(g(x)\text{,}\)</span> not at <span class="process-math">\(x\)</span>). The two rates multiply, gear-ratio style:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-13-4">In two thin strips. One strip comes from the width growing: about <span class="process-math">\(u' \cdot v\text{.}\)</span> The other comes from the height growing: about <span class="process-math">\(u \cdot v'\text{.}\)</span> There is also a tiny corner piece, but it is so small that it disappears in the limit.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-13-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-13">
+<div class="para" id="subsec-differentiation-rules-13-5">Add the two strips, and that is the whole rule:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-13-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: The Product Rule, as a picture"><a tabindex="-1" href="#subsec-differentiation-rules-13" title="Copy heading and permalink for Paragraphs: The Product Rule, as a picture" aria-label="Copy heading and permalink for Paragraphs: The Product Rule, as a picture">🔗</a></div>
+</section><div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-14">
+\begin{equation*}
+\text{Product Rule:} \qquad \frac{d}{dx}[u\,v] = u'\,v + u\,v'
+\end{equation*}
+</div>
+<div class="para" id="subsec-differentiation-rules-15">In words: differentiate one factor at a time, hold the other one fixed, and add.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="paragraphs" id="subsec-differentiation-rules-16"><h3 class="heading"><span class="title">The Quotient Rule is not really new.</span></h3>
+<div class="para" id="subsec-differentiation-rules-16-2">It is the Product Rule in disguise. Write <span class="process-math">\(\dfrac{f(x)}{g(x)}\)</span> as <span class="process-math">\(f(x) \cdot g(x)^{-1}\text{.}\)</span> Apply the Product Rule, plus the Chain Rule for <span class="process-math">\(g(x)^{-1}\text{,}\)</span> and the familiar formula falls out. That is also why the minus sign and the <span class="process-math">\(g^2\)</span> show up where they do.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-16-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: The Quotient Rule is not really new"><a tabindex="-1" href="#subsec-differentiation-rules-16" title="Copy heading and permalink for Paragraphs: The Quotient Rule is not really new" aria-label="Copy heading and permalink for Paragraphs: The Quotient Rule is not really new">🔗</a></div>
+</section>
+<section class="paragraphs" id="subsec-differentiation-rules-17"><h3 class="heading"><span class="title">The Chain Rule: rates multiply.</span></h3>
+<div class="para" id="subsec-differentiation-rules-17-2">This is usually the rustiest rule. It is also the one we lean on hardest this semester. Substitution, our main integration technique in <a href="ch-integrals.html" class="internal" title="Chapter 3: Integrals">Chapter 3</a>, is the Chain Rule run backward.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-17-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-17-3">So let’s rebuild it from something simple: gears.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-17-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: The Chain Rule: rates multiply"><a tabindex="-1" href="#subsec-differentiation-rules-17" title="Copy heading and permalink for Paragraphs: The Chain Rule: rates multiply" aria-label="Copy heading and permalink for Paragraphs: The Chain Rule: rates multiply">🔗</a></div>
+</section>
+<details id="check-chain-gears" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Gears.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-chain-gears"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-chain-gears-2-1\">Three gears are linked in a row: <span class=\"process-math\">\\(A\\text{,}\\)<\/span> <span class=\"process-math\">\\(B\\text{,}\\)<\/span> <span class=\"process-math\">\\(C\\text{.}\\)<\/span> Gear <span class=\"process-math\">\\(B\\)<\/span> turns <span class=\"process-math\">\\(3\\)<\/span> times as fast as gear <span class=\"process-math\">\\(A\\text{.}\\)<\/span> Gear <span class=\"process-math\">\\(C\\)<\/span> turns <span class=\"process-math\">\\(2\\)<\/span> times as fast as gear <span class=\"process-math\">\\(B\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-chain-gears-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-chain-gears-2-2\">Gear <span class=\"process-math\">\\(C\\)<\/span> turns how many times as fast as gear <span class=\"process-math\">\\(A\\text{?}\\)<\/span> <input type=\"number\" id=\"check-chain-gears-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-chain-gears-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [6,6], "feedback": "\n<div class=\"para\" id=\"check-chain-gears-3-1-1-2-1\">Yes. <span class=\"process-math\">\\(3 \\times 2 = 6\\text{.}\\)<\/span> Rates along a chain multiply.<\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.12: Gears"><a tabindex="-1" href="#check-chain-gears" title="Copy heading and permalink for Checkpoint 1.1.12: Gears" aria-label="Copy heading and permalink for Checkpoint 1.1.12: Gears">🔗</a></div>
+</article></details>
+<div class="para" id="subsec-differentiation-rules-19">A composition <span class="process-math">\(f(g(x))\)</span> works exactly like those gears.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-20">Nudge <span class="process-math">\(x\text{,}\)</span> and the inner function <span class="process-math">\(g(x)\)</span> changes at rate <span class="process-math">\(g'(x)\text{.}\)</span> That change makes the outer function change at rate <span class="process-math">\(f'\text{,}\)</span> measured at <span class="process-math">\(g(x)\text{.}\)</span> Two rates in a chain. So multiply:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ch-integrals.html" id="subsec-differentiation-rules-21">
 \begin{equation*}
 \text{Chain Rule:} \qquad \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x)
 \end{equation*}
 </div>
-<div class="para" id="subsec-differentiation-rules-14">Alongside these rules for <em class="emphasis">combining</em> functions, you’ll need the rates of a handful of specific functions on recall. Two are worth a quick word rather than bare memorization. <span class="process-math">\(e^x\)</span> is the unique function that is <em class="emphasis">its own</em> rate of change — at every instant it’s already growing exactly as fast as its current size demands, the way an account under continuous compounding grows faster the bigger it gets. And differentiating a wave produces another wave, a quarter-cycle out of step: the slope of <span class="process-math">\(\sin x\)</span> traces out <span class="process-math">\(\cos x\text{,}\)</span> whose own slope traces out <span class="process-math">\(-\sin x\text{,}\)</span> and so on around.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="assemblage assemblage-like" id="subsec-differentiation-rules-22"><h3 class="heading"><span class="title">Watch out.</span></h3>
+<div class="para" id="subsec-differentiation-rules-22-2">Two places people slip: forgetting the <span class="process-math">\(g'(x)\)</span> at the end, and plugging <span class="process-math">\(x\)</span> into <span class="process-math">\(f'\)</span> instead of <span class="process-math">\(g(x)\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-22-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Watch out"><a tabindex="-1" href="#subsec-differentiation-rules-22" title="Copy heading and permalink for Assemblage: Watch out" aria-label="Copy heading and permalink for Assemblage: Watch out">🔗</a></div>
+</article>
+<section class="paragraphs" id="subsec-differentiation-rules-23"><h3 class="heading"><span class="title">A few derivatives to know by heart.</span></h3>
+<div class="para" id="subsec-differentiation-rules-23-2">Two of these deserve a picture instead of memorizing.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-23-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-23-3">
+<span class="process-math">\(e^x\)</span> is its own rate of change. The bigger it gets, the faster it grows, like money under continuous compounding.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-23-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-differentiation-rules-23-4">Differentiating a wave gives back a wave, shifted by a quarter-cycle. The slope of <span class="process-math">\(\sin x\)</span> traces out <span class="process-math">\(\cos x\text{.}\)</span> The slope of <span class="process-math">\(\cos x\)</span> traces out <span class="process-math">\(-\sin x\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-23-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: A few derivatives to know by heart"><a tabindex="-1" href="#subsec-differentiation-rules-23" title="Copy heading and permalink for Paragraphs: A few derivatives to know by heart" aria-label="Copy heading and permalink for Paragraphs: A few derivatives to know by heart">🔗</a></div>
+</section>
 <article class="fact theorem-like" id="fact-standard-derivatives"><h3 class="heading">
-<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Standard derivatives.</span>
+<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Standard derivatives.</span>
 </h3>
 <div class="displaymath process-math" id="fact-standard-derivatives-2-1">
 \begin{align*}
@@ -413,10 +640,10 @@ f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} \\
 \frac{d}{dx}[\ln x] &amp;= \frac{1}{x} 
 \end{align*}
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Fact 1.1.9: Standard derivatives"><a tabindex="-1" href="#fact-standard-derivatives" title="Copy heading and permalink for Fact 1.1.9: Standard derivatives" aria-label="Copy heading and permalink for Fact 1.1.9: Standard derivatives">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Fact 1.1.13: Standard derivatives"><a tabindex="-1" href="#fact-standard-derivatives" title="Copy heading and permalink for Fact 1.1.13: Standard derivatives" aria-label="Copy heading and permalink for Fact 1.1.13: Standard derivatives">🔗</a></div>
 </article>
 <details id="example-product-chain" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Product Rule and Chain Rule together.</span>
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">We do: Product Rule and Chain Rule together.</span>
 </h3></summary>
 <article class="example example-like knowl__content">
 <div class="para" id="example-product-chain-2-1">Differentiate <span class="process-math">\(f(x) = x^2 e^{3x}\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -424,26 +651,34 @@ f'(x) &amp;= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} \\
 <div class="solutions">
 <details id="example-product-chain-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
-<div class="para" id="example-product-chain-3-1">This is a product of two functions, <span class="process-math">\(x^2\)</span> and <span class="process-math">\(e^{3x}\text{,}\)</span> so start with the Product Rule. The second factor needs the Chain Rule on its own: the "outside" function is <span class="process-math">\(e^{(\,\cdot\,)}\)</span> and the "inside" function is <span class="process-math">\(3x\text{,}\)</span> whose derivative is <span class="process-math">\(3\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="example-product-chain-3-1">
+<em class="alert">What kind of function is this?</em> A product: <span class="process-math">\(x^2\)</span> times <span class="process-math">\(e^{3x}\text{.}\)</span> So the Product Rule goes first.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" id="example-product-chain-3-2">
+<div class="para" id="example-product-chain-3-2">
+<em class="alert">Does either piece need another rule?</em> Yes. <span class="process-math">\(e^{3x}\)</span> is a composition. The outer function is <span class="process-math">\(e^{(\;\cdot\;)}\text{.}\)</span> The inner function is <span class="process-math">\(3x\text{,}\)</span> with derivative <span class="process-math">\(3\text{.}\)</span> So <span class="process-math">\(\frac{d}{dx}\big[e^{3x}\big] = 3e^{3x}\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="example-product-chain-3-3">
+<em class="alert">Now put it together.</em><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" id="example-product-chain-3-4">
 \begin{align*}
 f'(x) &amp;= \frac{d}{dx}[x^2]\cdot e^{3x} + x^2 \cdot \frac{d}{dx}[e^{3x}] \\
 &amp;= 2x\,e^{3x} + x^2 \cdot 3e^{3x} \\
-&amp;= e^{3x}(2x + 3x^2) \\
 &amp;= x e^{3x}(2 + 3x). 
 \end{align*}
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.10.1"><a tabindex="-1" href="#example-product-chain-3" title="Copy heading and permalink for Solution 1.1.10.1" aria-label="Copy heading and permalink for Solution 1.1.10.1">🔗</a></div>
+<div class="para" id="example-product-chain-3-5">Both terms had an <span class="process-math">\(x\,e^{3x}\)</span> in them, so we factored it out.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-product-chain-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.14.1"><a tabindex="-1" href="#example-product-chain-3" title="Copy heading and permalink for Solution 1.1.14.1" aria-label="Copy heading and permalink for Solution 1.1.14.1">🔗</a></div>
 </div></details>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.10: Product Rule and Chain Rule together"><a tabindex="-1" href="#example-product-chain" title="Copy heading and permalink for Example 1.1.10: Product Rule and Chain Rule together" aria-label="Copy heading and permalink for Example 1.1.10: Product Rule and Chain Rule together">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.14: We do: Product Rule and Chain Rule together"><a tabindex="-1" href="#example-product-chain" title="Copy heading and permalink for Example 1.1.14: We do: Product Rule and Chain Rule together" aria-label="Copy heading and permalink for Example 1.1.14: We do: Product Rule and Chain Rule together">🔗</a></div>
 </article></details>
-<details id="example-quotient" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Quotient Rule.</span>
+<details id="example-quotient" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">You do: Quotient Rule.</span>
 </h3></summary>
-<article class="example example-like knowl__content">
-<div class="para" id="example-quotient-2-1">Differentiate <span class="process-math">\(g(x) = \dfrac{x^2 + 1}{x - 3}\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-quotient-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="exercise exercise-like knowl__content">
+<div class="para" id="example-quotient-2-1">Differentiate <span class="process-math">\(g(x) = \dfrac{x^2 + 1}{x - 3}\text{.}\)</span> Work it out on paper before you open the solution.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-quotient-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="solutions">
 <details id="example-quotient-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
@@ -455,15 +690,15 @@ g'(x) &amp;= \frac{(2x)(x-3) - (x^2+1)(1)}{(x-3)^2} \\
 &amp;= \frac{x^2 - 6x - 1}{(x-3)^2}. 
 \end{align*}
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.11.1"><a tabindex="-1" href="#example-quotient-3" title="Copy heading and permalink for Solution 1.1.11.1" aria-label="Copy heading and permalink for Solution 1.1.11.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.15.1"><a tabindex="-1" href="#example-quotient-3" title="Copy heading and permalink for Solution 1.1.15.1" aria-label="Copy heading and permalink for Solution 1.1.15.1">🔗</a></div>
 </div></details>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.11: Quotient Rule"><a tabindex="-1" href="#example-quotient" title="Copy heading and permalink for Example 1.1.11: Quotient Rule" aria-label="Copy heading and permalink for Example 1.1.11: Quotient Rule">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.15: You do: Quotient Rule"><a tabindex="-1" href="#example-quotient" title="Copy heading and permalink for Checkpoint 1.1.15: You do: Quotient Rule" aria-label="Copy heading and permalink for Checkpoint 1.1.15: You do: Quotient Rule">🔗</a></div>
 </article></details>
-<div class="para" id="subsec-differentiation-rules-18">For quick reference once the intuition above has done its job:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-differentiation-rules-27">Here is the whole toolkit on one card. Use it as a reference. When you forget a rule, go back to its picture.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-27" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="fact theorem-like" id="fact-basic-rules"><h3 class="heading">
-<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Basic differentiation rules, all in one place.</span>
+<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The differentiation toolkit, all in one place.</span>
 </h3>
 <div class="para" id="fact-basic-rules-2-1">For differentiable functions <span class="process-math">\(f\)</span> and <span class="process-math">\(g\text{,}\)</span> and a constant <span class="process-math">\(c\text{:}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#fact-basic-rules-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -478,14 +713,24 @@ g'(x) &amp;= \frac{(2x)(x-3) - (x^2+1)(1)}{(x-3)^2} \\
 \text{Chain Rule:} \qquad &amp; \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x) 
 \end{align*}
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Fact 1.1.12: Basic differentiation rules, all in one place"><a tabindex="-1" href="#fact-basic-rules" title="Copy heading and permalink for Fact 1.1.12: Basic differentiation rules, all in one place" aria-label="Copy heading and permalink for Fact 1.1.12: Basic differentiation rules, all in one place">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Fact 1.1.16: The differentiation toolkit, all in one place"><a tabindex="-1" href="#fact-basic-rules" title="Copy heading and permalink for Fact 1.1.16: The differentiation toolkit, all in one place" aria-label="Copy heading and permalink for Fact 1.1.16: The differentiation toolkit, all in one place">🔗</a></div>
+</article>
+<article class="assemblage assemblage-like" id="subsec-differentiation-rules-29"><h3 class="heading"><span class="title">Main idea.</span></h3>
+<div class="para" id="subsec-differentiation-rules-29-2">Every rule is the definition of the derivative, worked out once for a whole family of functions. Remember the picture, and you can rebuild the rule.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-differentiation-rules-29-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Main idea"><a tabindex="-1" href="#subsec-differentiation-rules-29" title="Copy heading and permalink for Assemblage: Main idea" aria-label="Copy heading and permalink for Assemblage: Main idea">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Subsection 1.1.2: The differentiation toolkit"><a tabindex="-1" href="#subsec-differentiation-rules" title="Copy heading and permalink for Subsection 1.1.2: The differentiation toolkit" aria-label="Copy heading and permalink for Subsection 1.1.2: The differentiation toolkit">🔗</a></div>
 </section>
 <section class="subsection" id="subsec-critical-points">
 <h2 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical points</span>
 </h2>
-<div class="para" id="subsec-critical-points-2">One more piece of vocabulary, and it follows straight from the tangent-line picture. Imagine hiking along the graph of <span class="process-math">\(f\)</span> like a trail. At most points the ground under your feet is tilted — you’re climbing or descending. But right at the top of a hill, or the bottom of a valley, the ground goes momentarily flat: for that one instant, slope zero, before it tips the other way. That flatness is exactly <span class="process-math">\(f'(c) = 0\text{,}\)</span> and it’s worth naming.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="assemblage assemblage-like" id="assemblage-question-hilltop"><h3 class="heading"><span class="title">Question.</span></h3>
+<div class="para" id="assemblage-question-hilltop-2">You are hiking a trail shaped like the graph of <span class="process-math">\(f\text{.}\)</span> You reach the very top of a hill. What is the ground like under your feet?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#assemblage-question-hilltop-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Question"><a tabindex="-1" href="#assemblage-question-hilltop" title="Copy heading and permalink for Assemblage: Question" aria-label="Copy heading and permalink for Assemblage: Question">🔗</a></div>
+</article>
+<div class="para" id="subsec-critical-points-3">Most of the time, the ground is tilted. You are climbing, or you are heading down. Walk the trail below. Watch the slope at the hilltop and at the bottom of the valley.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="fig-hiking-trail"><div class="interactive-iframe-container"><iframe id="interactive-hiking-trail" style="width:600px; height:450px; display: block; " src="interactive-hiking-trail-if.html"></iframe></div>
 <div class="interactive-iframe-container__opener"><a href="interactive-hiking-trail.html" title="Open in new tab" aria-label="Open in new tab" target="_blank"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe89e;</span></a></div>
@@ -497,19 +742,56 @@ g'(x) &amp;= \frac{(2x)(x-3) - (x^2+1)(1)}{(x-3)^2} \\
 <div class="autopermalink" aria-hidden="true" data-description="Instructions"><a tabindex="-1" href="#interactive-hiking-trail-2" title="Copy heading and permalink for Instructions" aria-label="Copy heading and permalink for Instructions">🔗</a></div>
 </div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.13<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Drag the hiker along the trail and watch the slope underfoot hit <span class="process-math">\(0\)</span> at the hilltop and the valley bottom.<div class="autopermalink" aria-hidden="true" data-description="Figure 1.1.13"><a tabindex="-1" href="#fig-hiking-trail" title="Copy heading and permalink for Figure 1.1.13" aria-label="Copy heading and permalink for Figure 1.1.13">🔗</a></div></figcaption>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.17<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Drag the hiker along the trail and watch the slope underfoot hit <span class="process-math">\(0\)</span> at the hilltop and the valley bottom.<div class="autopermalink" aria-hidden="true" data-description="Figure 1.1.17"><a tabindex="-1" href="#fig-hiking-trail" title="Copy heading and permalink for Figure 1.1.17" aria-label="Copy heading and permalink for Figure 1.1.17">🔗</a></div></figcaption>
 </figure>
+<div class="para" id="subsec-critical-points-5">At the top of the hill, the ground is flat. For one instant, the slope is <span class="process-math">\(0\text{.}\)</span> Then it tips the other way. The bottom of a valley works the same way.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-critical-points-6">In symbols, a flat spot at <span class="process-math">\(x = c\)</span> means <span class="process-math">\(f'(c) = 0\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="paragraphs" id="subsec-critical-points-7"><h3 class="heading"><span class="title">One more case: sharp corners.</span></h3>
+<div class="para" id="subsec-critical-points-7-2">Some peaks are not smooth. Picture the graph of <span class="process-math">\(y = -|x|\text{.}\)</span> Its top, at <span class="process-math">\(x = 0\text{,}\)</span> is a sharp point. What is the slope right there?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-critical-points-7-3">There isn’t one. Just left of <span class="process-math">\(0\text{,}\)</span> the slope is <span class="process-math">\(1\text{.}\)</span> Just right of <span class="process-math">\(0\text{,}\)</span> it is <span class="process-math">\(-1\text{.}\)</span> So <span class="process-math">\(f'(0)\)</span> does not exist. But it is still a peak, so we want to count it too.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-7-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraphs: One more case: sharp corners"><a tabindex="-1" href="#subsec-critical-points-7" title="Copy heading and permalink for Paragraphs: One more case: sharp corners" aria-label="Copy heading and permalink for Paragraphs: One more case: sharp corners">🔗</a></div>
+</section>
+<div class="para" id="subsec-critical-points-8">Now give both cases one name.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="definition definition-like" id="def-critical-point"><h3 class="heading">
-<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical point.</span>
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.18</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical point.</span>
 </h3>
-<div class="para" id="def-critical-point-2-1">A <dfn class="terminology">critical point</dfn> of <span class="process-math">\(f\)</span> is a value <span class="process-math">\(c\)</span> in the domain of <span class="process-math">\(f\)</span> where either <span class="process-math">\(f'(c) = 0\)</span> (flat ground) or <span class="process-math">\(f'(c)\)</span> does not exist (a sharp corner or break, where "the slope" isn’t even well-defined).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#def-critical-point-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="def-critical-point-2-1">A <dfn class="terminology">critical point</dfn> of <span class="process-math">\(f\)</span> is a value <span class="process-math">\(c\)</span> in the domain of <span class="process-math">\(f\)</span> where either <span class="process-math">\(f'(c) = 0\)</span> (flat ground) or <span class="process-math">\(f'(c)\)</span> does not exist (a sharp corner or a break).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#def-critical-point-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Definition 1.1.14: Critical point"><a tabindex="-1" href="#def-critical-point" title="Copy heading and permalink for Definition 1.1.14: Critical point" aria-label="Copy heading and permalink for Definition 1.1.14: Critical point">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Definition 1.1.18: Critical point"><a tabindex="-1" href="#def-critical-point" title="Copy heading and permalink for Definition 1.1.18: Critical point" aria-label="Copy heading and permalink for Definition 1.1.18: Critical point">🔗</a></div>
 </article>
-<div class="para" id="subsec-critical-points-5">Critical points are exactly the <em class="emphasis">candidates</em> for a hilltop or valley bottom — not every flat spot turns out to be one (a trail can flatten briefly and keep climbing, like a switchback), but every genuine peak or valley in the interior of the trail has to be a critical point first. That’s the entire engine behind optimization, which is where we’re headed next: find the flat spots, then work out which ones are actually the top or bottom.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="subsec-critical-points-10">(Your textbook calls these <dfn class="terminology">critical numbers</dfn>. Same idea.)<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="para" id="subsec-critical-points-11">So every hilltop and valley bottom along the trail (not at its very ends) is a critical point. Does it work the other way? Is every critical point a hilltop or a valley? Decide before you check.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-flat-not-peak" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.19</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">True or false?</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone multiplechoice_section"><ul data-component="multiplechoice" data-multipleanswers="false" id="rs-check-flat-not-peak">
+<div class="para" id="check-flat-not-peak-2-1">If <span class="process-math">\(f'(c) = 0\text{,}\)</span> then <span class="process-math">\(f\)</span> has a local maximum or a local minimum at <span class="process-math">\(c\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-flat-not-peak-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<li data-component="answer" id="rs-check-flat-not-peak_opt_t"><p>True.</p></li>
+<li data-component="feedback" id="rs-check-flat-not-peak_opt_t">
+<div class="para" id="check-flat-not-peak-3-1">False. Try <span class="process-math">\(f(x) = x^3\text{.}\)</span> Its derivative is <span class="process-math">\(3x^2\text{,}\)</span> so <span class="process-math">\(f'(0) = 0\)</span> and the ground is flat at <span class="process-math">\(x = 0\text{.}\)</span> But the graph keeps climbing on both sides. No peak, no valley. Think of a trail that levels off for one step, then keeps going up.</div>
+</li>
+<li data-component="answer" id="rs-check-flat-not-peak_opt_f" data-correct=""><p>False.</p></li>
+<li data-component="feedback" id="rs-check-flat-not-peak_opt_f">
+<div class="para" id="check-flat-not-peak-3-1">False. Try <span class="process-math">\(f(x) = x^3\text{.}\)</span> Its derivative is <span class="process-math">\(3x^2\text{,}\)</span> so <span class="process-math">\(f'(0) = 0\)</span> and the ground is flat at <span class="process-math">\(x = 0\text{.}\)</span> But the graph keeps climbing on both sides. No peak, no valley. Think of a trail that levels off for one step, then keeps going up.</div>
+</li>
+</ul></div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.19: True or false?"><a tabindex="-1" href="#check-flat-not-peak" title="Copy heading and permalink for Checkpoint 1.1.19: True or false?" aria-label="Copy heading and permalink for Checkpoint 1.1.19: True or false?">🔗</a></div>
+</article></details>
+<article class="assemblage assemblage-like" id="subsec-critical-points-13"><h3 class="heading"><span class="title">Remember.</span></h3>
+<div class="para" id="subsec-critical-points-13-2">A critical point is a <em class="emphasis">candidate</em>, not automatically an answer.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-13-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Remember"><a tabindex="-1" href="#subsec-critical-points-13" title="Copy heading and permalink for Assemblage: Remember" aria-label="Copy heading and permalink for Assemblage: Remember">🔗</a></div>
+</article>
 <details id="example-critical-points" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Finding critical points.</span>
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.20</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">We do: find the critical points.</span>
 </h3></summary>
 <article class="example example-like knowl__content">
 <div class="para" id="example-critical-points-2-1">Find the critical points of <span class="process-math">\(f(x) = x^3 - 3x\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -518,9 +800,12 @@ g'(x) &amp;= \frac{(2x)(x-3) - (x^2+1)(1)}{(x-3)^2} \\
 <details id="example-critical-points-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
 <div class="para" id="example-critical-points-3-1">
-<span class="process-math">\(f\)</span> is a polynomial, so <span class="process-math">\(f'\)</span> is defined everywhere; the only critical points come from <span class="process-math">\(f'(x) = 0\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<em class="alert">Is there anywhere <span class="process-math">\(f'\)</span> fails to exist?</em> No. <span class="process-math">\(f\)</span> is a polynomial, so it has no corners or breaks. That leaves only the flat spots.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="displaymath process-math" id="example-critical-points-3-2">
+<div class="para" id="example-critical-points-3-2">
+<em class="alert">Where is the ground flat?</em> Set <span class="process-math">\(f'(x) = 0\text{:}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" id="example-critical-points-3-3">
 \begin{align*}
 f'(x) &amp;= 3x^2 - 3 \\
 0 &amp;= 3x^2 - 3 \\
@@ -528,27 +813,85 @@ f'(x) &amp;= 3x^2 - 3 \\
 x &amp;= \pm 1. 
 \end{align*}
 </div>
-<div class="para" id="example-critical-points-3-3">So <span class="process-math">\(f\)</span> has critical points at <span class="process-math">\(x=-1\)</span> and <span class="process-math">\(x=1\text{.}\)</span> (Sketch <span class="process-math">\(f(x)=x^3-3x\)</span> if you want to see why: it has a local max at <span class="process-math">\(x=-1\)</span> and a local min at <span class="process-math">\(x=1\text{,}\)</span> exactly the two flat spots on that curve’s trail.)<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="example-critical-points-3-4">So the critical points are <span class="process-math">\(x=-1\)</span> and <span class="process-math">\(x=1\text{.}\)</span> Sketch the graph and you will see a hilltop at <span class="process-math">\(x=-1\)</span> and a valley at <span class="process-math">\(x=1\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#example-critical-points-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.15.1"><a tabindex="-1" href="#example-critical-points-3" title="Copy heading and permalink for Solution 1.1.15.1" aria-label="Copy heading and permalink for Solution 1.1.15.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.20.1"><a tabindex="-1" href="#example-critical-points-3" title="Copy heading and permalink for Solution 1.1.20.1" aria-label="Copy heading and permalink for Solution 1.1.20.1">🔗</a></div>
 </div></details>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.15: Finding critical points"><a tabindex="-1" href="#example-critical-points" title="Copy heading and permalink for Example 1.1.15: Finding critical points" aria-label="Copy heading and permalink for Example 1.1.15: Finding critical points">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Example 1.1.20: We do: find the critical points"><a tabindex="-1" href="#example-critical-points" title="Copy heading and permalink for Example 1.1.20: We do: find the critical points" aria-label="Copy heading and permalink for Example 1.1.20: We do: find the critical points">🔗</a></div>
 </article></details>
 <details id="check-critical-points" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Try it yourself.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.21</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">You do: find the critical points.</span>
 </h3></summary>
 <article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-critical-points"><script type="application/json">{
 "problemHtml": "\n<div class=\"para\" id=\"check-critical-points-2-1\">Find the critical points of <span class=\"process-math\">\\(f(x) = x^3 - 12x\\text{.}\\)<\/span> Enter the smaller value first.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-critical-points-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>\n<div class=\"para\" id=\"check-critical-points-2-2\">Smaller critical point: <input type=\"number\" id=\"check-critical-points-blank1\"\/>     Larger critical point: <input type=\"number\" id=\"check-critical-points-blank2\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-critical-points-2-2\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0, "blank2": 1},
-"feedbackArray": [[{"number": [-2,-2], "feedback": "\n<div class=\"para\" id=\"check-critical-points-3-1-1-2-1\">Right — <span class=\"process-math\">\\(f'(x)=3x^2-12=0\\)<\/span> gives <span class=\"process-math\">\\(x^2=4\\text{,}\\)<\/span> and the smaller root is <span class=\"process-math\">\\(x=-2\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [2,2], "feedback": "\n<div class=\"para\" id=\"check-critical-points-3-2-1-2-1\">Right — the other solution of <span class=\"process-math\">\\(x^2=4\\)<\/span> is <span class=\"process-math\">\\(x=2\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"number": [-2,-2], "feedback": "\n<div class=\"para\" id=\"check-critical-points-3-1-1-2-1\">Right. <span class=\"process-math\">\\(f'(x)=3x^2-12=0\\)<\/span> gives <span class=\"process-math\">\\(x^2=4\\text{,}\\)<\/span> and the smaller solution is <span class=\"process-math\">\\(x=-2\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [2,2], "feedback": "\n<div class=\"para\" id=\"check-critical-points-3-2-1-2-1\">Right. The other solution of <span class=\"process-math\">\\(x^2=4\\)<\/span> is <span class=\"process-math\">\\(x=2\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.16: Try it yourself"><a tabindex="-1" href="#check-critical-points" title="Copy heading and permalink for Checkpoint 1.1.16: Try it yourself" aria-label="Copy heading and permalink for Checkpoint 1.1.16: Try it yourself">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.21: You do: find the critical points"><a tabindex="-1" href="#check-critical-points" title="Copy heading and permalink for Checkpoint 1.1.21: You do: find the critical points" aria-label="Copy heading and permalink for Checkpoint 1.1.21: You do: find the critical points">🔗</a></div>
 </article></details>
-<div class="para" id="subsec-critical-points-8">With the mechanics of differentiation and the idea of a critical point back in hand, we’re ready for Chapter <a href="ch-optimization-approximation.html" class="internal" title="Chapter 2: Optimization and Approximation">Chapter 2</a>, where "find the critical points" becomes the key step in solving real optimization problems.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<details id="exit-ticket-derivatives" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.1.22</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Exit ticket.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para logical" id="exit-ticket-derivatives-2-1">
+<div class="para">Answer in your own words. One sentence each is plenty.</div>
+<ol class="decimal" id="exit-ticket-derivatives-2-1-1">
+<li id="exit-ticket-derivatives-2-1-1-1">
+<div class="para" id="exit-ticket-derivatives-2-1-1-1-1">What is a derivative? No formulas allowed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.1"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-1" title="Copy heading and permalink for Item 1.1.22.1" aria-label="Copy heading and permalink for Item 1.1.22.1">🔗</a></div>
+</li>
+<li id="exit-ticket-derivatives-2-1-1-2">
+<div class="para" id="exit-ticket-derivatives-2-1-1-2-1">If we have the definition, why do we need the rules?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.2"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-2" title="Copy heading and permalink for Item 1.1.22.2" aria-label="Copy heading and permalink for Item 1.1.22.2">🔗</a></div>
+</li>
+<li id="exit-ticket-derivatives-2-1-1-3">
+<div class="para" id="exit-ticket-derivatives-2-1-1-3-1">Is every critical point a peak or a valley? Give an example.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.3"><a tabindex="-1" href="#exit-ticket-derivatives-2-1-1-3" title="Copy heading and permalink for Item 1.1.22.3" aria-label="Copy heading and permalink for Item 1.1.22.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions">
+<details id="exit-ticket-derivatives-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para logical" id="exit-ticket-derivatives-3-1">
+<ol class="decimal" id="exit-ticket-derivatives-3-1-1">
+<li id="exit-ticket-derivatives-3-1-1-1">
+<div class="para" id="exit-ticket-derivatives-3-1-1-1-1">One good answer: how fast something is changing at a single instant, found by shrinking an average rate of change down to one point.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.1"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-1" title="Copy heading and permalink for Item 1.1.22.1" aria-label="Copy heading and permalink for Item 1.1.22.1">🔗</a></div>
+</li>
+<li id="exit-ticket-derivatives-3-1-1-2">
+<div class="para" id="exit-ticket-derivatives-3-1-1-2-1">The definition is slow. Each rule is the definition worked out once, so we never have to redo the limit by hand.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.2"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-2" title="Copy heading and permalink for Item 1.1.22.2" aria-label="Copy heading and permalink for Item 1.1.22.2">🔗</a></div>
+</li>
+<li id="exit-ticket-derivatives-3-1-1-3">
+<div class="para" id="exit-ticket-derivatives-3-1-1-3-1">No. <span class="process-math">\(f(x) = x^3\)</span> has a critical point at <span class="process-math">\(x = 0\text{,}\)</span> but no peak or valley there.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 1.1.22.3"><a tabindex="-1" href="#exit-ticket-derivatives-3-1-1-3" title="Copy heading and permalink for Item 1.1.22.3" aria-label="Copy heading and permalink for Item 1.1.22.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#exit-ticket-derivatives-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 1.1.22.1"><a tabindex="-1" href="#exit-ticket-derivatives-3" title="Copy heading and permalink for Solution 1.1.22.1" aria-label="Copy heading and permalink for Solution 1.1.22.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 1.1.22: Exit ticket"><a tabindex="-1" href="#exit-ticket-derivatives" title="Copy heading and permalink for Checkpoint 1.1.22: Exit ticket" aria-label="Copy heading and permalink for Checkpoint 1.1.22: Exit ticket">🔗</a></div>
+</article></details>
+<article class="assemblage assemblage-like" id="subsec-critical-points-17"><h3 class="heading"><span class="title">Main idea.</span></h3>
+<div class="para" id="subsec-critical-points-17-2">Peaks and valleys can only happen where the slope is <span class="process-math">\(0\)</span> or does not exist. Those points are candidates. Deciding which candidate is the <em class="emphasis">best</em> is what optimization is about.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-17-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Main idea"><a tabindex="-1" href="#subsec-critical-points-17" title="Copy heading and permalink for Assemblage: Main idea" aria-label="Copy heading and permalink for Assemblage: Main idea">🔗</a></div>
+</article>
+<div class="para" id="subsec-critical-points-18">That is exactly where we go next, in <a href="ch-optimization-approximation.html" class="internal" title="Chapter 2: Optimization and Approximation">Chapter 2</a>. There, “find the critical points” becomes one step in solving real problems, like building the biggest possible box from a sheet of cardboard.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-critical-points-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 1.1.3: Critical points"><a tabindex="-1" href="#subsec-critical-points" title="Copy heading and permalink for Subsection 1.1.3: Critical points" aria-label="Copy heading and permalink for Subsection 1.1.3: Critical points">🔗</a></div>
 </section><div class="autopermalink" aria-hidden="true" data-description="Section 1.1: Derivative Rules and Critical Points"><a tabindex="-1" href="#sec-derivatives-refresher" title="Copy heading and permalink for Section 1.1: Derivative Rules and Critical Points" aria-label="Copy heading and permalink for Section 1.1: Derivative Rules and Critical Points">🔗</a></div>

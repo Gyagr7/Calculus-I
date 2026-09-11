@@ -6,8 +6,8 @@ var ptx_lunr_docs = [
   "url": "preface.html",
   "type": "Preface",
   "number": "",
-  "title": "Preface",
-  "body": " Preface  [TODO: a short note to students -- what this course covers, how these notes are organized (each section moves from a motivating question, to a worked problem, to the general rule or theorem), and how the notes connect to the skills you'll be assessed on this semester.]  "
+  "title": "Before You Start",
+  "body": " Before You Start  Welcome to Math 1540.  These notes go with our class. They are not meant to be read like a novel. They are meant to be worked through , with a pencil in your hand.  Every section is built the same way:  A question. Something worth caring about, in plain language.  You try something. A computation, a prediction, or a graph to play with.  Then we give it a name. The definition or rule comes after you have seen why we need it.    Along the way you will see a few kinds of boxes:  Checkpoints ask you to do something right now. Some check your answer instantly. Others have a solution you can open. Try first, then check.  We do examples are worked out step by step, with the thinking written down.  You do problems are your turn to try the same kind of problem.  Pre-assignments link to short warm-ups on Doenet. Do them before class.    Getting a checkpoint wrong costs you nothing. It is exactly how learning starts.  One last thing. If a sentence in here does not make sense, that is on the notes, not on you. Tell me, and I will fix it.  "
 },
 {
   "id": "sec-derivatives-refresher",
@@ -16,158 +16,158 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.1",
   "title": "Derivative Rules and Critical Points",
-  "body": " Derivative Rules and Critical Points    What does a derivative actually mean?  Picture yourself driving. The odometer racks up total distance, and dividing that by elapsed time gives your average speed for the whole trip — one honest number, easy to compute. The speedometer is answering a stranger question: how fast are you going right now , at this exact instant? There's no stretch of time to divide by here — time isn't passing at an instant. And yet the needle gives a real, meaningful number. Figuring out what that number even means , and how to compute it for any changing quantity — not just a car's position, but a population, a temperature, an account balance — is the entire point of a derivative.  Here's the trick that makes \"speed right now\" computable: you can't measure it directly, but you can measure average speed over a short window of time, and see what happens as that window shrinks toward nothing. Say your position after seconds is (in some units), and you want your speed exactly at . Average speed over is . Watch what happens as shrinks:   The average speeds aren't jumping around — they're homing in on . That limiting number, the one the average settles toward as the time window shrinks to a single instant, is the instantaneous speed at . Nothing mystical is happening; we're just squeezing an average over a smaller and smaller window until, in the limit, it stops being an average of two points and becomes a property of one.   Try it yourself   Push the squeeze one step further than the table above. For , what is the average speed on the interval ?  Average speed          Right on the money — and this is even closer to than the row was. Shrink further and this number keeps sliding toward .       The same squeeze has a geometric picture, and it's the one worth keeping in your head all semester. Take any curve and a point on it. Pick a second, nearby point, and draw the line through both — a secant line . Its slope is exactly the average rate of change we computed above, . Now let that second point slide back toward the first, so . The secant line swings around and settles onto the tangent line : the line that just grazes the curve at that single point, tilted at exactly the curve's own steepness there. That settling slope is the derivative.   Dragging toward turns the secant line into the tangent line.     The big idea  A derivative is nothing more than: the slope an average rate of change settles into as the interval it's averaged over shrinks to a single point. Everything in this subsection — the formula below, the rules in the next subsection, all of it — is just bookkeeping built on top of that one idea.   Writing that squeeze down symbolically, instead of re-deriving it with a table of numbers every time, gives the formal definition:   The derivative   The derivative of at , written , is provided the limit exists.    You'll hear described two ways, and both readings trace straight back to the picture above. Geometrically, it's the slope of the tangent line to at — useful whenever you care about steepness. Physically, it's an instantaneous rate of change — useful whenever you care about how fast something is happening right now. Velocity is the derivative of position; marginal cost is the derivative of total cost; the rate an epidemic spreads is the derivative of case count. Same computation, different story attached to it depending on what represents.   True or false?    tells you the average rate of change of over the interval from to .    False. is the instantaneous rate of change at the single point — there's no interval left to average over once the limit has been taken. The average rate of change over is the different number , and generally won't match at all.     Computing a derivative directly from the definition   Let . Find using , and check it against the numerical squeeze above.    Set up the difference quotient and simplify before taking the limit — plugging in too early gives the meaningless , since we need the algebra to cancel that out of the denominator first.   Now can safely go to , since it's no longer sitting in a denominator. At this gives — exactly the number our shrinking-window table was homing in on. The definition isn't just abstract machinery; it's the same squeeze, done symbolically instead of numerically, for every at once.    That algebra worked fine for , but imagine repeating it for , or . The definition is the truth of what a derivative is — you should always be able to fall back on it — but it's a slow way to compute one. The rules below exist purely so you never have to run that limit by hand again; every single one of them is just this same limit, worked out once and in general, for a whole family of functions at a time.    The differentiation toolkit  Rather than list these as symbols to memorize, here's the intuition behind each one — the picture that makes the formula feel inevitable rather than arbitrary. A clean reference table for all of them sits at the end of this subsection once the ideas are back in place.  Three of the rules are close to obvious once you see them stated. A constant function never changes, so its rate of change is . Scaling a function by a constant factor scales its rate of change by that same factor — if you triple every output, you triple how fast it's changing too. And if two quantities change independently and you add them together (two separate savings accounts, each earning its own interest), the combined total changes at the combined rate — you just add the two rates.   The Power Rule takes a little more picturing. Think of as copies of multiplied together. Nudge up by a tiny amount, and each of those copies gets nudged — each contributing its own small sliver to the product. With nudges each worth roughly stacking up, the total rate of change comes out to times :   (That picture is easiest to see for a whole number , but the formula itself holds for any real exponent — negative, fractional, whatever you throw at it.)   Quick check: Power Rule   Which of these is ?      Careful with the exponent step: the Power Rule drops the exponent by , so becomes , not .     Right — bring the down as a coefficient, then drop the exponent by one: becomes .     The exponent change is right, but the sign of the coefficient should carry over from the original .     That mixes up two different rules. The Power Rule just brings the exponent down as a coefficient and lowers it by — nothing gets multiplied twice.      Two more Power Rule reflexes   Use the Power Rule to differentiate, then evaluate at the given point.  If , then    If , then         Yes — , and .       Yes — rewrite as first, so , and .      The Product Rule has a nice picture too. Imagine a rectangle whose width is and whose height is , so its area is . Nudge slightly, and both sides grow a little. The extra area shows up as two thin strips — one along the top from the width growing (worth ) and one along the side from the height growing (worth ) — plus a tiny corner sliver so small it vanishes in the limit. Add the two strips and you have the whole rule: differentiate one factor at a time, holding the other one fixed, and add the results.  The Quotient Rule isn't really a separate idea — it's the Product Rule wearing a disguise. Write as and apply the Product Rule (plus the Chain Rule, below, to differentiate ), and the familiar formula falls out on its own — which is also why the minus sign and the in the denominator show up right where they do.  The Chain Rule is usually the rustiest one, and it's the one we'll lean on hardest all semester — substitution, our main integration technique in Chapter , is really the Chain Rule run backwards. Picture two gears meshed together: turn the first one, and it turns the second at a rate scaled by the gear ratio between them. A composed function works the same way — an \"outer\" function wrapped around an \"inner\" function . Nudging nudges at rate , and that nudge to in turn nudges at rate (evaluated at , not at ). The two rates multiply, gear-ratio style:   Alongside these rules for combining functions, you'll need the rates of a handful of specific functions on recall. Two are worth a quick word rather than bare memorization. is the unique function that is its own rate of change — at every instant it's already growing exactly as fast as its current size demands, the way an account under continuous compounding grows faster the bigger it gets. And differentiating a wave produces another wave, a quarter-cycle out of step: the slope of traces out , whose own slope traces out , and so on around.   Standard derivatives       Product Rule and Chain Rule together   Differentiate .    This is a product of two functions, and , so start with the Product Rule. The second factor needs the Chain Rule on its own: the \"outside\" function is and the \"inside\" function is , whose derivative is .      Quotient Rule   Differentiate .       For quick reference once the intuition above has done its job:   Basic differentiation rules, all in one place   For differentiable functions and , and a constant :       Critical points  One more piece of vocabulary, and it follows straight from the tangent-line picture. Imagine hiking along the graph of like a trail. At most points the ground under your feet is tilted — you're climbing or descending. But right at the top of a hill, or the bottom of a valley, the ground goes momentarily flat: for that one instant, slope zero, before it tips the other way. That flatness is exactly , and it's worth naming.   Drag the hiker along the trail and watch the slope underfoot hit at the hilltop and the valley bottom.     Critical point   A critical point of is a value in the domain of where either (flat ground) or does not exist (a sharp corner or break, where \"the slope\" isn't even well-defined).    Critical points are exactly the candidates for a hilltop or valley bottom — not every flat spot turns out to be one (a trail can flatten briefly and keep climbing, like a switchback), but every genuine peak or valley in the interior of the trail has to be a critical point first. That's the entire engine behind optimization, which is where we're headed next: find the flat spots, then work out which ones are actually the top or bottom.   Finding critical points   Find the critical points of .     is a polynomial, so is defined everywhere; the only critical points come from .   So has critical points at and . (Sketch if you want to see why: it has a local max at and a local min at , exactly the two flat spots on that curve's trail.)     Try it yourself   Find the critical points of . Enter the smaller value first.  Smaller critical point:     Larger critical point:        Right — gives , and the smaller root is .       Right — the other solution of is .      With the mechanics of differentiation and the idea of a critical point back in hand, we're ready for Chapter , where \"find the critical points\" becomes the key step in solving real optimization problems.   "
+  "body": " Derivative Rules and Critical Points    What does a derivative actually mean?   Today's Question  Your speedometer says mph. But at a single instant, no time passes. So what is that measuring?   Here is why that is strange. Speed is distance divided by time. At one instant, the time is zero. And you cannot divide by zero.  Yet the needle points at a real number. Where does it come from?   Start with something you can compute  You can compute an average speed. Pick a start time and an end time, then divide:   Say your position after seconds is meters. We want your speed at exactly .  Here is the first average, done for you. From to :   A one-second window is pretty wide, though. Let's shrink it. Your turn.    Shrink the window   Find the average speed of on each window.  From to : m\/s  From to : m\/s        Yes. , so the average is .         Yes. , so the average is .       See a pattern yet? Push it one more step.   One more squeeze   From to , the average speed is m\/s.        Right. Even closer to than last time.        What do you notice?   Line up your averages, from the widest window to the narrowest. What is happening to them? Decide before you open the solution.    They go , , , . Each one is closer to . They are not jumping around. They are settling down.     What just happened  As the window shrinks, the average speed settles on one number: m\/s. That number is your speed at the instant .  Notice what we did not do. We never divided by zero. We just watched where the averages were headed.    Now see it on a graph  The same squeeze has a picture. It is the picture to keep in your head all semester.  Pick a point on a curve. Pick a second point nearby. Draw the line through them. That is a secant line . Its slope is an average rate of change, just like the averages you computed.  Now slide toward . Before you touch the graph, predict: what will happen to the line? What will happen to its slope?    Dragging toward turns the secant line into the tangent line.    The secant line swings around and settles onto one line: the line that just touches the curve at . That is the tangent line .  And its slope? . The same number you found with the table. That is not a coincidence. The table and the picture are the same squeeze.   Now give the idea a name  Twice now, we did the same thing: shrink a window, and watch an average rate of change settle down. That settling number has a name.    The big idea  A derivative is the number an average rate of change settles on as the window shrinks to a single point.  Everything else in this chapter is bookkeeping on top of that one idea.   Here is the same idea, written in symbols.   The derivative   The derivative of at , written , is provided the limit exists.    Check that it matches what you did. The fraction is an average rate of change over a window of width . The part just says: shrink the window.   Two ways to read   On a graph,  is the slope of the tangent line . Use this reading when you care about steepness.   In the world,  is an instantaneous rate of change . Use this reading when you care about how fast something is happening right now.  Velocity is the derivative of position. If is the concentration of a drug in the bloodstream, then tells you how fast that level is rising or falling right now. Same computation. Different story.    True or false?    tells you the average rate of change of over the interval from to .    False. is the rate at the single point . Once the limit is taken, there is no window left to average over. The average over is a different number, , and it usually does not match .     We do: the definition, by hand   Let . Use to find . Then check: does match the we found twice already?    First, a trap. If we plug in right away, we get . That tells us nothing. So we simplify first and take the limit last .   Once the in the denominator cancels, letting is safe.  So , and . Same number, third time.    That worked nicely for . Now imagine doing it for . Or for .  No thanks.  That is why we have rules. Each rule is this same limit, worked out once, for a whole family of functions.   Keep these two apart  The definition tells you what a derivative is .  The rules tell you how to compute one fast.     The differentiation toolkit  You already know these rules. Here is a better question: do you know why they work?  If you know why, you will not mix them up. So for each rule, we start with a guess or a picture. The formula comes second.   Three rules you could guess  Try these before you open the solution. No formulas needed.    Predict first     The function never changes. How fast is it changing?  You triple every output of a function. What happens to how fast it changes?  You have two savings accounts, each growing on its own. How fast does the total grow?        Not at all. Its rate of change is .  It triples too. Three times the output means three times the change.  Add the two rates. The total grows at the combined rate.      If you got those, you already know three rules. Here they are in symbols.    The Power Rule, as a picture  Think of as three copies of multiplied together: .  Now nudge up a tiny bit. Each of the three copies gets nudged. Each nudge adds about worth of change (the other two copies, multiplied).  Three copies. Three nudges. Total rate of change: .  With copies, you get nudges, each worth about :    The picture works for whole numbers . The rule works for any exponent: negative, fractional, anything. Let's put that to the test.   Error analysis: who is right?   Four students differentiated . Which answer is correct?     Student A:  Student A lowered the exponent in the wrong direction. Subtract : , not .    Student B:  Right. Bring the down in front. Then lower the exponent by one: becomes .    Student C:  Student C got the exponent right but lost the minus sign. The number in front is the old exponent, .    Student D:  Student D mixed two rules together. The Power Rule brings the exponent down once and lowers it by . Nothing gets multiplied twice.      You do: two quick ones   Differentiate first. Then plug in the point.  If , then    If , then         Yes. , and .       Yes. The trick is to rewrite as first. Then , and .       The Product Rule, as a picture  Picture a rectangle. Its width is and its height is . So its area is .  Now nudge . Both sides grow a little. Where does the new area show up?  In two thin strips. One strip comes from the width growing: about . The other comes from the height growing: about . There is also a tiny corner piece, but it is so small that it disappears in the limit.  Add the two strips, and that is the whole rule:    In words: differentiate one factor at a time, hold the other one fixed, and add.   The Quotient Rule is not really new  It is the Product Rule in disguise. Write as . Apply the Product Rule, plus the Chain Rule for , and the familiar formula falls out. That is also why the minus sign and the show up where they do.    The Chain Rule: rates multiply  This is usually the rustiest rule. It is also the one we lean on hardest this semester. Substitution, our main integration technique in , is the Chain Rule run backward.  So let's rebuild it from something simple: gears.    Gears   Three gears are linked in a row: , , . Gear turns times as fast as gear . Gear turns times as fast as gear .  Gear turns how many times as fast as gear ?        Yes. . Rates along a chain multiply.      A composition works exactly like those gears.  Nudge , and the inner function changes at rate . That change makes the outer function change at rate , measured at . Two rates in a chain. So multiply:    Watch out  Two places people slip: forgetting the at the end, and plugging into instead of .    A few derivatives to know by heart  Two of these deserve a picture instead of memorizing.   is its own rate of change. The bigger it gets, the faster it grows, like money under continuous compounding.  Differentiating a wave gives back a wave, shifted by a quarter-cycle. The slope of traces out . The slope of traces out .    Standard derivatives       We do: Product Rule and Chain Rule together   Differentiate .     What kind of function is this? A product: times . So the Product Rule goes first.   Does either piece need another rule? Yes. is a composition. The outer function is . The inner function is , with derivative . So .   Now put it together.    Both terms had an in them, so we factored it out.     You do: Quotient Rule   Differentiate . Work it out on paper before you open the solution.       Here is the whole toolkit on one card. Use it as a reference. When you forget a rule, go back to its picture.   The differentiation toolkit, all in one place   For differentiable functions and , and a constant :      Main idea  Every rule is the definition of the derivative, worked out once for a whole family of functions. Remember the picture, and you can rebuild the rule.     Critical points   Question  You are hiking a trail shaped like the graph of . You reach the very top of a hill. What is the ground like under your feet?   Most of the time, the ground is tilted. You are climbing, or you are heading down. Walk the trail below. Watch the slope at the hilltop and at the bottom of the valley.   Drag the hiker along the trail and watch the slope underfoot hit at the hilltop and the valley bottom.    At the top of the hill, the ground is flat. For one instant, the slope is . Then it tips the other way. The bottom of a valley works the same way.  In symbols, a flat spot at means .   One more case: sharp corners  Some peaks are not smooth. Picture the graph of . Its top, at , is a sharp point. What is the slope right there?  There isn't one. Just left of , the slope is . Just right of , it is . So does not exist. But it is still a peak, so we want to count it too.   Now give both cases one name.   Critical point   A critical point of is a value in the domain of where either (flat ground) or does not exist (a sharp corner or a break).    (Your textbook calls these critical numbers . Same idea.)  So every hilltop and valley bottom along the trail (not at its very ends) is a critical point. Does it work the other way? Is every critical point a hilltop or a valley? Decide before you check.   True or false?   If , then has a local maximum or a local minimum at .    False. Try . Its derivative is , so and the ground is flat at . But the graph keeps climbing on both sides. No peak, no valley. Think of a trail that levels off for one step, then keeps going up.     Remember  A critical point is a candidate , not automatically an answer.    We do: find the critical points   Find the critical points of .     Is there anywhere fails to exist? No. is a polynomial, so it has no corners or breaks. That leaves only the flat spots.   Where is the ground flat? Set :   So the critical points are and . Sketch the graph and you will see a hilltop at and a valley at .     You do: find the critical points   Find the critical points of . Enter the smaller value first.  Smaller critical point:     Larger critical point:        Right. gives , and the smaller solution is .       Right. The other solution of is .       Exit ticket   Answer in your own words. One sentence each is plenty.  What is a derivative? No formulas allowed.  If we have the definition, why do we need the rules?  Is every critical point a peak or a valley? Give an example.        One good answer: how fast something is changing at a single instant, found by shrinking an average rate of change down to one point.  The definition is slow. Each rule is the definition worked out once, so we never have to redo the limit by hand.  No. has a critical point at , but no peak or valley there.       Main idea  Peaks and valleys can only happen where the slope is or does not exist. Those points are candidates. Deciding which candidate is the best is what optimization is about.   That is exactly where we go next, in . There, find the critical points becomes one step in solving real problems, like building the biggest possible box from a sheet of cardboard.   "
 },
 {
-  "id": "subsec-what-is-a-derivative-2",
+  "id": "check-shrink-window",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-2",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "average speed "
+  "url": "sec-derivatives-refresher.html#check-shrink-window",
+  "type": "Checkpoint",
+  "number": "1.1.1",
+  "title": "Shrink the window.",
+  "body": " Shrink the window   Find the average speed of on each window.  From to : m\/s  From to : m\/s        Yes. , so the average is .         Yes. , so the average is .      "
 },
 {
   "id": "check-numeric-squeeze",
   "level": "2",
   "url": "sec-derivatives-refresher.html#check-numeric-squeeze",
   "type": "Checkpoint",
-  "number": "1.1.1",
-  "title": "Try it yourself.",
-  "body": " Try it yourself   Push the squeeze one step further than the table above. For , what is the average speed on the interval ?  Average speed          Right on the money — and this is even closer to than the row was. Shrink further and this number keeps sliding toward .      "
+  "number": "1.1.2",
+  "title": "One more squeeze.",
+  "body": " One more squeeze   From to , the average speed is m\/s.        Right. Even closer to than last time.      "
 },
 {
-  "id": "subsec-what-is-a-derivative-7",
+  "id": "notice-averages-settle",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-7",
+  "url": "sec-derivatives-refresher.html#notice-averages-settle",
+  "type": "Checkpoint",
+  "number": "1.1.3",
+  "title": "What do you notice?",
+  "body": " What do you notice?   Line up your averages, from the widest window to the narrowest. What is happening to them? Decide before you open the solution.    They go , , , . Each one is closer to . They are not jumping around. They are settling down.   "
+},
+{
+  "id": "subsec-what-is-a-derivative-11-3",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-11-3",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "secant line tangent line "
+  "body": "secant line "
 },
 {
   "id": "fig-secant-to-tangent",
   "level": "2",
   "url": "sec-derivatives-refresher.html#fig-secant-to-tangent",
   "type": "Figure",
-  "number": "1.1.2",
+  "number": "1.1.4",
   "title": "",
   "body": " Dragging toward turns the secant line into the tangent line.   "
 },
 {
-  "id": "subsec-what-is-a-derivative-9",
+  "id": "subsec-what-is-a-derivative-13",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-9",
+  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-13",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "tangent line "
+},
+{
+  "id": "subsec-what-is-a-derivative-16",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-16",
   "type": "Insight",
-  "number": "1.1.3",
+  "number": "1.1.5",
   "title": "The big idea.",
-  "body": " The big idea  A derivative is nothing more than: the slope an average rate of change settles into as the interval it's averaged over shrinks to a single point. Everything in this subsection — the formula below, the rules in the next subsection, all of it — is just bookkeeping built on top of that one idea.  "
+  "body": " The big idea  A derivative is the number an average rate of change settles on as the window shrinks to a single point.  Everything else in this chapter is bookkeeping on top of that one idea.  "
 },
 {
   "id": "def-derivative",
   "level": "2",
   "url": "sec-derivatives-refresher.html#def-derivative",
   "type": "Definition",
-  "number": "1.1.4",
+  "number": "1.1.6",
   "title": "The derivative.",
   "body": " The derivative   The derivative of at , written , is provided the limit exists.   "
 },
 {
-  "id": "subsec-what-is-a-derivative-12",
+  "id": "subsec-what-is-a-derivative-20-2",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-12",
+  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-20-2",
   "type": "Paragraph (with a defined term)",
   "number": "",
   "title": "",
-  "body": "slope of the tangent line instantaneous rate of change "
+  "body": "slope of the tangent line "
+},
+{
+  "id": "subsec-what-is-a-derivative-20-3",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#subsec-what-is-a-derivative-20-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "instantaneous rate of change "
 },
 {
   "id": "check-derivative-meaning",
   "level": "2",
   "url": "sec-derivatives-refresher.html#check-derivative-meaning",
   "type": "Checkpoint",
-  "number": "1.1.5",
+  "number": "1.1.7",
   "title": "True or false?",
-  "body": " True or false?    tells you the average rate of change of over the interval from to .    False. is the instantaneous rate of change at the single point — there's no interval left to average over once the limit has been taken. The average rate of change over is the different number , and generally won't match at all.   "
+  "body": " True or false?    tells you the average rate of change of over the interval from to .    False. is the rate at the single point . Once the limit is taken, there is no window left to average over. The average over is a different number, , and it usually does not match .   "
 },
 {
   "id": "example-derivative-from-definition",
   "level": "2",
   "url": "sec-derivatives-refresher.html#example-derivative-from-definition",
   "type": "Example",
-  "number": "1.1.6",
-  "title": "Computing a derivative directly from the definition.",
-  "body": " Computing a derivative directly from the definition   Let . Find using , and check it against the numerical squeeze above.    Set up the difference quotient and simplify before taking the limit — plugging in too early gives the meaningless , since we need the algebra to cancel that out of the denominator first.   Now can safely go to , since it's no longer sitting in a denominator. At this gives — exactly the number our shrinking-window table was homing in on. The definition isn't just abstract machinery; it's the same squeeze, done symbolically instead of numerically, for every at once.   "
+  "number": "1.1.8",
+  "title": "We do: the definition, by hand.",
+  "body": " We do: the definition, by hand   Let . Use to find . Then check: does match the we found twice already?    First, a trap. If we plug in right away, we get . That tells us nothing. So we simplify first and take the limit last .   Once the in the denominator cancels, letting is safe.  So , and . Same number, third time.   "
 },
 {
-  "id": "subsec-differentiation-rules-3",
+  "id": "predict-first-three-rules",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-differentiation-rules-3",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "constant "
-},
-{
-  "id": "subsec-differentiation-rules-5",
-  "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-differentiation-rules-5",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "Power Rule "
+  "url": "sec-derivatives-refresher.html#predict-first-three-rules",
+  "type": "Checkpoint",
+  "number": "1.1.9",
+  "title": "Predict first.",
+  "body": " Predict first     The function never changes. How fast is it changing?  You triple every output of a function. What happens to how fast it changes?  You have two savings accounts, each growing on its own. How fast does the total grow?        Not at all. Its rate of change is .  It triples too. Three times the output means three times the change.  Add the two rates. The total grows at the combined rate.     "
 },
 {
   "id": "check-power-rule-negative",
   "level": "2",
   "url": "sec-derivatives-refresher.html#check-power-rule-negative",
   "type": "Checkpoint",
-  "number": "1.1.7",
-  "title": "Quick check: Power Rule.",
-  "body": " Quick check: Power Rule   Which of these is ?      Careful with the exponent step: the Power Rule drops the exponent by , so becomes , not .     Right — bring the down as a coefficient, then drop the exponent by one: becomes .     The exponent change is right, but the sign of the coefficient should carry over from the original .     That mixes up two different rules. The Power Rule just brings the exponent down as a coefficient and lowers it by — nothing gets multiplied twice.    "
+  "number": "1.1.10",
+  "title": "Error analysis: who is right?",
+  "body": " Error analysis: who is right?   Four students differentiated . Which answer is correct?     Student A:  Student A lowered the exponent in the wrong direction. Subtract : , not .    Student B:  Right. Bring the down in front. Then lower the exponent by one: becomes .    Student C:  Student C got the exponent right but lost the minus sign. The number in front is the old exponent, .    Student D:  Student D mixed two rules together. The Power Rule brings the exponent down once and lowers it by . Nothing gets multiplied twice.    "
 },
 {
   "id": "check-power-rule-more",
   "level": "2",
   "url": "sec-derivatives-refresher.html#check-power-rule-more",
   "type": "Checkpoint",
-  "number": "1.1.8",
-  "title": "Two more Power Rule reflexes.",
-  "body": " Two more Power Rule reflexes   Use the Power Rule to differentiate, then evaluate at the given point.  If , then    If , then         Yes — , and .       Yes — rewrite as first, so , and .     "
+  "number": "1.1.11",
+  "title": "You do: two quick ones.",
+  "body": " You do: two quick ones   Differentiate first. Then plug in the point.  If , then    If , then         Yes. , and .       Yes. The trick is to rewrite as first. Then , and .     "
 },
 {
-  "id": "subsec-differentiation-rules-10",
+  "id": "check-chain-gears",
   "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-differentiation-rules-10",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "Product Rule "
-},
-{
-  "id": "subsec-differentiation-rules-11",
-  "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-differentiation-rules-11",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "Quotient Rule "
-},
-{
-  "id": "subsec-differentiation-rules-12",
-  "level": "2",
-  "url": "sec-derivatives-refresher.html#subsec-differentiation-rules-12",
-  "type": "Paragraph (with a defined term)",
-  "number": "",
-  "title": "",
-  "body": "Chain Rule "
+  "url": "sec-derivatives-refresher.html#check-chain-gears",
+  "type": "Checkpoint",
+  "number": "1.1.12",
+  "title": "Gears.",
+  "body": " Gears   Three gears are linked in a row: , , . Gear turns times as fast as gear . Gear turns times as fast as gear .  Gear turns how many times as fast as gear ?        Yes. . Rates along a chain multiply.     "
 },
 {
   "id": "fact-standard-derivatives",
   "level": "2",
   "url": "sec-derivatives-refresher.html#fact-standard-derivatives",
   "type": "Fact",
-  "number": "1.1.9",
+  "number": "1.1.13",
   "title": "Standard derivatives.",
   "body": " Standard derivatives     "
 },
@@ -176,34 +176,34 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-derivatives-refresher.html#example-product-chain",
   "type": "Example",
-  "number": "1.1.10",
-  "title": "Product Rule and Chain Rule together.",
-  "body": " Product Rule and Chain Rule together   Differentiate .    This is a product of two functions, and , so start with the Product Rule. The second factor needs the Chain Rule on its own: the \"outside\" function is and the \"inside\" function is , whose derivative is .    "
+  "number": "1.1.14",
+  "title": "We do: Product Rule and Chain Rule together.",
+  "body": " We do: Product Rule and Chain Rule together   Differentiate .     What kind of function is this? A product: times . So the Product Rule goes first.   Does either piece need another rule? Yes. is a composition. The outer function is . The inner function is , with derivative . So .   Now put it together.    Both terms had an in them, so we factored it out.   "
 },
 {
   "id": "example-quotient",
   "level": "2",
   "url": "sec-derivatives-refresher.html#example-quotient",
-  "type": "Example",
-  "number": "1.1.11",
-  "title": "Quotient Rule.",
-  "body": " Quotient Rule   Differentiate .      "
+  "type": "Checkpoint",
+  "number": "1.1.15",
+  "title": "You do: Quotient Rule.",
+  "body": " You do: Quotient Rule   Differentiate . Work it out on paper before you open the solution.      "
 },
 {
   "id": "fact-basic-rules",
   "level": "2",
   "url": "sec-derivatives-refresher.html#fact-basic-rules",
   "type": "Fact",
-  "number": "1.1.12",
-  "title": "Basic differentiation rules, all in one place.",
-  "body": " Basic differentiation rules, all in one place   For differentiable functions and , and a constant :    "
+  "number": "1.1.16",
+  "title": "The differentiation toolkit, all in one place.",
+  "body": " The differentiation toolkit, all in one place   For differentiable functions and , and a constant :    "
 },
 {
   "id": "fig-hiking-trail",
   "level": "2",
   "url": "sec-derivatives-refresher.html#fig-hiking-trail",
   "type": "Figure",
-  "number": "1.1.13",
+  "number": "1.1.17",
   "title": "",
   "body": " Drag the hiker along the trail and watch the slope underfoot hit at the hilltop and the valley bottom.   "
 },
@@ -212,27 +212,54 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "sec-derivatives-refresher.html#def-critical-point",
   "type": "Definition",
-  "number": "1.1.14",
+  "number": "1.1.18",
   "title": "Critical point.",
-  "body": " Critical point   A critical point of is a value in the domain of where either (flat ground) or does not exist (a sharp corner or break, where \"the slope\" isn't even well-defined).   "
+  "body": " Critical point   A critical point of is a value in the domain of where either (flat ground) or does not exist (a sharp corner or a break).   "
+},
+{
+  "id": "subsec-critical-points-10",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#subsec-critical-points-10",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "critical numbers "
+},
+{
+  "id": "check-flat-not-peak",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#check-flat-not-peak",
+  "type": "Checkpoint",
+  "number": "1.1.19",
+  "title": "True or false?",
+  "body": " True or false?   If , then has a local maximum or a local minimum at .    False. Try . Its derivative is , so and the ground is flat at . But the graph keeps climbing on both sides. No peak, no valley. Think of a trail that levels off for one step, then keeps going up.   "
 },
 {
   "id": "example-critical-points",
   "level": "2",
   "url": "sec-derivatives-refresher.html#example-critical-points",
   "type": "Example",
-  "number": "1.1.15",
-  "title": "Finding critical points.",
-  "body": " Finding critical points   Find the critical points of .     is a polynomial, so is defined everywhere; the only critical points come from .   So has critical points at and . (Sketch if you want to see why: it has a local max at and a local min at , exactly the two flat spots on that curve's trail.)   "
+  "number": "1.1.20",
+  "title": "We do: find the critical points.",
+  "body": " We do: find the critical points   Find the critical points of .     Is there anywhere fails to exist? No. is a polynomial, so it has no corners or breaks. That leaves only the flat spots.   Where is the ground flat? Set :   So the critical points are and . Sketch the graph and you will see a hilltop at and a valley at .   "
 },
 {
   "id": "check-critical-points",
   "level": "2",
   "url": "sec-derivatives-refresher.html#check-critical-points",
   "type": "Checkpoint",
-  "number": "1.1.16",
-  "title": "Try it yourself.",
-  "body": " Try it yourself   Find the critical points of . Enter the smaller value first.  Smaller critical point:     Larger critical point:        Right — gives , and the smaller root is .       Right — the other solution of is .     "
+  "number": "1.1.21",
+  "title": "You do: find the critical points.",
+  "body": " You do: find the critical points   Find the critical points of . Enter the smaller value first.  Smaller critical point:     Larger critical point:        Right. gives , and the smaller solution is .       Right. The other solution of is .     "
+},
+{
+  "id": "exit-ticket-derivatives",
+  "level": "2",
+  "url": "sec-derivatives-refresher.html#exit-ticket-derivatives",
+  "type": "Checkpoint",
+  "number": "1.1.22",
+  "title": "Exit ticket.",
+  "body": " Exit ticket   Answer in your own words. One sentence each is plenty.  What is a derivative? No formulas allowed.  If we have the definition, why do we need the rules?  Is every critical point a peak or a valley? Give an example.        One good answer: how fast something is changing at a single instant, found by shrinking an average rate of change down to one point.  The definition is slow. Each rule is the definition worked out once, so we never have to redo the limit by hand.  No. has a critical point at , but no peak or valley there.     "
 },
 {
   "id": "sec-pre-assignment-optimization",
@@ -241,7 +268,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.1",
   "title": "Pre-Assignment: Before Tuesday’s Class",
-  "body": " Pre-Assignment: Before Tuesday's Class  Complete the short warm-up below before we meet Tuesday. It connects the critical-point skill from to the idea of optimization, and takes about 10 minutes.   Open the pre-assignment and sign in (your own Doenet account, or create a free one) before you start, so your work is recorded for completion credit. It opens in a new tab.  "
+  "body": " Pre-Assignment: Before Tuesday's Class  Pancake the alpaca keeps breaking out of her pen. You have meters of fencing. How do you build her the biggest pen possible?  That is your warm-up before Tuesday. It takes about 10 minutes, and it counts for completion, so a wrong answer is completely fine.  Here is the twist: you already own the tool that solves it. You built it in .   Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab.  "
 },
 {
   "id": "sec-4-7-optimization",
@@ -268,7 +295,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.4",
   "title": "Pre-Assignment: Before Thursday’s Class",
-  "body": " Pre-Assignment: Before Thursday's Class  Complete the short warm-up below before we meet Thursday. It runs the differentiation rules from in reverse, and takes about 10 minutes.   Open the pre-assignment and sign in (your own Doenet account, or create a free one) before you start, so your work is recorded for completion credit. It opens in a new tab.  "
+  "body": " Pre-Assignment: Before Thursday's Class  So far, you have always gone one direction: from a function to its derivative.  Can you go backward? If you know how fast Pancake is running, can you figure out how far Pancake has gone?  That is your warm-up before Thursday. It takes about 10 minutes, and it counts for completion, so a wrong answer is completely fine. Keep the differentiation toolkit ( ) handy. You will be running it in reverse.   Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab.  "
 },
 {
   "id": "sec-4-9-antiderivatives",
