@@ -39,6 +39,7 @@
 <p>Pancake's position: <slider name="x" from="0" to="4" step="0.5" initialValue="2" /></p>
 
 <graph xmin="-0.5" xmax="4.5" ymin="-0.5" ymax="9">
+  <description>A graph of the line y equals 2x, with a shaded triangle showing the painted area from x equals 0 up to the slider position, and a point marking Pancake's current position on the x-axis.</description>
   <function>2x</function>
   <polygon vertices="(0,0) ($x,0) ($x,2$x)" />
   <point>($x, 0)</point>
