@@ -58,15 +58,15 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.2.12';
+eBookConfig.runestone_version = '8.2.13';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.e3f9706509fcf6f7.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.c5ba0ffa5f963084.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
-<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.561f7165d9bf3626.css">
+<script src="_static/prefix-runtime.a45d14e8fc8c534a.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.538acb8e671a3b5d.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.1bda041f5a098305.css">
 <script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
 </head>
@@ -216,8 +216,33 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="ch-integrals.html" class="internal"><span class="codenumber">4</span> <span class="title">Integrals</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-ch-integrals">
 <li class="toc-item toc-introduction"><div class="toc-title-box"><a href="ch-integrals-2.html" class="internal"><span class="title">Introduction</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Areas and Distances</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html" class="internal"><span class="codenumber">4.2</span> <span class="title">The Definite Integral</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-5-1-areas-distances.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Areas and Distances</span></a></div>
+<ul id="ptx-toc-group-sec-5-1-areas-distances" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-constant-velocity" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Start with constant velocity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-changing-velocity" class="internal"><span class="codenumber">4.1.2</span> <span class="title">But our car does not move at a constant velocity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-riemann-sums" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Add the small changes together</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-area-problem" class="internal"><span class="codenumber">4.1.4</span> <span class="title">The same idea, without any velocity at all</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-general-recipe" class="internal"><span class="codenumber">4.1.5</span> <span class="title">The general rectangle recipe</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-table-examples" class="internal"><span class="codenumber">4.1.6</span> <span class="title">When all we have is a table</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-1-areas-distances.html#subsec-5-1-practice" class="internal"><span class="codenumber">4.1.7</span> <span class="title">Putting it together</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sec-5-2-definite-integral.html" class="internal"><span class="codenumber">4.2</span> <span class="title">The Definite Integral</span></a></div>
+<ul class="structural toc-item-list active" id="ptx-toc-group-sec-5-2-definite-integral">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-from-approx-to-exact" class="internal"><span class="codenumber">4.2.1</span> <span class="title">From approximation to exact</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-notation" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Give the process a name</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-anatomy" class="internal"><span class="codenumber">4.2.3</span> <span class="title">Anatomy of a definite integral</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-is-a-number" class="internal"><span class="codenumber">4.2.4</span> <span class="title">Important: a definite integral is a number</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-geometry" class="internal"><span class="codenumber">4.2.5</span> <span class="title">Evaluate a definite integral using geometry</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-signed-area" class="internal"><span class="codenumber">4.2.6</span> <span class="title">What if the graph goes below the axis?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-velocity" class="internal"><span class="codenumber">4.2.7</span> <span class="title">Return to velocity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-properties" class="internal"><span class="codenumber">4.2.8</span> <span class="title">Basic properties from common sense</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-units" class="internal"><span class="codenumber">4.2.9</span> <span class="title">Interpret before you calculate</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-5-2-definite-integral.html#subsec-5-2-practice" class="internal"><span class="codenumber">4.2.10</span> <span class="title">Putting it together</span></a></div></li>
+</ul>
+</li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-5-3-ftc.html" class="internal"><span class="codenumber">4.3</span> <span class="title">The Fundamental Theorem of Calculus</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-5-4-indefinite-net-change.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Indefinite Integrals and the Net Change Theorem</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-5-5-substitution.html" class="internal"><span class="codenumber">4.5</span> <span class="title">The Substitution Rule</span></a></div></li>
@@ -250,13 +275,541 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Definite Integral</span>
 </h1>
-<div class="para" id="sec-5-2-definite-integral-2">[Motivation -- TODO: the question or problem that makes this worth learning]<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#sec-5-2-definite-integral-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="introduction" id="sec-5-2-definite-integral-2">
+<article class="assemblage assemblage-like" id="assemblage-question-definite-integral"><h2 class="heading"><span class="title">Today’s Question.</span></h2>
+<div class="para" id="assemblage-question-definite-integral-2">How do we describe the <em class="emphasis">exact</em> accumulation we get once our rectangles become infinitely thin?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#assemblage-question-definite-integral-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sec-5-2-definite-integral-3">[Problem -- TODO: a guiding worked example]<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#sec-5-2-definite-integral-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Today’s Question"><a tabindex="-1" href="#assemblage-question-definite-integral" title="Copy heading and permalink for Assemblage: Today’s Question" aria-label="Copy heading and permalink for Assemblage: Today’s Question">🔗</a></div>
+</article>
+<div class="para" id="sec-5-2-definite-integral-2-2">Last class we trapped the true change in our car’s position between <span class="process-math">\(L_4 = 5.25\)</span> and <span class="process-math">\(R_4 = 11.25\text{,}\)</span> and watched <span class="process-math">\(L_n\)</span> and <span class="process-math">\(R_n\)</span> squeeze in on <span class="process-math">\(8\)</span> as <span class="process-math">\(n\)</span> grew. Today we make that squeezing exact, and give it a name.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#sec-5-2-definite-integral-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section>
+<section class="subsection" id="subsec-5-2-from-approx-to-exact">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">From approximation to exact</span>
+</h2>
+<div class="para logical" id="subsec-5-2-from-approx-to-exact-2">
+<div class="para">Recall the general recipe from <a href="sec-5-1-areas-distances.html" class="internal" title="Section 4.1: Areas and Distances">Section 4.1</a>. For <span class="process-math">\(f\)</span> positive on <span class="process-math">\([a, b]\text{,}\)</span> split into <span class="process-math">\(n\)</span> equal pieces of width <span class="process-math">\(\Delta x = \frac{b-a}{n}\text{,}\)</span> pick a point <span class="process-math">\(x_i^*\)</span> in each piece, and add up the rectangles:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-5-1-areas-distances.html" id="subsec-5-2-from-approx-to-exact-2-7">
+\begin{equation*}
+\sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+\end{equation*}
 </div>
-<div class="para" id="sec-5-2-definite-integral-4">[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#sec-5-2-definite-integral-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para">With a small <span class="process-math">\(n\text{,}\)</span> this is only an approximation. But as <span class="process-math">\(n \to \infty\text{,}\)</span> the rectangles get thinner and thinner, so <span class="process-math">\(\Delta x \to 0\text{.}\)</span> We <em class="emphasis">define</em> the exact accumulated value to be the limit of these sums:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/sec-5-1-areas-distances.html" id="subsec-5-2-from-approx-to-exact-2-12">
+\begin{equation*}
+\lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+\end{equation*}
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Section 4.2: The Definite Integral"><a tabindex="-1" href="#sec-5-2-definite-integral" title="Copy heading and permalink for Section 4.2: The Definite Integral" aria-label="Copy heading and permalink for Section 4.2: The Definite Integral">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-from-approx-to-exact-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-5-2-from-approx-to-exact-3">That expression is completely correct. It is also long to write every single time. Mathematicians gave it a shorter name.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-from-approx-to-exact-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.1: From approximation to exact"><a tabindex="-1" href="#subsec-5-2-from-approx-to-exact" title="Copy heading and permalink for Subsection 4.2.1: From approximation to exact" aria-label="Copy heading and permalink for Subsection 4.2.1: From approximation to exact">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-notation">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Give the process a name</span>
+</h2>
+<div class="para logical" id="subsec-5-2-notation-2">
+<div class="para">We write</div>
+<div class="displaymath process-math" id="subsec-5-2-notation-2-1">
+\begin{equation*}
+\int_a^b f(x)\,dx
+\end{equation*}
+</div>
+<div class="para">for that exact limiting accumulation:</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-notation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-definite-integral"><h3 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Definite integral.</span>
+</h3>
+<div class="para logical" id="def-definite-integral-2-1">
+<div class="displaymath process-math" id="def-definite-integral-2-1-1">
+\begin{equation*}
+\int_a^b f(x)\,dx \;=\; \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+\end{equation*}
+</div>
+<div class="para">The symbol <span class="process-math">\(\int\)</span> is called the <dfn class="terminology">integral sign</dfn>. The whole expression <span class="process-math">\(\int_a^b f(x)\,dx\)</span> is called a <dfn class="terminology">definite integral</dfn>.</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#def-definite-integral-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Definition 4.2.1: Definite integral"><a tabindex="-1" href="#def-definite-integral" title="Copy heading and permalink for Definition 4.2.1: Definite integral" aria-label="Copy heading and permalink for Definition 4.2.1: Definite integral">🔗</a></div>
+</article>
+<article class="assemblage assemblage-like" id="subsec-5-2-notation-4"><h3 class="heading"><span class="title">What the new symbol buys you.</span></h3>
+<div class="para" id="subsec-5-2-notation-4-2">
+<span class="process-math">\(\int_a^b f(x)\,dx\)</span> is nothing new mathematically — it is exactly the limit of Riemann sums you have been computing since <a href="sec-5-1-areas-distances.html" class="internal" title="Section 4.1: Areas and Distances">Section 4.1</a>. It is only a shorter way to write that limit.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-notation-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: What the new symbol buys you"><a tabindex="-1" href="#subsec-5-2-notation-4" title="Copy heading and permalink for Assemblage: What the new symbol buys you" aria-label="Copy heading and permalink for Assemblage: What the new symbol buys you">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.2: Give the process a name"><a tabindex="-1" href="#subsec-5-2-notation" title="Copy heading and permalink for Subsection 4.2.2: Give the process a name" aria-label="Copy heading and permalink for Subsection 4.2.2: Give the process a name">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-anatomy">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Anatomy of a definite integral</span>
+</h2>
+<div class="para" id="subsec-5-2-anatomy-2">Look closely at <span class="process-math">\(\int_a^b f(x)\,dx\text{.}\)</span> Every piece has a job:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-anatomy-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b0 r0 l0 t0 lines">Symbol</th>
+<th scope="col" class="l m b0 r0 l0 t0 lines">Meaning</th>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(a\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">where the accumulation starts</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(b\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">where the accumulation stops</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(f(x)\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">the height of one thin rectangle</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\(dx\)</span></td>
+<td class="l m b0 r0 l0 t0 lines">the (infinitely thin) width of one rectangle</td>
+</tr>
+</table></div>
+<div class="para logical" id="subsec-5-2-anatomy-4">
+<div class="para">An informal way to picture the pieces:</div>
+<div class="displaymath process-math" id="subsec-5-2-anatomy-4-1">
+\begin{equation*}
+f(x)\,dx \;\approx\; \text{height} \times \text{tiny width},
+\end{equation*}
+</div>
+<div class="para">so <span class="process-math">\(\int_a^b f(x)\,dx\)</span> means: accumulate all of the tiny contributions <span class="process-math">\(f(x)\,dx\)</span> from <span class="process-math">\(x = a\)</span> to <span class="process-math">\(x = b\text{.}\)</span>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-anatomy-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.3: Anatomy of a definite integral"><a tabindex="-1" href="#subsec-5-2-anatomy" title="Copy heading and permalink for Subsection 4.2.3: Anatomy of a definite integral" aria-label="Copy heading and permalink for Subsection 4.2.3: Anatomy of a definite integral">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-is-a-number">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Important: a definite integral is a number</span>
+</h2>
+<div class="para" id="subsec-5-2-is-a-number-2">Look at <span class="process-math">\(\int_0^4 x\,dx\text{.}\)</span> The bounds <span class="process-math">\(0\)</span> and <span class="process-math">\(4\)</span> are fixed, so this expression represents one single accumulated amount.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-is-a-number-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="fact theorem-like" id="fact-integral-is-a-number"><h3 class="heading">
+<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A definite integral is a number.</span>
+</h3>
+<div class="para" id="fact-integral-is-a-number-2-1">
+<span class="process-math">\(\int_a^b f(x)\,dx\)</span> is a <em class="emphasis">number</em>, not a function of <span class="process-math">\(x\text{.}\)</span> Compare this to solving <span class="process-math">\(F'(x) = x\text{,}\)</span> which asks for a <em class="emphasis">function</em> <span class="process-math">\(F\text{.}\)</span> These are related questions, but they are not the same question.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#fact-integral-is-a-number-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Fact 4.2.2: A definite integral is a number"><a tabindex="-1" href="#fact-integral-is-a-number" title="Copy heading and permalink for Fact 4.2.2: A definite integral is a number" aria-label="Copy heading and permalink for Fact 4.2.2: A definite integral is a number">🔗</a></div>
+</article>
+<details id="check-number-or-function" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Number or function?</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="check-number-or-function-2-1">Is <span class="process-math">\(\int_a^b f(x)\,dx\)</span> a number, or a function?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-number-or-function-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-check-number-or-function" data-multipleanswers="false">
+<li data-component="answer" id="rs-check-number-or-function_opt_a" data-correct="">
+<div class="para" id="check-number-or-function-3-1-1-1">a number</div>
+</li>
+<li data-component="feedback" id="rs-check-number-or-function_opt_a">
+<div class="para" id="check-number-or-function-3-1-2-1">Right — once <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> are fixed, the integral is a single number.</div>
+</li>
+<li data-component="answer" id="rs-check-number-or-function_opt_b">
+<div class="para" id="check-number-or-function-3-2-1-1">a function</div>
+</li>
+<li data-component="feedback" id="rs-check-number-or-function_opt_b">
+<div class="para" id="check-number-or-function-3-2-2-1">Not quite — once <span class="process-math">\(a\)</span> and <span class="process-math">\(b\)</span> are fixed, there is no variable left to plug in. Compare this to <span class="process-math">\(F'(x) = x\text{,}\)</span> which really does ask for a function.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.3: Number or function?"><a tabindex="-1" href="#check-number-or-function" title="Copy heading and permalink for Checkpoint 4.2.3: Number or function?" aria-label="Copy heading and permalink for Checkpoint 4.2.3: Number or function?">🔗</a></div>
+</article></details><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.4: Important: a definite integral is a number"><a tabindex="-1" href="#subsec-5-2-is-a-number" title="Copy heading and permalink for Subsection 4.2.4: Important: a definite integral is a number" aria-label="Copy heading and permalink for Subsection 4.2.4: Important: a definite integral is a number">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-geometry">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Evaluate a definite integral using geometry</span>
+</h2>
+<div class="para" id="subsec-5-2-geometry-2">Some definite integrals can be found without any limits at all — just geometry.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-geometry-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-5-2-geometry-3">Consider <span class="process-math">\(\int_1^5 3\,dx\text{.}\)</span> The graph of <span class="process-math">\(y = 3\)</span> from <span class="process-math">\(x=1\)</span> to <span class="process-math">\(x=5\)</span> is a horizontal strip: a rectangle of width <span class="process-math">\(4\)</span> and height <span class="process-math">\(3\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-geometry-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-constant-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A rectangle.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-constant-integral"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-constant-integral-2-1\"><span class=\"process-math\">\\(\\displaystyle\\int_1^5 3\\,dx =\\)<\/span> <input type=\"number\" id=\"check-constant-integral-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-constant-integral-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [12,12], "feedback": "\n<div class=\"para\" id=\"check-constant-integral-3-1-1-2-1\">Yes. Width <span class=\"process-math\">\\(4\\)<\/span> times height <span class=\"process-math\">\\(3\\)<\/span> is <span class=\"process-math\">\\(12\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.4: A rectangle"><a tabindex="-1" href="#check-constant-integral" title="Copy heading and permalink for Checkpoint 4.2.4: A rectangle" aria-label="Copy heading and permalink for Checkpoint 4.2.4: A rectangle">🔗</a></div>
+</article></details>
+<div class="para" id="subsec-5-2-geometry-5">Now consider <span class="process-math">\(\int_0^4 x\,dx\text{.}\)</span> The graph of <span class="process-math">\(y = x\)</span> from <span class="process-math">\(x=0\)</span> to <span class="process-math">\(x=4\)</span> forms a triangle with base <span class="process-math">\(4\)</span> and height <span class="process-math">\(4\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-geometry-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-triangle-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A triangle — and a familiar number.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-triangle-integral"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-triangle-integral-2-1\"><span class=\"process-math\">\\(\\displaystyle\\int_0^4 x\\,dx =\\)<\/span> <input type=\"number\" id=\"check-triangle-integral-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-triangle-integral-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [8,8], "feedback": "\n<div class=\"para\" id=\"check-triangle-integral-3-1-1-2-1\">Yes: <span class=\"process-math\">\\(\\tfrac12(4)(4) = 8\\text{.}\\)<\/span> That number <span class=\"process-math\">\\(8\\)<\/span> again — the same number from our car. We did not need an antiderivative to get it this time; we used geometry.<\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.5: A triangle — and a familiar number"><a tabindex="-1" href="#check-triangle-integral" title="Copy heading and permalink for Checkpoint 4.2.5: A triangle — and a familiar number" aria-label="Copy heading and permalink for Checkpoint 4.2.5: A triangle — and a familiar number">🔗</a></div>
+</article></details><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.5: Evaluate a definite integral using geometry"><a tabindex="-1" href="#subsec-5-2-geometry" title="Copy heading and permalink for Subsection 4.2.5: Evaluate a definite integral using geometry" aria-label="Copy heading and permalink for Subsection 4.2.5: Evaluate a definite integral using geometry">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-signed-area">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">What if the graph goes below the axis?</span>
+</h2>
+<div class="para" id="subsec-5-2-signed-area-2">Suppose a graph forms a triangle of area <span class="process-math">\(A_1 = 2\)</span> above the <span class="process-math">\(x\)</span>-axis on <span class="process-math">\([0,2]\text{,}\)</span> then a triangle of area <span class="process-math">\(A_2 = 2\)</span> below the axis on <span class="process-math">\([2,4]\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-signed-area-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-signed-area" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Above and below.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-signed-area"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-signed-area-2-1\">The region above the axis contributes <span class=\"process-math\">\\(+A_1\\text{,}\\)<\/span> and the region below the axis contributes <span class=\"process-math\">\\(-A_2\\text{.}\\)<\/span> So <span class=\"process-math\">\\(\\displaystyle\\int_0^4 f(x)\\,dx =\\)<\/span> <input type=\"number\" id=\"check-signed-area-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-signed-area-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [0,0], "feedback": "\n<div class=\"para\" id=\"check-signed-area-3-1-1-2-1\">Yes: <span class=\"process-math\">\\(2 - 2 = 0\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.6: Above and below"><a tabindex="-1" href="#check-signed-area" title="Copy heading and permalink for Checkpoint 4.2.6: Above and below" aria-label="Copy heading and permalink for Checkpoint 4.2.6: Above and below">🔗</a></div>
+</article></details>
+<article class="fact theorem-like" id="fact-signed-area"><h3 class="heading">
+<span class="type">Fact</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Definite integrals measure signed area.</span>
+</h3>
+<div class="para" id="fact-signed-area-2-1">Area above the <span class="process-math">\(x\)</span>-axis contributes positively. Area below the <span class="process-math">\(x\)</span>-axis contributes negatively.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#fact-signed-area-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Fact 4.2.7: Definite integrals measure signed area"><a tabindex="-1" href="#fact-signed-area" title="Copy heading and permalink for Fact 4.2.7: Definite integrals measure signed area" aria-label="Copy heading and permalink for Fact 4.2.7: Definite integrals measure signed area">🔗</a></div>
+</article>
+<div class="para" id="subsec-5-2-signed-area-5">Suppose instead the area above the axis is <span class="process-math">\(7\)</span> and the area below is <span class="process-math">\(3\text{.}\)</span> The definite integral is the <dfn class="terminology">net signed area</dfn>, <span class="process-math">\(7 - 3 = 4\)</span> — but the <dfn class="terminology">total geometric area</dfn> is <span class="process-math">\(7 + 3 = 10\text{.}\)</span> In general,<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-signed-area-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="assemblage assemblage-like" id="subsec-5-2-signed-area-6"><h3 class="heading"><span class="title">Net area is not always total area.</span></h3>
+<div class="para" id="subsec-5-2-signed-area-6-2">
+<span class="process-math">\(\displaystyle \text{definite integral} \ne \text{total area}\text{,}\)</span> in general. Instead, <span class="process-math">\(\displaystyle \text{definite integral} = \text{net signed area}\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-signed-area-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Net area is not always total area"><a tabindex="-1" href="#subsec-5-2-signed-area-6" title="Copy heading and permalink for Assemblage: Net area is not always total area" aria-label="Copy heading and permalink for Assemblage: Net area is not always total area">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.6: What if the graph goes below the axis?"><a tabindex="-1" href="#subsec-5-2-signed-area" title="Copy heading and permalink for Subsection 4.2.6: What if the graph goes below the axis?" aria-label="Copy heading and permalink for Subsection 4.2.6: What if the graph goes below the axis?">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-velocity">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Return to velocity</span>
+</h2>
+<div class="para" id="subsec-5-2-velocity-2">If <span class="process-math">\(v(t)\)</span> is a velocity function, then <span class="process-math">\(\int_a^b v(t)\,dt\)</span> represents the net change in position from time <span class="process-math">\(a\)</span> to time <span class="process-math">\(b\text{,}\)</span> also called <dfn class="terminology">displacement</dfn>. When <span class="process-math">\(v(t) &gt; 0\)</span> the object moves in the positive direction; when <span class="process-math">\(v(t) &lt; 0\)</span> it moves in the negative direction, and that motion is subtracted off.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-velocity-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-5-2-velocity-3">Displacement is not the same as <dfn class="terminology">total distance traveled</dfn>. Suppose a particle moves <span class="process-math">\(5\)</span> meters forward, then <span class="process-math">\(2\)</span> meters backward.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-velocity-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-displacement-vs-distance" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Displacement vs. total distance.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-displacement-vs-distance"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-displacement-vs-distance-2-1\">Displacement <span class=\"process-math\">\\(= 5 - 2 =\\)<\/span> <input type=\"number\" id=\"check-displacement-vs-distance-blank1\"\/> meters. Total distance traveled <span class=\"process-math\">\\(= 5 + 2 =\\)<\/span> <input type=\"number\" id=\"check-displacement-vs-distance-blank2\"\/> meters.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-displacement-vs-distance-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0, "blank2": 1},
+"feedbackArray": [[{"number": [3,3], "feedback": "\n<div class=\"para\" id=\"check-displacement-vs-distance-3-1-1-2-1\">Yes, <span class=\"process-math\">\\(3\\)<\/span> meters of net displacement.<\/div>"}, {"feedback": "Incorrect."}], [{"number": [7,7], "feedback": "\n<div class=\"para\" id=\"check-displacement-vs-distance-3-2-1-2-1\">Yes, <span class=\"process-math\">\\(7\\)<\/span> meters walked in total.<\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.8: Displacement vs. total distance"><a tabindex="-1" href="#check-displacement-vs-distance" title="Copy heading and permalink for Checkpoint 4.2.8: Displacement vs. total distance" aria-label="Copy heading and permalink for Checkpoint 4.2.8: Displacement vs. total distance">🔗</a></div>
+</article></details>
+<div class="para" id="subsec-5-2-velocity-5">A velocity integral naturally gives displacement, not total distance, because the backward motion is counted as <em class="emphasis">negative</em> — the same signed-area idea from a moment ago, now applied to motion.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-velocity-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-5-2-velocity-6">
+<div class="para">Back to our car: <span class="process-math">\(v(t) = 3t^2\)</span> for <span class="process-math">\(0 \le t \le 2\text{.}\)</span> We can now write the exact change in position as</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/subsec-4-9-car.html" id="subsec-5-2-velocity-6-3">
+\begin{equation*}
+\int_0^2 3t^2\,dt.
+\end{equation*}
+</div>
+<div class="para">Read this aloud: “the integral from <span class="process-math">\(0\)</span> to <span class="process-math">\(2\)</span> of <span class="process-math">\(3t^2\)</span> with respect to <span class="process-math">\(t\text{.}\)</span>” From our antiderivative work in <a href="sec-4-9-antiderivatives.html#subsec-4-9-car" class="internal" title="Subsection 3.3.8: Our running example: a car">Subsection 3.3.8</a>, we already know the answer.</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-velocity-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-car-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Our car, one more time.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-car-integral"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-car-integral-2-1\"><span class=\"process-math\">\\(\\displaystyle\\int_0^2 3t^2\\,dt =\\)<\/span> <input type=\"number\" id=\"check-car-integral-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-car-integral-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [8,8], "feedback": "\n<div class=\"para\" id=\"check-car-integral-3-1-1-2-1\">Yes, <span class=\"process-math\">\\(8\\)<\/span> meters — exactly what the antiderivative method gave us, and exactly what <span class=\"process-math\">\\(L_n\\)<\/span> and <span class=\"process-math\">\\(R_n\\)<\/span> were squeezing toward.<\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.9: Our car, one more time"><a tabindex="-1" href="#check-car-integral" title="Copy heading and permalink for Checkpoint 4.2.9: Our car, one more time" aria-label="Copy heading and permalink for Checkpoint 4.2.9: Our car, one more time">🔗</a></div>
+</article></details>
+<article class="remark remark-like" id="remark-ftc-preview"><h3 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Important question for next time.</span>
+</h3>
+<div class="para" id="remark-ftc-preview-2">Today we focused on what <span class="process-math">\(\int_0^2 3t^2\,dt\)</span> <em class="emphasis">means</em>, not on using antiderivatives to compute it. But why does the antiderivative method give <em class="emphasis">exactly</em> the same answer as this accumulation method? That question is the whole subject of <a href="sec-5-3-ftc.html" class="internal" title="Section 4.3: The Fundamental Theorem of Calculus">Section 4.3</a>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#remark-ftc-preview-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Remark 4.2.10: Important question for next time"><a tabindex="-1" href="#remark-ftc-preview" title="Copy heading and permalink for Remark 4.2.10: Important question for next time" aria-label="Copy heading and permalink for Remark 4.2.10: Important question for next time">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.7: Return to velocity"><a tabindex="-1" href="#subsec-5-2-velocity" title="Copy heading and permalink for Subsection 4.2.7: Return to velocity" aria-label="Copy heading and permalink for Subsection 4.2.7: Return to velocity">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-properties">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.8</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Basic properties from common sense</span>
+</h2>
+<div class="para" id="subsec-5-2-properties-2">Suppose <span class="process-math">\(\int_a^b f(x)\,dx = 10\)</span> and <span class="process-math">\(\int_a^b g(x)\,dx = 4\text{.}\)</span> Accumulating <span class="process-math">\(f\)</span> and <span class="process-math">\(g\)</span> together over the same interval should just add the two accumulations:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-properties-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-linearity" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Adding two accumulations.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-linearity"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-linearity-2-1\"><span class=\"process-math\">\\(\\displaystyle\\int_a^b [f(x) + g(x)]\\,dx =\\)<\/span> <input type=\"number\" id=\"check-linearity-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-linearity-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [14,14], "feedback": "\n<div class=\"para\" id=\"check-linearity-3-1-1-2-1\">Yes, <span class=\"process-math\">\\(10 + 4 = 14\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.11: Adding two accumulations"><a tabindex="-1" href="#check-linearity" title="Copy heading and permalink for Checkpoint 4.2.11: Adding two accumulations" aria-label="Copy heading and permalink for Checkpoint 4.2.11: Adding two accumulations">🔗</a></div>
+</article></details>
+<div class="para logical" id="subsec-5-2-properties-4">
+<div class="para">In general,</div>
+<div class="displaymath process-math" id="subsec-5-2-properties-4-1">
+\begin{equation*}
+\int_a^b [f(x) + g(x)]\,dx = \int_a^b f(x)\,dx + \int_a^b g(x)\,dx.
+\end{equation*}
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-properties-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-5-2-properties-5">
+<div class="para">Next: suppose <span class="process-math">\(a &lt; c &lt; b\text{.}\)</span> Accumulating from <span class="process-math">\(a\)</span> to <span class="process-math">\(c\text{,}\)</span> then from <span class="process-math">\(c\)</span> to <span class="process-math">\(b\text{,}\)</span> should give the same total as accumulating directly from <span class="process-math">\(a\)</span> to <span class="process-math">\(b\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="subsec-5-2-properties-5-8">
+\begin{equation*}
+\int_a^c f(x)\,dx + \int_c^b f(x)\,dx = \int_a^b f(x)\,dx.
+\end{equation*}
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-properties-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-additivity" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Breaking an interval apart.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-check-additivity"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"check-additivity-2-1\">If <span class=\"process-math\">\\(\\int_0^2 f(x)\\,dx = 5\\)<\/span> and <span class=\"process-math\">\\(\\int_2^7 f(x)\\,dx = 9\\text{,}\\)<\/span> then <span class=\"process-math\">\\(\\displaystyle\\int_0^7 f(x)\\,dx =\\)<\/span> <input type=\"number\" id=\"check-additivity-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#check-additivity-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"number": [14,14], "feedback": "\n<div class=\"para\" id=\"check-additivity-3-1-1-2-1\">Yes, <span class=\"process-math\">\\(5 + 9 = 14\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.12: Breaking an interval apart"><a tabindex="-1" href="#check-additivity" title="Copy heading and permalink for Checkpoint 4.2.12: Breaking an interval apart" aria-label="Copy heading and permalink for Checkpoint 4.2.12: Breaking an interval apart">🔗</a></div>
+</article></details>
+<div class="para logical" id="subsec-5-2-properties-7">
+<div class="para">Finally, what if we reverse direction? Suppose <span class="process-math">\(\int_2^5 f(x)\,dx = 7\text{.}\)</span> Reversing the direction of accumulation flips the sign:</div>
+<div class="displaymath process-math" id="subsec-5-2-properties-7-2">
+\begin{equation*}
+\int_5^2 f(x)\,dx = -7, \qquad\text{and in general}\qquad \int_b^a f(x)\,dx = -\int_a^b f(x)\,dx.
+\end{equation*}
+</div>
+<div class="para">And if we start and stop at the same place, nothing has accumulated:</div>
+<div class="displaymath process-math" id="subsec-5-2-properties-7-3">
+\begin{equation*}
+\int_a^a f(x)\,dx = 0.
+\end{equation*}
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-properties-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.8: Basic properties from common sense"><a tabindex="-1" href="#subsec-5-2-properties" title="Copy heading and permalink for Subsection 4.2.8: Basic properties from common sense" aria-label="Copy heading and permalink for Subsection 4.2.8: Basic properties from common sense">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-units">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Interpret before you calculate</span>
+</h2>
+<div class="para" id="subsec-5-2-units-2">A definite integral always has units: (units of <span class="process-math">\(f\)</span>) times (units of <span class="process-math">\(x\)</span>). Before computing anything, get in the habit of asking what an integral <em class="emphasis">means</em>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-units-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="check-units-interpret" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Three integrals, three meanings.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para logical" id="check-units-interpret-2-1">
+<ol class="decimal" id="check-units-interpret-2-1-1">
+<li id="check-units-interpret-2-1-1-1">
+<div class="para" id="check-units-interpret-2-1-1-1-1">
+<span class="process-math">\(\int_0^6 v(t)\,dt\text{,}\)</span> where <span class="process-math">\(v\)</span> is in meters per second. What does this represent, and in what units?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.1"><a tabindex="-1" href="#check-units-interpret-2-1-1-1" title="Copy heading and permalink for Item 4.2.13.1" aria-label="Copy heading and permalink for Item 4.2.13.1">🔗</a></div>
+</li>
+<li id="check-units-interpret-2-1-1-2">
+<div class="para" id="check-units-interpret-2-1-1-2-1">
+<span class="process-math">\(\int_2^8 r(t)\,dt\text{,}\)</span> where <span class="process-math">\(r(t)\)</span> is a water-flow rate in liters per minute. What does this represent, and in what units?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.2"><a tabindex="-1" href="#check-units-interpret-2-1-1-2" title="Copy heading and permalink for Item 4.2.13.2" aria-label="Copy heading and permalink for Item 4.2.13.2">🔗</a></div>
+</li>
+<li id="check-units-interpret-2-1-1-3">
+<div class="para" id="check-units-interpret-2-1-1-3-1">
+<span class="process-math">\(\int_0^{10} c(x)\,dx\text{,}\)</span> where <span class="process-math">\(c(x)\)</span> is a cost rate in dollars per item. What does this represent, and in what units?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.3"><a tabindex="-1" href="#check-units-interpret-2-1-1-3" title="Copy heading and permalink for Item 4.2.13.3" aria-label="Copy heading and permalink for Item 4.2.13.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions">
+<details id="check-units-interpret-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para logical" id="check-units-interpret-3-1">
+<ol class="decimal" id="check-units-interpret-3-1-1">
+<li id="check-units-interpret-3-1-1-1">
+<div class="para" id="check-units-interpret-3-1-1-1-1">The net change in position (displacement) over the first <span class="process-math">\(6\)</span> seconds, measured in meters.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-3-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.1"><a tabindex="-1" href="#check-units-interpret-3-1-1-1" title="Copy heading and permalink for Item 4.2.13.1" aria-label="Copy heading and permalink for Item 4.2.13.1">🔗</a></div>
+</li>
+<li id="check-units-interpret-3-1-1-2">
+<div class="para" id="check-units-interpret-3-1-1-2-1">The net volume of water that flowed from minute <span class="process-math">\(2\)</span> to minute <span class="process-math">\(8\text{,}\)</span> measured in liters.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-3-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.2"><a tabindex="-1" href="#check-units-interpret-3-1-1-2" title="Copy heading and permalink for Item 4.2.13.2" aria-label="Copy heading and permalink for Item 4.2.13.2">🔗</a></div>
+</li>
+<li id="check-units-interpret-3-1-1-3">
+<div class="para" id="check-units-interpret-3-1-1-3-1">The total cost of the first <span class="process-math">\(10\)</span> items, measured in dollars.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-3-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.13.3"><a tabindex="-1" href="#check-units-interpret-3-1-1-3" title="Copy heading and permalink for Item 4.2.13.3" aria-label="Copy heading and permalink for Item 4.2.13.3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-units-interpret-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.2.13.1"><a tabindex="-1" href="#check-units-interpret-3" title="Copy heading and permalink for Solution 4.2.13.1" aria-label="Copy heading and permalink for Solution 4.2.13.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.13: Three integrals, three meanings"><a tabindex="-1" href="#check-units-interpret" title="Copy heading and permalink for Checkpoint 4.2.13: Three integrals, three meanings" aria-label="Copy heading and permalink for Checkpoint 4.2.13: Three integrals, three meanings">🔗</a></div>
+</article></details><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.9: Interpret before you calculate"><a tabindex="-1" href="#subsec-5-2-units" title="Copy heading and permalink for Subsection 4.2.9: Interpret before you calculate" aria-label="Copy heading and permalink for Subsection 4.2.9: Interpret before you calculate">🔗</a></div>
+</section>
+<section class="subsection" id="subsec-5-2-practice">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.10</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Putting it together</span>
+</h2>
+<details id="try-piecewise-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">You do: geometry with two pieces.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para" id="try-piecewise-integral-2-1">The graph of <span class="process-math">\(f\)</span> from <span class="process-math">\(x=0\)</span> to <span class="process-math">\(x=6\)</span> is a rectangle of height <span class="process-math">\(3\)</span> above the <span class="process-math">\(x\)</span>-axis from <span class="process-math">\(0\)</span> to <span class="process-math">\(4\text{,}\)</span> followed by a triangle of height <span class="process-math">\(2\)</span> below the <span class="process-math">\(x\)</span>-axis from <span class="process-math">\(4\)</span> to <span class="process-math">\(6\text{.}\)</span> Find the positive area <span class="process-math">\(A_1\text{,}\)</span> the magnitude of the area below the axis <span class="process-math">\(A_2\text{,}\)</span> the definite integral <span class="process-math">\(\int_0^6 f(x)\,dx\text{,}\)</span> and the total geometric area.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#try-piecewise-integral-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions">
+<details id="try-piecewise-integral-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para logical" id="try-piecewise-integral-3-1">
+<div class="para">
+<span class="process-math">\(A_1 = (4)(3) = 12\text{.}\)</span> <span class="process-math">\(A_2 = \tfrac12(2)(2) = 2\text{.}\)</span>
+</div>
+<div class="displaymath process-math" id="try-piecewise-integral-3-1-3">
+\begin{equation*}
+\int_0^6 f(x)\,dx = A_1 - A_2 = 12 - 2 = 10.
+\end{equation*}
+</div>
+<div class="para">Total geometric area <span class="process-math">\(= A_1 + A_2 = 14\text{.}\)</span>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#try-piecewise-integral-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.2.14.1"><a tabindex="-1" href="#try-piecewise-integral-3" title="Copy heading and permalink for Solution 4.2.14.1" aria-label="Copy heading and permalink for Solution 4.2.14.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.14: You do: geometry with two pieces"><a tabindex="-1" href="#try-piecewise-integral" title="Copy heading and permalink for Checkpoint 4.2.14: You do: geometry with two pieces" aria-label="Copy heading and permalink for Checkpoint 4.2.14: You do: geometry with two pieces">🔗</a></div>
+</article></details>
+<details id="check-conceptual-definite-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Conceptual check.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content">
+<div class="para logical" id="check-conceptual-definite-integral-2-1">
+<ol class="decimal" id="check-conceptual-definite-integral-2-1-1">
+<li id="check-conceptual-definite-integral-2-1-1-1">
+<div class="para" id="check-conceptual-definite-integral-2-1-1-1-1">What is the difference between a Riemann sum and a definite integral?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.1"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-1" title="Copy heading and permalink for Item 4.2.15.1" aria-label="Copy heading and permalink for Item 4.2.15.1">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-2-1-1-2">
+<div class="para" id="check-conceptual-definite-integral-2-1-1-2-1">Is <span class="process-math">\(\int_a^b f(x)\,dx\)</span> a number or a function?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.2"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-2" title="Copy heading and permalink for Item 4.2.15.2" aria-label="Copy heading and permalink for Item 4.2.15.2">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-2-1-1-3">
+<div class="para" id="check-conceptual-definite-integral-2-1-1-3-1">If <span class="process-math">\(f(x) &gt; 0\)</span> on <span class="process-math">\([a,b]\text{,}\)</span> what does <span class="process-math">\(\int_a^b f(x)\,dx\)</span> represent geometrically?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.3"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-3" title="Copy heading and permalink for Item 4.2.15.3" aria-label="Copy heading and permalink for Item 4.2.15.3">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-2-1-1-4">
+<div class="para" id="check-conceptual-definite-integral-2-1-1-4-1">If part of the graph lies below the <span class="process-math">\(x\)</span>-axis, does that part contribute positively or negatively to the definite integral?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.4"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-4" title="Copy heading and permalink for Item 4.2.15.4" aria-label="Copy heading and permalink for Item 4.2.15.4">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-2-1-1-5">
+<div class="para" id="check-conceptual-definite-integral-2-1-1-5-1">If <span class="process-math">\(\int_a^b f(x)\,dx = 0\text{,}\)</span> must <span class="process-math">\(f(x) = 0\)</span> everywhere on <span class="process-math">\([a,b]\text{?}\)</span> Explain.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.5"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1-1-5" title="Copy heading and permalink for Item 4.2.15.5" aria-label="Copy heading and permalink for Item 4.2.15.5">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions">
+<details id="check-conceptual-definite-integral-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<div class="para logical" id="check-conceptual-definite-integral-3-1">
+<ol class="decimal" id="check-conceptual-definite-integral-3-1-1">
+<li id="check-conceptual-definite-integral-3-1-1-1">
+<div class="para" id="check-conceptual-definite-integral-3-1-1-1-1">A Riemann sum is a finite approximation using rectangles; the definite integral is the exact value that those sums approach as the number of rectangles goes to infinity.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.1"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-1" title="Copy heading and permalink for Item 4.2.15.1" aria-label="Copy heading and permalink for Item 4.2.15.1">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-3-1-1-2">
+<div class="para" id="check-conceptual-definite-integral-3-1-1-2-1">A number.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.2"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-2" title="Copy heading and permalink for Item 4.2.15.2" aria-label="Copy heading and permalink for Item 4.2.15.2">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-3-1-1-3">
+<div class="para" id="check-conceptual-definite-integral-3-1-1-3-1">The area between the curve and the <span class="process-math">\(x\)</span>-axis, over <span class="process-math">\([a,b]\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.3"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-3" title="Copy heading and permalink for Item 4.2.15.3" aria-label="Copy heading and permalink for Item 4.2.15.3">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-3-1-1-4">
+<div class="para" id="check-conceptual-definite-integral-3-1-1-4-1">Negatively.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.4"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-4" title="Copy heading and permalink for Item 4.2.15.4" aria-label="Copy heading and permalink for Item 4.2.15.4">🔗</a></div>
+</li>
+<li id="check-conceptual-definite-integral-3-1-1-5">
+<div class="para" id="check-conceptual-definite-integral-3-1-1-5-1">No — areas above and below the axis can cancel, as in the signed-area example earlier in this section.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item 4.2.15.5"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1-1-5" title="Copy heading and permalink for Item 4.2.15.5" aria-label="Copy heading and permalink for Item 4.2.15.5">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#check-conceptual-definite-integral-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.2.15.1"><a tabindex="-1" href="#check-conceptual-definite-integral-3" title="Copy heading and permalink for Solution 4.2.15.1" aria-label="Copy heading and permalink for Solution 4.2.15.1">🔗</a></div>
+</div></details>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.15: Conceptual check"><a tabindex="-1" href="#check-conceptual-definite-integral" title="Copy heading and permalink for Checkpoint 4.2.15: Conceptual check" aria-label="Copy heading and permalink for Checkpoint 4.2.15: Conceptual check">🔗</a></div>
+</article></details>
+<details id="exit-ticket-definite-integral" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Exit ticket.</span>
+</h3></summary>
+<article class="exercise exercise-like knowl__content"><div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-exit-ticket-definite-integral"><script type="application/json">{
+"problemHtml": "\n<div class=\"para logical\" id=\"exit-ticket-definite-integral-2-1\">\n<ol class=\"decimal\" id=\"exit-ticket-definite-integral-2-1-1\">\n<li id=\"exit-ticket-definite-integral-2-1-1-1\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-2-1-1-1-1\">In your own words, what does a definite integral measure?<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.1\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-1\" title=\"Copy heading and permalink for Item 4.2.16.1\" aria-label=\"Copy heading and permalink for Item 4.2.16.1\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-2-1-1-2\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-2-1-1-2-1\">Complete the definition: <span class=\"process-math\">\\(\\int_a^b f(x)\\,dx = \\lim_{n\\to\\infty}\\underline{\\hspace{2.5cm}}\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.2\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-2\" title=\"Copy heading and permalink for Item 4.2.16.2\" aria-label=\"Copy heading and permalink for Item 4.2.16.2\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-2-1-1-3\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-2-1-1-3-1\">Evaluate using geometry: <span class=\"process-math\">\\(\\int_0^5 2\\,dx =\\)<\/span> <input type=\"number\" id=\"exit-ticket-definite-integral-blank1\"\/>.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-3-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.3\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-3\" title=\"Copy heading and permalink for Item 4.2.16.3\" aria-label=\"Copy heading and permalink for Item 4.2.16.3\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-2-1-1-4\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-2-1-1-4-1\">The graph of <span class=\"process-math\">\\(f\\)<\/span> has area <span class=\"process-math\">\\(9\\)<\/span> above the <span class=\"process-math\">\\(x\\)<\/span>-axis and area <span class=\"process-math\">\\(4\\)<\/span> below the axis on <span class=\"process-math\">\\([a,b]\\text{.}\\)<\/span> Then <span class=\"process-math\">\\(\\int_a^b f(x)\\,dx =\\)<\/span> <input type=\"number\" id=\"exit-ticket-definite-integral-blank2\"\/>.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-4-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.4\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-4\" title=\"Copy heading and permalink for Item 4.2.16.4\" aria-label=\"Copy heading and permalink for Item 4.2.16.4\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-2-1-1-5\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-2-1-1-5-1\">If <span class=\"process-math\">\\(v(t)\\)<\/span> is velocity, what does <span class=\"process-math\">\\(\\int_a^b v(t)\\,dt\\)<\/span> represent?<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-5-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.5\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1-1-5\" title=\"Copy heading and permalink for Item 4.2.16.5\" aria-label=\"Copy heading and permalink for Item 4.2.16.5\">🔗<\/a><\/div><\/li><\/ol><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "\n<div class=\"para logical\" id=\"exit-ticket-definite-integral-4-1\">\n<ol class=\"decimal\" id=\"exit-ticket-definite-integral-4-1-1\">\n<li id=\"exit-ticket-definite-integral-4-1-1-1\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-4-1-1-1-1\">The exact net accumulation of a changing quantity, obtained by adding infinitely many infinitely thin contributions.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.1\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-1\" title=\"Copy heading and permalink for Item 4.2.16.1\" aria-label=\"Copy heading and permalink for Item 4.2.16.1\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-4-1-1-2\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-4-1-1-2-1\"><span class=\"process-math\">\\(\\sum_{i=1}^{n} f(x_i^*)\\,\\Delta x\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-2-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.2\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-2\" title=\"Copy heading and permalink for Item 4.2.16.2\" aria-label=\"Copy heading and permalink for Item 4.2.16.2\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-4-1-1-3\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-4-1-1-3-1\"><span class=\"process-math\">\\(10\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-3-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.3\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-3\" title=\"Copy heading and permalink for Item 4.2.16.3\" aria-label=\"Copy heading and permalink for Item 4.2.16.3\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-4-1-1-4\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-4-1-1-4-1\"><span class=\"process-math\">\\(5\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-4-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.4\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-4\" title=\"Copy heading and permalink for Item 4.2.16.4\" aria-label=\"Copy heading and permalink for Item 4.2.16.4\">🔗<\/a><\/div><\/li>\n<li id=\"exit-ticket-definite-integral-4-1-1-5\">\n<div class=\"para\" id=\"exit-ticket-definite-integral-4-1-1-5-1\">The net change in position (displacement) from time <span class=\"process-math\">\\(a\\)<\/span> to time <span class=\"process-math\">\\(b\\text{.}\\)<\/span><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-5-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Item 4.2.16.5\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1-1-5\" title=\"Copy heading and permalink for Item 4.2.16.5\" aria-label=\"Copy heading and permalink for Item 4.2.16.5\">🔗<\/a><\/div><\/li><\/ol><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#exit-ticket-definite-integral-4-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"blankNames": {"blank1": 0, "blank2": 1},
+"feedbackArray": [[{"number": [10,10], "feedback": "\n<div class=\"para\" id=\"exit-ticket-definite-integral-3-1-1-2-1\">Yes, <span class=\"process-math\">\\(2 \\cdot 5 = 10\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}], [{"number": [5,5], "feedback": "\n<div class=\"para\" id=\"exit-ticket-definite-integral-3-2-1-2-1\">Yes, <span class=\"process-math\">\\(9 - 4 = 5\\text{.}\\)<\/span><\/div>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.2.16: Exit ticket"><a tabindex="-1" href="#exit-ticket-definite-integral" title="Copy heading and permalink for Checkpoint 4.2.16: Exit ticket" aria-label="Copy heading and permalink for Checkpoint 4.2.16: Exit ticket">🔗</a></div>
+</article></details>
+<article class="assemblage assemblage-like" id="subsec-5-2-practice-5"><h3 class="heading"><span class="title">Today’s main idea.</span></h3>
+<div class="para logical" id="subsec-5-2-practice-5-2">
+<div class="para">A definite integral is the exact net accumulation obtained by adding infinitely many tiny contributions:</div>
+<div class="displaymath process-math" id="subsec-5-2-practice-5-2-1">
+\begin{equation*}
+\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+\end{equation*}
+</div>
+<div class="para">The integral tells us what has accumulated.</div>
+<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-practice-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-5-2-practice-5-3">Next we discover why <em class="emphasis">antiderivatives</em> let us compute that accumulation without ever taking a limit — the <a href="sec-5-3-ftc.html" class="internal" title="Section 4.3: The Fundamental Theorem of Calculus">Fundamental Theorem of Calculus</a>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#subsec-5-2-practice-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Assemblage: Today’s main idea"><a tabindex="-1" href="#subsec-5-2-practice-5" title="Copy heading and permalink for Assemblage: Today’s main idea" aria-label="Copy heading and permalink for Assemblage: Today’s main idea">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.2.10: Putting it together"><a tabindex="-1" href="#subsec-5-2-practice" title="Copy heading and permalink for Subsection 4.2.10: Putting it together" aria-label="Copy heading and permalink for Subsection 4.2.10: Putting it together">🔗</a></div>
+</section><div class="autopermalink" aria-hidden="true" data-description="Section 4.2: The Definite Integral"><a tabindex="-1" href="#sec-5-2-definite-integral" title="Copy heading and permalink for Section 4.2: The Definite Integral" aria-label="Copy heading and permalink for Section 4.2: The Definite Integral">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

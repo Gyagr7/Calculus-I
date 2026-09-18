@@ -907,7 +907,160 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.1",
   "title": "Areas and Distances",
-  "body": " Areas and Distances   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Areas and Distances     Today's Question  Can we get the change in position directly from the velocity — without ever finding the position function?   Remember our car? Velocity meters per second, starting at . In we worked backward: we found an antiderivative , and then meters.  That method needed a formula for . Today we ask what happens if we only ever know the velocity, and never find at all. For now, pretend we do not know the position function.    Start with constant velocity  Suppose a car travels at a constant meters per second for seconds. How far does it go?   Easy case   distance  meters       Yes. meters.      Now graph the velocity: a flat line at height , from to . The region underneath it is a rectangle, with width and height . Its area is also .   Distance is area   When velocity is constant, distance traveled equals the area under the velocity graph.    Why does this happen? Check the units: Multiplying a rate by a length of time is exactly what finding the area of a rectangle does: height times width.    But our car does not move at a constant velocity  Return to . The velocity changes every instant, so we cannot just multiply one velocity by seconds.  What if we break the two seconds into smaller pieces, and pretend the velocity is constant on each small piece? You may recognize this table from your warm-up before class — dividing into four equal pieces of width gives:                    Over a short interval, we can pretend the velocity is approximately constant. From to , the width is . Using the velocity at the start of the interval, , the change in position is approximately Geometrically, this is the area of one thin rectangle.   One rectangle, one small change   rectangle area (velocity)(time) change in position.      Add the small changes together  Use the velocity at the left endpoint of each of the four intervals , , , . This is called a left-endpoint sum , written :    Compute L4     meters        Yes. meters. Because is increasing, each left-endpoint height is the smallest velocity on its interval, so is an underestimate.       Now do the same thing with right endpoints:    Compute R4     meters        Yes. meters. This time each height is the largest velocity on its interval, so is an overestimate.       So the true change in position is trapped:    There it is again  Remember the number 8 from our antiderivative work? It sits right between and , exactly where it should.   Can we do better than and ? One idea: use the midpoint of each interval instead of an endpoint.   Compute M4   Using the midpoints , , , ,   meters        Yes. meters — noticeably closer to than either or .       Drag below to use more rectangles, and toggle the endpoint. Watch what happens to the estimate as the rectangles get thinner.   Left- and right-endpoint rectangles under on .     What did you notice?   As grows, what happens to the gap between and ?    The gap shrinks toward , and both and squeeze in on the same number: .      The same idea, without any velocity at all  Forget velocity for a moment. Suppose we want the area under from to . This region is not a rectangle, triangle, or circle, so there is no ready-made formula.  We do exactly what we just did: replace one hard region with many easy rectangles. Divide into four equal pieces, so . Using left endpoints, Using right endpoints, Since is increasing on , .  Compare the two situations side by side:    Area problem  Distance problem   width time width  height height  : small rectangle area : small change in position  add the rectangles add the changes in position    The same rectangle sum, two different stories  The same rectangle sum can represent an area under a curve, or an accumulated physical quantity such as a distance travelled .     The general rectangle recipe  Suppose is positive on . Break the interval into equal pieces, each of width Inside each small interval, choose one point . One rectangle has area . Adding all rectangles gives    Riemann sum   A sum of the form is called a Riemann sum for on .    What happens as we use more and more, thinner and thinner rectangles? As , we have , and our approximation approaches the exact area:    Important idea  We do not build rectangles because rectangles are the goal. We build rectangles because their areas are easy to compute, and increasingly thin rectangles let us capture a curved region exactly.    A note on notation  That limit expression is correct, but long. Next class we give it a much shorter name — and along with it, a symbol you may already have seen somewhere. We are saving it for on purpose, so you see exactly where it comes from first.     When all we have is a table  A cyclist's velocity is recorded every two seconds:    (s)         (m\/s)         We have no formula for , but we can still estimate the distance.   Estimate from a table   Each interval has width seconds.  meters, and  meters.       Yes. meters.       Yes. meters.      Now suppose oil leaks from a tank at a decreasing rate:    (hours)        (liters\/hour)         A decreasing rate   Using the rate at the beginning of each two-hour interval, amount  liters.  Since the rate is decreasing, is this an overestimate or an underestimate?        Yes, liters. And because the rate is decreasing , using the rate at the beginning of each interval means we always use the largest rate on that interval — so this is an overestimate.        The unit test   One of the fastest ways to understand an accumulation problem is to multiply the units: rate small input change small accumulated amount. This works whether the rate is , , or .      Putting it together   You do: a right-endpoint estimate   Estimate the area under from to using four right-endpoint rectangles.     , with right endpoints . Since is increasing on , this is an overestimate.     Conceptual check     Why does a rectangle under a velocity graph represent a distance?  What does making the rectangles thinner accomplish?  For an increasing function, which gives the larger estimate: left endpoints or right endpoints?  If a quantity changes at rate , what does approximately represent? What does adding many such terms represent?        Multiplying velocity by a time width gives (rate)(time) distance, which is exactly a rectangle's area.  Thinner rectangles hug the curve more closely, so the approximation gets more accurate.  Right endpoints give the larger estimate, since the function's largest value on each interval sits at the right edge.  approximates one small accumulated amount. Adding many of them approximates the total accumulated amount.       Exit ticket     A car travels at ft\/s for seconds. How far does it travel?  A velocity graph is divided into rectangles of width seconds. One rectangle has height ft\/s. What physical quantity does represent?  If a positive function is increasing, is a left-endpoint sum usually an underestimate or an overestimate?  In your own words, why can rectangles help us find the area under a curve?        feet.  feet — the distance travelled during that -second interval.  An underestimate, since the left edge holds the smallest value on an increasing function.  Because a curved region can be approximated as closely as we like by many thin rectangles, whose areas we already know how to compute.       Today's main idea  A changing quantity can be accumulated by breaking time or space into small pieces, approximating each piece with a rectangle, and adding: rate small interval small accumulated amount.  One method works backward from the rate, using an antiderivative. The other method adds up the rate, using increasingly thin rectangles. Soon we will discover why these two methods give exactly the same answer.    "
+},
+{
+  "id": "check-constant-velocity-distance",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-constant-velocity-distance",
+  "type": "Checkpoint",
+  "number": "4.1.1",
+  "title": "Easy case.",
+  "body": " Easy case   distance  meters       Yes. meters.     "
+},
+{
+  "id": "fact-distance-is-area",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#fact-distance-is-area",
+  "type": "Fact",
+  "number": "4.1.2",
+  "title": "Distance is area.",
+  "body": " Distance is area   When velocity is constant, distance traveled equals the area under the velocity graph.   "
+},
+{
+  "id": "fact-rectangle-approximates-change",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#fact-rectangle-approximates-change",
+  "type": "Fact",
+  "number": "4.1.3",
+  "title": "One rectangle, one small change.",
+  "body": " One rectangle, one small change   rectangle area (velocity)(time) change in position.   "
+},
+{
+  "id": "subsec-5-1-riemann-sums-2",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#subsec-5-1-riemann-sums-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "left-endpoint sum "
+},
+{
+  "id": "check-left-endpoint-sum",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-left-endpoint-sum",
+  "type": "Checkpoint",
+  "number": "4.1.4",
+  "title": "Compute L4.",
+  "body": " Compute L4     meters        Yes. meters. Because is increasing, each left-endpoint height is the smallest velocity on its interval, so is an underestimate.      "
+},
+{
+  "id": "check-right-endpoint-sum",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-right-endpoint-sum",
+  "type": "Checkpoint",
+  "number": "4.1.5",
+  "title": "Compute R4.",
+  "body": " Compute R4     meters        Yes. meters. This time each height is the largest velocity on its interval, so is an overestimate.      "
+},
+{
+  "id": "check-midpoint-sum",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-midpoint-sum",
+  "type": "Checkpoint",
+  "number": "4.1.6",
+  "title": "Compute M4.",
+  "body": " Compute M4   Using the midpoints , , , ,   meters        Yes. meters — noticeably closer to than either or .      "
+},
+{
+  "id": "fig-riemann-rectangles",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#fig-riemann-rectangles",
+  "type": "Figure",
+  "number": "4.1.7",
+  "title": "",
+  "body": " Left- and right-endpoint rectangles under on .   "
+},
+{
+  "id": "notice-more-rectangles",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#notice-more-rectangles",
+  "type": "Checkpoint",
+  "number": "4.1.8",
+  "title": "What did you notice?",
+  "body": " What did you notice?   As grows, what happens to the gap between and ?    The gap shrinks toward , and both and squeeze in on the same number: .   "
+},
+{
+  "id": "def-riemann-sum",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#def-riemann-sum",
+  "type": "Definition",
+  "number": "4.1.9",
+  "title": "Riemann sum.",
+  "body": " Riemann sum   A sum of the form is called a Riemann sum for on .   "
+},
+{
+  "id": "remark-integral-notation-coming",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#remark-integral-notation-coming",
+  "type": "Remark",
+  "number": "4.1.10",
+  "title": "A note on notation.",
+  "body": " A note on notation  That limit expression is correct, but long. Next class we give it a much shorter name — and along with it, a symbol you may already have seen somewhere. We are saving it for on purpose, so you see exactly where it comes from first.  "
+},
+{
+  "id": "check-cyclist-table",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-cyclist-table",
+  "type": "Checkpoint",
+  "number": "4.1.11",
+  "title": "Estimate from a table.",
+  "body": " Estimate from a table   Each interval has width seconds.  meters, and  meters.       Yes. meters.       Yes. meters.     "
+},
+{
+  "id": "check-oil-leak-table",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-oil-leak-table",
+  "type": "Checkpoint",
+  "number": "4.1.12",
+  "title": "A decreasing rate.",
+  "body": " A decreasing rate   Using the rate at the beginning of each two-hour interval, amount  liters.  Since the rate is decreasing, is this an overestimate or an underestimate?        Yes, liters. And because the rate is decreasing , using the rate at the beginning of each interval means we always use the largest rate on that interval — so this is an overestimate.      "
+},
+{
+  "id": "fact-unit-test",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#fact-unit-test",
+  "type": "Fact",
+  "number": "4.1.13",
+  "title": "The unit test.",
+  "body": " The unit test   One of the fastest ways to understand an accumulation problem is to multiply the units: rate small input change small accumulated amount. This works whether the rate is , , or .   "
+},
+{
+  "id": "try-right-endpoint-sum",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#try-right-endpoint-sum",
+  "type": "Checkpoint",
+  "number": "4.1.14",
+  "title": "You do: a right-endpoint estimate.",
+  "body": " You do: a right-endpoint estimate   Estimate the area under from to using four right-endpoint rectangles.     , with right endpoints . Since is increasing on , this is an overestimate.   "
+},
+{
+  "id": "check-conceptual-areas-distances",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#check-conceptual-areas-distances",
+  "type": "Checkpoint",
+  "number": "4.1.15",
+  "title": "Conceptual check.",
+  "body": " Conceptual check     Why does a rectangle under a velocity graph represent a distance?  What does making the rectangles thinner accomplish?  For an increasing function, which gives the larger estimate: left endpoints or right endpoints?  If a quantity changes at rate , what does approximately represent? What does adding many such terms represent?        Multiplying velocity by a time width gives (rate)(time) distance, which is exactly a rectangle's area.  Thinner rectangles hug the curve more closely, so the approximation gets more accurate.  Right endpoints give the larger estimate, since the function's largest value on each interval sits at the right edge.  approximates one small accumulated amount. Adding many of them approximates the total accumulated amount.     "
+},
+{
+  "id": "exit-ticket-areas-distances",
+  "level": "2",
+  "url": "sec-5-1-areas-distances.html#exit-ticket-areas-distances",
+  "type": "Checkpoint",
+  "number": "4.1.16",
+  "title": "Exit ticket.",
+  "body": " Exit ticket     A car travels at ft\/s for seconds. How far does it travel?  A velocity graph is divided into rectangles of width seconds. One rectangle has height ft\/s. What physical quantity does represent?  If a positive function is increasing, is a left-endpoint sum usually an underestimate or an overestimate?  In your own words, why can rectangles help us find the area under a curve?        feet.  feet — the distance travelled during that -second interval.  An underestimate, since the left edge holds the smallest value on an increasing function.  Because a curved region can be approximated as closely as we like by many thin rectangles, whose areas we already know how to compute.     "
 },
 {
   "id": "sec-5-2-definite-integral",
@@ -916,7 +1069,178 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.2",
   "title": "The Definite Integral",
-  "body": " The Definite Integral   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " The Definite Integral     Today's Question  How do we describe the exact accumulation we get once our rectangles become infinitely thin?   Last class we trapped the true change in our car's position between and , and watched and squeeze in on as grew. Today we make that squeezing exact, and give it a name.    From approximation to exact  Recall the general recipe from . For positive on , split into equal pieces of width , pick a point in each piece, and add up the rectangles: With a small , this is only an approximation. But as , the rectangles get thinner and thinner, so . We define the exact accumulated value to be the limit of these sums:   That expression is completely correct. It is also long to write every single time. Mathematicians gave it a shorter name.    Give the process a name  We write for that exact limiting accumulation:   Definite integral    The symbol is called the integral sign . The whole expression is called a definite integral .     What the new symbol buys you   is nothing new mathematically — it is exactly the limit of Riemann sums you have been computing since . It is only a shorter way to write that limit.     Anatomy of a definite integral  Look closely at . Every piece has a job:    Symbol  Meaning   where the accumulation starts  where the accumulation stops  the height of one thin rectangle  the (infinitely thin) width of one rectangle   An informal way to picture the pieces: so means: accumulate all of the tiny contributions from to .    Important: a definite integral is a number  Look at . The bounds and are fixed, so this expression represents one single accumulated amount.   A definite integral is a number    is a number , not a function of . Compare this to solving , which asks for a function  . These are related questions, but they are not the same question.     Number or function?   Is a number, or a function?     a number  Right — once and are fixed, the integral is a single number.    a function  Not quite — once and are fixed, there is no variable left to plug in. Compare this to , which really does ask for a function.       Evaluate a definite integral using geometry  Some definite integrals can be found without any limits at all — just geometry.  Consider . The graph of from to is a horizontal strip: a rectangle of width and height .   A rectangle            Yes. Width times height is .      Now consider . The graph of from to forms a triangle with base and height .   A triangle — and a familiar number             Yes: . That number again — the same number from our car. We did not need an antiderivative to get it this time; we used geometry.         What if the graph goes below the axis?  Suppose a graph forms a triangle of area above the -axis on , then a triangle of area below the axis on .   Above and below   The region above the axis contributes , and the region below the axis contributes . So         Yes: .       Definite integrals measure signed area   Area above the -axis contributes positively. Area below the -axis contributes negatively.    Suppose instead the area above the axis is and the area below is . The definite integral is the net signed area , — but the total geometric area is . In general,   Net area is not always total area   , in general. Instead, .     Return to velocity  If is a velocity function, then represents the net change in position from time to time , also called displacement . When the object moves in the positive direction; when it moves in the negative direction, and that motion is subtracted off.  Displacement is not the same as total distance traveled . Suppose a particle moves meters forward, then meters backward.   Displacement vs. total distance   Displacement  meters. Total distance traveled  meters.       Yes, meters of net displacement.       Yes, meters walked in total.      A velocity integral naturally gives displacement, not total distance, because the backward motion is counted as negative — the same signed-area idea from a moment ago, now applied to motion.  Back to our car: for . We can now write the exact change in position as Read this aloud: “the integral from to of with respect to .” From our antiderivative work in , we already know the answer.   Our car, one more time             Yes, meters — exactly what the antiderivative method gave us, and exactly what and were squeezing toward.        Important question for next time  Today we focused on what  means , not on using antiderivatives to compute it. But why does the antiderivative method give exactly the same answer as this accumulation method? That question is the whole subject of .     Basic properties from common sense  Suppose and . Accumulating and together over the same interval should just add the two accumulations:   Adding two accumulations            Yes, .      In general,   Next: suppose . Accumulating from to , then from to , should give the same total as accumulating directly from to :    Breaking an interval apart   If and , then         Yes, .      Finally, what if we reverse direction? Suppose . Reversing the direction of accumulation flips the sign: And if we start and stop at the same place, nothing has accumulated:     Interpret before you calculate  A definite integral always has units: (units of ) times (units of ). Before computing anything, get in the habit of asking what an integral means .   Three integrals, three meanings     , where is in meters per second. What does this represent, and in what units?  , where is a water-flow rate in liters per minute. What does this represent, and in what units?  , where is a cost rate in dollars per item. What does this represent, and in what units?        The net change in position (displacement) over the first seconds, measured in meters.  The net volume of water that flowed from minute to minute , measured in liters.  The total cost of the first items, measured in dollars.        Putting it together   You do: geometry with two pieces   The graph of from to is a rectangle of height above the -axis from to , followed by a triangle of height below the -axis from to . Find the positive area , the magnitude of the area below the axis , the definite integral , and the total geometric area.     . . Total geometric area .     Conceptual check     What is the difference between a Riemann sum and a definite integral?  Is a number or a function?  If on , what does represent geometrically?  If part of the graph lies below the -axis, does that part contribute positively or negatively to the definite integral?  If , must everywhere on ? Explain.        A Riemann sum is a finite approximation using rectangles; the definite integral is the exact value that those sums approach as the number of rectangles goes to infinity.  A number.  The area between the curve and the -axis, over .  Negatively.  No — areas above and below the axis can cancel, as in the signed-area example earlier in this section.       Exit ticket     In your own words, what does a definite integral measure?  Complete the definition: .  Evaluate using geometry:  .  The graph of has area above the -axis and area below the axis on . Then  .  If is velocity, what does represent?         Yes, .       Yes, .        The exact net accumulation of a changing quantity, obtained by adding infinitely many infinitely thin contributions.  .  .  .  The net change in position (displacement) from time to time .       Today's main idea  A definite integral is the exact net accumulation obtained by adding infinitely many tiny contributions: The integral tells us what has accumulated.  Next we discover why antiderivatives let us compute that accumulation without ever taking a limit — the Fundamental Theorem of Calculus .    "
+},
+{
+  "id": "def-definite-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#def-definite-integral",
+  "type": "Definition",
+  "number": "4.2.1",
+  "title": "Definite integral.",
+  "body": " Definite integral    The symbol is called the integral sign . The whole expression is called a definite integral .   "
+},
+{
+  "id": "fact-integral-is-a-number",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#fact-integral-is-a-number",
+  "type": "Fact",
+  "number": "4.2.2",
+  "title": "A definite integral is a number.",
+  "body": " A definite integral is a number    is a number , not a function of . Compare this to solving , which asks for a function  . These are related questions, but they are not the same question.   "
+},
+{
+  "id": "check-number-or-function",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-number-or-function",
+  "type": "Checkpoint",
+  "number": "4.2.3",
+  "title": "Number or function?",
+  "body": " Number or function?   Is a number, or a function?     a number  Right — once and are fixed, the integral is a single number.    a function  Not quite — once and are fixed, there is no variable left to plug in. Compare this to , which really does ask for a function.    "
+},
+{
+  "id": "check-constant-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-constant-integral",
+  "type": "Checkpoint",
+  "number": "4.2.4",
+  "title": "A rectangle.",
+  "body": " A rectangle            Yes. Width times height is .     "
+},
+{
+  "id": "check-triangle-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-triangle-integral",
+  "type": "Checkpoint",
+  "number": "4.2.5",
+  "title": "A triangle — and a familiar number.",
+  "body": " A triangle — and a familiar number             Yes: . That number again — the same number from our car. We did not need an antiderivative to get it this time; we used geometry.      "
+},
+{
+  "id": "check-signed-area",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-signed-area",
+  "type": "Checkpoint",
+  "number": "4.2.6",
+  "title": "Above and below.",
+  "body": " Above and below   The region above the axis contributes , and the region below the axis contributes . So         Yes: .     "
+},
+{
+  "id": "fact-signed-area",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#fact-signed-area",
+  "type": "Fact",
+  "number": "4.2.7",
+  "title": "Definite integrals measure signed area.",
+  "body": " Definite integrals measure signed area   Area above the -axis contributes positively. Area below the -axis contributes negatively.   "
+},
+{
+  "id": "subsec-5-2-signed-area-5",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#subsec-5-2-signed-area-5",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "net signed area total geometric area "
+},
+{
+  "id": "subsec-5-2-velocity-2",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#subsec-5-2-velocity-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "displacement "
+},
+{
+  "id": "subsec-5-2-velocity-3",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#subsec-5-2-velocity-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "total distance traveled "
+},
+{
+  "id": "check-displacement-vs-distance",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-displacement-vs-distance",
+  "type": "Checkpoint",
+  "number": "4.2.8",
+  "title": "Displacement vs. total distance.",
+  "body": " Displacement vs. total distance   Displacement  meters. Total distance traveled  meters.       Yes, meters of net displacement.       Yes, meters walked in total.     "
+},
+{
+  "id": "check-car-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-car-integral",
+  "type": "Checkpoint",
+  "number": "4.2.9",
+  "title": "Our car, one more time.",
+  "body": " Our car, one more time             Yes, meters — exactly what the antiderivative method gave us, and exactly what and were squeezing toward.      "
+},
+{
+  "id": "remark-ftc-preview",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#remark-ftc-preview",
+  "type": "Remark",
+  "number": "4.2.10",
+  "title": "Important question for next time.",
+  "body": " Important question for next time  Today we focused on what  means , not on using antiderivatives to compute it. But why does the antiderivative method give exactly the same answer as this accumulation method? That question is the whole subject of .  "
+},
+{
+  "id": "check-linearity",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-linearity",
+  "type": "Checkpoint",
+  "number": "4.2.11",
+  "title": "Adding two accumulations.",
+  "body": " Adding two accumulations            Yes, .     "
+},
+{
+  "id": "check-additivity",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-additivity",
+  "type": "Checkpoint",
+  "number": "4.2.12",
+  "title": "Breaking an interval apart.",
+  "body": " Breaking an interval apart   If and , then         Yes, .     "
+},
+{
+  "id": "check-units-interpret",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-units-interpret",
+  "type": "Checkpoint",
+  "number": "4.2.13",
+  "title": "Three integrals, three meanings.",
+  "body": " Three integrals, three meanings     , where is in meters per second. What does this represent, and in what units?  , where is a water-flow rate in liters per minute. What does this represent, and in what units?  , where is a cost rate in dollars per item. What does this represent, and in what units?        The net change in position (displacement) over the first seconds, measured in meters.  The net volume of water that flowed from minute to minute , measured in liters.  The total cost of the first items, measured in dollars.     "
+},
+{
+  "id": "try-piecewise-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#try-piecewise-integral",
+  "type": "Checkpoint",
+  "number": "4.2.14",
+  "title": "You do: geometry with two pieces.",
+  "body": " You do: geometry with two pieces   The graph of from to is a rectangle of height above the -axis from to , followed by a triangle of height below the -axis from to . Find the positive area , the magnitude of the area below the axis , the definite integral , and the total geometric area.     . . Total geometric area .   "
+},
+{
+  "id": "check-conceptual-definite-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#check-conceptual-definite-integral",
+  "type": "Checkpoint",
+  "number": "4.2.15",
+  "title": "Conceptual check.",
+  "body": " Conceptual check     What is the difference between a Riemann sum and a definite integral?  Is a number or a function?  If on , what does represent geometrically?  If part of the graph lies below the -axis, does that part contribute positively or negatively to the definite integral?  If , must everywhere on ? Explain.        A Riemann sum is a finite approximation using rectangles; the definite integral is the exact value that those sums approach as the number of rectangles goes to infinity.  A number.  The area between the curve and the -axis, over .  Negatively.  No — areas above and below the axis can cancel, as in the signed-area example earlier in this section.     "
+},
+{
+  "id": "exit-ticket-definite-integral",
+  "level": "2",
+  "url": "sec-5-2-definite-integral.html#exit-ticket-definite-integral",
+  "type": "Checkpoint",
+  "number": "4.2.16",
+  "title": "Exit ticket.",
+  "body": " Exit ticket     In your own words, what does a definite integral measure?  Complete the definition: .  Evaluate using geometry:  .  The graph of has area above the -axis and area below the axis on . Then  .  If is velocity, what does represent?         Yes, .       Yes, .        The exact net accumulation of a changing quantity, obtained by adding infinitely many infinitely thin contributions.  .  .  .  The net change in position (displacement) from time to time .     "
 },
 {
   "id": "sec-5-3-ftc",
