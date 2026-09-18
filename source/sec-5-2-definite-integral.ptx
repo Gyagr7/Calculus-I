@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-5-2-definite-integral" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Definite Integral</title>
+  <!-- Stewart 5.2 . Thu Sep 17 . Built from Handout 6 (The Definite Integral) in the
+       conversational handout voice. Written 2026-09-18.
+       NOTATION UNLOCK: the integral sign enters here for the first time in the book.
+       Everything before this section used only Riemann sums, sigma notation, and the
+       words "left/right/midpoint sum." Keep reusing the car (v(t) = 3t^2, answer 8)
+       and the x^2 triangle/area examples from sec-5-1-areas-distances so students see
+       the same numbers turn into integral notation. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-definite-integral">
+      <title>Today's Question</title>
+      <p>
+        How do we describe the <em>exact</em> accumulation we get once our
+        rectangles become infinitely thin?
+      </p>
+    </assemblage>
+    <p>
+      Last class we trapped the true change in our car's position between
+      <m>L_4 = 5.25</m> and <m>R_4 = 11.25</m>, and watched <m>L_n</m> and
+      <m>R_n</m> squeeze in on <m>8</m> as <m>n</m> grew. Today we make that
+      squeezing exact, and give it a name.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-5-2-from-approx-to-exact">
+    <title>From approximation to exact</title>
+
+    <p>
+      Recall the general recipe from <xref ref="sec-5-1-areas-distances"/>. For
+      <m>f</m> positive on <m>[a, b]</m>, split into <m>n</m> equal pieces of
+      width <m>\Delta x = \frac{b-a}{n}</m>, pick a point <m>x_i^*</m> in each
+      piece, and add up the rectangles:
+      <md>
+        \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+      </md>
+      With a small <m>n</m>, this is only an approximation. But as
+      <m>n \to \infty</m>, the rectangles get thinner and thinner, so
+      <m>\Delta x \to 0</m>. We <em>define</em> the exact accumulated value to be
+      the limit of these sums:
+      <md>
+        \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+      </md>
+    </p>
+    <p>
+      That expression is completely correct. It is also long to write every
+      single time. Mathematicians gave it a shorter name.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-notation">
+    <title>Give the process a name</title>
+
+    <p>
+      We write
+      <md>
+        \int_a^b f(x)\,dx
+      </md>
+      for that exact limiting accumulation:
+    </p>
+
+    <definition xml:id="def-definite-integral">
+      <title>Definite integral</title>
+      <statement>
+        <p>
+          <md>
+            \int_a^b f(x)\,dx \;=\; \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+          </md>
+          The symbol <m>\int</m> is called the <term>integral sign</term>. The
+          whole expression <m>\int_a^b f(x)\,dx</m> is called a
+          <term>definite integral</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <assemblage>
+      <title>What the new symbol buys you</title>
+      <p>
+        <m>\int_a^b f(x)\,dx</m> is nothing new mathematically &#8212; it is exactly
+        the limit of Riemann sums you have been computing since
+        <xref ref="sec-5-1-areas-distances"/>. It is only a shorter way to write
+        that limit.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-anatomy">
+    <title>Anatomy of a definite integral</title>
+
+    <p>
+      Look closely at <m>\int_a^b f(x)\,dx</m>. Every piece has a job:
+    </p>
+
+    <tabular halign="left">
+      <row header="yes">
+        <cell>Symbol</cell>
+        <cell>Meaning</cell>
+      </row>
+      <row><cell><m>a</m></cell><cell>where the accumulation starts</cell></row>
+      <row><cell><m>b</m></cell><cell>where the accumulation stops</cell></row>
+      <row><cell><m>f(x)</m></cell><cell>the height of one thin rectangle</cell></row>
+      <row><cell><m>dx</m></cell><cell>the (infinitely thin) width of one rectangle</cell></row>
+    </tabular>
+
+    <p>
+      An informal way to picture the pieces:
+      <md>
+        f(x)\,dx \;\approx\; \text{height} \times \text{tiny width},
+      </md>
+      so <m>\int_a^b f(x)\,dx</m> means: accumulate all of the tiny contributions
+      <m>f(x)\,dx</m> from <m>x = a</m> to <m>x = b</m>.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-is-a-number">
+    <title>Important: a definite integral is a number</title>
+
+    <p>
+      Look at <m>\int_0^4 x\,dx</m>. The bounds <m>0</m> and <m>4</m> are fixed,
+      so this expression represents one single accumulated amount.
+    </p>
+
+    <fact xml:id="fact-integral-is-a-number">
+      <title>A definite integral is a number</title>
+      <statement>
+        <p>
+          <m>\int_a^b f(x)\,dx</m> is a <em>number</em>, not a function of
+          <m>x</m>. Compare this to solving <m>F'(x) = x</m>, which asks for a
+          <em>function</em> <m>F</m>. These are related questions, but they are
+          not the same question.
+        </p>
+      </statement>
+    </fact>
+
+    <exercise xml:id="check-number-or-function">
+      <title>Number or function?</title>
+      <statement>
+        <p>Is <m>\int_a^b f(x)\,dx</m> a number, or a function?</p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>a number</p></statement>
+          <feedback><p>Right &#8212; once <m>a</m> and <m>b</m> are fixed, the integral is a single number.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>a function</p></statement>
+          <feedback><p>Not quite &#8212; once <m>a</m> and <m>b</m> are fixed, there is no variable left to plug in. Compare this to <m>F'(x) = x</m>, which really does ask for a function.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-geometry">
+    <title>Evaluate a definite integral using geometry</title>
+
+    <p>
+      Some definite integrals can be found without any limits at all &#8212; just
+      geometry.
+    </p>
+
+    <p>
+      Consider <m>\int_1^5 3\,dx</m>. The graph of <m>y = 3</m> from <m>x=1</m>
+      to <m>x=5</m> is a horizontal strip: a rectangle of width <m>4</m> and
+      height <m>3</m>.
+    </p>
+
+    <exercise xml:id="check-constant-integral" label="check-constant-integral">
+      <title>A rectangle</title>
+      <statement>
+        <p>
+          <m>\displaystyle\int_1^5 3\,dx =</m> <fillin answer="12" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. Width <m>4</m> times height <m>3</m> is <m>12</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Now consider <m>\int_0^4 x\,dx</m>. The graph of <m>y = x</m> from
+      <m>x=0</m> to <m>x=4</m> forms a triangle with base <m>4</m> and height
+      <m>4</m>.
+    </p>
+
+    <exercise xml:id="check-triangle-integral" label="check-triangle-integral">
+      <title>A triangle &#8212; and a familiar number</title>
+      <statement>
+        <p>
+          <m>\displaystyle\int_0^4 x\,dx =</m> <fillin answer="8" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes: <m>\tfrac12(4)(4) = 8</m>. That number <m>8</m> again &#8212; the
+                same number from our car. We did not need an antiderivative to get
+                it this time; we used geometry.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-signed-area">
+    <title>What if the graph goes below the axis?</title>
+
+    <p>
+      Suppose a graph forms a triangle of area <m>A_1 = 2</m> above the
+      <m>x</m>-axis on <m>[0,2]</m>, then a triangle of area <m>A_2 = 2</m>
+      below the axis on <m>[2,4]</m>.
+    </p>
+
+    <exercise xml:id="check-signed-area">
+      <title>Above and below</title>
+      <statement>
+        <p>
+          The region above the axis contributes <m>+A_1</m>, and the region
+          below the axis contributes <m>-A_2</m>. So
+          <m>\displaystyle\int_0^4 f(x)\,dx =</m> <fillin answer="0" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes: <m>2 - 2 = 0</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <fact xml:id="fact-signed-area">
+      <title>Definite integrals measure signed area</title>
+      <statement>
+        <p>
+          Area above the <m>x</m>-axis contributes positively. Area below the
+          <m>x</m>-axis contributes negatively.
+        </p>
+      </statement>
+    </fact>
+
+    <p>
+      Suppose instead the area above the axis is <m>7</m> and the area below is
+      <m>3</m>. The definite integral is the <term>net signed area</term>,
+      <m>7 - 3 = 4</m> &#8212; but the <term>total geometric area</term> is
+      <m>7 + 3 = 10</m>. In general,
+    </p>
+
+    <assemblage>
+      <title>Net area is not always total area</title>
+      <p>
+        <m>\displaystyle \text{definite integral} \ne \text{total area}</m>, in
+        general. Instead, <m>\displaystyle \text{definite integral} = \text{net signed area}</m>.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-velocity">
+    <title>Return to velocity</title>
+
+    <p>
+      If <m>v(t)</m> is a velocity function, then <m>\int_a^b v(t)\,dt</m>
+      represents the net change in position from time <m>a</m> to time <m>b</m>,
+      also called <term>displacement</term>. When <m>v(t) &gt; 0</m> the object
+      moves in the positive direction; when <m>v(t) &lt; 0</m> it moves in the
+      negative direction, and that motion is subtracted off.
+    </p>
+
+    <p>
+      Displacement is not the same as <term>total distance traveled</term>.
+      Suppose a particle moves <m>5</m> meters forward, then <m>2</m> meters
+      backward.
+    </p>
+
+    <exercise xml:id="check-displacement-vs-distance">
+      <title>Displacement vs. total distance</title>
+      <statement>
+        <p>
+          Displacement <m>= 5 - 2 =</m> <fillin answer="3" mode="number"/> meters.
+          Total distance traveled <m>= 5 + 2 =</m> <fillin answer="7" mode="number"/> meters.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>3</m> meters of net displacement.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>7</m> meters walked in total.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      A velocity integral naturally gives displacement, not total distance,
+      because the backward motion is counted as <em>negative</em> &#8212; the same
+      signed-area idea from a moment ago, now applied to motion.
+    </p>
+
+    <p>
+      Back to our car: <m>v(t) = 3t^2</m> for <m>0 \le t \le 2</m>. We can now
+      write the exact change in position as
+      <md>
+        \int_0^2 3t^2\,dt.
+      </md>
+      Read this aloud: &#8220;the integral from <m>0</m> to <m>2</m> of
+      <m>3t^2</m> with respect to <m>t</m>.&#8221; From our antiderivative work in
+      <xref ref="subsec-4-9-car"/>, we already know the answer.
+    </p>
+
+    <exercise xml:id="check-car-integral">
+      <title>Our car, one more time</title>
+      <statement>
+        <p>
+          <m>\displaystyle\int_0^2 3t^2\,dt =</m> <fillin answer="8" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes, <m>8</m> meters &#8212; exactly what the antiderivative method gave
+                us, and exactly what <m>L_n</m> and <m>R_n</m> were squeezing toward.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <remark xml:id="remark-ftc-preview">
+      <title>Important question for next time</title>
+      <p>
+        Today we focused on what <m>\int_0^2 3t^2\,dt</m> <em>means</em>, not on
+        using antiderivatives to compute it. But why does the antiderivative
+        method give <em>exactly</em> the same answer as this accumulation
+        method? That question is the whole subject of
+        <xref ref="sec-5-3-ftc"/>.
+      </p>
+    </remark>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-properties">
+    <title>Basic properties from common sense</title>
+
+    <p>
+      Suppose <m>\int_a^b f(x)\,dx = 10</m> and <m>\int_a^b g(x)\,dx = 4</m>.
+      Accumulating <m>f</m> and <m>g</m> together over the same interval should
+      just add the two accumulations:
+    </p>
+
+    <exercise xml:id="check-linearity">
+      <title>Adding two accumulations</title>
+      <statement>
+        <p>
+          <m>\displaystyle\int_a^b [f(x) + g(x)]\,dx =</m> <fillin answer="14" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>10 + 4 = 14</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      In general,
+      <md>
+        \int_a^b [f(x) + g(x)]\,dx = \int_a^b f(x)\,dx + \int_a^b g(x)\,dx.
+      </md>
+    </p>
+
+    <p>
+      Next: suppose <m>a &lt; c &lt; b</m>. Accumulating from <m>a</m> to
+      <m>c</m>, then from <m>c</m> to <m>b</m>, should give the same total as
+      accumulating directly from <m>a</m> to <m>b</m>:
+      <md>
+        \int_a^c f(x)\,dx + \int_c^b f(x)\,dx = \int_a^b f(x)\,dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-additivity">
+      <title>Breaking an interval apart</title>
+      <statement>
+        <p>
+          If <m>\int_0^2 f(x)\,dx = 5</m> and <m>\int_2^7 f(x)\,dx = 9</m>, then
+          <m>\displaystyle\int_0^7 f(x)\,dx =</m> <fillin answer="14" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>5 + 9 = 14</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Finally, what if we reverse direction? Suppose <m>\int_2^5 f(x)\,dx = 7</m>.
+      Reversing the direction of accumulation flips the sign:
+      <md>
+        \int_5^2 f(x)\,dx = -7, \qquad\text{and in general}\qquad \int_b^a f(x)\,dx = -\int_a^b f(x)\,dx.
+      </md>
+      And if we start and stop at the same place, nothing has accumulated:
+      <md>
+        \int_a^a f(x)\,dx = 0.
+      </md>
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-units">
+    <title>Interpret before you calculate</title>
+
+    <p>
+      A definite integral always has units: (units of <m>f</m>) times (units of
+      <m>x</m>). Before computing anything, get in the habit of asking what an
+      integral <em>means</em>.
+    </p>
+
+    <exercise xml:id="check-units-interpret">
+      <title>Three integrals, three meanings</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p><m>\int_0^6 v(t)\,dt</m>, where <m>v</m> is in meters per second. What does this represent, and in what units?</p></li>
+            <li><p><m>\int_2^8 r(t)\,dt</m>, where <m>r(t)</m> is a water-flow rate in liters per minute. What does this represent, and in what units?</p></li>
+            <li><p><m>\int_0^{10} c(x)\,dx</m>, where <m>c(x)</m> is a cost rate in dollars per item. What does this represent, and in what units?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>The net change in position (displacement) over the first <m>6</m> seconds, measured in meters.</p></li>
+            <li><p>The net volume of water that flowed from minute <m>2</m> to minute <m>8</m>, measured in liters.</p></li>
+            <li><p>The total cost of the first <m>10</m> items, measured in dollars.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-2-practice">
+    <title>Putting it together</title>
+
+    <exercise xml:id="try-piecewise-integral">
+      <title>You do: geometry with two pieces</title>
+      <statement>
+        <p>
+          The graph of <m>f</m> from <m>x=0</m> to <m>x=6</m> is a rectangle of
+          height <m>3</m> above the <m>x</m>-axis from <m>0</m> to <m>4</m>,
+          followed by a triangle of height <m>2</m> below the <m>x</m>-axis from
+          <m>4</m> to <m>6</m>. Find the positive area <m>A_1</m>, the magnitude
+          of the area below the axis <m>A_2</m>, the definite integral
+          <m>\int_0^6 f(x)\,dx</m>, and the total geometric area.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>A_1 = (4)(3) = 12</m>. <m>A_2 = \tfrac12(2)(2) = 2</m>.
+          <md>
+            \int_0^6 f(x)\,dx = A_1 - A_2 = 12 - 2 = 10.
+          </md>
+          Total geometric area <m>= A_1 + A_2 = 14</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-conceptual-definite-integral">
+      <title>Conceptual check</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>What is the difference between a Riemann sum and a definite integral?</p></li>
+            <li><p>Is <m>\int_a^b f(x)\,dx</m> a number or a function?</p></li>
+            <li><p>If <m>f(x) &gt; 0</m> on <m>[a,b]</m>, what does <m>\int_a^b f(x)\,dx</m> represent geometrically?</p></li>
+            <li><p>If part of the graph lies below the <m>x</m>-axis, does that part contribute positively or negatively to the definite integral?</p></li>
+            <li><p>If <m>\int_a^b f(x)\,dx = 0</m>, must <m>f(x) = 0</m> everywhere on <m>[a,b]</m>? Explain.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>A Riemann sum is a finite approximation using rectangles; the definite integral is the exact value that those sums approach as the number of rectangles goes to infinity.</p></li>
+            <li><p>A number.</p></li>
+            <li><p>The area between the curve and the <m>x</m>-axis, over <m>[a,b]</m>.</p></li>
+            <li><p>Negatively.</p></li>
+            <li><p>No &#8212; areas above and below the axis can cancel, as in the signed-area example earlier in this section.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-definite-integral">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>In your own words, what does a definite integral measure?</p></li>
+            <li><p>Complete the definition: <m>\int_a^b f(x)\,dx = \lim_{n\to\infty}\underline{\hspace{2.5cm}}</m>.</p></li>
+            <li><p>Evaluate using geometry: <m>\int_0^5 2\,dx =</m> <fillin answer="10" mode="number"/>.</p></li>
+            <li><p>The graph of <m>f</m> has area <m>9</m> above the <m>x</m>-axis and area <m>4</m> below the axis on <m>[a,b]</m>. Then <m>\int_a^b f(x)\,dx =</m> <fillin answer="5" mode="number"/>.</p></li>
+            <li><p>If <m>v(t)</m> is velocity, what does <m>\int_a^b v(t)\,dt</m> represent?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>2 \cdot 5 = 10</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>9 - 4 = 5</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+      <solution>
+        <p>
+          <ol>
+            <li><p>The exact net accumulation of a changing quantity, obtained by adding infinitely many infinitely thin contributions.</p></li>
+            <li><p><m>\sum_{i=1}^{n} f(x_i^*)\,\Delta x</m>.</p></li>
+            <li><p><m>10</m>.</p></li>
+            <li><p><m>5</m>.</p></li>
+            <li><p>The net change in position (displacement) from time <m>a</m> to time <m>b</m>.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Today's main idea</title>
+      <p>
+        A definite integral is the exact net accumulation obtained by adding
+        infinitely many tiny contributions:
+        <md>
+          \int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+        </md>
+        The integral tells us what has accumulated.
+      </p>
+      <p>
+        Next we discover why <em>antiderivatives</em> let us compute that
+        accumulation without ever taking a limit &#8212; the
+        <xref ref="sec-5-3-ftc" text="custom">Fundamental Theorem of Calculus</xref>.
+      </p>
+    </assemblage>
+  </subsection>
+</section>

@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-5-1-areas-distances" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Areas and Distances</title>
+  <!-- Stewart 5.1 . Tue Sep 15 . Built from Handout 5 (Areas and Distances) in the
+       conversational handout voice. Written 2026-09-18.
+       NOTATION QUARANTINE: no integral sign anywhere in this section. It enters in 5.2.
+       Keep the car example exactly as in Handout 4/5: v(t) = 3t^2, s(0) = 0, s(2) = 8.
+       This section is also the direct sequel to the "Guess How Far Pancake Ran" Doenet
+       pre-assignment students did before this class, same table, same L4/R4 numbers. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-areas-distances">
+      <title>Today's Question</title>
+      <p>
+        Can we get the change in position directly from the velocity
+        &#8212; without ever finding the position function?
+      </p>
+    </assemblage>
+    <p>
+      Remember our car? Velocity <m>v(t) = 3t^2</m> meters per second, starting at
+      <m>s(0) = 0</m>. In <xref ref="subsec-4-9-car"/> we worked backward: we found
+      an antiderivative <m>s(t) = t^3</m>, and then <m>s(2) - s(0) = 8</m> meters.
+    </p>
+    <p>
+      That method needed a formula for <m>s</m>. Today we ask what happens if we
+      only ever know the velocity, and never find <m>s</m> at all. For now, pretend
+      we do not know the position function.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-5-1-constant-velocity">
+    <title>Start with constant velocity</title>
+
+    <p>
+      Suppose a car travels at a constant <m>20</m> meters per second for
+      <m>3</m> seconds. How far does it go?
+    </p>
+
+    <exercise xml:id="check-constant-velocity-distance" label="check-constant-velocity-distance">
+      <title>Easy case</title>
+      <statement>
+        <p>
+          distance <m>=</m> <fillin answer="60" mode="number"/> meters
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>20 \cdot 3 = 60</m> meters.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Now graph the velocity: a flat line at height <m>20</m>, from <m>t = 0</m> to
+      <m>t = 3</m>. The region underneath it is a rectangle, with width <m>3</m>
+      and height <m>20</m>. Its area is also <m>60</m>.
+    </p>
+
+    <fact xml:id="fact-distance-is-area">
+      <title>Distance is area</title>
+      <statement>
+        <p>
+          When velocity is constant, distance traveled equals the area under the
+          velocity graph.
+        </p>
+      </statement>
+    </fact>
+
+    <p>
+      Why does this happen? Check the units:
+      <md>
+        \left(\frac{\text{meters}}{\text{second}}\right)(\text{seconds}) = \text{meters}.
+      </md>
+      Multiplying a rate by a length of time is exactly what finding the area of a
+      rectangle does: height times width.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-changing-velocity">
+    <title>But our car does not move at a constant velocity</title>
+
+    <p>
+      Return to <m>v(t) = 3t^2</m>. The velocity changes every instant, so we
+      cannot just multiply one velocity by <m>2</m> seconds.
+    </p>
+    <p>
+      What if we break the two seconds into smaller pieces, and pretend the
+      velocity is constant on each small piece? You may recognize this table from
+      your warm-up before class &#8212; dividing <m>0 \le t \le 2</m> into four equal
+      pieces of width <m>\Delta t = 0.5</m> gives:
+    </p>
+
+    <tabular halign="center">
+      <row header="yes">
+        <cell><m>t</m></cell>
+        <cell><m>0</m></cell>
+        <cell><m>0.5</m></cell>
+        <cell><m>1</m></cell>
+        <cell><m>1.5</m></cell>
+        <cell><m>2</m></cell>
+      </row>
+      <row>
+        <cell><m>v(t) = 3t^2</m></cell>
+        <cell><m>0</m></cell>
+        <cell><m>0.75</m></cell>
+        <cell><m>3</m></cell>
+        <cell><m>6.75</m></cell>
+        <cell><m>12</m></cell>
+      </row>
+    </tabular>
+
+    <p>
+      Over a short interval, we can pretend the velocity is approximately
+      constant. From <m>t = 0.5</m> to <m>t = 1</m>, the width is
+      <m>\Delta t = 0.5</m>. Using the velocity at the <em>start</em> of the
+      interval, <m>v(0.5) = 0.75</m>, the change in position is approximately
+      <md>
+        \Delta s \approx v(0.5)\,\Delta t = (0.75)(0.5) = 0.375 \text{ meters}.
+      </md>
+      Geometrically, this is the area of one thin rectangle.
+    </p>
+
+    <fact xml:id="fact-rectangle-approximates-change">
+      <title>One rectangle, one small change</title>
+      <statement>
+        <p>
+          rectangle area <m>=</m> (velocity)(time) <m>\approx</m> change in position.
+        </p>
+      </statement>
+    </fact>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-riemann-sums">
+    <title>Add the small changes together</title>
+
+    <p>
+      Use the velocity at the <em>left endpoint</em> of each of the four
+      intervals <m>[0, 0.5]</m>, <m>[0.5, 1]</m>, <m>[1, 1.5]</m>, <m>[1.5, 2]</m>.
+      This is called a <term>left-endpoint sum</term>, written <m>L_4</m>:
+      <md>
+        L_4 = v(0)(0.5) + v(0.5)(0.5) + v(1)(0.5) + v(1.5)(0.5).
+      </md>
+    </p>
+
+    <exercise xml:id="check-left-endpoint-sum" label="check-left-endpoint-sum">
+      <title>Compute L4</title>
+      <statement>
+        <p>
+          <m>L_4 =</m> <fillin answer="5.25" mode="number"/> meters
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes. <m>L_4 = 0.5(0 + 0.75 + 3 + 6.75) = 0.5(10.5) = 5.25</m> meters.
+                Because <m>v(t) = 3t^2</m> is increasing, each left-endpoint height is
+                the <em>smallest</em> velocity on its interval, so <m>L_4</m> is an
+                underestimate.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Now do the same thing with <em>right</em> endpoints:
+      <md>
+        R_4 = v(0.5)(0.5) + v(1)(0.5) + v(1.5)(0.5) + v(2)(0.5).
+      </md>
+    </p>
+
+    <exercise xml:id="check-right-endpoint-sum" label="check-right-endpoint-sum">
+      <title>Compute R4</title>
+      <statement>
+        <p>
+          <m>R_4 =</m> <fillin answer="11.25" mode="number"/> meters
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes. <m>R_4 = 0.5(0.75 + 3 + 6.75 + 12) = 0.5(22.5) = 11.25</m> meters.
+                This time each height is the largest velocity on its interval, so
+                <m>R_4</m> is an overestimate.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      So the true change in position is trapped:
+      <md>
+        5.25 \;\lt\; \text{change in position} \;\lt\; 11.25.
+      </md>
+    </p>
+
+    <assemblage xml:id="assemblage-8-is-trapped">
+      <title>There it is again</title>
+      <p>
+        Remember <xref ref="assemblage-remember-8" text="custom">the number 8</xref>
+        from our antiderivative work? It sits right between <m>5.25</m> and
+        <m>11.25</m>, exactly where it should.
+      </p>
+    </assemblage>
+
+    <p>
+      Can we do better than <m>L_4</m> and <m>R_4</m>? One idea: use the
+      <em>midpoint</em> of each interval instead of an endpoint.
+    </p>
+
+    <exercise xml:id="check-midpoint-sum" label="check-midpoint-sum">
+      <title>Compute M4</title>
+      <statement>
+        <p>
+          Using the midpoints <m>0.25</m>, <m>0.75</m>, <m>1.25</m>, <m>1.75</m>,
+          <md>
+            M_4 = 0.5\big[v(0.25) + v(0.75) + v(1.25) + v(1.75)\big].
+          </md>
+          <m>M_4 =</m> <fillin answer="7.875" mode="number"/> meters
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes. <m>M_4 = 0.5(0.1875 + 1.6875 + 4.6875 + 9.1875) = 0.5(15.75) = 7.875</m>
+                meters &#8212; noticeably closer to <m>8</m> than either <m>L_4</m> or <m>R_4</m>.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Drag <m>n</m> below to use more rectangles, and toggle the endpoint. Watch
+      what happens to the estimate as the rectangles get thinner.
+    </p>
+
+    <figure xml:id="fig-riemann-rectangles">
+      <caption>
+        Left- and right-endpoint rectangles under <m>v(t) = 3t^2</m> on <m>[0, 2]</m>.
+      </caption>
+      <interactive xml:id="interactive-riemann-rectangles" label="interactive-riemann-rectangles"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/riemann-rectangles.js">
+        <slate xml:id="interactive-riemann-rectangles-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            Drag <m>n</m> from <m>4</m> up toward <m>20</m>. Toggle the checkbox to
+            compare left- and right-endpoint rectangles. Where does the estimate head?
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="notice-more-rectangles">
+      <title>What did you notice?</title>
+      <statement>
+        <p>As <m>n</m> grows, what happens to the gap between <m>L_n</m> and <m>R_n</m>?</p>
+      </statement>
+      <solution>
+        <p>
+          The gap shrinks toward <m>0</m>, and both <m>L_n</m> and <m>R_n</m> squeeze in
+          on the same number: <m>8</m>.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-area-problem">
+    <title>The same idea, without any velocity at all</title>
+
+    <p>
+      Forget velocity for a moment. Suppose we want the area under
+      <m>f(x) = x^2</m> from <m>x = 0</m> to <m>x = 1</m>. This region is not a
+      rectangle, triangle, or circle, so there is no ready-made formula.
+    </p>
+    <p>
+      We do exactly what we just did: replace one hard region with many easy
+      rectangles. Divide <m>[0, 1]</m> into four equal pieces, so
+      <m>\Delta x = 0.25</m>. Using left endpoints,
+      <md>
+        L_4 = 0.25\left[0^2 + \left(\tfrac14\right)^2 + \left(\tfrac12\right)^2 + \left(\tfrac34\right)^2\right] = \tfrac{7}{32} = 0.21875.
+      </md>
+      Using right endpoints,
+      <md>
+        R_4 = 0.25\left[\left(\tfrac14\right)^2 + \left(\tfrac12\right)^2 + \left(\tfrac34\right)^2 + 1^2\right] = \tfrac{15}{32} = 0.46875.
+      </md>
+      Since <m>x^2</m> is increasing on <m>[0,1]</m>, <m>L_4 &lt; \text{actual area} &lt; R_4</m>.
+    </p>
+
+    <p>Compare the two situations side by side:</p>
+
+    <tabular halign="left">
+      <row header="yes">
+        <cell>Area problem</cell>
+        <cell>Distance problem</cell>
+      </row>
+      <row><cell>width <m>= \Delta x</m></cell><cell>time width <m>= \Delta t</m></cell></row>
+      <row><cell>height <m>= f(x)</m></cell><cell>height <m>= v(t)</m></cell></row>
+      <row><cell><m>f(x)\Delta x</m>: small rectangle area</cell><cell><m>v(t)\Delta t</m>: small change in position</cell></row>
+      <row><cell>add the rectangles</cell><cell>add the changes in position</cell></row>
+    </tabular>
+
+    <assemblage>
+      <title>The same rectangle sum, two different stories</title>
+      <p>
+        The same rectangle sum can represent an <em>area</em> under a curve, or an
+        accumulated physical quantity such as a <em>distance travelled</em>.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-general-recipe">
+    <title>The general rectangle recipe</title>
+
+    <p>
+      Suppose <m>f</m> is positive on <m>[a, b]</m>. Break the interval into
+      <m>n</m> equal pieces, each of width
+      <md>
+        \Delta x = \frac{b - a}{n}.
+      </md>
+      Inside each small interval, choose one point <m>x_i^*</m>. One rectangle has
+      area <m>f(x_i^*)\,\Delta x</m>. Adding all <m>n</m> rectangles gives
+      <md>
+        f(x_1^*)\Delta x + f(x_2^*)\Delta x + \cdots + f(x_n^*)\Delta x.
+      </md>
+    </p>
+
+    <definition xml:id="def-riemann-sum">
+      <title>Riemann sum</title>
+      <statement>
+        <p>
+          A sum of the form
+          <md>
+            \sum_{i=1}^{n} f(x_i^*)\,\Delta x
+          </md>
+          is called a <term>Riemann sum</term> for <m>f</m> on <m>[a, b]</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      What happens as we use more and more, thinner and thinner rectangles?
+      As <m>n \to \infty</m>, we have <m>\Delta x \to 0</m>, and our approximation
+      approaches the exact area:
+      <md>
+        A = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x.
+      </md>
+    </p>
+
+    <assemblage>
+      <title>Important idea</title>
+      <p>
+        We do not build rectangles because rectangles are the goal. We build
+        rectangles because their areas are easy to compute, and increasingly thin
+        rectangles let us capture a curved region exactly.
+      </p>
+    </assemblage>
+
+    <remark xml:id="remark-integral-notation-coming">
+      <title>A note on notation</title>
+      <p>
+        That limit expression is correct, but long. Next class we give it a much
+        shorter name &#8212; and along with it, a symbol you may already have seen
+        somewhere. We are saving it for <xref ref="sec-5-2-definite-integral"/> on
+        purpose, so you see exactly where it comes from first.
+      </p>
+    </remark>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-table-examples">
+    <title>When all we have is a table</title>
+
+    <p>
+      A cyclist's velocity is recorded every two seconds:
+    </p>
+
+    <tabular halign="center">
+      <row header="yes">
+        <cell><m>t</m> (s)</cell>
+        <cell><m>0</m></cell>
+        <cell><m>2</m></cell>
+        <cell><m>4</m></cell>
+        <cell><m>6</m></cell>
+        <cell><m>8</m></cell>
+      </row>
+      <row>
+        <cell><m>v(t)</m> (m/s)</cell>
+        <cell><m>2</m></cell>
+        <cell><m>4</m></cell>
+        <cell><m>7</m></cell>
+        <cell><m>9</m></cell>
+        <cell><m>10</m></cell>
+      </row>
+    </tabular>
+
+    <p>We have no formula for <m>v(t)</m>, but we can still estimate the distance.</p>
+
+    <exercise xml:id="check-cyclist-table" label="check-cyclist-table">
+      <title>Estimate from a table</title>
+      <statement>
+        <p>
+          Each interval has width <m>\Delta t = 2</m> seconds.
+          <m>L_4 =</m> <fillin answer="44" mode="number"/> meters, and
+          <m>R_4 =</m> <fillin answer="60" mode="number"/> meters.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>L_4 = 2(2 + 4 + 7 + 9) = 44</m> meters.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>R_4 = 2(4 + 7 + 9 + 10) = 60</m> meters.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Now suppose oil leaks from a tank at a <em>decreasing</em> rate:
+    </p>
+
+    <tabular halign="center">
+      <row header="yes">
+        <cell><m>t</m> (hours)</cell>
+        <cell><m>0</m></cell>
+        <cell><m>2</m></cell>
+        <cell><m>4</m></cell>
+        <cell><m>6</m></cell>
+      </row>
+      <row>
+        <cell><m>r(t)</m> (liters/hour)</cell>
+        <cell><m>10</m></cell>
+        <cell><m>8</m></cell>
+        <cell><m>7</m></cell>
+        <cell><m>5</m></cell>
+      </row>
+    </tabular>
+
+    <exercise xml:id="check-oil-leak-table" label="check-oil-leak-table">
+      <title>A decreasing rate</title>
+      <statement>
+        <p>
+          Using the rate at the <em>beginning</em> of each two-hour interval,
+          amount <m>\approx (10)(2) + (8)(2) + (7)(2) =</m>
+          <fillin answer="50" mode="number"/> liters.
+        </p>
+        <p>Since the rate is decreasing, is this an overestimate or an underestimate?</p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes, <m>50</m> liters. And because the rate is <em>decreasing</em>, using
+                the rate at the beginning of each interval means we always use the
+                <em>largest</em> rate on that interval &#8212; so this is an overestimate.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <fact xml:id="fact-unit-test">
+      <title>The unit test</title>
+      <statement>
+        <p>
+          One of the fastest ways to understand an accumulation problem is to
+          multiply the units: rate <m>\times</m> small input change <m>=</m> small
+          accumulated amount. This works whether the rate is
+          <m>\text{meters}/\text{second}</m>, <m>\text{liters}/\text{minute}</m>, or
+          <m>\text{dollars}/\text{item}</m>.
+        </p>
+      </statement>
+    </fact>
+  </subsection>
+
+  <subsection xml:id="subsec-5-1-practice">
+    <title>Putting it together</title>
+
+    <exercise xml:id="try-right-endpoint-sum">
+      <title>You do: a right-endpoint estimate</title>
+      <statement>
+        <p>
+          Estimate the area under <m>f(x) = x^2 + 1</m> from <m>x = 0</m> to
+          <m>x = 2</m> using four right-endpoint rectangles.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>\Delta x = \tfrac{2 - 0}{4} = 0.5</m>, with right endpoints
+          <m>0.5, 1, 1.5, 2</m>.
+          <md>
+            R_4 = 0.5\big[f(0.5) + f(1) + f(1.5) + f(2)\big] = 0.5(1.25 + 2 + 3.25 + 5) = 5.75.
+          </md>
+          Since <m>f</m> is increasing on <m>[0, 2]</m>, this is an overestimate.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-conceptual-areas-distances">
+      <title>Conceptual check</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>Why does a rectangle under a velocity graph represent a distance?</p></li>
+            <li><p>What does making the rectangles thinner accomplish?</p></li>
+            <li><p>For an increasing function, which gives the larger estimate: left endpoints or right endpoints?</p></li>
+            <li><p>If a quantity changes at rate <m>r(t)</m>, what does <m>r(t)\Delta t</m> approximately represent? What does <em>adding</em> many such terms represent?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Multiplying velocity by a time width gives (rate)(time) <m>=</m> distance, which is exactly a rectangle's area.</p></li>
+            <li><p>Thinner rectangles hug the curve more closely, so the approximation gets more accurate.</p></li>
+            <li><p>Right endpoints give the larger estimate, since the function's largest value on each interval sits at the right edge.</p></li>
+            <li><p><m>r(t)\Delta t</m> approximates one small accumulated amount. Adding many of them approximates the total accumulated amount.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-areas-distances">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>A car travels at <m>30</m> ft/s for <m>4</m> seconds. How far does it travel?</p></li>
+            <li><p>A velocity graph is divided into rectangles of width <m>0.2</m> seconds. One rectangle has height <m>15</m> ft/s. What physical quantity does <m>(15)(0.2)</m> represent?</p></li>
+            <li><p>If a positive function is increasing, is a left-endpoint sum usually an underestimate or an overestimate?</p></li>
+            <li><p>In your own words, why can rectangles help us find the area under a curve?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p><m>30 \cdot 4 = 120</m> feet.</p></li>
+            <li><p><m>3</m> feet &#8212; the distance travelled during that <m>0.2</m>-second interval.</p></li>
+            <li><p>An underestimate, since the left edge holds the smallest value on an increasing function.</p></li>
+            <li><p>Because a curved region can be approximated as closely as we like by many thin rectangles, whose areas we already know how to compute.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Today's main idea</title>
+      <p>
+        A changing quantity can be accumulated by breaking time or space into small
+        pieces, approximating each piece with a rectangle, and adding:
+        rate <m>\times</m> small interval <m>\approx</m> small accumulated amount.
+      </p>
+      <p>
+        One method works backward from the rate, using an antiderivative. The other
+        method adds up the rate, using increasingly thin rectangles. Soon we will
+        discover why these two methods give exactly the same answer.
+      </p>
+    </assemblage>
+  </subsection>
+</section>

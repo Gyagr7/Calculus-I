@@ -5,21 +5,9 @@
     <p>[TODO: overview -- this chapter builds the definite integral from scratch and connects it back to antiderivatives via the Fundamental Theorem of Calculus. Stewart Sec. 5.1-5.5.]</p>
   </introduction>
 
-  <section xml:id="sec-5-1-areas-distances">
-    <title>Areas and Distances</title>
-    <!-- Session 7 . Tue Sep 15 . Stewart Sec. 5.1 . Quiz 2 on Sep 15 (Skills 5-6) -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+  <xi:include href="./sec-5-1-areas-distances.ptx"/>
 
-  <section xml:id="sec-5-2-definite-integral">
-    <title>The Definite Integral</title>
-    <!-- Session 8 . Thu Sep 17 . Stewart Sec. 5.2 . HW3 assigned -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+  <xi:include href="./sec-5-2-definite-integral.ptx"/>
 
   <section xml:id="sec-5-3-ftc">
     <title>The Fundamental Theorem of Calculus</title>
