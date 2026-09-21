@@ -61,7 +61,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.6",
   "title": "Tue Sep 22: The Fundamental Theorem, Part 1",
-  "body": " Tue Sep 22: The Fundamental Theorem, Part 1  Today in class: (Stewart 5.3).   Think about this  You found the number twice. Once by running a derivative backward. Once by adding up rectangles.  Coincidence? Come to class with a guess for why.    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "body": " Tue Sep 22: The Fundamental Theorem, Part 1  Today in class: (Stewart 5.3).   Think about this  You found the number twice. Once by running a derivative backward. Once by adding up rectangles.  Coincidence? Come to class with a guess for why.    Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-sep-24",
