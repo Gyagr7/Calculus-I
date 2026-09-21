@@ -31,6 +31,14 @@
 </p>
 
 <p>
+  Notice something: it does not matter how big or small a step you look
+  at here &#8212; one whole meter, half a meter, a centimeter. The rate is
+  always exactly <m>3</m>, because the height never changes. That is what
+  makes a constant height easy. On the next wall, the height keeps
+  changing, so watch closely for whether the rate stays this simple.
+</p>
+
+<p>
   On the second wall, the paint gets taller as Pancake goes:
   <m>f(t) = 2t</m>. Now the painted region is a triangle. Drag the slider
   to move Pancake and watch the painted area change.
@@ -74,6 +82,44 @@
   <label>The derivative of the area function</label>
   <award>2x</award>
 </answer>
+
+<p>
+  Let's watch that growth rate directly instead of just guessing it. Drag
+  <m>x</m> to move Pancake, and use <m>\Delta x</m> to control how wide a
+  thin strip of new paint we look at.
+</p>
+
+<p>Pancake's position: <slider name="x2" from="0" to="4" step="0.5" initialValue="2" /></p>
+<p>Strip width <m>\Delta x</m>: <slider name="dx" from="0.1" to="1" step="0.1" initialValue="0.5" /></p>
+
+<graph xmin="-0.5" xmax="5.5" ymin="-0.5" ymax="12">
+  <description>A graph of the line y equals 2x. A shaded triangle shows the total painted area from 0 up to x. A second, thinner strip shows the extra area painted while moving from x to x plus delta x.</description>
+  <function>2x</function>
+  <polygon vertices="(0,0) ($x2,0) ($x2,2$x2)" />
+  <polygon vertices="($x2,0) ($x2+$dx,0) ($x2+$dx,2($x2+$dx)) ($x2,2$x2)" />
+  <point>($x2, 0)</point>
+</graph>
+
+<p>
+  New paint added <m>= A(x + \Delta x) - A(x) =</m>
+  <number>(($x2+$dx)^2 - $x2^2)</number> square meters, over a width of
+  <m>\Delta x =</m> <number>$dx</number> meters.
+  Rate of growth <m>= \dfrac{\Delta A}{\Delta x} =</m>
+  <number>(($x2+$dx)^2 - $x2^2)/$dx</number>.
+</p>
+
+<p>
+  Compare that rate to the paint height right at <m>x</m>, which is
+  <m>f(x) = 2x =</m> <number>2$x2</number>. Now slide <m>\Delta x</m> as
+  small as it goes. What happens to the rate?
+</p>
+
+<p>
+  Unlike Wall 1, this rate is <em>not</em> always <m>2x</m> &#8212; it only
+  gets close to <m>2x</m> once <m>\Delta x</m> is small. Squeezing
+  <m>\Delta x</m> down toward <m>0</m> and watching the rate settle on one
+  number is exactly what a derivative <em>is</em>.
+</p>
 
 <p>
   Now look back. On the first wall, the paint height was <m>3</m> and the
