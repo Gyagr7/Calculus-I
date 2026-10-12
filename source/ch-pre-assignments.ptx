@@ -173,8 +173,17 @@
     </p>
   </section>
 
-  <section xml:id="sec-pre-assignment-oct-01">
-    <title>Thu Oct 1: The Substitution Rule, Part 1</title>
+  <section xml:id="sec-pre-assignment-oct-06">
+    <title>Tue Oct 6: Test 1</title>
+    <assemblage>
+      <title>Before class</title>
+      <p>No pre-assignment today.</p>
+      <p>Test 1 covers everything since the start of the semester through the Net Change Theorem. Get some sleep.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-pre-assignment-oct-13">
+    <title>Tue Oct 13: The Substitution Rule</title>
     <p>
       Today in class: <xref ref="sec-5-5-substitution" text="title"/> (Stewart 5.5).
     </p>
@@ -190,24 +199,8 @@
     </p>
   </section>
 
-  <section xml:id="sec-pre-assignment-oct-06">
-    <title>Tue Oct 6: The Substitution Rule, Part 2</title>
-    <p>
-      Today in class: <xref ref="sec-5-5-substitution" text="title"/> (Stewart 5.5).
-    </p>
-    <assemblage>
-      <title>Think about this</title>
-      <p>When you swap one variable for another, the function changes. What should happen to the starting and ending values?</p>
-      <p>Make a prediction. We will test it in class.</p>
-    </assemblage>
-    <p>
-      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
-      About 10 minutes, completion credit.
-    </p>
-  </section>
-
-  <section xml:id="sec-pre-assignment-oct-13">
-    <title>Tue Oct 13: Areas Between Curves</title>
+  <section xml:id="sec-pre-assignment-oct-15">
+    <title>Thu Oct 15: Areas Between Curves</title>
     <p>
       Today in class: <xref ref="sec-6-1-areas-between-curves" text="title"/> (Stewart 6.1).
     </p>
@@ -222,31 +215,15 @@
     </p>
   </section>
 
-  <section xml:id="sec-pre-assignment-oct-15">
-    <title>Thu Oct 15: Volumes: The Disk Method</title>
-    <p>
-      Today in class: <xref ref="sec-6-2-volumes" text="title"/> (Stewart 6.2).
-    </p>
-    <assemblage>
-      <title>Think about this</title>
-      <p>Slice a loaf of bread. Each slice is almost a thin cylinder.</p>
-      <p>If you know the volume of one slice, how do you get the volume of the whole loaf?</p>
-    </assemblage>
-    <p>
-      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
-      About 10 minutes, completion credit.
-    </p>
-  </section>
-
   <section xml:id="sec-pre-assignment-oct-20">
-    <title>Tue Oct 20: Volumes: The Washer Method</title>
+    <title>Tue Oct 20: Volumes: Disks and Washers</title>
     <p>
       Today in class: <xref ref="sec-6-2-volumes" text="title"/> (Stewart 6.2).
     </p>
     <assemblage>
       <title>Think about this</title>
-      <p>Now slice a bagel. Every slice has a hole in the middle.</p>
-      <p>How would you change your loaf-of-bread idea to handle the hole?</p>
+      <p>Slice a loaf of bread. Each slice is almost a thin cylinder. If you know the volume of one slice, how do you get the volume of the whole loaf?</p>
+      <p>Now slice a bagel instead. Every slice has a hole in the middle. How would you change your loaf-of-bread idea to handle the hole?</p>
     </assemblage>
     <p>
       <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
@@ -255,32 +232,14 @@
   </section>
 
   <section xml:id="sec-pre-assignment-oct-22">
-    <title>Thu Oct 22: Midterm Review</title>
-    <assemblage>
-      <title>Before class</title>
-      <p>No new topic today, so no Doenet warm-up.</p>
-      <p>Look back over everything since the start of the semester. Bring the two topics you feel least sure about.</p>
-    </assemblage>
-  </section>
-
-  <section xml:id="sec-pre-assignment-oct-27">
-    <title>Tue Oct 27: Midterm</title>
-    <assemblage>
-      <title>Before class</title>
-      <p>No pre-assignment today.</p>
-      <p>Get some sleep. You have been practicing every one of these ideas since August.</p>
-    </assemblage>
-  </section>
-
-  <section xml:id="sec-pre-assignment-oct-29">
-    <title>Thu Oct 29: Volumes: The Shell Method, Part 1</title>
+    <title>Thu Oct 22: Volumes: The Shell Method</title>
     <p>
       Today in class: <xref ref="sec-6-3-cylindrical-shells" text="title"/> (Stewart 6.3).
     </p>
     <assemblage>
       <title>Think about this</title>
       <p>So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?</p>
-      <p>Could that ever be easier?</p>
+      <p>Could that ever be easier? Disks and shells can both work on the same solid -- what would make you pick one over the other?</p>
     </assemblage>
     <p>
       <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
@@ -288,31 +247,15 @@
     </p>
   </section>
 
-  <section xml:id="sec-pre-assignment-nov-03">
-    <title>Tue Nov 3: Volumes: The Shell Method, Part 2</title>
-    <p>
-      Today in class: <xref ref="sec-6-3-cylindrical-shells" text="title"/> (Stewart 6.3).
-    </p>
-    <assemblage>
-      <title>Think about this</title>
-      <p>Disks or shells? For the same solid, you can often do either.</p>
-      <p>What would make you pick one over the other?</p>
-    </assemblage>
-    <p>
-      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
-      About 10 minutes, completion credit.
-    </p>
-  </section>
-
-  <section xml:id="sec-pre-assignment-nov-05">
-    <title>Thu Nov 5: Work: Springs</title>
+  <section xml:id="sec-pre-assignment-oct-27">
+    <title>Tue Oct 27: Work</title>
     <p>
       Today in class: <xref ref="sec-6-4-work" text="title"/> (Stewart 6.4).
     </p>
     <assemblage>
       <title>Think about this</title>
-      <p>Stretching a spring gets harder the farther you pull.</p>
-      <p>If the force keeps changing, how can you measure the total effort?</p>
+      <p>Stretching a spring gets harder the farther you pull. If the force keeps changing, how can you measure the total effort?</p>
+      <p>Now picture pumping all the water out over the top of a full tank. Why is the water at the bottom harder to pump out than the water at the top?</p>
     </assemblage>
     <p>
       <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
@@ -320,24 +263,8 @@
     </p>
   </section>
 
-  <section xml:id="sec-pre-assignment-nov-10">
-    <title>Tue Nov 10: Work: Pumping Liquids</title>
-    <p>
-      Today in class: <xref ref="sec-6-4-work" text="title"/> (Stewart 6.4).
-    </p>
-    <assemblage>
-      <title>Think about this</title>
-      <p>You need to pump all the water out over the top of a full tank.</p>
-      <p>Why is the water at the bottom harder to pump out than the water at the top?</p>
-    </assemblage>
-    <p>
-      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
-      About 10 minutes, completion credit.
-    </p>
-  </section>
-
-  <section xml:id="sec-pre-assignment-nov-12">
-    <title>Thu Nov 12: Average Value of a Function</title>
+  <section xml:id="sec-pre-assignment-oct-29">
+    <title>Thu Oct 29: Average Value of a Function</title>
     <p>
       Today in class: <xref ref="sec-6-5-average-value" text="title"/> (Stewart 6.5).
     </p>
@@ -351,6 +278,13 @@
       About 10 minutes, completion credit.
     </p>
   </section>
+
+  <!-- TODO (2026-10-12): Chapter 6 (6.1-6.5) now finishes Thu Oct 29, about two
+       and a half weeks earlier than the original plan. The sections below this
+       comment (previously dated Nov 17 onward) still carry their old, stale
+       dates. What actually fills Oct 30 through mid-November (Board
+       Presentations? moving straight into Chapter 8?) has not been confirmed
+       with G yet. Do not treat the dates below as current. -->
 
   <section xml:id="sec-pre-assignment-nov-17">
     <title>Tue Nov 17: Board Presentations, Day 1</title>
