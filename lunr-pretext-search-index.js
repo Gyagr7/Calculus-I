@@ -88,7 +88,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.9",
   "title": "Thu Oct 1: The Substitution Rule, Part 1",
-  "body": " Thu Oct 1: The Substitution Rule, Part 1  Today in class: (Stewart 5.5).   Think about this  The Chain Rule turns into .  If you saw that pattern hiding inside a function, could you run the Chain Rule backward?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "body": " Thu Oct 1: The Substitution Rule, Part 1  Today in class: (Stewart 5.5).   Think about this  The Chain Rule turns into .  If you saw that pattern hiding inside a function, could you run the Chain Rule backward?    Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-06",
