@@ -1249,7 +1249,97 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.3",
   "title": "The Fundamental Theorem of Calculus",
-  "body": " The Fundamental Theorem of Calculus   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " The Fundamental Theorem of Calculus     Today's Question  Two different jobs — differentiating and accumulating — keep landing on the same answers. Is that a coincidence?   Pancake has been rolling paint onto walls since , and measuring the area since . Today she notices something her coach cannot ignore: every time she works out how fast the painted area is growing, she lands right back on the roller's speed . That is either an enormous coincidence, or it is a theorem.    Pancake's conjecture  Remember the two walls. On Wall 1, the roller moves at a constant speed , and the painted area after feet is . On Wall 2, the roller speeds up as it goes, , and the painted area is .  Now differentiate each area function.   Differentiate the area functions   For Wall 1, , so  . For Wall 2, , so , and at that is .       Yes — , exactly the roller speed .       Yes — , exactly the roller speed at that instant.      Both times, differentiating the accumulated area handed back the roller speed we started with. Pancake's conjecture:   Pancake's conjecture  If is the area painted up to position , then . Accumulating and then differentiating undoes itself.   Two examples are not a proof. We need to see why this has to be true for any reasonable , not just these two.    Look at one tiny piece of new area  Let be the area accumulated from up to , for some fixed starting point . Now step forward by a small amount . The new area is the old area plus one thin strip: a sliver running from to .  When is small, that sliver is almost a rectangle: its width is , and its height is approximately , the value of the roller speed right at the left edge of the strip. So This is exactly the running-triangle-plus-trapezoid-strip picture from the FTC paint-roller activity: the new paint added in one step is close to (rate) (step size), and the approximation gets better and better as the step shrinks.    Turn the area change into a rate  Divide both sides of by : That left-hand side should look familiar — it is exactly the difference quotient from the definition of the derivative. Let :   This is exactly the slider demonstration from the Doenet pre-assignment: on Wall 1 the rate sat still at no matter the step size, while on Wall 2 the rate only settled on once was squeezed down toward . Squeezing is precisely what turns an approximation into an exact derivative.   Pancake's conjecture, proved   If is the accumulated area up to , then . This is no longer a guess — it follows from the definition of the derivative applied to one thin strip.      Write the accumulation function using integral notation  We already have a name for the accumulated area: it is a definite integral with a variable upper bound, (The variable inside is renamed so it is not confused with the upper bound .) Combining this with gives the first part of the Fundamental Theorem of Calculus.   Fundamental Theorem of Calculus, Part 1   If is continuous and , then In words: differentiating an accumulation function gives back the rate you started with.      What is so “fundamental” about it?  Derivatives measure instantaneous change . Integrals measure total accumulation . These sound like opposite jobs — one zooms in, the other adds up. The Fundamental Theorem says they are secretly inverse operations: accumulate, then differentiate, and you land right back where you started. It is the calculus version of “undo a sum by subtracting.”  There is a second consequence worth naming right away: since , the accumulation function is itself an antiderivative of . That one observation is about to unlock every definite integral we could not evaluate by geometry alone.    Three accumulation functions   . A constant-height strip of height out to has area , so — exactly .   . This is the familiar triangle: , so — exactly .  Now a function with no obvious geometric shortcut: . Nothing about this region is a triangle or a rectangle, so geometry alone will not evaluate it. But FTC Part 1 does not care — it never asked us to compute the integral at all.   Differentiate without integrating   If , then . What is ?         Yes, . We found the exact rate at which the painted area is growing at , without ever computing the area itself.         From accumulation to a computation formula  FTC Part 1 tells us is an antiderivative of . But in we learned that any two antiderivatives of the same differ only by a constant. So if is any antiderivative we already know how to find (power rule, trig rule, whatever), then for some constant .  We can pin down using the one value of we already know for free: , since accumulating from to accumulates nothing. So , which means . Substituting back,   Nothing stops us from letting the ending point be any value instead of a generic . That gives the computational form of the theorem.   Fundamental Theorem of Calculus, Part 2   If is any antiderivative of a continuous function (that is, ), then     This one formula is the reason we spent all of building up antiderivative rules: every one of those rules now evaluates a definite integral instantly, with no limits and no rectangles.    The evaluation bar  Writing over and over gets repetitive, so we abbreviate it with an evaluation bar:   Worked example: evaluate . An antiderivative of is , so    You do: compute with FTC Part 2       using :      using :           Yes: .       Yes: .        Return to the car  Back in , the car with velocity gave displacement using the antiderivative . Back in , the same car gave as the limit of Riemann sums squeezing tighter and tighter. Two completely different procedures — one algebraic, one about rectangles — landed on the exact same number.  That was never a coincidence. FTC Part 2 is why it had to come out the same way both times: The antiderivative method is not a different answer to a different question. It is a shortcut for computing the exact Riemann-sum limit, guaranteed by the Fundamental Theorem.    What happened to the ?  You might expect to carry a leftover constant. It does not, and it is worth seeing exactly why.  If we used instead of as our antiderivative, The constant appears in both terms and cancels exactly. So it never matters which antiderivative you pick — and there is never any need to write when evaluating a definite integral.   Spot the error   A student writes . What went wrong?      A definite integral is a number , not a family of functions — the bounds must be used. The correct computation is .   Right. No bounds were ever plugged in, and never belongs on a definite integral.     Nothing — is a correct antiderivative of .   It is a correct antiderivative, but the question asked for a definite integral — a single number found by evaluating at the bounds, not a family of functions.       Putting it together   Conceptual check     In your own words, what does FTC Part 1 say about the relationship between accumulating and differentiating?  Why is the accumulation function itself an antiderivative of ?  Why does never appear in the final answer to a definite integral?        Differentiating an accumulation function gives back the exact rate that was being accumulated: .  Because FTC Part 1 says , which is exactly the defining property of an antiderivative.  Because the constant appears in both and , and subtracting cancels it.       Exit ticket, part 1   If , then ?      Yes — by FTC Part 1, differentiating the accumulation function just hands back the integrand.     That is an antiderivative of , which is a different question from . FTC Part 1 says is just the integrand itself.     Not quite — that would be the derivative of alone, but the integrand here is .      Exit ticket, part 2            Yes, . Our car's number, one more time.       Today's main idea  The Fundamental Theorem of Calculus ties the two halves of this chapter together: Differentiating undoes accumulating. And once we know any single antiderivative, every definite integral becomes a two-step subtraction — no limits required.  Next question: when there are no bounds at all, what does even mean, and how is it different from everything we just did? That is Indefinite Integrals and the Net Change Theorem .    "
+},
+{
+  "id": "check-wall-derivatives",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#check-wall-derivatives",
+  "type": "Checkpoint",
+  "number": "4.3.1",
+  "title": "Differentiate the area functions.",
+  "body": " Differentiate the area functions   For Wall 1, , so  . For Wall 2, , so , and at that is .       Yes — , exactly the roller speed .       Yes — , exactly the roller speed at that instant.     "
+},
+{
+  "id": "fact-ftc-part-1-informal",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#fact-ftc-part-1-informal",
+  "type": "Fact",
+  "number": "4.3.2",
+  "title": "Pancake’s conjecture, proved.",
+  "body": " Pancake's conjecture, proved   If is the accumulated area up to , then . This is no longer a guess — it follows from the definition of the derivative applied to one thin strip.   "
+},
+{
+  "id": "def-ftc-part-1",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#def-ftc-part-1",
+  "type": "Definition",
+  "number": "4.3.3",
+  "title": "Fundamental Theorem of Calculus, Part 1.",
+  "body": " Fundamental Theorem of Calculus, Part 1   If is continuous and , then In words: differentiating an accumulation function gives back the rate you started with.   "
+},
+{
+  "id": "check-ftc1-no-geometry",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#check-ftc1-no-geometry",
+  "type": "Checkpoint",
+  "number": "4.3.4",
+  "title": "Differentiate without integrating.",
+  "body": " Differentiate without integrating   If , then . What is ?         Yes, . We found the exact rate at which the painted area is growing at , without ever computing the area itself.      "
+},
+{
+  "id": "def-ftc-part-2",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#def-ftc-part-2",
+  "type": "Definition",
+  "number": "4.3.5",
+  "title": "Fundamental Theorem of Calculus, Part 2.",
+  "body": " Fundamental Theorem of Calculus, Part 2   If is any antiderivative of a continuous function (that is, ), then    "
+},
+{
+  "id": "try-ftc-computation",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#try-ftc-computation",
+  "type": "Checkpoint",
+  "number": "4.3.6",
+  "title": "You do: compute with FTC Part 2.",
+  "body": " You do: compute with FTC Part 2       using :      using :           Yes: .       Yes: .     "
+},
+{
+  "id": "check-no-plus-c",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#check-no-plus-c",
+  "type": "Checkpoint",
+  "number": "4.3.7",
+  "title": "Spot the error.",
+  "body": " Spot the error   A student writes . What went wrong?      A definite integral is a number , not a family of functions — the bounds must be used. The correct computation is .   Right. No bounds were ever plugged in, and never belongs on a definite integral.     Nothing — is a correct antiderivative of .   It is a correct antiderivative, but the question asked for a definite integral — a single number found by evaluating at the bounds, not a family of functions.    "
+},
+{
+  "id": "check-ftc-conceptual",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#check-ftc-conceptual",
+  "type": "Checkpoint",
+  "number": "4.3.8",
+  "title": "Conceptual check.",
+  "body": " Conceptual check     In your own words, what does FTC Part 1 say about the relationship between accumulating and differentiating?  Why is the accumulation function itself an antiderivative of ?  Why does never appear in the final answer to a definite integral?        Differentiating an accumulation function gives back the exact rate that was being accumulated: .  Because FTC Part 1 says , which is exactly the defining property of an antiderivative.  Because the constant appears in both and , and subtracting cancels it.     "
+},
+{
+  "id": "exit-ticket-ftc-1",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#exit-ticket-ftc-1",
+  "type": "Checkpoint",
+  "number": "4.3.9",
+  "title": "Exit ticket, part 1.",
+  "body": " Exit ticket, part 1   If , then ?      Yes — by FTC Part 1, differentiating the accumulation function just hands back the integrand.     That is an antiderivative of , which is a different question from . FTC Part 1 says is just the integrand itself.     Not quite — that would be the derivative of alone, but the integrand here is .    "
+},
+{
+  "id": "exit-ticket-ftc-2",
+  "level": "2",
+  "url": "sec-5-3-ftc.html#exit-ticket-ftc-2",
+  "type": "Checkpoint",
+  "number": "4.3.10",
+  "title": "Exit ticket, part 2.",
+  "body": " Exit ticket, part 2            Yes, . Our car's number, one more time.     "
 },
 {
   "id": "sec-5-4-indefinite-net-change",
@@ -1258,7 +1348,106 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.4",
   "title": "Indefinite Integrals and the Net Change Theorem",
-  "body": " Indefinite Integrals and the Net Change Theorem   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Indefinite Integrals and the Net Change Theorem     Today's Question  When do we want a function , and when do we want an accumulated amount ?   Consider the rate . Here are two questions that sound similar but are not the same question at all:  Question A: find all functions whose derivative is .  Question B: find the accumulated amount from to .  Question A wants a function — really, a whole family of them. Question B wants a single number. We already answered Question B in : . Today we give Question A its own notation, and get precise about why these two questions need two different tools.    Indefinite integral: find the family  Suppose , so is an antiderivative of . We now give the family of all antiderivatives its own symbol, dropping the bounds entirely:   Indefinite integral    where and is an arbitrary constant. This is called an indefinite integral .    For example, . Why the ? Because , but so does and . Every one of these is an equally correct answer to “find a function whose derivative is ,” so the indefinite integral represents all of them at once : an entire family of antiderivatives.   Indefinite integral, at a glance   . No bounds. The answer is a family of functions. Always include .     Side by side with the definite integral  Compare this new symbol to the one from and :    Indefinite integral  Definite integral   no bounds has bounds  answer is a family of functions answer is a number  include never include  recover a quantity from its rate find net accumulation over an interval   One question settles which tool to reach for:   The question to ask  Do I need a function , or do I need the total change over an interval?    Which one should I use?   For each situation, is the right tool an indefinite integral or a definite integral?  The velocity of a car is known. Find a formula for its position.  Water flows into a tank at rate . Find how much water enters between and .  The marginal cost is . Find the change in cost from producing 100 items to 150 items.        Indefinite integral — “a formula” asks for a function.  Definite integral — “between and ” asks for net change over an interval.  Definite integral — “the change from…to…” asks for net change over an interval.        Indefinite integral toolkit  Finding an indefinite integral means reversing a derivative rule you already know.    Derivative rule  Integral rule           None of these need to be memorized as isolated facts — every single one can be checked by differentiating the right-hand side and confirming it matches the left.  Roots and fractions are usually easier to integrate once they are rewritten with exponents, exactly as in derivative work. For example,    Rewrite first, integrate second  One exception never to forget: . The power rule for integration explicitly excludes — it would require dividing by . That special case is exactly where the logarithm rule takes over.    You do: algebraic integrals     Find .  Find .              To check any indefinite integral, differentiate your answer and make sure it reproduces the original integrand — the same habit of checking antiderivatives from .    From rate to quantity: one rate, two questions  Suppose a car has velocity .   Question A: find the position function. Since , we need an indefinite integral: If we also know , then , pinning down one member of the family: .   Question B: find the displacement from to . Now we need a definite integral:    Same rate, different question   The displacement for the car above is units.       Yes, units — notice this required bounds and no , while finding required an initial condition and did carry a .       Same rate function, different question  Need the quantity as a function? Indefinite integral (plus an initial condition, if you have one). Need the change over an interval? Definite integral.     The net change theorem  Let be any quantity and its rate of change. FTC Part 2, applied to instead of a generic , says   Net change theorem    In words: the integral of the rate equals the net change in the quantity. Equivalently, or: final amount equals initial amount plus net change.    This is nothing new mathematically — it is FTC Part 2 again — but the “final initial change” framing is exactly how these integrals show up in applications.    Applications: final = initial + net change  A tank initially contains liters of water. Water enters at the rate liters per minute for . This is exactly the setup behind the Doenet pre-assignment on Pancake's water trough.   Water in a tank        liters.    How much water is in the tank after minutes?    liters.          Yes — liters is the net amount that entered, not the final amount in the tank.       Yes, liters entered.       Yes, liters total. The integral alone only gives the change — the initial liters still has to be added back in.      Marginal cost gives another standard use of the net change theorem. If the marginal cost of producing items is dollars per item, the increase in cost from 100 to 150 items is The phrase “increase in cost” is the giveaway: it is asking for a net change over an interval, so it needs a definite integral, not a cost function.    Net change is not the same as total distance  Suppose velocity is for . The particle moves backward for and forward for . The net displacement is    Zero displacement — did the particle not move?   The displacement above came out to . Does that mean the particle never moved?     Yes — zero displacement means the particle stayed still the whole time.  Not quite — the particle moved backward, then forward by the same amount, so the net change cancels even though real distance was covered.    No — the backward motion and the forward motion are the same size and cancel in the net change, even though the particle traveled a positive distance.  Right. The word “net” in the Net Change Theorem matters: negative velocity subtracts from the total.     To find the actual distance traveled, every bit of motion has to count positively: which in practice means splitting the integral wherever changes sign and taking absolute values on each piece. For this example, that gives a total distance of , not .    Putting it together   Conceptual check     What is the main difference between and ?  Why does an indefinite integral need , while a definite integral does not?  If is measured in liters per minute, what are the units of ?        The indefinite integral is a family of antiderivative functions; the definite integral is a single number, the net accumulation from to .  Differentiation loses constant information, so every antiderivative needs to represent the whole family; in a definite integral the constant appears in both and and cancels.  Liters — (liters per minute) minutes liters.       Exit ticket       ?                Yes: .               Today's main idea  If you want to recover a function from its rate, use an indefinite integral: . If you want the net accumulated change over an interval, use a definite integral: . For applications, remember final amount initial amount net change.  Every antiderivative rule we have used so far has reversed a derivative we already knew directly — power rule, trig rule, exponential rule. But what happens when the rate in front of us does not match any rule we know, until we notice it is secretly a chain rule in disguise? That puzzle is the Substitution Rule .    "
+},
+{
+  "id": "def-indefinite-integral",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#def-indefinite-integral",
+  "type": "Definition",
+  "number": "4.4.1",
+  "title": "Indefinite integral.",
+  "body": " Indefinite integral    where and is an arbitrary constant. This is called an indefinite integral .   "
+},
+{
+  "id": "check-which-integral",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#check-which-integral",
+  "type": "Checkpoint",
+  "number": "4.4.2",
+  "title": "Which one should I use?",
+  "body": " Which one should I use?   For each situation, is the right tool an indefinite integral or a definite integral?  The velocity of a car is known. Find a formula for its position.  Water flows into a tank at rate . Find how much water enters between and .  The marginal cost is . Find the change in cost from producing 100 items to 150 items.        Indefinite integral — “a formula” asks for a function.  Definite integral — “between and ” asks for net change over an interval.  Definite integral — “the change from…to…” asks for net change over an interval.     "
+},
+{
+  "id": "try-algebraic-integrals",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#try-algebraic-integrals",
+  "type": "Checkpoint",
+  "number": "4.4.3",
+  "title": "You do: algebraic integrals.",
+  "body": " You do: algebraic integrals     Find .  Find .             "
+},
+{
+  "id": "subsec-5-4-car-3",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#subsec-5-4-car-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "Question A: find the position function. "
+},
+{
+  "id": "subsec-5-4-car-4",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#subsec-5-4-car-4",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "Question B: find the displacement from to . "
+},
+{
+  "id": "check-same-rate-two-questions",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#check-same-rate-two-questions",
+  "type": "Checkpoint",
+  "number": "4.4.4",
+  "title": "Same rate, different question.",
+  "body": " Same rate, different question   The displacement for the car above is units.       Yes, units — notice this required bounds and no , while finding required an initial condition and did carry a .     "
+},
+{
+  "id": "def-net-change-theorem",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#def-net-change-theorem",
+  "type": "Definition",
+  "number": "4.4.5",
+  "title": "Net change theorem.",
+  "body": " Net change theorem    In words: the integral of the rate equals the net change in the quantity. Equivalently, or: final amount equals initial amount plus net change.   "
+},
+{
+  "id": "check-water-tank",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#check-water-tank",
+  "type": "Checkpoint",
+  "number": "4.4.6",
+  "title": "Water in a tank.",
+  "body": " Water in a tank        liters.    How much water is in the tank after minutes?    liters.          Yes — liters is the net amount that entered, not the final amount in the tank.       Yes, liters entered.       Yes, liters total. The integral alone only gives the change — the initial liters still has to be added back in.     "
+},
+{
+  "id": "check-net-vs-total",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#check-net-vs-total",
+  "type": "Checkpoint",
+  "number": "4.4.7",
+  "title": "Zero displacement — did the particle not move?",
+  "body": " Zero displacement — did the particle not move?   The displacement above came out to . Does that mean the particle never moved?     Yes — zero displacement means the particle stayed still the whole time.  Not quite — the particle moved backward, then forward by the same amount, so the net change cancels even though real distance was covered.    No — the backward motion and the forward motion are the same size and cancel in the net change, even though the particle traveled a positive distance.  Right. The word “net” in the Net Change Theorem matters: negative velocity subtracts from the total.    "
+},
+{
+  "id": "check-indefinite-conceptual",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#check-indefinite-conceptual",
+  "type": "Checkpoint",
+  "number": "4.4.8",
+  "title": "Conceptual check.",
+  "body": " Conceptual check     What is the main difference between and ?  Why does an indefinite integral need , while a definite integral does not?  If is measured in liters per minute, what are the units of ?        The indefinite integral is a family of antiderivative functions; the definite integral is a single number, the net accumulation from to .  Differentiation loses constant information, so every antiderivative needs to represent the whole family; in a definite integral the constant appears in both and and cancels.  Liters — (liters per minute) minutes liters.     "
+},
+{
+  "id": "exit-ticket-indefinite",
+  "level": "2",
+  "url": "sec-5-4-indefinite-net-change.html#exit-ticket-indefinite",
+  "type": "Checkpoint",
+  "number": "4.4.9",
+  "title": "Exit ticket.",
+  "body": " Exit ticket       ?                Yes: .             "
 },
 {
   "id": "sec-5-5-substitution",
