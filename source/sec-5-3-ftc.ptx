@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-5-3-ftc" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Fundamental Theorem of Calculus</title>
+  <!-- Stewart 5.3 . Sessions 9-10 . Tue Sep 22 and Thu Sep 24 . Quiz 3 on Sep 24 (Skills 10-11)
+       Built from Handout 7 ("Why the Fundamental Theorem of Calculus Works") in the
+       conversational handout voice. Written 2026-10-12.
+       NOTATION: A(x) = int_a^x f(t) dt is a definite integral with a variable upper
+       bound; this is legal under the sec-5-2 integral-sign unlock. Indefinite-integral
+       notation (int f(x) dx with +C) does NOT appear here; that is quarantined to
+       sec-5-4-indefinite-net-change. Antiderivatives keep being written as F with F'=f.
+       Keeps reusing the paint-roller walls from sec-5-1/the Doenet FTC activity
+       (f=3, A=3x and f=2x, A=x^2) and the car (v(t)=3t^2, answer 8) from sec-4-9/sec-5-2. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-ftc">
+      <title>Today's Question</title>
+      <p>
+        Two different jobs &#8212; <em>differentiating</em> and
+        <em>accumulating</em> &#8212; keep landing on the same answers. Is that a
+        coincidence?
+      </p>
+    </assemblage>
+    <p>
+      Pancake has been rolling paint onto walls since <xref ref="sec-5-1-areas-distances"/>,
+      and measuring the area <m>\int_a^x f(t)\,dt</m> since
+      <xref ref="sec-5-2-definite-integral"/>. Today she notices something her coach
+      cannot ignore: every time she works out how <em>fast</em> the painted area
+      is growing, she lands right back on the roller's speed <m>f</m>. That is
+      either an enormous coincidence, or it is a theorem.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-5-3-conjecture">
+    <title>Pancake's conjecture</title>
+
+    <p>
+      Remember the two walls. On Wall 1, the roller moves at a constant speed
+      <m>f(x) = 3</m>, and the painted area after <m>x</m> feet is
+      <m>A(x) = 3x</m>. On Wall 2, the roller speeds up as it goes,
+      <m>f(x) = 2x</m>, and the painted area is <m>A(x) = x^2</m>.
+    </p>
+
+    <p>
+      Now differentiate each area function.
+    </p>
+
+    <exercise xml:id="check-wall-derivatives">
+      <title>Differentiate the area functions</title>
+      <statement>
+        <p>
+          For Wall 1, <m>A(x) = 3x</m>, so <m>A'(x) =</m>
+          <fillin answer="3" mode="number"/>. For Wall 2, <m>A(x) = x^2</m>, so
+          <m>A'(x) = 2x</m>, and at <m>x = 4</m> that is
+          <fillin answer="8" mode="number"/>.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes &#8212; <m>A'(x) = 3</m>, exactly the roller speed <m>f(x) = 3</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes &#8212; <m>A'(4) = 2(4) = 8</m>, exactly the roller speed <m>f(4) = 2(4) = 8</m> at that instant.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Both times, differentiating the <em>accumulated area</em> handed back the
+      <em>roller speed</em> we started with. Pancake's conjecture:
+    </p>
+
+    <assemblage xml:id="assemblage-conjecture">
+      <title>Pancake's conjecture</title>
+      <p>
+        If <m>A(x)</m> is the area painted up to position <m>x</m>, then
+        <m>A'(x) = f(x)</m>. Accumulating and then differentiating undoes
+        itself.
+      </p>
+    </assemblage>
+
+    <p>
+      Two examples are not a proof. We need to see <em>why</em> this has to be
+      true for any reasonable <m>f</m>, not just these two.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-tiny-strip">
+    <title>Look at one tiny piece of new area</title>
+
+    <p>
+      Let <m>A(x)</m> be the area accumulated from <m>a</m> up to <m>x</m>, for
+      some fixed starting point <m>a</m>. Now step forward by a small amount
+      <m>\Delta x</m>. The new area <m>A(x + \Delta x)</m> is the old area
+      <m>A(x)</m> plus one thin strip: a sliver running from <m>x</m> to
+      <m>x + \Delta x</m>.
+    </p>
+
+    <p>
+      When <m>\Delta x</m> is small, that sliver is almost a rectangle: its
+      width is <m>\Delta x</m>, and its height is approximately <m>f(x)</m>,
+      the value of the roller speed right at the left edge of the strip. So
+      <md>
+        A(x + \Delta x) - A(x) \;\approx\; f(x)\,\Delta x.
+      </md>
+      This is exactly the running-triangle-plus-trapezoid-strip picture from
+      the FTC paint-roller activity: the new paint added in one step is close
+      to (rate) <m>\times</m> (step size), and the approximation gets better
+      and better as the step shrinks.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-rate">
+    <title>Turn the area change into a rate</title>
+
+    <p>
+      Divide both sides of <m>A(x+\Delta x) - A(x) \approx f(x)\,\Delta x</m> by
+      <m>\Delta x</m>:
+      <md>
+        \frac{A(x+\Delta x) - A(x)}{\Delta x} \;\approx\; f(x).
+      </md>
+      That left-hand side should look familiar &#8212; it is exactly the
+      difference quotient from the definition of the derivative. Let
+      <m>\Delta x \to 0</m>:
+      <md>
+        A'(x) \;=\; \lim_{\Delta x \to 0} \frac{A(x+\Delta x) - A(x)}{\Delta x} \;=\; f(x).
+      </md>
+    </p>
+
+    <p>
+      This is exactly the slider demonstration from the Doenet pre-assignment:
+      on Wall 1 the rate <m>\Delta A/\Delta x</m> sat still at <m>3</m> no
+      matter the step size, while on Wall 2 the rate only settled on
+      <m>f(x) = 2x</m> once <m>\Delta x</m> was squeezed down toward <m>0</m>.
+      Squeezing <m>\Delta x \to 0</m> is precisely what turns an approximation
+      into an exact derivative.
+    </p>
+
+    <fact xml:id="fact-ftc-part-1-informal">
+      <title>Pancake's conjecture, proved</title>
+      <statement>
+        <p>
+          If <m>A(x)</m> is the accumulated area up to <m>x</m>, then
+          <m>A'(x) = f(x)</m>. This is no longer a guess &#8212; it follows from
+          the definition of the derivative applied to one thin strip.
+        </p>
+      </statement>
+    </fact>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-notation">
+    <title>Write the accumulation function using integral notation</title>
+
+    <p>
+      We already have a name for the accumulated area: it is a definite
+      integral with a variable upper bound,
+      <md>
+        A(x) = \int_a^x f(t)\,dt.
+      </md>
+      (The variable inside is renamed <m>t</m> so it is not confused with the
+      upper bound <m>x</m>.) Combining this with
+      <xref ref="fact-ftc-part-1-informal"/> gives the first part of the
+      Fundamental Theorem of Calculus.
+    </p>
+
+    <definition xml:id="def-ftc-part-1">
+      <title>Fundamental Theorem of Calculus, Part 1</title>
+      <statement>
+        <p>
+          If <m>f</m> is continuous and <m>A(x) = \displaystyle\int_a^x f(t)\,dt</m>,
+          then
+          <md>
+            \frac{d}{dx}\left(\int_a^x f(t)\,dt\right) = f(x).
+          </md>
+          In words: differentiating an accumulation function gives back the
+          rate you started with.
+        </p>
+      </statement>
+    </definition>
+  </subsection>
+
+
+  <subsection xml:id="subsec-5-3-fundamental">
+    <title>What is so &#8220;fundamental&#8221; about it?</title>
+
+    <p>
+      Derivatives measure instantaneous <em>change</em>. Integrals measure
+      total <em>accumulation</em>. These sound like opposite jobs &#8212; one
+      zooms in, the other adds up. The Fundamental Theorem says they are
+      secretly inverse operations: accumulate, then differentiate, and you
+      land right back where you started. It is the calculus version of
+      &#8220;undo a sum by subtracting.&#8221;
+    </p>
+
+    <p>
+      There is a second consequence worth naming right away: since
+      <m>A'(x) = f(x)</m>, the accumulation function <m>A</m> is itself <em>an
+      antiderivative</em> of <m>f</m>. That one observation is about to unlock
+      every definite integral we could not evaluate by geometry alone.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-examples-1">
+    <title>Three accumulation functions</title>
+
+    <p>
+      <m>A(x) = \displaystyle\int_0^x 4\,dt</m>. A constant-height strip of
+      height <m>4</m> out to <m>x</m> has area <m>A(x) = 4x</m>, so
+      <m>A'(x) = 4</m> &#8212; exactly <m>f(x) = 4</m>.
+    </p>
+
+    <p>
+      <m>A(x) = \displaystyle\int_0^x 2t\,dt</m>. This is the familiar triangle:
+      <m>A(x) = x^2</m>, so <m>A'(x) = 2x</m> &#8212; exactly <m>f(x) = 2x</m>.
+    </p>
+
+    <p>
+      Now a function with no obvious geometric shortcut:
+      <m>A(x) = \displaystyle\int_1^x (t^2+3)\,dt</m>. Nothing about this region
+      is a triangle or a rectangle, so geometry alone will not evaluate it.
+      But FTC Part 1 does not care &#8212; it never asked us to compute the
+      integral at all.
+    </p>
+
+    <exercise xml:id="check-ftc1-no-geometry" label="check-ftc1-no-geometry">
+      <title>Differentiate without integrating</title>
+      <statement>
+        <p>
+          If <m>A(x) = \displaystyle\int_1^x (t^2+3)\,dt</m>, then
+          <m>A'(x) = x^2+3</m>. What is <m>A'(2)</m>?
+          <fillin answer="7" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback>
+              <p>
+                Yes, <m>A'(2) = 2^2+3 = 7</m>. We found the exact rate at which
+                the painted area is growing at <m>x=2</m>, without ever
+                computing the area itself.
+              </p>
+            </feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-ftc-part-2">
+    <title>From accumulation to a computation formula</title>
+
+    <p>
+      FTC Part 1 tells us <m>A</m> is <em>an</em> antiderivative of <m>f</m>.
+      But in <xref ref="sec-4-9-antiderivatives"/> we learned that any two
+      antiderivatives of the same <m>f</m> differ only by a constant. So if
+      <m>F</m> is <em>any</em> antiderivative we already know how to find
+      (power rule, trig rule, whatever), then
+      <md>
+        A(x) = F(x) + C
+      </md>
+      for some constant <m>C</m>.
+    </p>
+
+    <p>
+      We can pin down <m>C</m> using the one value of <m>A</m> we already know
+      for free: <m>A(a) = \displaystyle\int_a^a f(t)\,dt = 0</m>, since
+      accumulating from <m>a</m> to <m>a</m> accumulates nothing. So
+      <m>0 = F(a) + C</m>, which means <m>C = -F(a)</m>. Substituting back,
+      <md>
+        \int_a^x f(t)\,dt = A(x) = F(x) - F(a).
+      </md>
+    </p>
+
+    <p>
+      Nothing stops us from letting the ending point be any value <m>b</m>
+      instead of a generic <m>x</m>. That gives the computational form of the
+      theorem.
+    </p>
+
+    <definition xml:id="def-ftc-part-2">
+      <title>Fundamental Theorem of Calculus, Part 2</title>
+      <statement>
+        <p>
+          If <m>F</m> is any antiderivative of a continuous function <m>f</m>
+          (that is, <m>F' = f</m>), then
+          <md>
+            \int_a^b f(x)\,dx = F(b) - F(a).
+          </md>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      This one formula is the reason we spent all of
+      <xref ref="sec-4-9-antiderivatives"/> building up antiderivative rules:
+      every one of those rules now evaluates a definite integral instantly,
+      with no limits and no rectangles.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-evaluation-bar">
+    <title>The evaluation bar</title>
+
+    <p>
+      Writing <m>F(b) - F(a)</m> over and over gets repetitive, so we abbreviate
+      it with an evaluation bar:
+      <md>
+        \bigl[F(x)\bigr]_a^b \;:=\; F(b) - F(a).
+      </md>
+    </p>
+
+    <p>
+      Worked example: evaluate <m>\displaystyle\int_1^3 x^2\,dx</m>. An
+      antiderivative of <m>x^2</m> is <m>F(x) = \tfrac13x^3</m>, so
+      <md>
+        \int_1^3 x^2\,dx = \left[\frac{x^3}{3}\right]_1^3 = \frac{27}{3} - \frac13 = 9 - \frac13 = \frac{26}{3}.
+      </md>
+    </p>
+
+    <exercise xml:id="try-ftc-computation" label="try-ftc-computation">
+      <title>You do: compute with FTC Part 2</title>
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>\displaystyle\int_0^3 2x\,dx</m> using <m>F(x) = x^2</m>:
+                <fillin answer="9" mode="number"/>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>\displaystyle\int_0^{\pi/2} \cos x\,dx</m> using
+                <m>F(x) = \sin x</m>: <fillin answer="1" mode="number"/>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes: <m>[x^2]_0^3 = 9 - 0 = 9</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes: <m>[\sin x]_0^{\pi/2} = 1 - 0 = 1</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+
+  <subsection xml:id="subsec-5-3-car">
+    <title>Return to the car</title>
+
+    <p>
+      Back in <xref ref="sec-4-9-antiderivatives"/>, the car with velocity
+      <m>v(t) = 3t^2</m> gave displacement <m>F(2) - F(0) = 8 - 0 = 8</m> using
+      the antiderivative <m>F(t) = t^3</m>. Back in
+      <xref ref="sec-5-2-definite-integral"/>, the same car gave
+      <m>\int_0^2 3t^2\,dt = 8</m> as the limit of Riemann sums squeezing
+      tighter and tighter. Two completely different procedures &#8212; one
+      algebraic, one about rectangles &#8212; landed on the exact same number.
+    </p>
+
+    <p>
+      That was never a coincidence. FTC Part 2 is <em>why</em> it had to come
+      out the same way both times:
+      <md>
+        \int_0^2 3t^2\,dt = \bigl[t^3\bigr]_0^2 = 8 - 0 = 8.
+      </md>
+      The antiderivative method is not a different answer to a different
+      question. It is a shortcut for computing the exact Riemann-sum limit,
+      guaranteed by the Fundamental Theorem.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-no-plus-c">
+    <title>What happened to the <m>+C</m>?</title>
+
+    <p>
+      You might expect <m>F(b) - F(a)</m> to carry a leftover constant. It
+      does not, and it is worth seeing exactly why.
+    </p>
+
+    <p>
+      If we used <m>F(x) + C</m> instead of <m>F(x)</m> as our antiderivative,
+      <md>
+        \bigl(F(b)+C\bigr) - \bigl(F(a)+C\bigr) = F(b) - F(a).
+      </md>
+      The constant appears in both terms and cancels exactly. So it never
+      matters which antiderivative you pick &#8212; and there is never any need
+      to write <m>+C</m> when evaluating a definite integral.
+    </p>
+
+    <exercise xml:id="check-no-plus-c">
+      <title>Spot the error</title>
+      <statement>
+        <p>
+          A student writes
+          <m>\displaystyle\int_0^2 3x^2\,dx = x^3+C</m>. What went wrong?
+        </p>
+      </statement>
+      <choices randomize="yes">
+        <choice correct="yes">
+          <statement>
+            <p>
+              A definite integral is a <em>number</em>, not a family of
+              functions &#8212; the bounds must be used. The correct computation
+              is <m>[x^3]_0^2 = 8 - 0 = 8</m>.
+            </p>
+          </statement>
+          <feedback><p>Right. No bounds were ever plugged in, and <m>+C</m> never belongs on a definite integral.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement>
+            <p>Nothing &#8212; <m>x^3+C</m> is a correct antiderivative of <m>3x^2</m>.</p>
+          </statement>
+          <feedback><p>It is a correct antiderivative, but the question asked for a definite integral &#8212; a single number found by evaluating at the bounds, not a family of functions.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-3-practice">
+    <title>Putting it together</title>
+
+    <exercise xml:id="check-ftc-conceptual">
+      <title>Conceptual check</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>In your own words, what does FTC Part 1 say about the relationship between accumulating and differentiating?</p></li>
+            <li><p>Why is the accumulation function <m>A(x) = \int_a^x f(t)\,dt</m> itself an antiderivative of <m>f</m>?</p></li>
+            <li><p>Why does <m>+C</m> never appear in the final answer to a definite integral?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Differentiating an accumulation function gives back the exact rate that was being accumulated: <m>A'(x) = f(x)</m>.</p></li>
+            <li><p>Because FTC Part 1 says <m>A'(x) = f(x)</m>, which is exactly the defining property of an antiderivative.</p></li>
+            <li><p>Because the constant appears in both <m>F(b)+C</m> and <m>F(a)+C</m>, and subtracting cancels it.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-ftc-1">
+      <title>Exit ticket, part 1</title>
+      <statement>
+        <p>
+          If <m>A(x) = \displaystyle\int_1^x (t^3+2)\,dt</m>, then
+          <m>A'(x) =</m> ?
+        </p>
+      </statement>
+      <choices randomize="yes">
+        <choice correct="yes">
+          <statement><p><m>x^3+2</m></p></statement>
+          <feedback><p>Yes &#8212; by FTC Part 1, differentiating the accumulation function just hands back the integrand.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p><m>\tfrac14 x^4+2x</m></p></statement>
+          <feedback><p>That is an antiderivative of <m>t^3+2</m>, which is a different question from <m>A'(x)</m>. FTC Part 1 says <m>A'(x)</m> is just the integrand itself.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p><m>3x^2</m></p></statement>
+          <feedback><p>Not quite &#8212; that would be the derivative of <m>x^3</m> alone, but the integrand here is <m>t^3+2</m>.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-ftc-2">
+      <title>Exit ticket, part 2</title>
+      <statement>
+        <p>
+          <m>\displaystyle\int_0^2 3x^2\,dx =</m>
+          <fillin answer="8" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>[x^3]_0^2 = 8-0 = 8</m>. Our car's number, one more time.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage>
+      <title>Today's main idea</title>
+      <p>
+        The Fundamental Theorem of Calculus ties the two halves of this
+        chapter together:
+        <md>
+          \frac{d}{dx}\left(\int_a^x f(t)\,dt\right) = f(x)
+          \qquad\text{and}\qquad
+          \int_a^b f(x)\,dx = F(b) - F(a) \text{ when } F' = f.
+        </md>
+        Differentiating undoes accumulating. And once we know any single
+        antiderivative, every definite integral becomes a two-step
+        subtraction &#8212; no limits required.
+      </p>
+      <p>
+        Next question: when there are <em>no</em> bounds at all, what does
+        <m>\int f(x)\,dx</m> even mean, and how is it different from
+        everything we just did? That is
+        <xref ref="sec-5-4-indefinite-net-change" text="custom">Indefinite Integrals and the Net Change Theorem</xref>.
+      </p>
+    </assemblage>
+  </subsection>
+</section>

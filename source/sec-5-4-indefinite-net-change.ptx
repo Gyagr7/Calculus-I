@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-5-4-indefinite-net-change" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Indefinite Integrals and the Net Change Theorem</title>
+  <!-- Stewart 5.4 . Session 11 . Tue Sep 29
+       Built from the Section 5.4 Worksheet (student and instructor versions) in the
+       conversational handout voice. Written 2026-10-12.
+       NOTATION UNLOCK: int f(x) dx (no bounds, with +C) enters here for the first
+       time in the book. Everything before this section used only int_a^b f(x) dx
+       (bounds, a number, no +C) or int_a^x f(t) dt (FTC accumulation function).
+       Reuses the net-change water-trough Doenet pre-assignment framing and the
+       car example (now v(t) = 6t-4) to contrast "find the function" vs
+       "find the net change." -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-indefinite">
+      <title>Today's Question</title>
+      <p>
+        When do we want a <em>function</em>, and when do we want an
+        <em>accumulated amount</em>?
+      </p>
+    </assemblage>
+    <p>
+      Consider the rate <m>f(x) = 3x^2</m>. Here are two questions that sound
+      similar but are not the same question at all:
+    </p>
+    <p>
+      Question A: find all functions whose derivative is <m>3x^2</m>.
+    </p>
+    <p>
+      Question B: find the accumulated amount from <m>x=0</m> to <m>x=2</m>.
+    </p>
+    <p>
+      Question A wants a function &#8212; really, a whole family of them.
+      Question B wants a single number. We already answered Question B in
+      <xref ref="sec-5-3-ftc"/>: <m>\int_0^2 3x^2\,dx = 8</m>. Today we give
+      Question A its own notation, and get precise about why these two
+      questions need two different tools.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-5-4-indefinite-notation">
+    <title>Indefinite integral: find the family</title>
+
+    <p>
+      Suppose <m>F'(x) = f(x)</m>, so <m>F</m> is an antiderivative of
+      <m>f</m>. We now give the <em>family</em> of all antiderivatives its own
+      symbol, dropping the bounds entirely:
+    </p>
+
+    <definition xml:id="def-indefinite-integral">
+      <title>Indefinite integral</title>
+      <statement>
+        <p>
+          <md>
+            \int f(x)\,dx = F(x) + C,
+          </md>
+          where <m>F' = f</m> and <m>C</m> is an arbitrary constant. This is
+          called an <term>indefinite integral</term>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      For example, <m>\displaystyle\int 3x^2\,dx = x^3+C</m>. Why the
+      <m>+C</m>? Because <m>\frac{d}{dx}(x^3) = 3x^2</m>, but so does
+      <m>\frac{d}{dx}(x^3+7)</m> and <m>\frac{d}{dx}(x^3-100)</m>. Every one of
+      these is an equally correct answer to &#8220;find a function whose
+      derivative is <m>3x^2</m>,&#8221; so the indefinite integral represents
+      <em>all of them at once</em>: an entire family of antiderivatives.
+    </p>
+
+    <assemblage>
+      <title>Indefinite integral, at a glance</title>
+      <p>
+        <m>\displaystyle\int f(x)\,dx = F(x) + C</m>. No bounds. The answer is
+        a family of functions. Always include <m>+C</m>.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-4-side-by-side">
+    <title>Side by side with the definite integral</title>
+
+    <p>
+      Compare this new symbol to the one from <xref ref="sec-5-2-definite-integral"/>
+      and <xref ref="sec-5-3-ftc"/>:
+    </p>
+
+    <tabular halign="left">
+      <row header="yes">
+        <cell>Indefinite integral <m>\int f(x)\,dx</m></cell>
+        <cell>Definite integral <m>\int_a^b f(x)\,dx</m></cell>
+      </row>
+      <row><cell>no bounds</cell><cell>has bounds</cell></row>
+      <row><cell>answer is a family of functions</cell><cell>answer is a number</cell></row>
+      <row><cell>include <m>+C</m></cell><cell>never include <m>+C</m></cell></row>
+      <row><cell>recover a quantity from its rate</cell><cell>find net accumulation over an interval</cell></row>
+    </tabular>
+
+    <p>
+      One question settles which tool to reach for:
+    </p>
+
+    <assemblage>
+      <title>The question to ask</title>
+      <p>
+        Do I need a <em>function</em>, or do I need the <em>total change</em>
+        over an interval?
+      </p>
+    </assemblage>
+
+    <exercise xml:id="check-which-integral">
+      <title>Which one should I use?</title>
+      <statement>
+        <p>
+          For each situation, is the right tool an indefinite integral or a
+          definite integral?
+          <ol>
+            <li><p>The velocity of a car is known. Find a formula for its position.</p></li>
+            <li><p>Water flows into a tank at rate <m>r(t)</m>. Find how much water enters between <m>t=2</m> and <m>t=7</m>.</p></li>
+            <li><p>The marginal cost is <m>C'(x)</m>. Find the change in cost from producing 100 items to 150 items.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>Indefinite integral &#8212; &#8220;a formula&#8221; asks for a function.</p></li>
+            <li><p>Definite integral &#8212; &#8220;between <m>t=2</m> and <m>t=7</m>&#8221; asks for net change over an interval.</p></li>
+            <li><p>Definite integral &#8212; &#8220;the change from&#8230;to&#8230;&#8221; asks for net change over an interval.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+
+  <subsection xml:id="subsec-5-4-toolkit">
+    <title>Indefinite integral toolkit</title>
+
+    <p>
+      Finding an indefinite integral means reversing a derivative rule you
+      already know.
+    </p>
+
+    <tabular halign="left">
+      <row header="yes">
+        <cell>Derivative rule</cell>
+        <cell>Integral rule</cell>
+      </row>
+      <row><cell><m>\frac{d}{dx}(x^{n+1}) = (n+1)x^n</m></cell><cell><m>\int x^n\,dx = \dfrac{x^{n+1}}{n+1}+C,\ n\neq-1</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(\ln|x|) = \frac1x</m></cell><cell><m>\int \frac1x\,dx = \ln|x|+C</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(e^x) = e^x</m></cell><cell><m>\int e^x\,dx = e^x+C</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(a^x) = a^x\ln a</m></cell><cell><m>\int a^x\,dx = \dfrac{a^x}{\ln a}+C</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(-\cos x) = \sin x</m></cell><cell><m>\int \sin x\,dx = -\cos x+C</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(\sin x) = \cos x</m></cell><cell><m>\int \cos x\,dx = \sin x+C</m></cell></row>
+      <row><cell><m>\frac{d}{dx}(\tan x) = \sec^2x</m></cell><cell><m>\int \sec^2x\,dx = \tan x+C</m></cell></row>
+    </tabular>
+
+    <p>
+      None of these need to be memorized as isolated facts &#8212; every single
+      one can be checked by differentiating the right-hand side and
+      confirming it matches the left.
+    </p>
+
+    <p>
+      Roots and fractions are usually easier to integrate once they are
+      rewritten with exponents, exactly as in derivative work. For example,
+      <md>
+        \int \left(\sqrt{x}+\frac{2}{x^3}\right)dx
+        = \int \left(x^{1/2}+2x^{-3}\right)dx
+        = \frac{2}{3}x^{3/2}-\frac{1}{x^2}+C.
+      </md>
+    </p>
+
+    <assemblage>
+      <title>Rewrite first, integrate second</title>
+      <p>
+        One exception never to forget: <m>\displaystyle\int \frac1x\,dx =
+        \ln|x|+C</m>. The power rule for integration explicitly excludes
+        <m>n=-1</m> &#8212; it would require dividing by <m>0</m>. That special
+        case is exactly where the logarithm rule takes over.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="try-algebraic-integrals" label="try-algebraic-integrals">
+      <title>You do: algebraic integrals</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>Find <m>\displaystyle\int (6x^5-4x^2+7)\,dx</m>.</p></li>
+            <li><p>Find <m>\displaystyle\int \left(\frac{2}{x}+x^4\right)dx</m>.</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p><m>x^6-\tfrac43x^3+7x+C</m></p></li>
+            <li><p><m>2\ln|x|+\tfrac15x^5+C</m></p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      To check any indefinite integral, differentiate your answer and make
+      sure it reproduces the original integrand &#8212; the same habit of
+      checking antiderivatives from <xref ref="sec-4-9-antiderivatives"/>.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-4-car">
+    <title>From rate to quantity: one rate, two questions</title>
+
+    <p>
+      Suppose a car has velocity <m>v(t) = 6t-4</m>.
+    </p>
+
+    <p>
+      <term>Question A: find the position function.</term> Since
+      <m>s'(t) = v(t)</m>, we need an indefinite integral:
+      <md>
+        s(t) = \int (6t-4)\,dt = 3t^2-4t+C.
+      </md>
+      If we also know <m>s(0)=10</m>, then <m>10=C</m>, pinning down one
+      member of the family:
+      <m>s(t) = 3t^2-4t+10</m>.
+    </p>
+
+    <p>
+      <term>Question B: find the displacement from <m>t=1</m> to
+      <m>t=4</m>.</term> Now we need a definite integral:
+      <md>
+        \int_1^4 (6t-4)\,dt = \bigl[3t^2-4t\bigr]_1^4 = (48-16)-(3-4) = 32-(-1) = 33.
+      </md>
+    </p>
+
+    <exercise xml:id="check-same-rate-two-questions">
+      <title>Same rate, different question</title>
+      <statement>
+        <p>
+          The displacement for the car above is
+          <fillin answer="33" mode="number"/> units.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>33</m> units &#8212; notice this required bounds and no <m>+C</m>, while finding <m>s(t)</m> required an initial condition and did carry a <m>+C</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage>
+      <title>Same rate function, different question</title>
+      <p>
+        Need the quantity as a function? Indefinite integral (plus an initial
+        condition, if you have one). Need the change over an interval?
+        Definite integral.
+      </p>
+    </assemblage>
+  </subsection>
+
+
+  <subsection xml:id="subsec-5-4-net-change-theorem">
+    <title>The net change theorem</title>
+
+    <p>
+      Let <m>Q(t)</m> be any quantity and <m>Q'(t)</m> its rate of change.
+      FTC Part 2, applied to <m>Q</m> instead of a generic <m>f</m>, says
+    </p>
+
+    <definition xml:id="def-net-change-theorem">
+      <title>Net change theorem</title>
+      <statement>
+        <p>
+          <md>
+            \int_a^b Q'(t)\,dt = Q(b) - Q(a).
+          </md>
+          In words: the integral of the rate equals the net change in the
+          quantity. Equivalently,
+          <md>
+            Q(b) = Q(a) + \int_a^b Q'(t)\,dt,
+          </md>
+          or: final amount equals initial amount plus net change.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      This is nothing new mathematically &#8212; it is FTC Part 2 again &#8212; but
+      the &#8220;final <m>=</m> initial <m>+</m> change&#8221; framing is exactly how
+      these integrals show up in applications.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-4-applications">
+    <title>Applications: final = initial + net change</title>
+
+    <p>
+      A tank initially contains <m>500</m> liters of water. Water enters at
+      the rate <m>r(t) = 20-2t</m> liters per minute for <m>0 \le t \le 5</m>.
+      This is exactly the setup behind the Doenet pre-assignment on Pancake's
+      water trough.
+    </p>
+
+    <exercise xml:id="check-water-tank">
+      <title>Water in a tank</title>
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>\displaystyle\int_0^5 (20-2t)\,dt =
+                \bigl[20t-t^2\bigr]_0^5 =</m>
+                <fillin answer="75" mode="number"/> liters.
+              </p>
+            </li>
+            <li>
+              <p>
+                How much water is in the tank after <m>5</m> minutes?
+                <m>500 +</m> <fillin answer="75" mode="number"/>
+                <m>=</m> <fillin answer="575" mode="number"/> liters.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes &#8212; <m>75</m> liters is the net amount that entered, not the final amount in the tank.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>75</m> liters entered.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>575</m> liters total. The integral alone only gives the <em>change</em> &#8212; the initial <m>500</m> liters still has to be added back in.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Marginal cost gives another standard use of the net change theorem.
+      If the marginal cost of producing <m>x</m> items is
+      <m>C'(x) = 0.02x+5</m> dollars per item, the increase in cost from 100
+      to 150 items is
+      <md>
+        C(150)-C(100) = \int_{100}^{150}(0.02x+5)\,dx
+        = \bigl[0.01x^2+5x\bigr]_{100}^{150} = 975-600 = 375 \text{ dollars}.
+      </md>
+      The phrase &#8220;increase in cost&#8221; is the giveaway: it is asking for a
+      net change over an interval, so it needs a definite integral, not a
+      cost function.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-4-total-distance">
+    <title>Net change is not the same as total distance</title>
+
+    <p>
+      Suppose velocity is <m>v(t) = t-2</m> for <m>0 \le t \le 4</m>. The
+      particle moves backward for <m>0 &lt; t &lt; 2</m> and forward for
+      <m>2 &lt; t &lt; 4</m>. The net displacement is
+      <md>
+        \int_0^4 (t-2)\,dt = \left[\frac{t^2}{2}-2t\right]_0^4 = 0.
+      </md>
+    </p>
+
+    <exercise xml:id="check-net-vs-total">
+      <title>Zero displacement &#8212; did the particle not move?</title>
+      <statement>
+        <p>
+          The displacement above came out to <m>0</m>. Does that mean the
+          particle never moved?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Yes &#8212; zero displacement means the particle stayed still the whole time.</p></statement>
+          <feedback><p>Not quite &#8212; the particle moved backward, then forward by the same amount, so the net change cancels even though real distance was covered.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>No &#8212; the backward motion and the forward motion are the same size and cancel in the <em>net</em> change, even though the particle traveled a positive distance.</p></statement>
+          <feedback><p>Right. The word &#8220;net&#8221; in the Net Change Theorem matters: negative velocity subtracts from the total.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <p>
+      To find the actual distance traveled, every bit of motion has to count
+      positively:
+      <md>
+        \text{total distance} = \int_a^b |v(t)|\,dt,
+      </md>
+      which in practice means splitting the integral wherever <m>v(t)</m>
+      changes sign and taking absolute values on each piece. For this
+      example, that gives a total distance of <m>4</m>, not <m>0</m>.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="subsec-5-4-practice">
+    <title>Putting it together</title>
+
+    <exercise xml:id="check-indefinite-conceptual">
+      <title>Conceptual check</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>What is the main difference between <m>\int f(x)\,dx</m> and <m>\int_a^b f(x)\,dx</m>?</p></li>
+            <li><p>Why does an indefinite integral need <m>+C</m>, while a definite integral does not?</p></li>
+            <li><p>If <m>Q'(t)</m> is measured in liters per minute, what are the units of <m>\int_2^8 Q'(t)\,dt</m>?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li><p>The indefinite integral is a family of antiderivative functions; the definite integral is a single number, the net accumulation from <m>a</m> to <m>b</m>.</p></li>
+            <li><p>Differentiation loses constant information, so every antiderivative needs <m>+C</m> to represent the whole family; in a definite integral the constant appears in both <m>F(b)+C</m> and <m>F(a)+C</m> and cancels.</p></li>
+            <li><p>Liters &#8212; (liters per minute) <m>\times</m> minutes <m>=</m> liters.</p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="exit-ticket-indefinite">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>\displaystyle\int \left(6x^2+\frac1x\right)dx =</m> ?
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>\displaystyle\int_0^2 6x^2\,dx =</m>
+                <fillin answer="16" mode="number"/>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes: <m>[2x^3]_0^2 = 16-0 = 16</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+      <solution>
+        <p>
+          <ol>
+            <li><p><m>2x^3+\ln|x|+C</m></p></li>
+            <li><p><m>16</m></p></li>
+          </ol>
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage>
+      <title>Today's main idea</title>
+      <p>
+        If you want to recover a <em>function</em> from its rate, use an
+        indefinite integral: <m>\int f(x)\,dx = F(x)+C</m>. If you want the
+        <em>net accumulated change</em> over an interval, use a definite
+        integral: <m>\int_a^b f(x)\,dx = F(b)-F(a)</m>. For applications,
+        remember final amount <m>=</m> initial amount <m>+</m> net change.
+      </p>
+      <p>
+        Every antiderivative rule we have used so far has reversed a
+        derivative we already knew directly &#8212; power rule, trig rule,
+        exponential rule. But what happens when the rate in front of us does
+        not match any rule we know, until we notice it is secretly a chain
+        rule in disguise? That puzzle is
+        <xref ref="sec-5-5-substitution" text="custom">the Substitution Rule</xref>.
+      </p>
+    </assemblage>
+  </subsection>
+</section>
