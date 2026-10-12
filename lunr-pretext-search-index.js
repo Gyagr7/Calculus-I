@@ -82,119 +82,74 @@ var ptx_lunr_docs = [
   "body": " Tue Sep 29: Indefinite Integrals and Net Change  Today in class: (Stewart 5.4).   Think about this  A water tank leaks at a rate you know. Can you find how much water was lost between 2 pm and 5 pm, without knowing how much was in the tank to start?  What information do you actually need?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
-  "id": "sec-pre-assignment-oct-01",
-  "level": "1",
-  "url": "sec-pre-assignment-oct-01.html",
-  "type": "Section",
-  "number": "1.9",
-  "title": "Thu Oct 1: The Substitution Rule, Part 1",
-  "body": " Thu Oct 1: The Substitution Rule, Part 1  Today in class: (Stewart 5.5).   Think about this  The Chain Rule turns into .  If you saw that pattern hiding inside a function, could you run the Chain Rule backward?    Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab. About 10 minutes, completion credit.  "
-},
-{
   "id": "sec-pre-assignment-oct-06",
   "level": "1",
   "url": "sec-pre-assignment-oct-06.html",
   "type": "Section",
-  "number": "1.10",
-  "title": "Tue Oct 6: The Substitution Rule, Part 2",
-  "body": " Tue Oct 6: The Substitution Rule, Part 2  Today in class: (Stewart 5.5).   Think about this  When you swap one variable for another, the function changes. What should happen to the starting and ending values?  Make a prediction. We will test it in class.    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "number": "1.9",
+  "title": "Tue Oct 6: Test 1",
+  "body": " Tue Oct 6: Test 1   Before class  No pre-assignment today.  Test 1 covers everything since the start of the semester through the Net Change Theorem. Get some sleep.   "
 },
 {
   "id": "sec-pre-assignment-oct-13",
   "level": "1",
   "url": "sec-pre-assignment-oct-13.html",
   "type": "Section",
-  "number": "1.11",
-  "title": "Tue Oct 13: Areas Between Curves",
-  "body": " Tue Oct 13: Areas Between Curves  Today in class: (Stewart 6.1).   Think about this  You know how to find the area under one curve. How would you find the area trapped between two curves?  Sketch two curves that cross, and shade the region you mean.    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "number": "1.10",
+  "title": "Tue Oct 13: The Substitution Rule",
+  "body": " Tue Oct 13: The Substitution Rule  Today in class: (Stewart 5.5).   Think about this  The Chain Rule turns into .  If you saw that pattern hiding inside a function, could you run the Chain Rule backward?    Open the pre-assignment . Sign in first (your Doenet account, or a free new one) so your work counts. It opens in a new tab. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-15",
   "level": "1",
   "url": "sec-pre-assignment-oct-15.html",
   "type": "Section",
-  "number": "1.12",
-  "title": "Thu Oct 15: Volumes: The Disk Method",
-  "body": " Thu Oct 15: Volumes: The Disk Method  Today in class: (Stewart 6.2).   Think about this  Slice a loaf of bread. Each slice is almost a thin cylinder.  If you know the volume of one slice, how do you get the volume of the whole loaf?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "number": "1.11",
+  "title": "Thu Oct 15: Areas Between Curves",
+  "body": " Thu Oct 15: Areas Between Curves  Today in class: (Stewart 6.1).   Think about this  You know how to find the area under one curve. How would you find the area trapped between two curves?  Sketch two curves that cross, and shade the region you mean.    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-20",
   "level": "1",
   "url": "sec-pre-assignment-oct-20.html",
   "type": "Section",
-  "number": "1.13",
-  "title": "Tue Oct 20: Volumes: The Washer Method",
-  "body": " Tue Oct 20: Volumes: The Washer Method  Today in class: (Stewart 6.2).   Think about this  Now slice a bagel. Every slice has a hole in the middle.  How would you change your loaf-of-bread idea to handle the hole?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "number": "1.12",
+  "title": "Tue Oct 20: Volumes: Disks and Washers",
+  "body": " Tue Oct 20: Volumes: Disks and Washers  Today in class: (Stewart 6.2).   Think about this  Slice a loaf of bread. Each slice is almost a thin cylinder. If you know the volume of one slice, how do you get the volume of the whole loaf?  Now slice a bagel instead. Every slice has a hole in the middle. How would you change your loaf-of-bread idea to handle the hole?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-22",
   "level": "1",
   "url": "sec-pre-assignment-oct-22.html",
   "type": "Section",
-  "number": "1.14",
-  "title": "Thu Oct 22: Midterm Review",
-  "body": " Thu Oct 22: Midterm Review   Before class  No new topic today, so no Doenet warm-up.  Look back over everything since the start of the semester. Bring the two topics you feel least sure about.   "
+  "number": "1.13",
+  "title": "Thu Oct 22: Volumes: The Shell Method",
+  "body": " Thu Oct 22: Volumes: The Shell Method  Today in class: (Stewart 6.3).   Think about this  So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?  Could that ever be easier? Disks and shells can both work on the same solid -- what would make you pick one over the other?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-27",
   "level": "1",
   "url": "sec-pre-assignment-oct-27.html",
   "type": "Section",
-  "number": "1.15",
-  "title": "Tue Oct 27: Midterm",
-  "body": " Tue Oct 27: Midterm   Before class  No pre-assignment today.  Get some sleep. You have been practicing every one of these ideas since August.   "
+  "number": "1.14",
+  "title": "Tue Oct 27: Work",
+  "body": " Tue Oct 27: Work  Today in class: (Stewart 6.4).   Think about this  Stretching a spring gets harder the farther you pull. If the force keeps changing, how can you measure the total effort?  Now picture pumping all the water out over the top of a full tank. Why is the water at the bottom harder to pump out than the water at the top?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-oct-29",
   "level": "1",
   "url": "sec-pre-assignment-oct-29.html",
   "type": "Section",
-  "number": "1.16",
-  "title": "Thu Oct 29: Volumes: The Shell Method, Part 1",
-  "body": " Thu Oct 29: Volumes: The Shell Method, Part 1  Today in class: (Stewart 6.3).   Think about this  So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?  Could that ever be easier?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
-},
-{
-  "id": "sec-pre-assignment-nov-03",
-  "level": "1",
-  "url": "sec-pre-assignment-nov-03.html",
-  "type": "Section",
-  "number": "1.17",
-  "title": "Tue Nov 3: Volumes: The Shell Method, Part 2",
-  "body": " Tue Nov 3: Volumes: The Shell Method, Part 2  Today in class: (Stewart 6.3).   Think about this  Disks or shells? For the same solid, you can often do either.  What would make you pick one over the other?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
-},
-{
-  "id": "sec-pre-assignment-nov-05",
-  "level": "1",
-  "url": "sec-pre-assignment-nov-05.html",
-  "type": "Section",
-  "number": "1.18",
-  "title": "Thu Nov 5: Work: Springs",
-  "body": " Thu Nov 5: Work: Springs  Today in class: (Stewart 6.4).   Think about this  Stretching a spring gets harder the farther you pull.  If the force keeps changing, how can you measure the total effort?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
-},
-{
-  "id": "sec-pre-assignment-nov-10",
-  "level": "1",
-  "url": "sec-pre-assignment-nov-10.html",
-  "type": "Section",
-  "number": "1.19",
-  "title": "Tue Nov 10: Work: Pumping Liquids",
-  "body": " Tue Nov 10: Work: Pumping Liquids  Today in class: (Stewart 6.4).   Think about this  You need to pump all the water out over the top of a full tank.  Why is the water at the bottom harder to pump out than the water at the top?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
-},
-{
-  "id": "sec-pre-assignment-nov-12",
-  "level": "1",
-  "url": "sec-pre-assignment-nov-12.html",
-  "type": "Section",
-  "number": "1.20",
-  "title": "Thu Nov 12: Average Value of a Function",
-  "body": " Thu Nov 12: Average Value of a Function  Today in class: (Stewart 6.5).   Think about this  What does the average temperature today mean, when the temperature changes every second?  How would you compute it from a graph of temperature over the day?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
+  "number": "1.15",
+  "title": "Thu Oct 29: Average Value of a Function",
+  "body": " Thu Oct 29: Average Value of a Function  Today in class: (Stewart 6.5).   Think about this  What does the average temperature today mean, when the temperature changes every second?  How would you compute it from a graph of temperature over the day?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
 {
   "id": "sec-pre-assignment-nov-17",
   "level": "1",
   "url": "sec-pre-assignment-nov-17.html",
   "type": "Section",
-  "number": "1.21",
+  "number": "1.16",
   "title": "Tue Nov 17: Board Presentations, Day 1",
   "body": " Tue Nov 17: Board Presentations, Day 1   Before class  No Doenet warm-up today. It is presentation day.  If your group presents today, rehearse once out loud. If not, come ready to ask one good question.   "
 },
@@ -203,7 +158,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-pre-assignment-nov-19.html",
   "type": "Section",
-  "number": "1.22",
+  "number": "1.17",
   "title": "Thu Nov 19: Board Presentations, Day 2",
   "body": " Thu Nov 19: Board Presentations, Day 2   Before class  No Doenet warm-up today. It is presentation day.  If your group presents today, rehearse once out loud. If not, come ready to ask one good question.   "
 },
@@ -212,7 +167,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-pre-assignment-nov-24.html",
   "type": "Section",
-  "number": "1.23",
+  "number": "1.18",
   "title": "Tue Nov 24: Arc Length and Surface Area",
   "body": " Tue Nov 24: Arc Length and Surface Area  Today in class: (Stewart 8.1 and 8.2).   Think about this  How long is a curvy road? You can measure straight lines easily.  Could lots of tiny straight pieces do the job?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
@@ -221,7 +176,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-pre-assignment-dec-01.html",
   "type": "Section",
-  "number": "1.24",
+  "number": "1.19",
   "title": "Tue Dec 1: Fluid Pressure and Center of Mass",
   "body": " Tue Dec 1: Fluid Pressure and Center of Mass  Today in class: (Stewart 8.3).   Think about this  Why is a dam built thicker at the bottom than at the top?  And where would you put your finger to balance a flat, oddly shaped plate?    Link coming soon. The Doenet warm-up will appear here before class. About 10 minutes, completion credit.  "
 },
@@ -230,7 +185,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "sec-pre-assignment-dec-03.html",
   "type": "Section",
-  "number": "1.25",
+  "number": "1.20",
   "title": "Thu Dec 3: Cumulative Review",
   "body": " Thu Dec 3: Cumulative Review   Before class  No new topic today, so no Doenet warm-up.  Bring the one topic from the whole semester you most want to see again.   "
 },
