@@ -142,10 +142,7 @@
 </p>
 
 <graph xmin="-0.5" xmax="3.5" ymin="-1" ymax="10">
-  <description>
-    Graph of u of x equals x squared, with a movable point at the
-    current slider value of x, tracing the curve as x changes.
-  </description>
+  <shortDescription>Graph of u of x equals x squared, with a movable point at the current slider value of x, tracing the curve as x changes.</shortDescription>
   <function>x^2</function>
   <point x="$xSlide" y="($xSlide)^2"/>
 </graph>
