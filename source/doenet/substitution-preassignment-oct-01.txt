@@ -1,0 +1,188 @@
+<title>Pre-Assignment: Pancake's Substitution Puzzle</title>
+
+<p>
+  Pancake is training for the fall race, and her coach hands her a new
+  rate to integrate before Thursday:
+</p>
+
+<p>
+  <m>\displaystyle\int 2x(x^2+1)^3\,dx</m>
+</p>
+
+<p>
+  She reaches for her toolkit from last class: power rule, exponential
+  rule, trig rule. None of them match directly. The integrand is not a
+  single power of <m>x</m> -- it is a whole expression, <m>(x^2+1)</m>,
+  raised to a power, multiplied by something else out front.
+</p>
+
+<p>
+  <alert>Question 1.</alert> What do you think is going on here?
+</p>
+
+<answer>
+  <label>What's going on with this integral?</label>
+  <choice credit="0">You can expand <m>(x^2+1)^3</m> with the binomial theorem, then the power rule handles each term -- there is no shortcut here.</choice>
+  <choice credit="1"><m>2x</m> looks suspicious. It is exactly the derivative of <m>x^2+1</m>, the expression being cubed. Maybe that is not a coincidence.</choice>
+  <choice credit="0">This cannot be integrated at all with the tools from this course.</choice>
+</answer>
+
+<p>
+  You are right to be suspicious. Expanding <m>(x^2+1)^3</m> and
+  multiplying through by <m>2x</m> would work eventually, but it is slow
+  and easy to mess up. There is a much faster path -- if you notice the
+  right pattern.
+</p>
+
+<p>
+  Here is the pattern: somewhere inside this integral, one piece is an
+  <em>inside function</em>, and another piece is exactly its own
+  derivative, just riding along as a factor. When that happens, calculus
+  lets you rename the whole inside function as one new letter, <m>u</m>,
+  and the messy integral in <m>x</m> turns into a simple integral in
+  <m>u</m>.
+</p>
+
+<p>
+  <alert>Question 2.</alert> In <m>\displaystyle\int 2x(x^2+1)^3\,dx</m>,
+  let <m>u = x^2+1</m>. Which of these is <m>du</m>?
+</p>
+
+<answer>
+  <label>Which expression is du?</label>
+  <choice credit="1"><m>2x\,dx</m></choice>
+  <choice credit="0"><m>x^2\,dx</m></choice>
+  <choice credit="0"><m>2x</m></choice>
+</answer>
+
+<p>
+  Now the entire integral has a new face. Every <m>x^2+1</m> becomes
+  <m>u</m>, and the leftover <m>2x\,dx</m> is exactly <m>du</m> -- it
+  disappears into the substitution, not into the answer.
+</p>
+
+<p>
+  <alert>Question 3.</alert> Rewrite <m>\displaystyle\int 2x(x^2+1)^3\,dx</m>
+  entirely in terms of <m>u</m>.
+</p>
+
+<answer>
+  <label>The integral rewritten in u</label>
+  <choice credit="1"><m>\displaystyle\int u^3\,du</m></choice>
+  <choice credit="0"><m>\displaystyle\int u^3\,dx</m></choice>
+  <choice credit="0"><m>\displaystyle\int 2x\,u^3\,du</m></choice>
+</answer>
+
+<p>
+  That is a power-rule integral you already know how to do.
+</p>
+
+<p>
+  <alert>Question 4.</alert> Evaluate <m>\displaystyle\int u^3\,du</m>,
+  then substitute back <m>u = x^2+1</m> to answer in terms of <m>x</m>.
+  What is <m>\displaystyle\int 2x(x^2+1)^3\,dx</m>?
+</p>
+
+<answer>
+  <label>The antiderivative, back in terms of x</label>
+  <choice credit="1"><m>\dfrac{(x^2+1)^4}{4} + C</m></choice>
+  <choice credit="0"><m>(x^2+1)^4 + C</m></choice>
+  <choice credit="0"><m>4(x^2+1)^3 + C</m></choice>
+</answer>
+
+<p>
+  Check it the way you always check an indefinite integral: differentiate
+  your answer. If the substitution was done correctly,
+  <m>\frac{d}{dx}\left[\dfrac{(x^2+1)^4}{4}\right] = (x^2+1)^3 \cdot 2x</m>
+  by the chain rule -- exactly the original integrand. Substitution and
+  the chain rule are the same move, run in opposite directions.
+</p>
+
+<p>
+  <alert>Question 5.</alert> Pancake's coach hands her a second rate
+  before the race: <m>\displaystyle\int 2x\cos(x^2)\,dx</m>. What
+  substitution <m>u</m> turns this into a trig-rule integral you already
+  know?
+</p>
+
+<answer>
+  <label>Choose the substitution</label>
+  <choice credit="1"><m>u = x^2</m>, since <m>du = 2x\,dx</m> is exactly the leftover factor.</choice>
+  <choice credit="0"><m>u = \cos(x^2)</m>, since that is the most complicated piece.</choice>
+  <choice credit="0"><m>u = 2x</m>, since that is the piece sitting out front.</choice>
+</answer>
+
+<p>
+  <alert>Question 6.</alert> <m>\displaystyle\int 2x\cos(x^2)\,dx =</m>
+</p>
+
+<answer>
+  <label>The antiderivative of 2x cos(x^2)</label>
+  <choice credit="1"><m>\sin(x^2) + C</m></choice>
+  <choice credit="0"><m>\cos(x^2) + C</m></choice>
+  <choice credit="0"><m>-\cos(x^2) + C</m></choice>
+</answer>
+
+<p>
+  Here is the slider version of the same idea. Drag <m>x</m> and watch two
+  numbers at once: the inside function <m>u(x) = x^2</m>, and its rate of
+  change <m>u'(x) = 2x</m>. The factor sitting out front of every
+  substitution problem in this activity is never random -- it is always
+  <m>u'(x)</m>, caught in the act.
+</p>
+
+<slider name="xSlide" from="0" to="3" step="0.25" initialValue="1"/>
+
+<p>
+  <m>x =</m> <number>$xSlide</number>,
+  &#160;&#160;
+  <m>u(x) = x^2 =</m> <number>($xSlide)^2</number>,
+  &#160;&#160;
+  <m>u'(x) = 2x =</m> <number>2$xSlide</number>
+</p>
+
+<graph xmin="-0.5" xmax="3.5" ymin="-1" ymax="10">
+  <description>
+    Graph of u of x equals x squared, with a movable point at the
+    current slider value of x, tracing the curve as x changes.
+  </description>
+  <function>x^2</function>
+  <point x="$xSlide" y="($xSlide)^2"/>
+</graph>
+
+<p>
+  Every time you see a factor out front that matches the derivative of
+  something more complicated behind it, that factor is <m>du</m> in
+  disguise. Finding it is the whole puzzle.
+</p>
+
+<p>
+  <alert>Question 7 (exit ticket).</alert>
+  One more for the road: <m>\displaystyle\int 3x^2\sin(x^3)\,dx</m>.
+  First, identify <m>u</m>.
+</p>
+
+<answer>
+  <label>Identify u</label>
+  <award>x^3</award>
+</answer>
+
+<p>
+  <alert>Question 8 (exit ticket).</alert>
+  Now give the full antiderivative: <m>\displaystyle\int 3x^2\sin(x^3)\,dx =</m>
+</p>
+
+<answer>
+  <label>The full antiderivative</label>
+  <choice credit="1"><m>-\cos(x^3) + C</m></choice>
+  <choice credit="0"><m>\cos(x^3) + C</m></choice>
+  <choice credit="0"><m>-3x^2\cos(x^3) + C</m></choice>
+</answer>
+
+<p>
+  Not every antiderivative hands itself to you the way <m>\int x^n\,dx</m>
+  does. Sometimes the function in front of you is really two functions
+  tangled together by the chain rule, and finding the antiderivative
+  means untangling them first. That untangling is the Substitution Rule
+  -- see you in class to make it official.
+</p>
