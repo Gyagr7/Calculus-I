@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spin the Slice</title>
+<!-- 3D animation for Section 6.2 (disks and washers). Embedded in the book through
+     <interactive iframe="volumes/spin-the-slice.html"> in source/sec-6-2-volumes.ptx.
+     Loads three.js 0.128.0 from jsdelivr. Inside an iframe it switches to a compact layout. -->
+<script>if(window.self!==window.top||/embed/.test(location.search))document.documentElement.classList.add("embed");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --panel:#ffffff; --ink:#16202b; --muted:#5a6575; --line:#d8dde5; --stage:#e9edf2;
+  --solid:#2b7a87; --slice:#d9701a; --axis:#c2185b; --curve:#1b2735; --slab:#3d6db3; --slab2:#86a8d9;
+  --chip:#eef1f5; --chip-on:#16202b; --chip-on-ink:#ffffff;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-math:"STIX Two Text", "Cambria Math", "Times New Roman", serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not(.embed){
+  --bg:#0e1319; --panel:#151c25; --ink:#e5eaf0; --muted:#93a0b0; --line:#28323f; --stage:#111821;
+  --solid:#4fb0bc; --slice:#f39a46; --axis:#f0679a; --curve:#dce5ee; --slab:#6f9be0; --slab2:#3b5c94;
+  --chip:#1d2631; --chip-on:#e5eaf0; --chip-on-ink:#0e1319; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0e1319; --panel:#151c25; --ink:#e5eaf0; --muted:#93a0b0; --line:#28323f; --stage:#111821;
+  --solid:#4fb0bc; --slice:#f39a46; --axis:#f0679a; --curve:#dce5ee; --slab:#6f9be0; --slab2:#3b5c94;
+  --chip:#1d2631; --chip-on:#e5eaf0; --chip-on-ink:#0e1319; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 28px}
+[hidden]{display:none!important}
+.wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+h1{font-family:var(--f-display);font-weight:750;font-size:clamp(1.6rem,3vw,2.2rem);margin:0;letter-spacing:-.01em;text-wrap:balance}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.m{font-family:var(--f-math);font-size:1.08em}
+.m i{font-style:italic}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:minmax(0,1fr)}}
+.stagebox{position:relative;background:var(--stage);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  height:min(76vh,720px);min-height:340px}
+@media (max-width:900px){.stagebox{height:62vh}}
+#gl{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#gl:active{cursor:grabbing}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lab{position:absolute;transform:translate(-50%,-50%);font-family:var(--f-math);font-size:15px;white-space:nowrap;
+  padding:0 4px;border-radius:4px;background:color-mix(in srgb,var(--stage) 78%,transparent)}
+.lab.axis{color:var(--axis);font-family:var(--f-body);font-size:13px;font-weight:600}
+.lab.R,.lab.r{color:var(--slice);font-weight:600;font-style:italic;font-size:17px}
+.lab.curve{color:var(--curve)}
+.stagebar{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.stagebar input[type=range]{flex:1 1 160px;min-width:0}
+.hint{position:absolute;top:10px;right:12px;font-size:12px;color:var(--muted)}
+.rail{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip{border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:4px 11px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);border-color:var(--chip-on)}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--slice);outline-offset:2px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.step{border:1px solid var(--line);background:var(--chip);border-radius:6px;padding:5px 2px;font-size:12.5px;font-weight:600;letter-spacing:.03em}
+.step[aria-pressed="true"]{background:var(--slice);color:#fff;border-color:var(--slice)}
+.caption{margin:0;min-height:4.4em}
+.btn{border:1px solid var(--chip-on);background:var(--chip-on);color:var(--chip-on-ink);border-radius:6px;padding:5px 12px;font-weight:600;font-size:14px;min-width:78px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.row label{font-size:14px}
+.row input[type=range]{flex:1 1 140px;min-width:0}
+.num{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums}
+.tog{display:flex;align-items:center;gap:6px;font-size:14px}
+.read{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:baseline;margin:0}
+.read dt{color:var(--muted);font-size:13.5px}
+.read dd{margin:0;min-width:0}
+.read .val{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.xs{display:flex;gap:12px;align-items:center}
+#xs{width:120px;height:120px;flex:none}
+.note{font-size:14px;color:var(--muted);margin:0}
+.big{font-size:1.15rem}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:baseline}
+html.embed{color-scheme:light}
+.embed body{padding-block:8px 12px}
+.embed header{display:none}
+.embed .main{grid-template-columns:minmax(0,1fr)}
+.embed .stagebox{height:400px;min-height:0}
+.embed .rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));align-items:start}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Spin the Slice</h1>
+    <p>One thin rectangle, rotated about the axis, becomes one thin disk or washer. Spin them all and you get the solid. Drag the picture to look around it.</p>
+  </header>
+
+  <div class="main">
+    <div class="stagebox" id="stagebox">
+      <canvas id="gl" aria-label="3D view of the region rotating about its axis"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="hint">drag to orbit · scroll to zoom</div>
+      <div class="stagebar">
+        <button class="btn" id="play" type="button">Spin</button>
+        <label for="theta" class="num">θ</label>
+        <input type="range" id="theta" min="0" max="360" step="1" value="0">
+        <span class="num" id="thetaOut">0°</span>
+      </div>
+    </div>
+
+    <div class="rail">
+      <section class="card">
+        <span class="eyebrow">Example</span>
+        <div class="chips" id="scenes"></div>
+        <div class="m big" id="sceneTitle"></div>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">Walk through it</span>
+        <div class="steps" id="steps"></div>
+        <p class="caption" id="caption"></p>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">Show</span>
+        <div class="row">
+          <label class="tog"><input type="checkbox" id="showSolid" checked> <span><span class="swatch" style="background:var(--solid)"></span>Whole region</span></label>
+          <label class="tog"><input type="checkbox" id="showSlice" checked> <span><span class="swatch" style="background:var(--slice)"></span>One slice</span></label>
+        </div>
+        <div class="row">
+          <label for="tpos" id="tposLab">Slice at <span class="m"><i>x</i></span></label>
+          <input type="range" id="tpos" min="0" max="1000" value="550">
+          <span class="num" id="tOut"></span>
+        </div>
+        <div class="row">
+          <span style="font-size:14px">Stack of slabs</span>
+          <div class="chips" id="slabs"></div>
+        </div>
+        <div class="row"><button class="btn ghost" id="resetView" type="button">Reset view</button></div>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">The slice in numbers</span>
+        <div class="xs">
+          <canvas id="xs" aria-label="Cross-section of the slice"></canvas>
+          <dl class="read" id="read"></dl>
+        </div>
+        <p class="note" id="sceneNote"></p>
+        <dl class="read" id="total"></dl>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+const TAU = Math.PI*2, V = THREE.Vector3;
+const $ = id => document.getElementById(id);
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#888';
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- the four examples from the Section 6.2 handout ----------
+const SCENES = [
+  { tab:'Disk', along:'x', a:0, b:2, k:0, L:u=>0, U:u=>u*u, kind:'disk',
+    title:'Region under <i>y</i> = <i>x</i>² on [0, 2], about the <i>x</i>-axis',
+    R:'<i>x</i>²', r:'0', exact:'32π/5',
+    integral:'π∫<sub>0</sub><sup>2</sup> (<i>x</i>²)² d<i>x</i>',
+    note:'The rectangle starts on the axis, so there is no hole. Radius = height of the curve.',
+    labels:[{t:'y = x²', u:1.9, w:'U'}], hideL:true },
+  { tab:'Washer', along:'x', a:0, b:1, k:0, L:u=>u*u, U:u=>u, kind:'washer',
+    title:'Between <i>y</i> = <i>x</i> and <i>y</i> = <i>x</i>² , about the <i>x</i>-axis',
+    R:'<i>x</i>', r:'<i>x</i>²', exact:'2π/15',
+    integral:'π∫<sub>0</sub><sup>1</sup> (<i>x</i>² − <i>x</i>⁴) d<i>x</i>',
+    note:'The rectangle floats above the axis, so it sweeps out a ring. The gap under it becomes the hole.',
+    labels:[{t:'y = x', u:0.85, w:'U'},{t:'y = x²', u:0.9, w:'L'}] },
+  { tab:'Axis y = 2', along:'x', a:0, b:1, k:2, L:u=>u*u, U:u=>u, kind:'washer',
+    title:'Same region, about the line <i>y</i> = 2',
+    R:'2 − <i>x</i>²', r:'2 − <i>x</i>', exact:'8π/15',
+    integral:'π∫<sub>0</sub><sup>1</sup> [(2 − <i>x</i>²)² − (2 − <i>x</i>)²] d<i>x</i>',
+    note:'Now the lower curve is farther from the axis, so it gives the outer radius. Radius means distance to the axis.',
+    labels:[{t:'y = x', u:0.85, w:'U'},{t:'y = x²', u:0.9, w:'L'}] },
+  { tab:'About y-axis', along:'y', a:-2, b:2, k:0, L:u=>u*u, U:u=>4, kind:'washer',
+    title:'Between <i>x</i> = <i>y</i>² and <i>x</i> = 4, about the <i>y</i>-axis',
+    R:'4', r:'<i>y</i>²', exact:'256π/5',
+    integral:'π∫<sub>−2</sub><sup>2</sup> (16 − <i>y</i>⁴) d<i>y</i>',
+    note:'Vertical axis, so the slices are horizontal and everything is a function of y.',
+    labels:[{t:'x = y²', u:-1.6, w:'L'},{t:'x = 4', u:1.7, w:'U'}] }
+];
+SCENES.forEach(sc=>{
+  const n=400, h=(sc.b-sc.a)/n; let s=0;
+  for(let i=0;i<=n;i++){ const u=sc.a+i*h, w=(i===0||i===n)?1:(i%2?4:2); s+=w*area(sc,u); }
+  sc.vol = s*h/3;
+  let m=0; for(let i=0;i<=100;i++){ const u=sc.a+(sc.b-sc.a)*i/100; m=Math.max(m,Rr(sc,u)[0]); }
+  sc.Rmax=m;
+});
+function Rr(sc,u){ const d1=Math.abs(sc.U(u)-sc.k), d2=Math.abs(sc.L(u)-sc.k); return [Math.max(d1,d2), Math.min(d1,d2)]; }
+function area(sc,u){ const [R,r]=Rr(sc,u); return Math.PI*(R*R-r*r); }
+
+// ---------- state ----------
+const st = { si:0, theta:0, t:0.55, solid:true, slice:true, slabs:0, playing:false, step:-1 };
+let sc = SCENES[0], dirty = true;
+
+// ---------- three.js setup ----------
+const canvas=$('gl'), box=$('stagebox');
+const renderer=new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,1,0.01,500);
+const controls=new THREE.OrbitControls(camera, canvas);
+controls.enableDamping=true; controls.dampingFactor=0.08;
+scene.add(new THREE.HemisphereLight(0xffffff,0x667080,0.75));
+const dl=new THREE.DirectionalLight(0xffffff,0.55); dl.position.set(3,5,6); scene.add(dl);
+const dl2=new THREE.DirectionalLight(0xffffff,0.25); dl2.position.set(-4,-2,-5); scene.add(dl2);
+
+const M = {
+  solid:new THREE.MeshPhongMaterial({transparent:true,opacity:0.42,side:THREE.DoubleSide,depthWrite:false,shininess:50}),
+  face:new THREE.MeshPhongMaterial({transparent:true,opacity:0.75,side:THREE.DoubleSide,depthWrite:false,shininess:20}),
+  ghost:new THREE.MeshPhongMaterial({transparent:true,opacity:0.10,side:THREE.DoubleSide,depthWrite:false}),
+  slice:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:60}),
+  slabA:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:40}),
+  slabB:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:40}),
+  curve:new THREE.MeshBasicMaterial(),
+  axis:new THREE.MeshBasicMaterial(),
+  rad:new THREE.MeshBasicMaterial(),
+  grid:new THREE.LineBasicMaterial({transparent:true,opacity:0.55})
+};
+function applyTheme(){
+  scene.background=new THREE.Color(tok('--stage'));
+  M.solid.color.set(tok('--solid')); M.face.color.set(tok('--solid')); M.ghost.color.set(tok('--solid'));
+  M.slice.color.set(tok('--slice')); M.rad.color.set(tok('--slice'));
+  M.slabA.color.set(tok('--slab')); M.slabB.color.set(tok('--slab2'));
+  M.curve.color.set(tok('--curve')); M.axis.color.set(tok('--axis')); M.grid.color.set(tok('--muted'));
+  drawXS();
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+// ---------- geometry helpers ----------
+function rot(u,s,phi){ const d=s-sc.k, c=Math.cos(phi), n=Math.sin(phi);
+  return sc.along==='x' ? new V(u, sc.k+d*c, d*n) : new V(sc.k+d*c, u, -d*n); }
+function grid(nu,nv,f){
+  const pos=new Float32Array((nu+1)*(nv+1)*3), idx=[]; let p=0;
+  for(let i=0;i<=nu;i++) for(let j=0;j<=nv;j++){ const v=f(i/nu,j/nv); pos[p++]=v.x; pos[p++]=v.y; pos[p++]=v.z; }
+  for(let i=0;i<nu;i++) for(let j=0;j<nv;j++){ const a=i*(nv+1)+j, b=a+nv+1; idx.push(a,b,a+1, b,b+1,a+1); }
+  const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g;
+}
+function piece(a,b,L,U,th,mat,faceMat,nu){
+  const g=new THREE.Group(), nt=Math.max(2,Math.ceil(72*th/TAU)), m=(geo,mm)=>g.add(new THREE.Mesh(geo,mm));
+  if(th>1e-3){
+    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return rot(u,U(u),th*q);}),mat);
+    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return rot(u,L(u),th*q);}),mat);
+    m(grid(3,nt,(p,q)=>rot(a,L(a)+(U(a)-L(a))*p,th*q)),mat);
+    m(grid(3,nt,(p,q)=>rot(b,L(b)+(U(b)-L(b))*p,th*q)),mat);
+  }
+  const face=(phi)=>grid(nu,3,(p,q)=>{const u=a+(b-a)*p; return rot(u,L(u)+(U(u)-L(u))*q,phi);});
+  m(face(0),faceMat||mat);
+  if(th>1e-3 && th<TAU-1e-3) m(face(th),faceMat||mat);
+  return g;
+}
+function rod(p,q,r,mat){
+  const d=q.clone().sub(p), len=d.length(); if(len<1e-6) return new THREE.Group();
+  const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,10),mat);
+  mesh.position.copy(p).add(q).multiplyScalar(0.5);
+  mesh.quaternion.setFromUnitVectors(new V(0,1,0),d.normalize()); return mesh;
+}
+function tube(pts,r,mat){ return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),Math.max(8,pts.length*2),r,8,false),mat); }
+function disposeGroup(g){ g.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); while(g.children.length) g.remove(g.children[0]); }
+
+const staticG=new THREE.Group(), dynG=new THREE.Group(); scene.add(staticG,dynG);
+let lw=0.01;
+
+function buildStatic(){
+  disposeGroup(staticG);
+  const pad=(sc.b-sc.a)*0.18, R=sc.Rmax; lw=Math.max(sc.b-sc.a,R)*0.009;
+  const lineG=(p,q)=>new THREE.Line(new THREE.BufferGeometry().setFromPoints([p,q]),M.grid);
+  if(sc.along==='x'){ staticG.add(lineG(new V(sc.a-pad,0,0),new V(sc.b+pad,0,0)), lineG(new V(0,sc.k-R-pad,0),new V(0,sc.k+R+pad,0))); }
+  else { staticG.add(lineG(new V(-R-pad,0,0),new V(R+pad,0,0)), lineG(new V(0,sc.a-pad,0),new V(0,sc.b+pad,0))); }
+  const A0=sc.a-pad, A1=sc.b+pad, n=Math.round((A1-A0)/(lw*9));
+  for(let i=0;i<n;i+=2){ const u0=A0+(A1-A0)*i/n, u1=A0+(A1-A0)*(i+1)/n;
+    staticG.add(rod(rot(u0,sc.k,0),rot(u1,sc.k,0),lw*0.8,M.axis)); }
+  const pts=f=>{const a=[];for(let i=0;i<=60;i++){const u=sc.a+(sc.b-sc.a)*i/60;a.push(rot(u,f(u),0));}return a;};
+  staticG.add(tube(pts(sc.U),lw*0.9,M.curve));
+  if(!sc.hideL) staticG.add(tube(pts(sc.L),lw*0.9,M.curve));
+  [sc.a,sc.b].forEach(u=>staticG.add(rod(rot(u,sc.L(u),0),rot(u,sc.U(u),0),lw*0.6,M.curve)));
+}
+
+function dt(){ return (sc.b-sc.a)/22; }
+function t0(){ const d=dt(); return sc.a+d/2+(sc.b-sc.a-d)*st.t; }
+
+function buildDyn(){
+  disposeGroup(dynG);
+  const th=st.theta, nu=56;
+  if(st.slabs>0){
+    const n=st.slabs, h=(sc.b-sc.a)/n;
+    for(let i=0;i<n;i++){ const a=sc.a+i*h, b=a+h, mid=(a+b)/2, Lc=sc.L(mid), Uc=sc.U(mid);
+      dynG.add(piece(a,b,()=>Lc,()=>Uc,th,i%2?M.slabB:M.slabA,null,2)); }
+    if(st.solid) dynG.add(piece(sc.a,sc.b,sc.L,sc.U,th,M.ghost,M.ghost,nu));
+  } else if(st.solid){
+    dynG.add(piece(sc.a,sc.b,sc.L,sc.U,th,M.solid,M.face,nu));
+    if(th>0.01 && th<TAU-0.01){
+      const edge=f=>{const a=[];for(let i=0;i<=50;i++){const u=sc.a+(sc.b-sc.a)*i/50;a.push(rot(u,f(u),th));}return a;};
+      dynG.add(tube(edge(sc.U),lw*0.55,M.curve)); if(!sc.hideL) dynG.add(tube(edge(sc.L),lw*0.55,M.curve));
+    }
+  }
+  if(st.slice && st.slabs===0){
+    const c=t0(), d=dt();
+    dynG.add(piece(c-d/2,c+d/2,sc.L,sc.U,th,M.slice,M.slice,4));
+    const sOut=Math.abs(sc.U(c)-sc.k)>=Math.abs(sc.L(c)-sc.k)?sc.U(c):sc.L(c);
+    const sIn = sOut===sc.U(c)?sc.L(c):sc.U(c);
+    const ax=rot(c,sc.k,0), ph=th;
+    dynG.add(rod(ax,rot(c,sOut,ph),lw*0.55,M.rad));
+    if(Math.abs(sIn-sc.k)>1e-3) dynG.add(rod(ax,rot(c,sIn,ph),lw*0.4,M.curve));
+    if(th>0.05){ const arc=[]; for(let i=0;i<=48;i++) arc.push(rot(c+d/2+lw*1.5,sOut,th*i/48)); dynG.add(tube(arc,lw*0.35,M.rad)); }
+    lab.R.pos=rot(c,(sc.k+sOut)/2,ph).add(sc.along==='x'?new V(lw*6,0,0):new V(0,lw*6,0));
+    lab.r.pos=Math.abs(sIn-sc.k)>1e-3?rot(c,(sc.k+sIn)/2,ph).add(sc.along==='x'?new V(-lw*6,0,0):new V(0,-lw*6,0)):null;
+  } else { lab.R.pos=null; lab.r.pos=null; }
+}
+
+// ---------- labels projected from 3D ----------
+const labelsEl=$('labels'), lab={};
+function mkLabel(key,cls,html){ const el=document.createElement('div'); el.className='lab '+cls; el.innerHTML=html; labelsEl.appendChild(el); lab[key]={el,pos:null}; }
+mkLabel('axis','axis','axis of rotation'); mkLabel('R','R','R'); mkLabel('r','r','r');
+let curveLabs=[];
+function setSceneLabels(){
+  curveLabs.forEach(k=>{lab[k].el.remove(); delete lab[k];}); curveLabs=[];
+  sc.labels.forEach((L,i)=>{ const k='c'+i; mkLabel(k,'curve',L.t.replace(/([xy])/g,'<i>$1</i>')); curveLabs.push(k);
+    const s=(L.w==='U'?sc.U:sc.L)(L.u), off=(L.w==='U'?1:-1)*lw*7;
+    lab[k].pos=sc.along==='x'?new V(L.u,s+off,0):new V(s+off*1.5,L.u,0); });
+  const pad=(sc.b-sc.a)*0.14; lab.axis.pos=rot(sc.b+pad,sc.k,0).add(sc.along==='x'?new V(0,-lw*7,0):new V(lw*14,0,0));
+}
+const tmp=new V();
+function placeLabels(){
+  const w=box.clientWidth,h=box.clientHeight;
+  for(const k in lab){ const L=lab[k]; if(!L.pos){L.el.hidden=true;continue;}
+    tmp.copy(L.pos).project(camera); if(tmp.z>1){L.el.hidden=true;continue;}
+    L.el.hidden=false; L.el.style.left=((tmp.x+1)/2*w)+'px'; L.el.style.top=((1-tmp.y)/2*h)+'px'; }
+}
+
+// ---------- camera ----------
+function fitCamera(){
+  const R=sc.Rmax, half=(sc.b-sc.a)/2, mid=(sc.a+sc.b)/2;
+  const center=sc.along==='x'?new V(mid,sc.k,0):new V(sc.k,mid,0);
+  const rad=Math.sqrt(half*half+R*R)*1.05;
+  const dist=rad/Math.sin(camera.fov*Math.PI/360)*1.25;
+  const dir=sc.along==='x'?new V(0.9,0.45,1):new V(0.75,0.35,1);
+  controls.target.copy(center); camera.position.copy(center).add(dir.normalize().multiplyScalar(dist));
+  camera.near=dist/100; camera.far=dist*20; camera.updateProjectionMatrix(); controls.update();
+}
+function resize(){ const w=box.clientWidth,h=box.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(box);
+
+// ---------- UI ----------
+const fmt=x=>(Math.abs(x)<5e-4?0:x).toFixed(2);
+SCENES.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=s.tab;
+  b.addEventListener('click',()=>setScene(i)); $('scenes').appendChild(b); });
+[0,4,8,16,32].forEach(n=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=n?n:'Off'; b.dataset.n=n;
+  b.addEventListener('click',()=>{ st.slabs=n; st.step=-1; sync(); }); $('slabs').appendChild(b); });
+
+const STEPS=['Draw','Slice','Spin it','Spin all','Stack'];
+STEPS.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='step'; b.textContent=(i+1)+' '+t;
+  b.addEventListener('click',()=>goStep(i)); $('steps').appendChild(b); });
+
+function captionFor(i){
+  const v=sc.along, sh=sc.kind, axis=sc.along==='x'?(sc.k?'the line y = '+sc.k:'the x-axis'):'the y-axis';
+  const axisH=axis.replace(/([xy])(?=[ -]|$)/g,'<i>$1</i>');
+  return [
+    `This is the flat region. Nothing is 3D yet. The dashed line is ${axisH}, the axis we will spin around.`,
+    `Cut one thin ${v==='x'?'vertical':'horizontal'} rectangle of width Δ<i>${v}</i> at a typical <i>${v}</i>. This is the same rectangle as in a Riemann sum.`,
+    `Spin <b>only that rectangle</b> about ${axisH}. Its outer corner travels a full circle, so it sweeps out a thin <b>${sh}</b>. The orange line is the radius: the distance from the axis.`,
+    `Every rectangle does the same thing at the same time. Together their ${sh}s fill out the solid.`,
+    `The solid is approximately a stack of thin ${sh}s. Each one has volume ≈ <i>A</i>(<i>${v}</i>)Δ<i>${v}</i>. Add them up, then let Δ<i>${v}</i> → 0.`
+  ][i];
+}
+function goStep(i){
+  st.step=i; st.playing=false;
+  const set=[{theta:0,solid:true,slice:false,slabs:0},{theta:0,solid:true,slice:true,slabs:0},
+             {theta:0,solid:false,slice:true,slabs:0,play:1},{theta:0,solid:true,slice:true,slabs:0,play:1},
+             {theta:TAU,solid:true,slice:false,slabs:8}][i];
+  Object.assign(st,{theta:set.theta,solid:set.solid,slice:set.slice,slabs:set.slabs});
+  if(set.play) startPlay(true);
+  sync();
+}
+function setScene(i){ st.si=i; sc=SCENES[i]; buildStatic(); setSceneLabels(); fitCamera(); if(st.step>=0) goStep(st.step); else sync(); }
+
+$('showSolid').addEventListener('change',e=>{st.solid=e.target.checked; st.step=-1; sync();});
+$('showSlice').addEventListener('change',e=>{st.slice=e.target.checked; st.step=-1; sync();});
+$('tpos').addEventListener('input',e=>{st.t=e.target.value/1000; sync();});
+$('theta').addEventListener('input',e=>{st.theta=e.target.value/360*TAU; st.playing=false; sync();});
+$('play').addEventListener('click',()=>{ if(st.playing){st.playing=false;} else startPlay(st.theta>=TAU-1e-3); sync(); });
+$('resetView').addEventListener('click',fitCamera);
+function startPlay(fromZero){ if(fromZero) st.theta=0; if(reduce){ st.theta=TAU; st.playing=false; } else st.playing=true; }
+
+function sync(){
+  dirty=true;
+  [...$('scenes').children].forEach((b,i)=>b.setAttribute('aria-pressed',i===st.si));
+  [...$('slabs').children].forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===st.slabs));
+  [...$('steps').children].forEach((b,i)=>b.setAttribute('aria-pressed',i===st.step));
+  $('caption').innerHTML = st.step>=0 ? captionFor(st.step) : 'Pick a step above, or explore with the controls.';
+  $('sceneTitle').innerHTML=sc.title;
+  $('showSolid').checked=st.solid; $('showSlice').checked=st.slice;
+  $('play').textContent=st.playing?'Pause':(st.theta>=TAU-1e-3?'Replay':'Spin');
+  $('theta').value=Math.round(st.theta/TAU*360); $('thetaOut').textContent=Math.round(st.theta/TAU*360)+'°';
+  const v=sc.along; $('tposLab').innerHTML=`Slice at <span class="m"><i>${v}</i></span>`;
+  const c=t0(), [R,r]=Rr(sc,c), A=Math.PI*(R*R-r*r), d=dt();
+  $('tOut').textContent=v+' = '+fmt(c);
+  $('read').innerHTML=
+    `<dt>outer</dt><dd><span class="m"><i>R</i>(<i>${v}</i>) = ${sc.R}</span> <span class="val">= ${fmt(R)}</span></dd>`+
+    `<dt>inner</dt><dd><span class="m"><i>r</i>(<i>${v}</i>) = ${sc.r}</span> <span class="val">= ${fmt(r)}</span></dd>`+
+    `<dt>area</dt><dd><span class="m"><i>A</i> = π(<i>R</i>² − <i>r</i>²)</span> <span class="val">= ${fmt(A)}</span></dd>`+
+    `<dt>slab</dt><dd><span class="m"><i>A</i>·Δ<i>${v}</i></span> <span class="val">= ${fmt(A*d)}</span></dd>`;
+  $('sceneNote').textContent=sc.note;
+  let tot=`<dt>integral</dt><dd><span class="m"><i>V</i> = ${sc.integral}</span></dd>`+
+          `<dt>exact</dt><dd><span class="m">${sc.exact}</span> <span class="val">≈ ${sc.vol.toFixed(3)}</span></dd>`;
+  if(st.slabs>0){ const n=st.slabs,h=(sc.b-sc.a)/n; let s=0; for(let i=0;i<n;i++) s+=area(sc,sc.a+(i+.5)*h)*h;
+    tot=`<dt>${n} slabs</dt><dd><span class="m">Σ <i>A</i>(<i>${v}</i><sub>i</sub>)Δ<i>${v}</i></span> <span class="val">≈ ${s.toFixed(3)}</span></dd>`+tot; }
+  $('total').innerHTML=tot;
+  drawXS(R,r);
+}
+
+let lastRr=[1,0];
+function drawXS(R,r){
+  if(R!==undefined) lastRr=[R,r]; [R,r]=lastRr;
+  const cv=$('xs'), dpr=Math.min(window.devicePixelRatio||1,2), S=120; cv.width=S*dpr; cv.height=S*dpr;
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,S,S);
+  const sc2=(S/2-8)/sc.Rmax, cx=S/2, cy=S/2;
+  g.fillStyle=tok('--slice'); g.beginPath(); g.arc(cx,cy,R*sc2,0,TAU); if(r>1e-3) g.arc(cx,cy,r*sc2,0,TAU,true); g.fill('evenodd');
+  g.strokeStyle=tok('--muted'); g.setLineDash([3,3]); g.beginPath(); g.arc(cx,cy,sc.Rmax*sc2,0,TAU); g.stroke(); g.setLineDash([]);
+  g.fillStyle=tok('--axis'); g.beginPath(); g.arc(cx,cy,2.5,0,TAU); g.fill();
+  g.strokeStyle=tok('--ink'); g.lineWidth=1.5; g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+R*sc2*0.71,cy-R*sc2*0.71); g.stroke();
+  g.font='italic 14px "STIX Two Text", serif'; g.fillStyle=tok('--ink'); g.fillText('R',cx+R*sc2*0.4+4,cy-R*sc2*0.4-2);
+  if(r>1e-3){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx-r*sc2,cy); g.stroke(); g.fillText('r',cx-r*sc2/2-3,cy+14); }
+}
+
+let last=performance.now();
+function frame(now){
+  const dtm=Math.min(0.05,(now-last)/1000); last=now;
+  if(st.playing){ st.theta+=dtm*TAU/4.5; if(st.theta>=TAU){st.theta=TAU; st.playing=false;} sync(); }
+  if(dirty){ buildDyn(); dirty=false; }
+  controls.update(); renderer.render(scene,camera); placeLabels();
+  requestAnimationFrame(frame);
+}
+
+applyTheme(); resize(); setScene(0); goStep(0);
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

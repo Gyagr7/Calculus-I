@@ -1429,7 +1429,142 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "5.2",
   "title": "Volumes (Disks and Washers)",
-  "body": " Volumes (Disks and Washers)   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Volumes (Disks and Washers)     Today's Question  We found area by adding up many thin rectangles. Can we find a volume by adding up many thin pieces?   Spoiler: yes. And the integral we get has exactly the same shape as the one for area. Only one ingredient changes.    Start with something we already know  Take a region under from to . Cut it into thin rectangles. A typical rectangle has height and width , so Add them up and let the rectangles get thinner:    What are we actually adding?   In , what are the tiny things being added together?     Heights  Not quite. A height alone has no area. Something has to multiply it.    Areas of thin rectangles,  Yes. Height times width. Keep that picture in your head.    Widths  Adding only the widths gives . That is the length of the interval, not the area.       What is a slab?   1. A familiar prism  How do you find the volume of a box, or any prism with straight sides? You need two things: the area of the face, , and the thickness, . Then     2. Make it very thin  Now picture one very thin piece of a more complicated solid. Its face at position has area . Its thickness is . So Why only approximately ? The solid changes a little from one side of the slab to the other, so the slab is not a perfect prism.    Predict   If the slab gets thinner, does become a better or a worse estimate of the slab's volume?     Better  Right. A very thin slab barely changes from one side to the other, so it is almost exactly a prism.    Worse  Think about the Riemann rectangles in . Thinner rectangles gave better estimates. Same thing here.      3. Compare 2D and 3D  Put the two ideas side by side.     Area  Volume        height  cross-sectional area    width  thickness    What changed? The height was replaced by the area of a cross-section, . What stayed the same? The .   4. Many slabs, then thinner slabs  Cut the solid from to into slabs and add: That is a Riemann sum. The structure is identical to the one for area. As , it becomes a definite integral.    The big idea of this section     The hard part of a volume problem is usually not the integration. It is figuring out , the area of a typical cross-section.     What happens when a rectangle spins?  Here is where a lot of the solids in this section come from. Take a flat region, and spin it around an axis. It sweeps out a solid.  That sounds hard to picture. So do not try to picture the whole solid yet. Watch one thin rectangle.   Spin the Slice. One thin rectangle spins into a disk or a washer. All of them together sweep out the solid.     What do you notice?   In the Disk example, the rectangle stands on the -axis and reaches up to . When it spins about the -axis, what does it become, and what is its radius?    A thin disk . Its radius is the height of the rectangle, , because that is how far its top edge is from the axis.    Now give the idea a name. If a rectangle from the axis up to spins about the -axis, it makes a disk with radius . The face of that disk is a circle, so and the big idea gives    Where did the square come from?  Not from it is a volume problem. It comes from the geometry: the area of a circle is .     only works because the cross-section happens to be a circle. The general rule is still .     We do: build the integral from the picture  Rotate the region bounded by , , , and about the -axis. (This is the Disk example in .)    Radius. The slice reaches from the axis to the curve: .  Area.  .  Limits.  .  Integral.  .     Try it   Evaluate . Give a decimal to two places.           Yes. .     Close. You found . Where did the go?        What if there is a hole?  Now take a region trapped between two curves, on the outside and on the inside, with . Spin it about the -axis.  Switch the animation to the Washer example and run step 3. The rectangle no longer touches the axis. There is a gap under it, and that gap spins into a hole. The cross-section is a washer : a big disk with a smaller disk removed.  So and    Remember  Subtract areas , not radii. is not a washer.    Quick check   A washer has and . What is its area?      That is , the area of a disk of radius 1. A washer is not a small disk.     Yes. .     That is the whole outer disk. You still need to remove the hole.       We do: which radius is which?  Rotate the region between and , , about the -axis.  At a typical , the line is farther from the axis , so it gives the outer radius. The curve is closer, so it gives the inner radius:   Notice the phrase. Not is bigger than . The reason is distance from the axis. That matters in a minute.      Try it   Evaluate. Give a decimal to three places.           Yes. .        Distance to the axis matters  Same region. Now spin it about the line instead. (The Axis y = 2 example in the animation.)  Which curve is farther from the axis now? The axis sits above the region. So the lower curve is the farther one.   Find the radii   Write the outer and inner radius as distances from .    A radius is a distance, so it is (axis) minus (curve) here:     So    Remember   Radius = the function is a shortcut that only works when the axis is . The real rule: radius = distance from the axis of rotation.      Horizontal slices: the same idea  Nothing about requires . If the axis is vertical, the slices are horizontal, and everything becomes a function of :   Take the region between and , , and spin it about the -axis. (The About y-axis example.) A horizontal slice runs from out to , so    Which way do I slice?  For disks and washers, slices are perpendicular to the axis. Horizontal axis: vertical slices, . Vertical axis: horizontal slices, .     You do: set up before you integrate   A disk   Rotate the region bounded by , , and about the -axis. Find , , and the integral for .     , so , and .     A washer   Rotate the region between and , , about the -axis. Find , , , and the integral for .     and , so and . By symmetry, is also correct.     Less scaffolding   Rotate the region bounded by and about the line . Set up the integral. Do not evaluate.    The curves meet at . The axis is above the region, so the lower curve is farther: . The line is closer: .       Find the mistake   Error analysis   Three students rotate the region between and , , about the -axis. Which setup is correct?     Student A:   Student A used as a radius. That is the vertical thickness of the flat region, not a distance from the axis. The cross-section is a washer, not a disk.     Student B:  Yes. Outer disk minus inner disk: .    Student C:   The idea is right, but the notation is not. Without parentheses, the only belongs to the last term. Write .        A setup checklist  Before you integrate, ask:  What is the axis of rotation?  Should my slices be vertical or horizontal?  What does one slice become when it spins?  What is the outer radius? Is there an inner radius?  Are my radii actual distances from the axis?  What are my limits, and does my differential match the slices?     Main idea  Draw, slice, radius, area, integral.  The main formula is not the disk formula or the washer formula. It is Disks and washers are just two ways of finding .    Exit ticket   The axis of rotation is and a curve sits at . What radius does that curve give?  radius         Yes. Distance from the axis: .     That is the height of the curve. The radius is its distance from the axis .       "
+},
+{
+  "id": "check-what-are-we-adding",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-what-are-we-adding",
+  "type": "Checkpoint",
+  "number": "5.2.1",
+  "title": "What are we actually adding?",
+  "body": " What are we actually adding?   In , what are the tiny things being added together?     Heights  Not quite. A height alone has no area. Something has to multiply it.    Areas of thin rectangles,  Yes. Height times width. Keep that picture in your head.    Widths  Adding only the widths gives . That is the length of the interval, not the area.    "
+},
+{
+  "id": "check-thinner-slab",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-thinner-slab",
+  "type": "Checkpoint",
+  "number": "5.2.2",
+  "title": "Predict.",
+  "body": " Predict   If the slab gets thinner, does become a better or a worse estimate of the slab's volume?     Better  Right. A very thin slab barely changes from one side to the other, so it is almost exactly a prism.    Worse  Think about the Riemann rectangles in . Thinner rectangles gave better estimates. Same thing here.    "
+},
+{
+  "id": "fig-spin-the-slice",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#fig-spin-the-slice",
+  "type": "Figure",
+  "number": "5.2.3",
+  "title": "",
+  "body": " Spin the Slice. One thin rectangle spins into a disk or a washer. All of them together sweep out the solid.   "
+},
+{
+  "id": "check-rectangle-becomes",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-rectangle-becomes",
+  "type": "Checkpoint",
+  "number": "5.2.4",
+  "title": "What do you notice?",
+  "body": " What do you notice?   In the Disk example, the rectangle stands on the -axis and reaches up to . When it spins about the -axis, what does it become, and what is its radius?    A thin disk . Its radius is the height of the rectangle, , because that is how far its top edge is from the axis.   "
+},
+{
+  "id": "warning-disk-not-general",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#warning-disk-not-general",
+  "type": "Warning",
+  "number": "5.2.5",
+  "title": "",
+  "body": "  only works because the cross-section happens to be a circle. The general rule is still .  "
+},
+{
+  "id": "check-disk-volume",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-disk-volume",
+  "type": "Checkpoint",
+  "number": "5.2.6",
+  "title": "Try it.",
+  "body": " Try it   Evaluate . Give a decimal to two places.           Yes. .     Close. You found . Where did the go?     "
+},
+{
+  "id": "subsec-6-2-washers-3",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#subsec-6-2-washers-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "washer "
+},
+{
+  "id": "check-washer-not",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-washer-not",
+  "type": "Checkpoint",
+  "number": "5.2.7",
+  "title": "Quick check.",
+  "body": " Quick check   A washer has and . What is its area?      That is , the area of a disk of radius 1. A washer is not a small disk.     Yes. .     That is the whole outer disk. You still need to remove the hole.    "
+},
+{
+  "id": "check-washer-volume",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-washer-volume",
+  "type": "Checkpoint",
+  "number": "5.2.8",
+  "title": "Try it.",
+  "body": " Try it   Evaluate. Give a decimal to three places.           Yes. .     "
+},
+{
+  "id": "check-shifted-radii",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-shifted-radii",
+  "type": "Checkpoint",
+  "number": "5.2.9",
+  "title": "Find the radii.",
+  "body": " Find the radii   Write the outer and inner radius as distances from .    A radius is a distance, so it is (axis) minus (curve) here:    "
+},
+{
+  "id": "ex-6-2-you-do-disk",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#ex-6-2-you-do-disk",
+  "type": "Checkpoint",
+  "number": "5.2.10",
+  "title": "A disk.",
+  "body": " A disk   Rotate the region bounded by , , and about the -axis. Find , , and the integral for .     , so , and .   "
+},
+{
+  "id": "ex-6-2-you-do-washer",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#ex-6-2-you-do-washer",
+  "type": "Checkpoint",
+  "number": "5.2.11",
+  "title": "A washer.",
+  "body": " A washer   Rotate the region between and , , about the -axis. Find , , , and the integral for .     and , so and . By symmetry, is also correct.   "
+},
+{
+  "id": "ex-6-2-shifted",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#ex-6-2-shifted",
+  "type": "Checkpoint",
+  "number": "5.2.12",
+  "title": "Less scaffolding.",
+  "body": " Less scaffolding   Rotate the region bounded by and about the line . Set up the integral. Do not evaluate.    The curves meet at . The axis is above the region, so the lower curve is farther: . The line is closer: .    "
+},
+{
+  "id": "check-6-2-error-analysis",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-6-2-error-analysis",
+  "type": "Checkpoint",
+  "number": "5.2.13",
+  "title": "Error analysis.",
+  "body": " Error analysis   Three students rotate the region between and , , about the -axis. Which setup is correct?     Student A:   Student A used as a radius. That is the vertical thickness of the flat region, not a distance from the axis. The cross-section is a washer, not a disk.     Student B:  Yes. Outer disk minus inner disk: .    Student C:   The idea is right, but the notation is not. Without parentheses, the only belongs to the last term. Write .     "
+},
+{
+  "id": "check-6-2-exit",
+  "level": "2",
+  "url": "sec-6-2-volumes.html#check-6-2-exit",
+  "type": "Checkpoint",
+  "number": "5.2.14",
+  "title": "Exit ticket.",
+  "body": " Exit ticket   The axis of rotation is and a curve sits at . What radius does that curve give?  radius         Yes. Distance from the axis: .     That is the height of the curve. The radius is its distance from the axis .     "
 },
 {
   "id": "sec-6-3-cylindrical-shells",
