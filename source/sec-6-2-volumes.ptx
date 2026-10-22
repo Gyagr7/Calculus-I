@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-6-2-volumes" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Volumes (Disks and Washers)</title>
+  <!-- Sessions 15-16 . Thu Oct 15 and Tue Oct 20 . Stewart Sec. 6.2 . Quiz 5 on Oct 20 (Skills 18-19).
+       Built from the Section 6.2 instructor handout ("From Area to Volume") in the
+       conversational handout voice. Written 2026-10-22.
+       Big idea of the section: V = integral of A(x) dx. Disks and washers are just two
+       ways of finding A(x). Do not lead with the disk formula.
+       The 3D animation lives in assets/volumes/spin-the-slice.html (three.js, loaded from
+       jsdelivr). It is the same page as the Claude artifact "Spin the Slice". -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-volumes">
+      <title>Today's Question</title>
+      <p>
+        We found area by adding up many thin rectangles. Can we find a
+        <em>volume</em> by adding up many thin pieces?
+      </p>
+    </assemblage>
+    <p>
+      Spoiler: yes. And the integral we get has exactly the same shape as the
+      one for area. Only one ingredient changes.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-6-2-what-we-know">
+    <title>Start with something we already know</title>
+
+    <p>
+      Take a region under <m>y = f(x)</m> from <m>x = a</m> to <m>x = b</m>.
+      Cut it into thin rectangles. A typical rectangle has height <m>f(x)</m>
+      and width <m>\Delta x</m>, so
+      <md>
+        \Delta A \approx f(x)\,\Delta x.
+      </md>
+      Add them up and let the rectangles get thinner:
+      <md>
+        A = \int_a^b f(x)\,dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-what-are-we-adding" label="check-what-are-we-adding">
+      <title>What are we actually adding?</title>
+      <statement>
+        <p>
+          In <m>\int_a^b f(x)\,dx</m>, what are the tiny things being added together?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Heights <m>f(x)</m></p></statement>
+          <feedback><p>Not quite. A height alone has no area. Something has to multiply it.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>Areas of thin rectangles, <m>f(x)\,\Delta x</m></p></statement>
+          <feedback><p>Yes. Height times width. Keep that picture in your head.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Widths <m>\Delta x</m></p></statement>
+          <feedback><p>Adding only the widths gives <m>b - a</m>. That is the length of the interval, not the area.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-slab">
+    <title>What is a slab?</title>
+
+    <paragraphs>
+      <title>1. A familiar prism</title>
+      <p>
+        How do you find the volume of a box, or any prism with straight sides?
+        You need two things: the area of the face, <m>A</m>, and the thickness,
+        <m>h</m>. Then
+        <md>
+          V = (\text{area of face})(\text{thickness}) = Ah.
+        </md>
+      </p>
+    </paragraphs>
+
+    <paragraphs>
+      <title>2. Make it very thin</title>
+      <p>
+        Now picture one very thin piece of a more complicated solid. Its face
+        at position <m>x</m> has area <m>A(x)</m>. Its thickness is
+        <m>\Delta x</m>. So
+        <md>
+          \Delta V \approx A(x)\,\Delta x.
+        </md>
+        Why only <em>approximately</em>? The solid changes a little from one
+        side of the slab to the other, so the slab is not a perfect prism.
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-thinner-slab" label="check-thinner-slab">
+      <title>Predict</title>
+      <statement>
+        <p>
+          If the slab gets thinner, does <m>A(x)\,\Delta x</m> become a better
+          or a worse estimate of the slab's volume?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>Better</p></statement>
+          <feedback><p>Right. A very thin slab barely changes from one side to the other, so it is almost exactly a prism.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Worse</p></statement>
+          <feedback><p>Think about the Riemann rectangles in <xref ref="sec-5-1-areas-distances"/>. Thinner rectangles gave better estimates. Same thing here.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <paragraphs>
+      <title>3. Compare 2D and 3D</title>
+      <p>
+        Put the two ideas side by side.
+      </p>
+    </paragraphs>
+
+    <tabular halign="center">
+      <row header="yes" bottom="minor">
+        <cell>Area</cell>
+        <cell>Volume</cell>
+      </row>
+      <row>
+        <cell><m>\Delta A \approx f(x)\,\Delta x</m></cell>
+        <cell><m>\Delta V \approx A(x)\,\Delta x</m></cell>
+      </row>
+      <row>
+        <cell>height <m>f(x)</m></cell>
+        <cell>cross-sectional area <m>A(x)</m></cell>
+      </row>
+      <row>
+        <cell>width <m>\Delta x</m></cell>
+        <cell>thickness <m>\Delta x</m></cell>
+      </row>
+    </tabular>
+
+    <p>
+      What changed? The height <m>f(x)</m> was replaced by the area of a
+      cross-section, <m>A(x)</m>. What stayed the same? The <m>\Delta x</m>.
+    </p>
+
+    <paragraphs>
+      <title>4. Many slabs, then thinner slabs</title>
+      <p>
+        Cut the solid from <m>x = a</m> to <m>x = b</m> into <m>n</m> slabs and add:
+        <md>
+          V \approx A(x_1^*)\,\Delta x + A(x_2^*)\,\Delta x + \cdots + A(x_n^*)\,\Delta x
+          = \sum_{i=1}^{n} A(x_i^*)\,\Delta x.
+        </md>
+        That is a Riemann sum. The structure is identical to the one for area.
+        As <m>\Delta x \to 0</m>, it becomes a definite integral.
+      </p>
+    </paragraphs>
+
+    <assemblage xml:id="assemblage-volume-main-idea">
+      <title>The big idea of this section</title>
+      <p>
+        <md>
+          V = \int_a^b A(x)\,dx
+        </md>
+      </p>
+      <p>
+        The hard part of a volume problem is usually not the integration. It is
+        figuring out <m>A(x)</m>, the area of a typical cross-section.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-spin">
+    <title>What happens when a rectangle spins?</title>
+
+    <p>
+      Here is where a lot of the solids in this section come from. Take a flat
+      region, and spin it around an axis. It sweeps out a solid.
+    </p>
+    <p>
+      That sounds hard to picture. So do not try to picture the whole solid
+      yet. Watch <em>one</em> thin rectangle.
+    </p>
+
+    <figure xml:id="fig-spin-the-slice">
+      <caption>
+        Spin the Slice. One thin rectangle spins into a disk or a washer. All of
+        them together sweep out the solid.
+      </caption>
+      <interactive xml:id="interactive-spin-the-slice" label="interactive-spin-the-slice"
+                   iframe="volumes/spin-the-slice.html" width="100%" aspect="1:2">
+        <instructions>
+          <p>
+            Click through steps 1 to 5. In step 3, only the orange rectangle
+            spins. Watch the orange radius line: how long is it, and where does
+            it start? Drag the picture to look around the solid, and switch
+            between the four examples at the bottom.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="check-rectangle-becomes" label="check-rectangle-becomes">
+      <title>What do you notice?</title>
+      <statement>
+        <p>
+          In the <q>Disk</q> example, the rectangle stands on the <m>x</m>-axis
+          and reaches up to <m>y = x^2</m>. When it spins about the
+          <m>x</m>-axis, what does it become, and what is its radius?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A thin <term>disk</term>. Its radius is the height of the rectangle,
+          <m>r(x) = x^2</m>, because that is how far its top edge is from the axis.
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      Now give the idea a name. If a rectangle from the axis up to
+      <m>y = f(x)</m> spins about the <m>x</m>-axis, it makes a disk with
+      radius <m>r(x) = f(x)</m>. The face of that disk is a circle, so
+      <md>
+        A(x) = \pi[r(x)]^2 = \pi[f(x)]^2
+      </md>
+      and the big idea gives
+      <md>
+        V = \int_a^b \pi[f(x)]^2\,dx.
+      </md>
+    </p>
+
+    <assemblage xml:id="assemblage-where-square">
+      <title>Where did the square come from?</title>
+      <p>
+        Not from <q>it is a volume problem.</q> It comes from the geometry:
+        the area of a circle is <m>\pi r^2</m>.
+      </p>
+    </assemblage>
+
+    <warning xml:id="warning-disk-not-general">
+      <p>
+        <m>V = \pi\int r^2\,dx</m> only works because the cross-section happens
+        to be a circle. The general rule is still <m>V = \int A(x)\,dx</m>.
+      </p>
+    </warning>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-we-do-disk">
+    <title>We do: build the integral from the picture</title>
+
+    <p>
+      Rotate the region bounded by <m>y = x^2</m>, <m>y = 0</m>, <m>x = 0</m>,
+      and <m>x = 2</m> about the <m>x</m>-axis. (This is the <q>Disk</q>
+      example in <xref ref="fig-spin-the-slice"/>.)
+    </p>
+    <p>
+      <ol>
+        <li><p><alert>Radius.</alert> The slice reaches from the axis to the curve: <m>r(x) = x^2</m>.</p></li>
+        <li><p><alert>Area.</alert> <m>A(x) = \pi(x^2)^2 = \pi x^4</m>.</p></li>
+        <li><p><alert>Limits.</alert> <m>0 \le x \le 2</m>.</p></li>
+        <li><p><alert>Integral.</alert> <m>V = \int_0^2 \pi x^4\,dx</m>.</p></li>
+      </ol>
+    </p>
+
+    <exercise xml:id="check-disk-volume" label="check-disk-volume">
+      <title>Try it</title>
+      <statement>
+        <p>
+          Evaluate <m>\int_0^2 \pi x^4\,dx</m>. Give a decimal to two places.
+        </p>
+        <p>
+          <m>V \approx</m> <fillin answer="20.11" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.01"/>
+            <feedback><p>Yes. <m>\pi\left[\frac{x^5}{5}\right]_0^2 = \frac{32\pi}{5} \approx 20.11</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="6.4" tolerance="0.01"/>
+            <feedback><p>Close. You found <m>\frac{32}{5}</m>. Where did the <m>\pi</m> go?</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-washers">
+    <title>What if there is a hole?</title>
+
+    <p>
+      Now take a region trapped between two curves, <m>y = R(x)</m> on the
+      outside and <m>y = r(x)</m> on the inside, with
+      <m>R(x) \ge r(x) \ge 0</m>. Spin it about the <m>x</m>-axis.
+    </p>
+    <p>
+      Switch the animation to the <q>Washer</q> example and run step 3. The
+      rectangle no longer touches the axis. There is a gap under it, and that
+      gap spins into a hole. The cross-section is a <term>washer</term>: a big
+      disk with a smaller disk removed.
+    </p>
+    <p>
+      So
+      <md>
+        A(x) = \text{outer disk} - \text{inner disk} = \pi R^2 - \pi r^2 = \pi\left(R^2 - r^2\right)
+      </md>
+      and
+      <md>
+        V = \pi\int_a^b \left([R(x)]^2 - [r(x)]^2\right)dx.
+      </md>
+    </p>
+
+    <assemblage xml:id="assemblage-subtract-areas">
+      <title>Remember</title>
+      <p>
+        Subtract <em>areas</em>, not radii. <m>\pi(R - r)^2</m> is not a washer.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="check-washer-not" label="check-washer-not">
+      <title>Quick check</title>
+      <statement>
+        <p>
+          A washer has <m>R = 3</m> and <m>r = 2</m>. What is its area?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p><m>\pi</m></p></statement>
+          <feedback><p>That is <m>\pi(3 - 2)^2</m>, the area of a disk of radius 1. A washer is not a small disk.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p><m>5\pi</m></p></statement>
+          <feedback><p>Yes. <m>9\pi - 4\pi = 5\pi</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p><m>9\pi</m></p></statement>
+          <feedback><p>That is the whole outer disk. You still need to remove the hole.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-we-do-washer">
+    <title>We do: which radius is which?</title>
+
+    <p>
+      Rotate the region between <m>y = x</m> and <m>y = x^2</m>,
+      <m>0 \le x \le 1</m>, about the <m>x</m>-axis.
+    </p>
+    <p>
+      At a typical <m>x</m>, the line <m>y = x</m> is <em>farther from the axis</em>,
+      so it gives the outer radius. The curve <m>y = x^2</m> is closer, so it
+      gives the inner radius:
+      <md>
+        R(x) = x, \qquad r(x) = x^2.
+      </md>
+    </p>
+    <p>
+      Notice the phrase. Not <q><m>x</m> is bigger than <m>x^2</m>.</q> The
+      reason is distance from the axis. That matters in a minute.
+    </p>
+    <p>
+      <md>
+        A(x) = \pi\left[x^2 - (x^2)^2\right] = \pi\left(x^2 - x^4\right),
+        \qquad
+        V = \pi\int_0^1 \left(x^2 - x^4\right)dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-washer-volume" label="check-washer-volume">
+      <title>Try it</title>
+      <statement>
+        <p>
+          Evaluate. Give a decimal to three places.
+        </p>
+        <p>
+          <m>V \approx</m> <fillin answer="0.419" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.002"/>
+            <feedback><p>Yes. <m>\pi\left(\frac13 - \frac15\right) = \frac{2\pi}{15} \approx 0.419</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-shifted-axis">
+    <title>Distance to the axis matters</title>
+
+    <p>
+      Same region. Now spin it about the line <m>y = 2</m> instead. (The
+      <q>Axis y = 2</q> example in the animation.)
+    </p>
+    <p>
+      Which curve is farther from the axis now? The axis sits <em>above</em>
+      the region. So the lower curve <m>y = x^2</m> is the farther one.
+    </p>
+
+    <exercise xml:id="check-shifted-radii" label="check-shifted-radii">
+      <title>Find the radii</title>
+      <statement>
+        <p>
+          Write the outer and inner radius as distances from <m>y = 2</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A radius is a distance, so it is (axis) minus (curve) here:
+          <md>
+            R(x) = 2 - x^2, \qquad r(x) = 2 - x.
+          </md>
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      So
+      <md>
+        V = \pi\int_0^1 \left[(2 - x^2)^2 - (2 - x)^2\right]dx = \frac{8\pi}{15}.
+      </md>
+    </p>
+
+    <assemblage xml:id="assemblage-radius-is-distance">
+      <title>Remember</title>
+      <p>
+        <q>Radius = the function</q> is a shortcut that only works when the axis
+        is <m>y = 0</m>. The real rule: <alert>radius = distance from the axis of rotation.</alert>
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-horizontal">
+    <title>Horizontal slices: the same idea</title>
+
+    <p>
+      Nothing about <m>V = \int A</m> requires <m>dx</m>. If the axis is
+      vertical, the slices are horizontal, and everything becomes a function of <m>y</m>:
+      <md>
+        V = \int_c^d A(y)\,dy.
+      </md>
+    </p>
+    <p>
+      Take the region between <m>x = y^2</m> and <m>x = 4</m>,
+      <m>-2 \le y \le 2</m>, and spin it about the <m>y</m>-axis. (The
+      <q>About y-axis</q> example.) A horizontal slice runs from
+      <m>x = y^2</m> out to <m>x = 4</m>, so
+      <md>
+        R(y) = 4, \qquad r(y) = y^2, \qquad
+        V = \pi\int_{-2}^{2}\left(16 - y^4\right)dy.
+      </md>
+    </p>
+
+    <assemblage xml:id="assemblage-slice-direction">
+      <title>Which way do I slice?</title>
+      <p>
+        For disks and washers, slices are perpendicular to the axis.
+        Horizontal axis: vertical slices, <m>dx</m>.
+        Vertical axis: horizontal slices, <m>dy</m>.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-you-do">
+    <title>You do: set up before you integrate</title>
+
+    <exercise xml:id="ex-6-2-you-do-disk" label="ex-6-2-you-do-disk">
+      <title>A disk</title>
+      <statement>
+        <p>
+          Rotate the region bounded by <m>y = \sqrt{x}</m>, <m>y = 0</m>, and
+          <m>x = 4</m> about the <m>x</m>-axis. Find <m>r(x)</m>, <m>A(x)</m>,
+          and the integral for <m>V</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>r(x) = \sqrt{x}</m>, so <m>A(x) = \pi(\sqrt{x})^2 = \pi x</m>, and
+          <m>V = \pi\int_0^4 x\,dx = 8\pi</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-6-2-you-do-washer" label="ex-6-2-you-do-washer">
+      <title>A washer</title>
+      <statement>
+        <p>
+          Rotate the region between <m>y = 4</m> and <m>y = x^2</m>,
+          <m>-2 \le x \le 2</m>, about the <m>x</m>-axis. Find <m>R(x)</m>,
+          <m>r(x)</m>, <m>A(x)</m>, and the integral for <m>V</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>R(x) = 4</m> and <m>r(x) = x^2</m>, so
+          <m>A(x) = \pi(4)^2 - \pi(x^2)^2 = \pi(16 - x^4)</m> and
+          <m>V = \pi\int_{-2}^{2}(16 - x^4)\,dx</m>. By symmetry,
+          <m>2\pi\int_0^2 (16 - x^4)\,dx</m> is also correct.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-6-2-shifted" label="ex-6-2-shifted">
+      <title>Less scaffolding</title>
+      <statement>
+        <p>
+          Rotate the region bounded by <m>y = x^2</m> and <m>y = 4</m> about the
+          line <m>y = 5</m>. Set up the integral. Do not evaluate.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The curves meet at <m>x = \pm 2</m>. The axis is above the region, so
+          the lower curve <m>y = x^2</m> is farther: <m>R(x) = 5 - x^2</m>. The
+          line <m>y = 4</m> is closer: <m>r(x) = 5 - 4 = 1</m>.
+          <md>
+            V = \pi\int_{-2}^{2}\left[(5 - x^2)^2 - 1\right]dx.
+          </md>
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-mistake">
+    <title>Find the mistake</title>
+
+    <exercise xml:id="check-6-2-error-analysis" label="check-6-2-error-analysis">
+      <title>Error analysis</title>
+      <statement>
+        <p>
+          Three students rotate the region between <m>y = x</m> and
+          <m>y = x^2</m>, <m>0 \le x \le 1</m>, about the <m>x</m>-axis.
+          Which setup is correct?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Student A: <m>V = \pi\int_0^1 (x - x^2)^2\,dx</m></p></statement>
+          <feedback>
+            <p>
+              Student A used <m>x - x^2</m> as a radius. That is the vertical
+              thickness of the flat region, not a distance from the axis. The
+              cross-section is a washer, not a disk.
+            </p>
+          </feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>Student B: <m>V = \pi\int_0^1 (x^2 - x^4)\,dx</m></p></statement>
+          <feedback><p>Yes. Outer disk minus inner disk: <m>\pi x^2 - \pi x^4</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Student C: <m>V = \int_0^1 \pi x^2 - \pi x^4\,dx</m></p></statement>
+          <feedback>
+            <p>
+              The idea is right, but the notation is not. Without parentheses,
+              the <m>dx</m> only belongs to the last term. Write
+              <m>\int_0^1 \left(\pi x^2 - \pi x^4\right)dx</m>.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-2-checklist">
+    <title>A setup checklist</title>
+
+    <p>
+      Before you integrate, ask:
+      <ol>
+        <li><p>What is the axis of rotation?</p></li>
+        <li><p>Should my slices be vertical or horizontal?</p></li>
+        <li><p>What does one slice become when it spins?</p></li>
+        <li><p>What is the outer radius? Is there an inner radius?</p></li>
+        <li><p>Are my radii actual distances from the axis?</p></li>
+        <li><p>What are my limits, and does my differential match the slices?</p></li>
+      </ol>
+    </p>
+
+    <assemblage xml:id="assemblage-6-2-main-idea">
+      <title>Main idea</title>
+      <p>
+        Draw, slice, radius, area, integral.
+      </p>
+      <p>
+        The main formula is not the disk formula or the washer formula. It is
+        <md>
+          V = \int_a^b A(x)\,dx.
+        </md>
+        Disks and washers are just two ways of finding <m>A(x)</m>.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="check-6-2-exit" label="check-6-2-exit">
+      <title>Exit ticket</title>
+      <statement>
+        <p>
+          The axis of rotation is <m>y = 7</m> and a curve sits at <m>y = 2</m>.
+          What radius does that curve give?
+        </p>
+        <p>
+          radius <m>=</m> <fillin answer="5" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. Distance from the axis: <m>7 - 2 = 5</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="2"/>
+            <feedback><p>That is the height of the curve. The radius is its distance from the axis <m>y = 7</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+</section>

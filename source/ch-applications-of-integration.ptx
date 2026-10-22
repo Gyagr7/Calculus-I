@@ -13,13 +13,8 @@
     <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
   </section>
 
-  <section xml:id="sec-6-2-volumes">
-    <title>Volumes (Disks and Washers)</title>
-    <!-- Sessions 15-16 . Thu Oct 15 & Tue Oct 20 . Stewart Sec. 6.2 . Quiz 5 on Oct 20 (Skills 18-19) -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+  <!-- Sessions 15-16 . Thu Oct 15 and Tue Oct 20 . Stewart Sec. 6.2 -->
+  <xi:include href="./sec-6-2-volumes.ptx"/>
 
   <section xml:id="sec-6-3-cylindrical-shells">
     <title>Volumes by Cylindrical Shells</title>
