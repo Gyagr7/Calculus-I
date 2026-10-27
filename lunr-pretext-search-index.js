@@ -1411,7 +1411,304 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.5",
   "title": "The Substitution Rule",
-  "body": " The Substitution Rule   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " The Substitution Rule     Today's Question  Can a complicated integral hide a familiar derivative?   Every integral in this section is a puzzle with the same shape. Somewhere inside it, the Chain Rule has already happened. Our job is to spot it and run it backward.    Before anything new: what are we looking for?  Compare these two questions:    What kind of answer?   Which question asks for a fixed number?     A  Not quite. A has no bounds, so it asks for every antiderivative of . That is a family of functions.    B  Yes. Fixed bounds, fixed number.     The most general antiderivative of is . So question A has the answer .   Now question B   Use that antiderivative to evaluate .           Yes. . Remember this number. 8.      Why does A need but B does not? Every vertical shift of has the same derivative, so describes the whole family. In B, the same shows up at both endpoints and cancels.   Two kinds of answers  An indefinite integral describes a family of antiderivatives. A definite integral with fixed bounds gives a number.   Either way, the hard part is the same: finding an antiderivative. That is what today's new technique helps with.   Quick check   (a) Find . (b) Evaluate . Before you compute, say what kind of answer each one should be.    (a) A family of functions: . (b) A number: .      When the antiderivative is harder to see  Consider First idea: expand, then integrate term by term. Since , and that integrates to . That works. Expanding is a perfectly valid method.  Now imagine the problem were Expanding is still possible. It would give you terms before you even multiply by . No thanks.   The real question  Can we use the structure of the expression to find an antiderivative, without expanding everything?     Try a guess. Differentiate it. Adjust it.  Back to . The integrand has a third power in it. Antiderivatives raise the power by one, so try the guess Differentiate it with the Chain Rule:    What matched?   Compare with the integrand . What matches, and what is off?    The inside expression , its third power, and the factor all match. The only problem is a constant: is times too big.    A constant is easy to fix. Divide the guess by : Check: . Exactly right. So    Try one   Use the same guess-differentiate-adjust idea on .    Guess . Its derivative is , which is times too big. So . No expanding needed.    Notice something. The expanded answer from before and the compact answer look different. They differ by a constant, so they describe the same family.   What just happened  We used a rule we already knew: the Chain Rule . This time, we ran it backward.     Same puzzle, one small change  Now try . Changing to does not change the inside expression. It is still . Only the constant out front changed, and    Use the last puzzle    . What is ? Give a decimal.           Yes. .     That is the answer for . Here you have times as much.        Find the clue: an inside expression and its derivative   Fill in the derivative column   Find the derivative of each inside expression: , , , .      Inside expression  Its derivative           Spot the pair   In each integral, find an inside expression and a factor that matches its derivative, possibly up to a constant. (a) (b) (c)     (a) Inside: . Matching factor: . (b) Inside: . Its derivative is the constant , which is not there. Since , adjust with a factor of . (c) Inside: . Matching factor: .     A useful contrast   Does the same simple guess work for ? (Differentiate and compare.)     Yes, adjust by a constant  Differentiate it: you get . The extra factor is , which is a variable. No constant can cancel it.    No, the matching derivative is missing  Right. The extra factor is a variable, so a constant adjustment cannot remove it. This integral is still doable by expanding: .      Look for the pair  An inside expression, and its derivative. A constant mismatch can be adjusted. A variable mismatch cannot.     Give the inside expression a shorter name  We have already solved . Now let us organize the same reasoning. Call the inside expression : Then , and we write The notation records the derivative of our inside expression. It tells us how to replace the matching factor together with  : Our question was about , so put back: Same answer as before. This way of rewriting an integral is called substitution , or -substitution .   What does replace?   In the rewrite above, the single symbol replaces what?     Just  Not quite. If only replaced , the would still be hanging around.    Just  Close. But the goes with it.    The whole piece  Yes. swallows the whole piece.       Why does it work?  If , the Chain Rule says Read it backward: Writing and makes the familiar integral visible.   The Substitution Rule   If is differentiable and is continuous on the range of , then      Remember  Substitution organizes the reverse Chain Rule. The name helps us see a familiar integral inside a complicated one.     We do: account for the constant  Evaluate .  Choose.  , so .  Match. The integral has , not . So .  Rewrite everything in .  .  Integrate and go back.  .  Check by differentiating: .    You do: make the familiar integral visible  For each puzzle: choose , find and account for any constant, rewrite the entire integral in , integrate, substitute back, and check by differentiating.   Puzzle A     , . No adjustment needed this time: . Compare with the We Do problem: there the factor was , so the coefficient was instead of .     Puzzle B     , , so . . Check: .     Puzzle C     , . . Check: .     Check the puzzle pieces  After rewriting, the integral should use one variable throughout. After integrating, differentiate your answer to check it.     Same antiderivative, different kind of answer  Compare and . The first is a family. The second is a number. There are two routes to that number.   Route A: go back to , then evaluate  We already have the antiderivative . Use the original -bounds: No : it would appear at both endpoints and cancel.    Route B: stay in  Let , . The old bounds and are values of . What are the matching values of ?    Translate the endpoints   When ,  . When ,  .       Yes. .       Yes. .      So Same answer. Both routes compute the same accumulation.   Keep the variable and its bounds together  An expression in uses -bounds. An expression in uses the matching -bounds.    Your turn   Evaluate by changing both the variable and the bounds. Give a decimal to three places.          Yes. , , bounds to : .     Close. You found . Where did the from go?     It looks like you kept the old bound while working in . When , .        Find the bug and fix it   Bug A: an adjustment is missing   A student writes . Differentiate the answer. What is wrong? Fix it.     , which is twice the integrand. With we need , so .     Bug B: the variable changed, but the bounds did not   A student sets and writes . What went wrong?    The bounds and are -values. They match and . Correct version: .     Bug C: only part of the integral was rewritten   A student sets , finds , and writes . What is the problem?     The was counted twice  Yes. already replaced the whole piece . The correct rewrite is .    Nothing. It is fine to leave some in  Not here. An integral in with an still inside cannot be integrated with respect to . And this has already been used up by .    The student should have chosen  is a fine choice. The issue is what happened to .       More substitution puzzles   Find the pair before you integrate  For each one, name and only. No integrating yet.     (a) (b) , (c)     (a) , , so . (b) , . (c) , , so . Watch the constant and the sign.     Solve, then check  Integrate. Then differentiate your answer to check it.       , . .        , . . Check: .        , . . Since , no absolute value is needed.     ,    , . .     One piece is still in   Evaluate . Hint: with , there is a leftover . Can you write it in terms of too?     , , and . So . A leftover does not mean the substitution failed. It means one more piece needs rewriting.     Definite integrals: keep the variable and bounds together  With on , the -bounds are and . With on , the -bounds go from  down to  . Keep them in that order. Do not swap them just to put the smaller number on the bottom.     Evaluate . Give a decimal to three places.        Yes. , bounds to : .        Evaluate . Give a decimal to three places.        Yes. , , bounds to : .     The sign is off. The integrand is positive on this interval, so the answer must be positive. Check the minus sign from , and the order of the bounds.       Find the bug by differentiating   A student claims . Check it.     . That is times too big. The Chain Rule produces a factor of , so the antiderivative needs : .     A rate becomes an amount   A pump delivers water at liters per minute. How many liters does it deliver in the first minute? Give a decimal to two places.  liters       Yes. , , bounds to : L. Liters per minute times minutes gives liters.        Exit ticket    In one sentence: why is substitution connected to the Chain Rule?    The Chain Rule produces an outer derivative times an inner derivative. Substitution recognizes that pattern and runs it backward.      (a) Find . (b) For , use and write the new definite integral. Do not evaluate.    (a) , : . (b) At , . At , . So .     Main idea  Look for a familiar derivative hiding inside the integral. Recognize the inside expression, match its derivative, and adjust constants.   Guess. Differentiate. Adjust. Then organize with .     "
+},
+{
+  "id": "check-5-5-kind-of-answer",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-kind-of-answer",
+  "type": "Checkpoint",
+  "number": "4.5.1",
+  "title": "What kind of answer?",
+  "body": " What kind of answer?   Which question asks for a fixed number?     A  Not quite. A has no bounds, so it asks for every antiderivative of . That is a family of functions.    B  Yes. Fixed bounds, fixed number.    "
+},
+{
+  "id": "check-5-5-evaluate-b",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-evaluate-b",
+  "type": "Checkpoint",
+  "number": "4.5.2",
+  "title": "Now question B.",
+  "body": " Now question B   Use that antiderivative to evaluate .           Yes. . Remember this number. 8.     "
+},
+{
+  "id": "assemblage-two-kinds-of-answers-2",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#assemblage-two-kinds-of-answers-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "indefinite integral definite integral "
+},
+{
+  "id": "check-5-5-quick-check",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-quick-check",
+  "type": "Checkpoint",
+  "number": "4.5.3",
+  "title": "Quick check.",
+  "body": " Quick check   (a) Find . (b) Evaluate . Before you compute, say what kind of answer each one should be.    (a) A family of functions: . (b) A number: .   "
+},
+{
+  "id": "check-5-5-what-matched",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-what-matched",
+  "type": "Checkpoint",
+  "number": "4.5.4",
+  "title": "What matched?",
+  "body": " What matched?   Compare with the integrand . What matches, and what is off?    The inside expression , its third power, and the factor all match. The only problem is a constant: is times too big.   "
+},
+{
+  "id": "check-5-5-power-100",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-power-100",
+  "type": "Checkpoint",
+  "number": "4.5.5",
+  "title": "Try one.",
+  "body": " Try one   Use the same guess-differentiate-adjust idea on .    Guess . Its derivative is , which is times too big. So . No expanding needed.   "
+},
+{
+  "id": "check-5-5-three-x",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-three-x",
+  "type": "Checkpoint",
+  "number": "4.5.6",
+  "title": "Use the last puzzle.",
+  "body": " Use the last puzzle    . What is ? Give a decimal.           Yes. .     That is the answer for . Here you have times as much.     "
+},
+{
+  "id": "check-5-5-derivative-column",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-derivative-column",
+  "type": "Checkpoint",
+  "number": "4.5.7",
+  "title": "Fill in the derivative column.",
+  "body": " Fill in the derivative column   Find the derivative of each inside expression: , , , .      Inside expression  Its derivative         "
+},
+{
+  "id": "check-5-5-spot-the-pair",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-spot-the-pair",
+  "type": "Checkpoint",
+  "number": "4.5.8",
+  "title": "Spot the pair.",
+  "body": " Spot the pair   In each integral, find an inside expression and a factor that matches its derivative, possibly up to a constant. (a) (b) (c)     (a) Inside: . Matching factor: . (b) Inside: . Its derivative is the constant , which is not there. Since , adjust with a factor of . (c) Inside: . Matching factor: .   "
+},
+{
+  "id": "check-5-5-contrast",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-contrast",
+  "type": "Checkpoint",
+  "number": "4.5.9",
+  "title": "A useful contrast.",
+  "body": " A useful contrast   Does the same simple guess work for ? (Differentiate and compare.)     Yes, adjust by a constant  Differentiate it: you get . The extra factor is , which is a variable. No constant can cancel it.    No, the matching derivative is missing  Right. The extra factor is a variable, so a constant adjustment cannot remove it. This integral is still doable by expanding: .    "
+},
+{
+  "id": "subsec-5-5-name-u-2",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#subsec-5-5-name-u-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "substitution -substitution "
+},
+{
+  "id": "check-5-5-du-replaces",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-du-replaces",
+  "type": "Checkpoint",
+  "number": "4.5.10",
+  "title": "What does <span class=\"process-math\">\\(du\\)<\/span> replace?",
+  "body": " What does replace?   In the rewrite above, the single symbol replaces what?     Just  Not quite. If only replaced , the would still be hanging around.    Just  Close. But the goes with it.    The whole piece  Yes. swallows the whole piece.    "
+},
+{
+  "id": "fact-substitution-rule",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#fact-substitution-rule",
+  "type": "Fact",
+  "number": "4.5.11",
+  "title": "The Substitution Rule.",
+  "body": " The Substitution Rule   If is differentiable and is continuous on the range of , then    "
+},
+{
+  "id": "ex-5-5-puzzle-a",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-puzzle-a",
+  "type": "Checkpoint",
+  "number": "4.5.12",
+  "title": "Puzzle A.",
+  "body": " Puzzle A     , . No adjustment needed this time: . Compare with the We Do problem: there the factor was , so the coefficient was instead of .   "
+},
+{
+  "id": "ex-5-5-puzzle-b",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-puzzle-b",
+  "type": "Checkpoint",
+  "number": "4.5.13",
+  "title": "Puzzle B.",
+  "body": " Puzzle B     , , so . . Check: .   "
+},
+{
+  "id": "ex-5-5-puzzle-c",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-puzzle-c",
+  "type": "Checkpoint",
+  "number": "4.5.14",
+  "title": "Puzzle C.",
+  "body": " Puzzle C     , . . Check: .   "
+},
+{
+  "id": "check-5-5-new-bounds",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-new-bounds",
+  "type": "Checkpoint",
+  "number": "4.5.15",
+  "title": "Translate the endpoints.",
+  "body": " Translate the endpoints   When ,  . When ,  .       Yes. .       Yes. .     "
+},
+{
+  "id": "check-5-5-e-2x",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-e-2x",
+  "type": "Checkpoint",
+  "number": "4.5.16",
+  "title": "Your turn.",
+  "body": " Your turn   Evaluate by changing both the variable and the bounds. Give a decimal to three places.          Yes. , , bounds to : .     Close. You found . Where did the from go?     It looks like you kept the old bound while working in . When , .     "
+},
+{
+  "id": "ex-5-5-bug-a",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-bug-a",
+  "type": "Checkpoint",
+  "number": "4.5.17",
+  "title": "Bug A: an adjustment is missing.",
+  "body": " Bug A: an adjustment is missing   A student writes . Differentiate the answer. What is wrong? Fix it.     , which is twice the integrand. With we need , so .   "
+},
+{
+  "id": "ex-5-5-bug-b",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-bug-b",
+  "type": "Checkpoint",
+  "number": "4.5.18",
+  "title": "Bug B: the variable changed, but the bounds did not.",
+  "body": " Bug B: the variable changed, but the bounds did not   A student sets and writes . What went wrong?    The bounds and are -values. They match and . Correct version: .   "
+},
+{
+  "id": "check-5-5-bug-c",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-bug-c",
+  "type": "Checkpoint",
+  "number": "4.5.19",
+  "title": "Bug C: only part of the integral was rewritten.",
+  "body": " Bug C: only part of the integral was rewritten   A student sets , finds , and writes . What is the problem?     The was counted twice  Yes. already replaced the whole piece . The correct rewrite is .    Nothing. It is fine to leave some in  Not here. An integral in with an still inside cannot be integrated with respect to . And this has already been used up by .    The student should have chosen  is a fine choice. The issue is what happened to .    "
+},
+{
+  "id": "ex-5-5-pairs",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-pairs",
+  "type": "Checkpoint",
+  "number": "4.5.20",
+  "title": "",
+  "body": "  (a) (b) , (c)     (a) , , so . (b) , . (c) , , so . Watch the constant and the sign.   "
+},
+{
+  "id": "ex-5-5-solve-a",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-solve-a",
+  "type": "Checkpoint",
+  "number": "4.5.21",
+  "title": "",
+  "body": "    , . .   "
+},
+{
+  "id": "ex-5-5-solve-b",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-solve-b",
+  "type": "Checkpoint",
+  "number": "4.5.22",
+  "title": "",
+  "body": "    , . . Check: .   "
+},
+{
+  "id": "ex-5-5-solve-c",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-solve-c",
+  "type": "Checkpoint",
+  "number": "4.5.23",
+  "title": "",
+  "body": "    , . . Since , no absolute value is needed.   "
+},
+{
+  "id": "ex-5-5-solve-d",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-solve-d",
+  "type": "Checkpoint",
+  "number": "4.5.24",
+  "title": "",
+  "body": " ,    , . .   "
+},
+{
+  "id": "ex-5-5-leftover-x",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-leftover-x",
+  "type": "Checkpoint",
+  "number": "4.5.25",
+  "title": "One piece is still in <span class=\"process-math\">\\(x\\)<\/span>.",
+  "body": " One piece is still in   Evaluate . Hint: with , there is a leftover . Can you write it in terms of too?     , , and . So . A leftover does not mean the substitution failed. It means one more piece needs rewriting.   "
+},
+{
+  "id": "check-5-5-change-bounds-a",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-change-bounds-a",
+  "type": "Checkpoint",
+  "number": "4.5.26",
+  "title": "",
+  "body": "  Evaluate . Give a decimal to three places.        Yes. , bounds to : .     "
+},
+{
+  "id": "check-5-5-change-bounds-b",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-change-bounds-b",
+  "type": "Checkpoint",
+  "number": "4.5.27",
+  "title": "",
+  "body": "  Evaluate . Give a decimal to three places.        Yes. , , bounds to : .     The sign is off. The integrand is positive on this interval, so the answer must be positive. Check the minus sign from , and the order of the bounds.     "
+},
+{
+  "id": "ex-5-5-bug-e",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-bug-e",
+  "type": "Checkpoint",
+  "number": "4.5.28",
+  "title": "Find the bug by differentiating.",
+  "body": " Find the bug by differentiating   A student claims . Check it.     . That is times too big. The Chain Rule produces a factor of , so the antiderivative needs : .   "
+},
+{
+  "id": "check-5-5-pump",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#check-5-5-pump",
+  "type": "Checkpoint",
+  "number": "4.5.29",
+  "title": "A rate becomes an amount.",
+  "body": " A rate becomes an amount   A pump delivers water at liters per minute. How many liters does it deliver in the first minute? Give a decimal to two places.  liters       Yes. , , bounds to : L. Liters per minute times minutes gives liters.     "
+},
+{
+  "id": "ex-5-5-exit-chain",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-exit-chain",
+  "type": "Checkpoint",
+  "number": "4.5.30",
+  "title": "",
+  "body": "  In one sentence: why is substitution connected to the Chain Rule?    The Chain Rule produces an outer derivative times an inner derivative. Substitution recognizes that pattern and runs it backward.   "
+},
+{
+  "id": "ex-5-5-exit-cos",
+  "level": "2",
+  "url": "sec-5-5-substitution.html#ex-5-5-exit-cos",
+  "type": "Checkpoint",
+  "number": "4.5.31",
+  "title": "",
+  "body": "  (a) Find . (b) For , use and write the new definite integral. Do not evaluate.    (a) , : . (b) At , . At , . So .   "
 },
 {
   "id": "sec-6-1-areas-between-curves",
@@ -1420,7 +1717,205 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "5.1",
   "title": "Areas Between Curves",
-  "body": " Areas Between Curves   [Motivation -- TODO: the question or problem that makes this worth learning]  [Problem -- TODO: a guiding worked example]  [Abstraction -- TODO: the general rule, definition, or theorem this section establishes]  "
+  "body": " Areas Between Curves     Today's Question  What does one thin piece measure?   An integral is not just something to compute. It is a description of a picture: what we are adding up, where we start and stop, and which variable is changing. Today we read integrals as pictures, and then we go backward, from a picture to an integral.    A familiar integral: can we see its meaning?  Consider Read it as the area under , above the -axis, from to . Do not evaluate yet.    One thin strip under .     What do the bounds tell us?   In , what are the numbers and ?     Where the strips start and stop along the -axis  Yes. The bounds say where the accumulation begins and ends.    The smallest and largest heights of the region  Not quite. The heights run from to . The bounds are -values, not heights.     A typical strip has height and width .   Predict   Is the area bigger than and smaller than ? Explain using the picture, not a calculation.    Yes. The width is and every height is between and . So the region contains the -by- rectangle and fits inside the -by- rectangle: .     Now evaluate            Yes. . Check with geometry: a trapezoid with parallel sides and , width , has area .       What just happened  An integral tells us what we accumulate , where we begin and end , and which variable changes .     What changes when the bottom boundary moves?  Now consider The region now sits between and . Check the box in to raise the floor.   Read the strip   Put the strip at . Its height is .       Yes. The top is at , the bottom at , so the height is .     That is where the top of the strip is. The strip no longer starts at . How long is it?      So measures the vertical distance from the lower boundary to the upper one. alone is only the top coordinate. The part from to is no longer in the region.   Predict, then check   Should this area be bigger or smaller than ? Then evaluate:         Yes. Smaller: we removed the -by- rectangle underneath, and . It is also a triangle with base and height .        A coordinate is not a length  A vertical segment runs from to . Its length is . Both ends have negative coordinates. The length is still positive.   True or false?   A region that sits below the -axis has negative area.    False. Geometric area is never negative. Negative coordinates tell us where the boundaries are. The difference, top minus bottom, tells us how long the strip is.    One more thing. On , the region between and , and the region between and , have the same strip height: . The second region is the first one shifted up. Same strips, same area.   Remember  The height of a vertical strip is the distance between its boundaries . Ask Where is it? and How long is it? as two separate questions.     Can we go backward? From a picture to an integral  Find the area of the region enclosed by First describe the region. Then build the integral.   A strip between and .     1. My prediction  The region fits inside a unit square, and it does not fill it. So .    2. My strip  At , the strip runs from up to . Its height is . In general:     3. My endpoints  The strip shrinks to nothing where the curves meet: So the strips run from to , and in between, is on top.    4. My small piece and my integral  One strip has area about . Add them up:     Evaluate     (a decimal is fine). Does it fit your prediction?       Yes. , and .     A negative area means the subtraction went the wrong way. Which curve is on top?       Remember   Picture strip dimensions integral. The integral records how the small pieces build the whole region.     Two shaded pieces: why might an integral give zero?  Look at the region between and on . It comes in two pieces. Make a prediction before you integrate anything.   The two pieces between and .     Predict   Do the two pieces have the same area? Could the total area be zero?    Same area: rotating the picture about the origin swaps the two pieces. But the total cannot be zero. Each piece is made of strips with positive length.    Now read two strips off the picture:     top  bottom  strip height     (on )  (on )      (on )  (on )     A student proposes    What does the student's integral give?            Right, . But the picture clearly has area. Something is wrong with the setup, not the arithmetic.       What cancelled?   Why did the student's integral come out to ?     The region really has no area  Look at the picture. Both pieces have strips with positive length.    On the left piece, is negative, so it cancels the right piece  Yes. On the curves trade places: is on top. So is bottom minus top there, a negative number. At it is , while the strip is long.    The bounds should have been and  That would only count the right piece. The left piece is part of the region too.      Remember  A strip has a nonnegative height. Before you use one subtraction everywhere, check whether the boundaries trade roles.     Let the picture tell us where to split  Solve : , so . At the inside intersection, , the top and bottom curves swap. So describe each piece separately:    interval  top curve  bottom curve  height                Then add the areas:    Use the symmetry, then evaluate            Yes. The two pieces match, so .     That is one piece. There are two.       Area between curves   If and are continuous and on , the area between them is If the curves trade places, describe each piece separately and add the areas.      Your turn: both boundaries below the axis    The region lies between and for . Sketch it and draw a strip. Should the area be positive or negative? Write an integral for the area and explain why your strip height is never negative. Do not evaluate.    The curve is on top. Height , so Since on , every strip is at least long. The area is positive even though every coordinate is negative. Note the side boundaries are the given lines , not where the curves cross.      Does the direction of the strip matter?  Consider the region enclosed by Try strips in both directions.   The region between and , sliced two ways.     Vertical strips   Look at vertical strips at and at . Which curve gives the top of each strip? Which gives the bottom? Does the bottom stay on the same curve all the way across?    At , both ends are on the parabola: . At , the bottom is on the line ( ) and the top is on the parabola ( ). The top is always . The bottom is for , then for . It changes at .     Horizontal strips   A horizontal strip at runs from to . Its length is . Do the left and right curves ever trade places as you slide from bottom to top?       Yes, . And no, they never trade places: from to the left end is always on and the right end is always on .       Remember  Both directions can work. Choose the one that makes the dimensions of the pieces easier to describe.     Build an integral from horizontal pieces  Stay with and , and use horizontal strips.  Dimensions. Length . Thickness .  Small piece. Area .  Bounds.  gives , so and . The variable changing is , so these are the bounds.  Integral.  .     Evaluate     . The region fits in a -by- box. Does your answer fit too?       Yes. , and .      Vertical strips work too. They just need two integrals, because the bottom curve changes at : Same region, same area. The two setups only reflect how the strip boundaries are described.   Same reasoning, a different direction    strip  length  thickness    vertical      horizontal         Exit ticket: make the geometry visible    The region is enclosed by and . Do not evaluate.  Can the area be negative or zero? Explain without calculating.  Choose a strip direction and say why.  Write both dimensions of your strip.  Find the bounds.  Write an integral for the area. Do you need more than one?      The area is positive: the region has positive width and height. Horizontal strips are easiest, because the left curve is always and the right curve is always . Length , thickness . The curves meet where , at and . One integral is enough: A vertical setup also works, but needs two integrals split at : .     One final question   Why can an integral equal zero even though the area between two curves is positive?    An integral of one fixed difference can have positive and negative parts that cancel. Area adds up strip lengths, which are never negative, using the correct top and bottom on each part.     Main idea  Read the picture. Draw a piece. Describe its dimensions. Check whether that description works across the whole region. Then write the integral that adds the pieces.    "
+},
+{
+  "id": "fig-strip-floor",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#fig-strip-floor",
+  "type": "Figure",
+  "number": "5.1.1",
+  "title": "",
+  "body": " One thin strip under .   "
+},
+{
+  "id": "check-6-1-bounds-mean",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-bounds-mean",
+  "type": "Checkpoint",
+  "number": "5.1.2",
+  "title": "What do the bounds tell us?",
+  "body": " What do the bounds tell us?   In , what are the numbers and ?     Where the strips start and stop along the -axis  Yes. The bounds say where the accumulation begins and ends.    The smallest and largest heights of the region  Not quite. The heights run from to . The bounds are -values, not heights.    "
+},
+{
+  "id": "ex-6-1-predict-trapezoid",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-predict-trapezoid",
+  "type": "Checkpoint",
+  "number": "5.1.3",
+  "title": "Predict.",
+  "body": " Predict   Is the area bigger than and smaller than ? Explain using the picture, not a calculation.    Yes. The width is and every height is between and . So the region contains the -by- rectangle and fits inside the -by- rectangle: .   "
+},
+{
+  "id": "check-6-1-trapezoid",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-trapezoid",
+  "type": "Checkpoint",
+  "number": "5.1.4",
+  "title": "Now evaluate.",
+  "body": " Now evaluate            Yes. . Check with geometry: a trapezoid with parallel sides and , width , has area .     "
+},
+{
+  "id": "check-6-1-strip-at-half",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-strip-at-half",
+  "type": "Checkpoint",
+  "number": "5.1.5",
+  "title": "Read the strip.",
+  "body": " Read the strip   Put the strip at . Its height is .       Yes. The top is at , the bottom at , so the height is .     That is where the top of the strip is. The strip no longer starts at . How long is it?     "
+},
+{
+  "id": "check-6-1-floor-area",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-floor-area",
+  "type": "Checkpoint",
+  "number": "5.1.6",
+  "title": "Predict, then check.",
+  "body": " Predict, then check   Should this area be bigger or smaller than ? Then evaluate:         Yes. Smaller: we removed the -by- rectangle underneath, and . It is also a triangle with base and height .     "
+},
+{
+  "id": "check-6-1-below-axis",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-below-axis",
+  "type": "Checkpoint",
+  "number": "5.1.7",
+  "title": "True or false?",
+  "body": " True or false?   A region that sits below the -axis has negative area.    False. Geometric area is never negative. Negative coordinates tell us where the boundaries are. The difference, top minus bottom, tells us how long the strip is.   "
+},
+{
+  "id": "fig-strip-between",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#fig-strip-between",
+  "type": "Figure",
+  "number": "5.1.8",
+  "title": "",
+  "body": " A strip between and .   "
+},
+{
+  "id": "check-6-1-lens-area",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-lens-area",
+  "type": "Checkpoint",
+  "number": "5.1.9",
+  "title": "Evaluate.",
+  "body": " Evaluate     (a decimal is fine). Does it fit your prediction?       Yes. , and .     A negative area means the subtraction went the wrong way. Which curve is on top?     "
+},
+{
+  "id": "fig-signed-cancel",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#fig-signed-cancel",
+  "type": "Figure",
+  "number": "5.1.10",
+  "title": "",
+  "body": " The two pieces between and .   "
+},
+{
+  "id": "ex-6-1-two-pieces",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-two-pieces",
+  "type": "Checkpoint",
+  "number": "5.1.11",
+  "title": "Predict.",
+  "body": " Predict   Do the two pieces have the same area? Could the total area be zero?    Same area: rotating the picture about the origin swaps the two pieces. But the total cannot be zero. Each piece is made of strips with positive length.   "
+},
+{
+  "id": "check-6-1-signed-zero",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-signed-zero",
+  "type": "Checkpoint",
+  "number": "5.1.12",
+  "title": "What does the student’s integral give?",
+  "body": " What does the student's integral give?            Right, . But the picture clearly has area. Something is wrong with the setup, not the arithmetic.     "
+},
+{
+  "id": "check-6-1-what-cancelled",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-what-cancelled",
+  "type": "Checkpoint",
+  "number": "5.1.13",
+  "title": "What cancelled?",
+  "body": " What cancelled?   Why did the student's integral come out to ?     The region really has no area  Look at the picture. Both pieces have strips with positive length.    On the left piece, is negative, so it cancels the right piece  Yes. On the curves trade places: is on top. So is bottom minus top there, a negative number. At it is , while the strip is long.    The bounds should have been and  That would only count the right piece. The left piece is part of the region too.    "
+},
+{
+  "id": "check-6-1-split-area",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-split-area",
+  "type": "Checkpoint",
+  "number": "5.1.14",
+  "title": "Use the symmetry, then evaluate.",
+  "body": " Use the symmetry, then evaluate            Yes. The two pieces match, so .     That is one piece. There are two.     "
+},
+{
+  "id": "fact-area-between-curves",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#fact-area-between-curves",
+  "type": "Fact",
+  "number": "5.1.15",
+  "title": "Area between curves.",
+  "body": " Area between curves   If and are continuous and on , the area between them is If the curves trade places, describe each piece separately and add the areas.   "
+},
+{
+  "id": "ex-6-1-below-axis",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-below-axis",
+  "type": "Checkpoint",
+  "number": "5.1.16",
+  "title": "",
+  "body": "  The region lies between and for . Sketch it and draw a strip. Should the area be positive or negative? Write an integral for the area and explain why your strip height is never negative. Do not evaluate.    The curve is on top. Height , so Since on , every strip is at least long. The area is positive even though every coordinate is negative. Note the side boundaries are the given lines , not where the curves cross.   "
+},
+{
+  "id": "fig-strip-direction",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#fig-strip-direction",
+  "type": "Figure",
+  "number": "5.1.17",
+  "title": "",
+  "body": " The region between and , sliced two ways.   "
+},
+{
+  "id": "ex-6-1-vertical-strips",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-vertical-strips",
+  "type": "Checkpoint",
+  "number": "5.1.18",
+  "title": "Vertical strips.",
+  "body": " Vertical strips   Look at vertical strips at and at . Which curve gives the top of each strip? Which gives the bottom? Does the bottom stay on the same curve all the way across?    At , both ends are on the parabola: . At , the bottom is on the line ( ) and the top is on the parabola ( ). The top is always . The bottom is for , then for . It changes at .   "
+},
+{
+  "id": "check-6-1-horizontal-length",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-horizontal-length",
+  "type": "Checkpoint",
+  "number": "5.1.19",
+  "title": "Horizontal strips.",
+  "body": " Horizontal strips   A horizontal strip at runs from to . Its length is . Do the left and right curves ever trade places as you slide from bottom to top?       Yes, . And no, they never trade places: from to the left end is always on and the right end is always on .     "
+},
+{
+  "id": "check-6-1-horizontal-area",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#check-6-1-horizontal-area",
+  "type": "Checkpoint",
+  "number": "5.1.20",
+  "title": "Evaluate.",
+  "body": " Evaluate     . The region fits in a -by- box. Does your answer fit too?       Yes. , and .     "
+},
+{
+  "id": "ex-6-1-exit",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-exit",
+  "type": "Checkpoint",
+  "number": "5.1.21",
+  "title": "",
+  "body": "  The region is enclosed by and . Do not evaluate.  Can the area be negative or zero? Explain without calculating.  Choose a strip direction and say why.  Write both dimensions of your strip.  Find the bounds.  Write an integral for the area. Do you need more than one?      The area is positive: the region has positive width and height. Horizontal strips are easiest, because the left curve is always and the right curve is always . Length , thickness . The curves meet where , at and . One integral is enough: A vertical setup also works, but needs two integrals split at : .   "
+},
+{
+  "id": "ex-6-1-final-question",
+  "level": "2",
+  "url": "sec-6-1-areas-between-curves.html#ex-6-1-final-question",
+  "type": "Checkpoint",
+  "number": "5.1.22",
+  "title": "One final question.",
+  "body": " One final question   Why can an integral equal zero even though the area between two curves is positive?    An integral of one fixed difference can have positive and negative parts that cancel. Area adds up strip lengths, which are never negative, using the correct top and bottom on each part.   "
 },
 {
   "id": "sec-6-2-volumes",
