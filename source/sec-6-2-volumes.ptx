@@ -188,13 +188,15 @@
         them together sweep out the solid.
       </caption>
       <interactive xml:id="interactive-spin-the-slice" label="interactive-spin-the-slice"
-                   iframe="volumes/spin-the-slice.html" width="100%" aspect="1:2">
+                   iframe="volumes/spin-the-slice.html" width="100%" aspect="4:9">
         <instructions>
           <p>
-            Click through steps 1 to 5. In step 3, only the orange rectangle
-            spins. Watch the orange radius line: how long is it, and where does
-            it start? Drag the picture to look around the solid, and switch
-            between the four examples at the bottom.
+            Click through steps 1 to 5. Step 3 will not spin until you predict:
+            pick what the orange rectangle will become, and drag the purple line
+            to where you think its outer edge is. Then lock in and watch. Drag
+            the picture to look around the solid, and switch between the four
+            examples. When you are done, try the Match game tab: a solid spins,
+            and you pick which flat region and axis made it.
           </p>
         </instructions>
       </interactive>

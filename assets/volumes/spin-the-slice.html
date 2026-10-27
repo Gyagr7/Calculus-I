@@ -1,19 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="embed">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Spin the Slice</title>
-<!-- 3D animation for Section 6.2 (disks and washers). Embedded in the book through
-     <interactive iframe="volumes/spin-the-slice.html"> in source/sec-6-2-volumes.ptx.
-     Loads three.js 0.128.0 from jsdelivr. Inside an iframe it switches to a compact layout. -->
-<script>if(window.self!==window.top||/embed/.test(location.search))document.documentElement.classList.add("embed");</script>
+<!-- 3D animation for Sec 6.2. Embedded via <interactive iframe="volumes/spin-the-slice.html"> in source/sec-6-2-volumes.ptx.
+     Source of truth is the Claude artifact "Spin the Slice"; this copy adds the compact "embed" layout. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@500&display=swap">
 <style>
+/* Layout: a lab bench. The 3D stage dominates on the left, a narrow control rail on the right; stacks on phones.
+   Two modes: Explore (walkthrough, with a predict-before-you-spin step) and Match game. */
 :root{
   --bg:#f3f5f8; --panel:#ffffff; --ink:#16202b; --muted:#5a6575; --line:#d8dde5; --stage:#e9edf2;
   --solid:#2b7a87; --slice:#d9701a; --axis:#c2185b; --curve:#1b2735; --slab:#3d6db3; --slab2:#86a8d9;
+  --guess:#6a3fd1; --good:#1e7d4f; --bad:#b3261e; --good-bg:#e6f4ec; --bad-bg:#fbe9e7;
   --chip:#eef1f5; --chip-on:#16202b; --chip-on-ink:#ffffff;
   --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -23,15 +24,16 @@
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not(.embed){
   --bg:#0e1319; --panel:#151c25; --ink:#e5eaf0; --muted:#93a0b0; --line:#28323f; --stage:#111821;
   --solid:#4fb0bc; --slice:#f39a46; --axis:#f0679a; --curve:#dce5ee; --slab:#6f9be0; --slab2:#3b5c94;
+  --guess:#a98bff; --good:#5fd39a; --bad:#ff8a80; --good-bg:#15291f; --bad-bg:#2e1715;
   --chip:#1d2631; --chip-on:#e5eaf0; --chip-on-ink:#0e1319; color-scheme:dark; } }
 :root[data-theme="dark"]{
   --bg:#0e1319; --panel:#151c25; --ink:#e5eaf0; --muted:#93a0b0; --line:#28323f; --stage:#111821;
   --solid:#4fb0bc; --slice:#f39a46; --axis:#f0679a; --curve:#dce5ee; --slab:#6f9be0; --slab2:#3b5c94;
+  --guess:#a98bff; --good:#5fd39a; --bad:#ff8a80; --good-bg:#15291f; --bad-bg:#2e1715;
   --chip:#1d2631; --chip-on:#e5eaf0; --chip-on-ink:#0e1319; color-scheme:dark; }
 
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;margin:0;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 28px}
 [hidden]{display:none!important}
 .wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
@@ -52,25 +54,33 @@ header p{margin:0;color:var(--muted);max-width:62ch}
   padding:0 4px;border-radius:4px;background:color-mix(in srgb,var(--stage) 78%,transparent)}
 .lab.axis{color:var(--axis);font-family:var(--f-body);font-size:13px;font-weight:600}
 .lab.R,.lab.r{color:var(--slice);font-weight:600;font-style:italic;font-size:17px}
-.lab.curve{color:var(--curve)}
+.lab.G{color:var(--guess);font-family:var(--f-body);font-size:13px;font-weight:600}
+.lab.curve,.lab.coord{color:var(--curve)}
 .stagebar{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
   background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
 .stagebar input[type=range]{flex:1 1 160px;min-width:0}
 .hint{position:absolute;top:10px;right:12px;font-size:12px;color:var(--muted)}
+.banner{position:absolute;top:10px;left:12px;font-size:13px;font-weight:600;color:var(--guess);
+  background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
 .rail{display:flex;flex-direction:column;gap:12px;min-width:0}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.45}
 .chip{border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:4px 11px;font-size:14px}
 .chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);border-color:var(--chip-on)}
-.chip:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--slice);outline-offset:2px}
+.chip:focus-visible,.btn:focus-visible,.opt:focus-visible,.step:focus-visible,input:focus-visible,.tab:focus-visible{outline:2px solid var(--slice);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:3px}
+.tab{border:0;background:transparent;border-radius:6px;padding:6px 8px;font-weight:600;font-size:14px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 .step{border:1px solid var(--line);background:var(--chip);border-radius:6px;padding:5px 2px;font-size:12.5px;font-weight:600;letter-spacing:.03em}
 .step[aria-pressed="true"]{background:var(--slice);color:#fff;border-color:var(--slice)}
-.caption{margin:0;min-height:4.4em}
+.caption{margin:0;min-height:3em}
 .btn{border:1px solid var(--chip-on);background:var(--chip-on);color:var(--chip-on-ink);border-radius:6px;padding:5px 12px;font-weight:600;font-size:14px;min-width:78px}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.go{background:var(--guess);border-color:var(--guess);color:#fff}
 .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .row label{font-size:14px}
 .row input[type=range]{flex:1 1 140px;min-width:0}
@@ -85,13 +95,31 @@ button{font:inherit;color:inherit;cursor:pointer}
 .note{font-size:14px;color:var(--muted);margin:0}
 .big{font-size:1.15rem}
 .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:baseline}
-html.embed{color-scheme:light}
+.predict{border:1px dashed var(--guess);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.predict h3{margin:0;font-size:14px;font-weight:600;color:var(--guess)}
+.verdict{border-radius:6px;padding:8px 10px;font-size:14px;margin:0}
+.verdict.ok{background:var(--good-bg);color:var(--good)}
+.verdict.no{background:var(--bad-bg);color:var(--bad)}
+.verdict b{font-weight:700}
+.verdict span{color:var(--ink)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:2px solid var(--line);background:var(--chip);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px;align-items:stretch;text-align:left}
+.opt canvas{width:100%;aspect-ratio:4/3;display:block;background:var(--panel);border-radius:4px}
+.opt .m{font-size:14px;line-height:1.25}
+.opt .ax{font-size:13px;color:var(--axis);font-weight:600}
+.opt:disabled{opacity:1;cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.score{display:flex;gap:14px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.score b{color:var(--ink);font-family:var(--f-mono);font-size:13px}
 .embed body{padding-block:8px 12px}
 .embed header{display:none}
 .embed .main{grid-template-columns:minmax(0,1fr)}
 .embed .stagebox{height:400px;min-height:0}
 .embed .rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));align-items:start}
+.embed .rail .wide{grid-column:1/-1}
 </style>
+
 </head>
 <body>
 <div class="wrap">
@@ -105,7 +133,8 @@ html.embed{color-scheme:light}
       <canvas id="gl" aria-label="3D view of the region rotating about its axis"></canvas>
       <div class="labels" id="labels"></div>
       <div class="hint">drag to orbit · scroll to zoom</div>
-      <div class="stagebar">
+      <div class="banner" id="banner" hidden></div>
+      <div class="stagebar" id="stagebar">
         <button class="btn" id="play" type="button">Spin</button>
         <label for="theta" class="num">θ</label>
         <input type="range" id="theta" min="0" max="360" step="1" value="0">
@@ -114,19 +143,45 @@ html.embed{color-scheme:light}
     </div>
 
     <div class="rail">
-      <section class="card">
+      <div class="tabs wide" role="tablist" aria-label="Mode">
+        <button class="tab" role="tab" id="tabExplore" type="button" aria-selected="true">Explore</button>
+        <button class="tab" role="tab" id="tabGame" type="button" aria-selected="false">Match game</button>
+      </div>
+
+      <!-- ===== Explore mode ===== -->
+      <section class="card ex">
         <span class="eyebrow">Example</span>
         <div class="chips" id="scenes"></div>
         <div class="m big" id="sceneTitle"></div>
       </section>
 
-      <section class="card">
+      <section class="card ex">
         <span class="eyebrow">Walk through it</span>
         <div class="steps" id="steps"></div>
         <p class="caption" id="caption"></p>
+        <label class="tog"><input type="checkbox" id="predictOn" checked> Predict before step 3 spins</label>
+        <div class="predict" id="predict" hidden>
+          <h3>Your prediction</h3>
+          <div style="font-size:14px">What will this rectangle become?</div>
+          <div class="chips" id="shapeChips"></div>
+          <div class="row">
+            <label for="guessR" style="font-size:14px">Drag the purple line to the outer edge</label>
+            <input type="range" id="guessR" min="0" max="1000" value="0">
+            <span class="num" id="guessOut">?</span>
+          </div>
+          <div class="row">
+            <button class="btn go" id="lockIn" type="button" disabled>Lock in and spin</button>
+            <span class="note" id="lockHint">Pick a shape and set the radius.</span>
+          </div>
+          <div id="verdict" hidden></div>
+          <div class="row" id="againRow" hidden>
+            <button class="btn ghost" id="again" type="button">Try another slice</button>
+            <span class="note" id="predScore"></span>
+          </div>
+        </div>
       </section>
 
-      <section class="card">
+      <section class="card ex">
         <span class="eyebrow">Show</span>
         <div class="row">
           <label class="tog"><input type="checkbox" id="showSolid" checked> <span><span class="swatch" style="background:var(--solid)"></span>Whole region</span></label>
@@ -144,7 +199,7 @@ html.embed{color-scheme:light}
         <div class="row"><button class="btn ghost" id="resetView" type="button">Reset view</button></div>
       </section>
 
-      <section class="card">
+      <section class="card ex">
         <span class="eyebrow">The slice in numbers</span>
         <div class="xs">
           <canvas id="xs" aria-label="Cross-section of the slice"></canvas>
@@ -152,6 +207,18 @@ html.embed{color-scheme:light}
         </div>
         <p class="note" id="sceneNote"></p>
         <dl class="read" id="total"></dl>
+      </section>
+
+      <!-- ===== Match game ===== -->
+      <section class="card gm wide" hidden>
+        <span class="eyebrow">Which region made this?</span>
+        <p style="margin:0">This solid came from spinning one of these flat regions about the red dashed line in its picture. Which one? Drag the solid to look at it from every side.</p>
+        <div class="opts" id="opts"></div>
+        <div id="gameVerdict" hidden></div>
+        <div class="row">
+          <button class="btn" id="nextSolid" type="button">Next solid</button>
+          <div class="score"><span>Streak <b id="streak">0</b></span><span>Best <b id="best">0</b></span><span>Score <b id="gscore">0/0</b></span></div>
+        </div>
       </section>
     </div>
   </div>
@@ -165,6 +232,7 @@ const TAU = Math.PI*2, V = THREE.Vector3;
 const $ = id => document.getElementById(id);
 const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#888';
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
 
 // ---------- the four examples from the Section 6.2 handout ----------
 const SCENES = [
@@ -204,7 +272,8 @@ function Rr(sc,u){ const d1=Math.abs(sc.U(u)-sc.k), d2=Math.abs(sc.L(u)-sc.k); r
 function area(sc,u){ const [R,r]=Rr(sc,u); return Math.PI*(R*R-r*r); }
 
 // ---------- state ----------
-const st = { si:0, theta:0, t:0.55, solid:true, slice:true, slabs:0, playing:false, step:-1 };
+const st = { mode:'explore', si:0, theta:0, t:0.55, solid:true, slice:true, slabs:0, playing:false, step:-1,
+  predictOn:true, pred:{shape:null, g:null, locked:false, done:false}, predRight:0, predTotal:0 };
 let sc = SCENES[0], dirty = true;
 
 // ---------- three.js setup ----------
@@ -214,7 +283,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(38,1,0.01,500);
 const controls=new THREE.OrbitControls(camera, canvas);
-controls.enableDamping=true; controls.dampingFactor=0.08;
+controls.enableDamping=true; controls.dampingFactor=0.08; controls.autoRotateSpeed=1.6;
 scene.add(new THREE.HemisphereLight(0xffffff,0x667080,0.75));
 const dl=new THREE.DirectionalLight(0xffffff,0.55); dl.position.set(3,5,6); scene.add(dl);
 const dl2=new THREE.DirectionalLight(0xffffff,0.25); dl2.position.set(-4,-2,-5); scene.add(dl2);
@@ -223,21 +292,23 @@ const M = {
   solid:new THREE.MeshPhongMaterial({transparent:true,opacity:0.42,side:THREE.DoubleSide,depthWrite:false,shininess:50}),
   face:new THREE.MeshPhongMaterial({transparent:true,opacity:0.75,side:THREE.DoubleSide,depthWrite:false,shininess:20}),
   ghost:new THREE.MeshPhongMaterial({transparent:true,opacity:0.10,side:THREE.DoubleSide,depthWrite:false}),
+  opaque:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:45}),
   slice:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:60}),
   slabA:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:40}),
   slabB:new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:40}),
   curve:new THREE.MeshBasicMaterial(),
   axis:new THREE.MeshBasicMaterial(),
   rad:new THREE.MeshBasicMaterial(),
+  guess:new THREE.MeshBasicMaterial(),
   grid:new THREE.LineBasicMaterial({transparent:true,opacity:0.55})
 };
 function applyTheme(){
   scene.background=new THREE.Color(tok('--stage'));
-  M.solid.color.set(tok('--solid')); M.face.color.set(tok('--solid')); M.ghost.color.set(tok('--solid'));
-  M.slice.color.set(tok('--slice')); M.rad.color.set(tok('--slice'));
+  M.solid.color.set(tok('--solid')); M.face.color.set(tok('--solid')); M.ghost.color.set(tok('--solid')); M.opaque.color.set(tok('--solid'));
+  M.slice.color.set(tok('--slice')); M.rad.color.set(tok('--slice')); M.guess.color.set(tok('--guess'));
   M.slabA.color.set(tok('--slab')); M.slabB.color.set(tok('--slab2'));
   M.curve.color.set(tok('--curve')); M.axis.color.set(tok('--axis')); M.grid.color.set(tok('--muted'));
-  drawXS();
+  drawXS(); if(game.round) drawOptions();
 }
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
 new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
@@ -251,40 +322,47 @@ function grid(nu,nv,f){
   for(let i=0;i<nu;i++) for(let j=0;j<nv;j++){ const a=i*(nv+1)+j, b=a+nv+1; idx.push(a,b,a+1, b,b+1,a+1); }
   const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g;
 }
-function piece(a,b,L,U,th,mat,faceMat,nu){
+// Sweep a region {a<=u<=b, L(u)<=s<=U(u)} through angle th, using the point map P(u,s,phi).
+function sweep(P,a,b,L,U,th,mat,faceMat,nu){
   const g=new THREE.Group(), nt=Math.max(2,Math.ceil(72*th/TAU)), m=(geo,mm)=>g.add(new THREE.Mesh(geo,mm));
   if(th>1e-3){
-    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return rot(u,U(u),th*q);}),mat);
-    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return rot(u,L(u),th*q);}),mat);
-    m(grid(3,nt,(p,q)=>rot(a,L(a)+(U(a)-L(a))*p,th*q)),mat);
-    m(grid(3,nt,(p,q)=>rot(b,L(b)+(U(b)-L(b))*p,th*q)),mat);
+    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return P(u,U(u),th*q);}),mat);
+    m(grid(nu,nt,(p,q)=>{const u=a+(b-a)*p; return P(u,L(u),th*q);}),mat);
+    m(grid(3,nt,(p,q)=>P(a,L(a)+(U(a)-L(a))*p,th*q)),mat);
+    m(grid(3,nt,(p,q)=>P(b,L(b)+(U(b)-L(b))*p,th*q)),mat);
   }
-  const face=(phi)=>grid(nu,3,(p,q)=>{const u=a+(b-a)*p; return rot(u,L(u)+(U(u)-L(u))*q,phi);});
-  m(face(0),faceMat||mat);
-  if(th>1e-3 && th<TAU-1e-3) m(face(th),faceMat||mat);
+  if(faceMat!==false){
+    const face=(phi)=>grid(nu,3,(p,q)=>{const u=a+(b-a)*p; return P(u,L(u)+(U(u)-L(u))*q,phi);});
+    m(face(0),faceMat||mat);
+    if(th>1e-3 && th<TAU-1e-3) m(face(th),faceMat||mat);
+  }
   return g;
 }
+const piece=(a,b,L,U,th,mat,faceMat,nu)=>sweep(rot,a,b,L,U,th,mat,faceMat,nu);
 function rod(p,q,r,mat){
   const d=q.clone().sub(p), len=d.length(); if(len<1e-6) return new THREE.Group();
   const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,10),mat);
   mesh.position.copy(p).add(q).multiplyScalar(0.5);
   mesh.quaternion.setFromUnitVectors(new V(0,1,0),d.normalize()); return mesh;
 }
+function dashed(p,q,r,mat,seg){
+  const g=new THREE.Group(), n=Math.max(2,Math.round(p.distanceTo(q)/seg));
+  for(let i=0;i<n;i+=2) g.add(rod(p.clone().lerp(q,i/n),p.clone().lerp(q,Math.min(1,(i+1)/n)),r,mat));
+  return g;
+}
 function tube(pts,r,mat){ return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),Math.max(8,pts.length*2),r,8,false),mat); }
 function disposeGroup(g){ g.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); while(g.children.length) g.remove(g.children[0]); }
+const lineG=(p,q)=>new THREE.Line(new THREE.BufferGeometry().setFromPoints([p,q]),M.grid);
 
-const staticG=new THREE.Group(), dynG=new THREE.Group(); scene.add(staticG,dynG);
+const staticG=new THREE.Group(), dynG=new THREE.Group(), gameG=new THREE.Group(); scene.add(staticG,dynG,gameG);
 let lw=0.01;
 
 function buildStatic(){
   disposeGroup(staticG);
   const pad=(sc.b-sc.a)*0.18, R=sc.Rmax; lw=Math.max(sc.b-sc.a,R)*0.009;
-  const lineG=(p,q)=>new THREE.Line(new THREE.BufferGeometry().setFromPoints([p,q]),M.grid);
   if(sc.along==='x'){ staticG.add(lineG(new V(sc.a-pad,0,0),new V(sc.b+pad,0,0)), lineG(new V(0,sc.k-R-pad,0),new V(0,sc.k+R+pad,0))); }
   else { staticG.add(lineG(new V(-R-pad,0,0),new V(R+pad,0,0)), lineG(new V(0,sc.a-pad,0),new V(0,sc.b+pad,0))); }
-  const A0=sc.a-pad, A1=sc.b+pad, n=Math.round((A1-A0)/(lw*9));
-  for(let i=0;i<n;i+=2){ const u0=A0+(A1-A0)*i/n, u1=A0+(A1-A0)*(i+1)/n;
-    staticG.add(rod(rot(u0,sc.k,0),rot(u1,sc.k,0),lw*0.8,M.axis)); }
+  staticG.add(dashed(rot(sc.a-pad,sc.k,0),rot(sc.b+pad,sc.k,0),lw*0.8,M.axis,lw*4.5));
   const pts=f=>{const a=[];for(let i=0;i<=60;i++){const u=sc.a+(sc.b-sc.a)*i/60;a.push(rot(u,f(u),0));}return a;};
   staticG.add(tube(pts(sc.U),lw*0.9,M.curve));
   if(!sc.hideL) staticG.add(tube(pts(sc.L),lw*0.9,M.curve));
@@ -293,6 +371,14 @@ function buildStatic(){
 
 function dt(){ return (sc.b-sc.a)/22; }
 function t0(){ const d=dt(); return sc.a+d/2+(sc.b-sc.a-d)*st.t; }
+function sliceInfo(){
+  const c=t0(), uC=sc.U(c), lC=sc.L(c);
+  const sOut=Math.abs(uC-sc.k)>=Math.abs(lC-sc.k)?uC:lC, sIn=sOut===uC?lC:uC;
+  return {c, sOut, sIn, R:Math.abs(sOut-sc.k), r:Math.abs(sIn-sc.k)};
+}
+const predicting=()=>st.mode==='explore' && st.step===2 && st.predictOn;
+const gMax=()=>sc.Rmax*1.25;
+const guessVal=()=>st.pred.g===null?null:st.pred.g/1000*gMax();
 
 function buildDyn(){
   disposeGroup(dynG);
@@ -309,24 +395,35 @@ function buildDyn(){
       dynG.add(tube(edge(sc.U),lw*0.55,M.curve)); if(!sc.hideL) dynG.add(tube(edge(sc.L),lw*0.55,M.curve));
     }
   }
+  lab.R.pos=null; lab.r.pos=null; lab.G.pos=null;
   if(st.slice && st.slabs===0){
-    const c=t0(), d=dt();
+    const {c,sOut,sIn}=sliceInfo(), d=dt(), ph=th, ax=rot(c,sc.k,0);
     dynG.add(piece(c-d/2,c+d/2,sc.L,sc.U,th,M.slice,M.slice,4));
-    const sOut=Math.abs(sc.U(c)-sc.k)>=Math.abs(sc.L(c)-sc.k)?sc.U(c):sc.L(c);
-    const sIn = sOut===sc.U(c)?sc.L(c):sc.U(c);
-    const ax=rot(c,sc.k,0), ph=th;
-    dynG.add(rod(ax,rot(c,sOut,ph),lw*0.55,M.rad));
-    if(Math.abs(sIn-sc.k)>1e-3) dynG.add(rod(ax,rot(c,sIn,ph),lw*0.4,M.curve));
-    if(th>0.05){ const arc=[]; for(let i=0;i<=48;i++) arc.push(rot(c+d/2+lw*1.5,sOut,th*i/48)); dynG.add(tube(arc,lw*0.35,M.rad)); }
-    lab.R.pos=rot(c,(sc.k+sOut)/2,ph).add(sc.along==='x'?new V(lw*6,0,0):new V(0,lw*6,0));
-    lab.r.pos=Math.abs(sIn-sc.k)>1e-3?rot(c,(sc.k+sIn)/2,ph).add(sc.along==='x'?new V(-lw*6,0,0):new V(0,-lw*6,0)):null;
-  } else { lab.R.pos=null; lab.r.pos=null; }
+    const hideTruth = predicting() && !st.pred.done;
+    if(!hideTruth){
+      dynG.add(rod(ax,rot(c,sOut,ph),lw*0.55,M.rad));
+      if(Math.abs(sIn-sc.k)>1e-3) dynG.add(rod(ax,rot(c,sIn,ph),lw*0.4,M.curve));
+      if(th>0.05){ const arc=[]; for(let i=0;i<=48;i++) arc.push(rot(c+d/2+lw*1.5,sOut,th*i/48)); dynG.add(tube(arc,lw*0.35,M.rad)); }
+      lab.R.pos=rot(c,(sc.k+sOut)/2,ph).add(sc.along==='x'?new V(lw*6,0,0):new V(0,lw*6,0));
+      lab.r.pos=Math.abs(sIn-sc.k)>1e-3?rot(c,(sc.k+sIn)/2,ph).add(sc.along==='x'?new V(-lw*6,0,0):new V(0,-lw*6,0)):null;
+    }
+    // the student's guess: a purple line from the axis, pointing toward the region
+    const g=guessVal();
+    if(predicting() && g!==null){
+      const dir=Math.sign((sOut-sc.k)||1), off=sc.along==='x'?new V(-d*1.2,0,0):new V(0,-d*1.2,0);
+      const p0=rot(c,sc.k,0).add(off), p1=rot(c,sc.k+dir*g,0).add(off);
+      dynG.add(rod(p0,p1,lw*0.7,M.guess));
+      const cap=new THREE.Mesh(new THREE.SphereGeometry(lw*1.8,12,10),M.guess); cap.position.copy(p1); dynG.add(cap);
+      lab.G.pos=p1.clone().add(off.clone().multiplyScalar(2.2));
+    }
+  }
 }
 
 // ---------- labels projected from 3D ----------
 const labelsEl=$('labels'), lab={};
-function mkLabel(key,cls,html){ const el=document.createElement('div'); el.className='lab '+cls; el.innerHTML=html; labelsEl.appendChild(el); lab[key]={el,pos:null}; }
-mkLabel('axis','axis','axis of rotation'); mkLabel('R','R','R'); mkLabel('r','r','r');
+function mkLabel(key,cls,html){ const el=document.createElement('div'); el.className='lab '+cls; el.innerHTML=html; labelsEl.appendChild(el); lab[key]={el,pos:null}; return lab[key]; }
+mkLabel('axis','axis','axis of rotation'); mkLabel('R','R','R'); mkLabel('r','r','r'); mkLabel('G','G','your guess');
+mkLabel('gx','coord','<i>x</i>'); mkLabel('gy','coord','<i>y</i>');
 let curveLabs=[];
 function setSceneLabels(){
   curveLabs.forEach(k=>{lab[k].el.remove(); delete lab[k];}); curveLabs=[];
@@ -344,32 +441,37 @@ function placeLabels(){
 }
 
 // ---------- camera ----------
+function fitTo(center,rad,dir){
+  const dist=rad/Math.sin(camera.fov*Math.PI/360)*1.25;
+  controls.target.copy(center); camera.position.copy(center).add(dir.clone().normalize().multiplyScalar(dist));
+  camera.near=dist/100; camera.far=dist*20; camera.updateProjectionMatrix(); controls.update();
+}
 function fitCamera(){
+  if(st.mode==='game'){ fitGame(); return; }
   const R=sc.Rmax, half=(sc.b-sc.a)/2, mid=(sc.a+sc.b)/2;
   const center=sc.along==='x'?new V(mid,sc.k,0):new V(sc.k,mid,0);
-  const rad=Math.sqrt(half*half+R*R)*1.05;
-  const dist=rad/Math.sin(camera.fov*Math.PI/360)*1.25;
-  const dir=sc.along==='x'?new V(0.9,0.45,1):new V(0.75,0.35,1);
-  controls.target.copy(center); camera.position.copy(center).add(dir.normalize().multiplyScalar(dist));
-  camera.near=dist/100; camera.far=dist*20; camera.updateProjectionMatrix(); controls.update();
+  fitTo(center, Math.sqrt(half*half+R*R)*1.05, sc.along==='x'?new V(0.9,0.45,1):new V(0.75,0.35,1));
 }
 function resize(){ const w=box.clientWidth,h=box.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(box);
 
-// ---------- UI ----------
+// ---------- Explore UI ----------
 const fmt=x=>(Math.abs(x)<5e-4?0:x).toFixed(2);
 SCENES.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=s.tab;
   b.addEventListener('click',()=>setScene(i)); $('scenes').appendChild(b); });
 [0,4,8,16,32].forEach(n=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=n?n:'Off'; b.dataset.n=n;
   b.addEventListener('click',()=>{ st.slabs=n; st.step=-1; sync(); }); $('slabs').appendChild(b); });
-
 const STEPS=['Draw','Slice','Spin it','Spin all','Stack'];
 STEPS.forEach((t,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='step'; b.textContent=(i+1)+' '+t;
   b.addEventListener('click',()=>goStep(i)); $('steps').appendChild(b); });
+['disk','washer','shell'].forEach(s=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.s=s;
+  b.textContent=s[0].toUpperCase()+s.slice(1);
+  b.addEventListener('click',()=>{ if(st.pred.locked) return; st.pred.shape=s; sync(); }); $('shapeChips').appendChild(b); });
 
+function axisName(){ return sc.along==='x'?(sc.k?'the line y = '+sc.k:'the x-axis'):'the y-axis'; }
 function captionFor(i){
-  const v=sc.along, sh=sc.kind, axis=sc.along==='x'?(sc.k?'the line y = '+sc.k:'the x-axis'):'the y-axis';
-  const axisH=axis.replace(/([xy])(?=[ -]|$)/g,'<i>$1</i>');
+  const v=sc.along, sh=sc.kind, axisH=axisName().replace(/([xy])(?=[ -]|$)/g,'<i>$1</i>');
+  if(i===2 && st.predictOn && !st.pred.done) return `Before it spins: what will this one rectangle sweep out when it turns about ${axisH}, and how far is its outer edge from that axis?`;
   return [
     `This is the flat region. Nothing is 3D yet. The dashed line is ${axisH}, the axis we will spin around.`,
     `Cut one thin ${v==='x'?'vertical':'horizontal'} rectangle of width Δ<i>${v}</i> at a typical <i>${v}</i>. This is the same rectangle as in a Riemann sum.`,
@@ -378,71 +480,250 @@ function captionFor(i){
     `The solid is approximately a stack of thin ${sh}s. Each one has volume ≈ <i>A</i>(<i>${v}</i>)Δ<i>${v}</i>. Add them up, then let Δ<i>${v}</i> → 0.`
   ][i];
 }
+function resetPred(){ st.pred={shape:null,g:null,locked:false,done:false}; $('guessR').value=0; st.theta=0; st.playing=false; }
 function goStep(i){
   st.step=i; st.playing=false;
   const set=[{theta:0,solid:true,slice:false,slabs:0},{theta:0,solid:true,slice:true,slabs:0},
              {theta:0,solid:false,slice:true,slabs:0,play:1},{theta:0,solid:true,slice:true,slabs:0,play:1},
              {theta:TAU,solid:true,slice:false,slabs:8}][i];
   Object.assign(st,{theta:set.theta,solid:set.solid,slice:set.slice,slabs:set.slabs});
-  if(set.play) startPlay(true);
+  if(i===2 && st.predictOn) resetPred();
+  else if(set.play) startPlay(true);
   sync();
 }
 function setScene(i){ st.si=i; sc=SCENES[i]; buildStatic(); setSceneLabels(); fitCamera(); if(st.step>=0) goStep(st.step); else sync(); }
 
 $('showSolid').addEventListener('change',e=>{st.solid=e.target.checked; st.step=-1; sync();});
 $('showSlice').addEventListener('change',e=>{st.slice=e.target.checked; st.step=-1; sync();});
-$('tpos').addEventListener('input',e=>{st.t=e.target.value/1000; sync();});
+$('tpos').addEventListener('input',e=>{st.t=e.target.value/1000; if(predicting()&&st.pred.locked) resetPred(); sync();});
 $('theta').addEventListener('input',e=>{st.theta=e.target.value/360*TAU; st.playing=false; sync();});
 $('play').addEventListener('click',()=>{ if(st.playing){st.playing=false;} else startPlay(st.theta>=TAU-1e-3); sync(); });
 $('resetView').addEventListener('click',fitCamera);
-function startPlay(fromZero){ if(fromZero) st.theta=0; if(reduce){ st.theta=TAU; st.playing=false; } else st.playing=true; }
+$('predictOn').addEventListener('change',e=>{ st.predictOn=e.target.checked; if(st.step===2) goStep(2); else sync(); });
+$('guessR').addEventListener('input',e=>{ if(st.pred.locked) return; st.pred.g=+e.target.value; sync(); });
+$('lockIn').addEventListener('click',()=>{ if(!st.pred.shape||st.pred.g===null) return; st.pred.locked=true; startPlay(true); sync(); });
+$('again').addEventListener('click',()=>{ st.t=0.08+Math.random()*0.84; $('tpos').value=Math.round(st.t*1000); resetPred(); sync(); });
+function startPlay(fromZero){ if(fromZero) st.theta=0; if(reduce){ st.theta=TAU; st.playing=false; finishSpin(); } else st.playing=true; }
+function finishSpin(){ if(predicting() && st.pred.locked && !st.pred.done){ st.pred.done=true; judge(); } }
+
+function judge(){
+  const {c,R,r,sOut}=sliceInfo(), g=guessVal(), tol=Math.max(0.07*sc.Rmax,0.04), v=sc.along;
+  const shapeOK=st.pred.shape===sc.kind, rOK=Math.abs(g-R)<=tol;
+  let shapeMsg, rMsg;
+  if(shapeOK) shapeMsg=`<b>✓ ${sc.kind[0].toUpperCase()+sc.kind.slice(1)}.</b> `+(sc.kind==='disk'?'The rectangle touches the axis, so there is no hole.':'There is a gap between the rectangle and the axis, and the gap spins into the hole.');
+  else if(st.pred.shape==='shell') shapeMsg=`<b>✗ It's a ${sc.kind}.</b> A shell comes from a rectangle <i>parallel</i> to the axis. This one is perpendicular to it. (Shells are Section 6.3.)`;
+  else shapeMsg=`<b>✗ It's a ${sc.kind}.</b> `+(sc.kind==='disk'?'The rectangle reaches all the way to the axis, so nothing is left over to make a hole.':'Look below the rectangle: there is a gap between it and the axis. That gap spins into a hole.');
+  if(rOK) rMsg=`<b>✓ Radius ${fmt(g)}.</b> The true outer radius is ${fmt(R)}.`;
+  else {
+    rMsg=`<b>✗ You set ${fmt(g)}, but the outer radius is ${fmt(R)}.</b> `;
+    const coord=sOut, thick=Math.abs(sc.U(c)-sc.L(c));
+    if(sc.k!==0 && Math.abs(g-Math.abs(coord))<=tol) rMsg+=`<span>You used the height of the curve, ${v==='x'?'y':'x'} = ${fmt(coord)}. But the axis is ${axisName()}, so the radius is the distance from there: ${fmt(Math.abs(sc.k))} − ${fmt(coord)} = ${fmt(R)}.</span>`;
+    else if(r>1e-3 && Math.abs(g-thick)<=tol) rMsg+=`<span>That is the length of the rectangle. The radius is measured from the axis to the far edge, not across the rectangle.</span>`;
+    else if(r>1e-3 && Math.abs(g-r)<=tol) rMsg+=`<span>That is the inner radius, to the near edge. The outer radius goes to the edge farthest from the axis.</span>`;
+    else rMsg+=`<span>Start at the axis and measure to the edge of the rectangle that is farthest away.</span>`;
+  }
+  st.predTotal++; if(shapeOK&&rOK) st.predRight++;
+  $('verdict').innerHTML=`<p class="verdict ${shapeOK?'ok':'no'}">${shapeMsg}</p><p class="verdict ${rOK?'ok':'no'}" style="margin-top:6px">${rMsg}</p>`;
+}
 
 function sync(){
   dirty=true;
+  const ex=st.mode==='explore';
+  document.querySelectorAll('.ex').forEach(e=>e.hidden=!ex);
+  document.querySelectorAll('.gm').forEach(e=>e.hidden=ex);
+  $('stagebar').hidden=!ex;
+  $('tabExplore').setAttribute('aria-selected',ex); $('tabGame').setAttribute('aria-selected',!ex);
+  if(!ex){ $('banner').hidden=true; return; }
   [...$('scenes').children].forEach((b,i)=>b.setAttribute('aria-pressed',i===st.si));
   [...$('slabs').children].forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===st.slabs));
   [...$('steps').children].forEach((b,i)=>b.setAttribute('aria-pressed',i===st.step));
   $('caption').innerHTML = st.step>=0 ? captionFor(st.step) : 'Pick a step above, or explore with the controls.';
   $('sceneTitle').innerHTML=sc.title;
   $('showSolid').checked=st.solid; $('showSlice').checked=st.slice;
+  // prediction panel
+  const pr=predicting(), waiting=pr && !st.pred.locked;
+  $('predict').hidden=!pr;
+  [...$('shapeChips').children].forEach(b=>{ b.setAttribute('aria-pressed',b.dataset.s===st.pred.shape); b.disabled=st.pred.locked; });
+  $('guessR').disabled=st.pred.locked;
+  const g=guessVal(); $('guessOut').textContent=g===null?'?':fmt(g);
+  $('lockIn').disabled=!(st.pred.shape && st.pred.g!==null) || st.pred.locked;
+  $('lockHint').textContent=st.pred.locked?(st.pred.done?'':'Watch the purple line.'):(!st.pred.shape?'Pick a shape.':(st.pred.g===null?'Now set the radius.':'Ready.'));
+  $('verdict').hidden=!st.pred.done; $('againRow').hidden=!st.pred.done;
+  $('predScore').textContent=st.predTotal?`Right ${st.predRight} of ${st.predTotal}`:'';
+  $('banner').hidden=!waiting; $('banner').textContent='Predict first, then spin';
+  $('play').disabled=waiting; $('theta').disabled=waiting;
   $('play').textContent=st.playing?'Pause':(st.theta>=TAU-1e-3?'Replay':'Spin');
   $('theta').value=Math.round(st.theta/TAU*360); $('thetaOut').textContent=Math.round(st.theta/TAU*360)+'°';
   const v=sc.along; $('tposLab').innerHTML=`Slice at <span class="m"><i>${v}</i></span>`;
-  const c=t0(), [R,r]=Rr(sc,c), A=Math.PI*(R*R-r*r), d=dt();
+  const c=t0(), [R,r]=Rr(sc,c), A=Math.PI*(R*R-r*r), d=dt(), hide=pr&&!st.pred.done;
   $('tOut').textContent=v+' = '+fmt(c);
+  const q=x=>hide?'?':fmt(x);
   $('read').innerHTML=
-    `<dt>outer</dt><dd><span class="m"><i>R</i>(<i>${v}</i>) = ${sc.R}</span> <span class="val">= ${fmt(R)}</span></dd>`+
-    `<dt>inner</dt><dd><span class="m"><i>r</i>(<i>${v}</i>) = ${sc.r}</span> <span class="val">= ${fmt(r)}</span></dd>`+
-    `<dt>area</dt><dd><span class="m"><i>A</i> = π(<i>R</i>² − <i>r</i>²)</span> <span class="val">= ${fmt(A)}</span></dd>`+
-    `<dt>slab</dt><dd><span class="m"><i>A</i>·Δ<i>${v}</i></span> <span class="val">= ${fmt(A*d)}</span></dd>`;
-  $('sceneNote').textContent=sc.note;
+    `<dt>outer</dt><dd><span class="m"><i>R</i>(<i>${v}</i>) = ${hide?'?':sc.R}</span> <span class="val">= ${q(R)}</span></dd>`+
+    `<dt>inner</dt><dd><span class="m"><i>r</i>(<i>${v}</i>) = ${hide?'?':sc.r}</span> <span class="val">= ${q(r)}</span></dd>`+
+    `<dt>area</dt><dd><span class="m"><i>A</i> = π(<i>R</i>² − <i>r</i>²)</span> <span class="val">= ${q(A)}</span></dd>`+
+    `<dt>slab</dt><dd><span class="m"><i>A</i>·Δ<i>${v}</i></span> <span class="val">= ${q(A*d)}</span></dd>`;
+  $('sceneNote').textContent=hide?'Numbers are hidden until you lock in your prediction.':sc.note;
   let tot=`<dt>integral</dt><dd><span class="m"><i>V</i> = ${sc.integral}</span></dd>`+
           `<dt>exact</dt><dd><span class="m">${sc.exact}</span> <span class="val">≈ ${sc.vol.toFixed(3)}</span></dd>`;
   if(st.slabs>0){ const n=st.slabs,h=(sc.b-sc.a)/n; let s=0; for(let i=0;i<n;i++) s+=area(sc,sc.a+(i+.5)*h)*h;
     tot=`<dt>${n} slabs</dt><dd><span class="m">Σ <i>A</i>(<i>${v}</i><sub>i</sub>)Δ<i>${v}</i></span> <span class="val">≈ ${s.toFixed(3)}</span></dd>`+tot; }
-  $('total').innerHTML=tot;
-  drawXS(R,r);
+  $('total').innerHTML=hide?'':tot;
+  drawXS(hide?null:R,hide?null:r);
 }
 
-let lastRr=[1,0];
+let lastRr=[1,0], xsHidden=false;
 function drawXS(R,r){
-  if(R!==undefined) lastRr=[R,r]; [R,r]=lastRr;
+  if(R===null){ xsHidden=true; } else if(R!==undefined){ lastRr=[R,r]; xsHidden=false; }
+  [R,r]=lastRr;
   const cv=$('xs'), dpr=Math.min(window.devicePixelRatio||1,2), S=120; cv.width=S*dpr; cv.height=S*dpr;
   const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,S,S);
   const sc2=(S/2-8)/sc.Rmax, cx=S/2, cy=S/2;
-  g.fillStyle=tok('--slice'); g.beginPath(); g.arc(cx,cy,R*sc2,0,TAU); if(r>1e-3) g.arc(cx,cy,r*sc2,0,TAU,true); g.fill('evenodd');
   g.strokeStyle=tok('--muted'); g.setLineDash([3,3]); g.beginPath(); g.arc(cx,cy,sc.Rmax*sc2,0,TAU); g.stroke(); g.setLineDash([]);
+  if(xsHidden){ g.fillStyle=tok('--muted'); g.font='600 28px "Source Sans 3", sans-serif'; g.textAlign='center'; g.fillText('?',cx,cy+10); g.textAlign='start'; return; }
+  g.fillStyle=tok('--slice'); g.beginPath(); g.arc(cx,cy,R*sc2,0,TAU); if(r>1e-3) g.arc(cx,cy,r*sc2,0,TAU,true); g.fill('evenodd');
   g.fillStyle=tok('--axis'); g.beginPath(); g.arc(cx,cy,2.5,0,TAU); g.fill();
   g.strokeStyle=tok('--ink'); g.lineWidth=1.5; g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+R*sc2*0.71,cy-R*sc2*0.71); g.stroke();
   g.font='italic 14px "STIX Two Text", serif'; g.fillStyle=tok('--ink'); g.fillText('R',cx+R*sc2*0.4+4,cy-R*sc2*0.4-2);
   if(r>1e-3){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx-r*sc2,cy); g.stroke(); g.fillText('r',cx-r*sc2/2-3,cy+14); }
 }
 
+// ---------- Match game ----------
+const REGIONS = [
+  { name:'<i>y</i> = <i>x</i>², <i>y</i> = 0, 0 ≤ <i>x</i> ≤ 2', a:0, b:2, L:x=>0, U:x=>x*x },
+  { name:'between <i>y</i> = <i>x</i> and <i>y</i> = <i>x</i>²', a:0, b:1, L:x=>x*x, U:x=>x },
+  { name:'<i>y</i> = √<i>x</i>, <i>y</i> = 0, 0 ≤ <i>x</i> ≤ 4', a:0, b:4, L:x=>0, U:x=>Math.sqrt(x) },
+  { name:'<i>y</i> = 3 − <i>x</i>, <i>y</i> = 0, 0 ≤ <i>x</i> ≤ 3', a:0, b:3, L:x=>0, U:x=>3-x },
+  { name:'<i>y</i> = 2<i>x</i> − <i>x</i>², <i>y</i> = 0', a:0, b:2, L:x=>0, U:x=>2*x-x*x },
+  { name:'between <i>y</i> = <i>x</i>² and <i>y</i> = 1, 0 ≤ <i>x</i> ≤ 1', a:0, b:1, L:x=>x*x, U:x=>1 }
+];
+REGIONS.forEach(R=>{ let lo=Infinity, hi=-Infinity; for(let i=0;i<=80;i++){ const x=R.a+(R.b-R.a)*i/80; lo=Math.min(lo,R.L(x)); hi=Math.max(hi,R.U(x)); } R.minY=lo; R.maxY=hi; });
+function axesFor(R){
+  return [{o:'h',k:0},{o:'h',k:-1},{o:'h',k:Math.ceil(R.maxY)+1},{o:'v',k:0},{o:'v',k:-1},{o:'v',k:R.b+1}];
+}
+function axisValid(R,A){ return A.o==='h' ? (A.k<=R.minY+1e-9 || A.k>=R.maxY-1e-9) : (A.k<=R.a || A.k>=R.b); }
+function axisLabel(A){ if(A.o==='h') return A.k===0?'about the <i>x</i>-axis':`about <i>y</i> = ${A.k<0?'−'+(-A.k):A.k}`;
+  return A.k===0?'about the <i>y</i>-axis':`about <i>x</i> = ${A.k<0?'−'+(-A.k):A.k}`; }
+const sameAxis=(A,B)=>A.o===B.o&&A.k===B.k;
+function ptG(A,x,y,phi){ const c=Math.cos(phi), s=Math.sin(phi);
+  if(A.o==='h'){ const d=y-A.k; return new V(x, A.k+d*c, d*s); }
+  const d=x-A.k; return new V(A.k+d*c, y, -d*s); }
+function hasHole(R,A){
+  if(A.o==='v') return Math.min(Math.abs(R.a-A.k),Math.abs(R.b-A.k))>1e-6;
+  let gap=0; for(let i=1;i<40;i++){ const x=R.a+(R.b-R.a)*i/40; gap+=Math.min(Math.abs(R.L(x)-A.k),Math.abs(R.U(x)-A.k)); }
+  return gap/39>0.02;
+}
+const shuffle=a=>{ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+
+const game={ round:null, answered:false, theta:TAU, streak:0, best:+(store.get('sts-best')||0), right:0, total:0 };
+function newRound(){
+  const ri=Math.floor(Math.random()*REGIONS.length), R=REGIONS[ri];
+  const axes=shuffle(axesFor(R).filter(A=>axisValid(R,A)));
+  const A=axes[0];
+  const opts=[{ri,A,correct:true}];
+  axes.slice(1,3).forEach(B=>opts.push({ri,A:B}));
+  const others=shuffle(REGIONS.map((_,i)=>i).filter(i=>i!==ri && axisValid(REGIONS[i],A)));
+  if(others.length) opts.push({ri:others[0],A});
+  game.round={ri,A,opts:shuffle(opts)}; game.answered=false; game.theta=TAU;
+  $('gameVerdict').hidden=true;
+  renderOptions(); buildGame(); fitGame(); controls.autoRotate=!reduce;
+}
+function renderOptions(){
+  const box=$('opts'); box.innerHTML='';
+  game.round.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='opt'; b.dataset.i=i;
+    b.innerHTML=`<canvas width="320" height="240" aria-hidden="true"></canvas><span class="m">${REGIONS[o.ri].name}</span><span class="ax">${axisLabel(o.A)}</span>`;
+    b.setAttribute('aria-label',(REGIONS[o.ri].name+', '+axisLabel(o.A)).replace(/<[^>]+>/g,''));
+    b.addEventListener('click',()=>answer(i)); box.appendChild(b);
+  });
+  drawOptions();
+}
+function drawOptions(){
+  [...$('opts').children].forEach((b,i)=>{
+    const o=game.round.opts[i], R=REGIONS[o.ri], A=o.A, cv=b.querySelector('canvas'), g=cv.getContext('2d');
+    const W=cv.width, H=cv.height;
+    let x0=Math.min(R.a,0,A.o==='v'?A.k:0)-0.6, x1=Math.max(R.b,A.o==='v'?A.k:0)+0.6;
+    let y0=Math.min(0,R.minY,A.o==='h'?A.k:0)-0.6, y1=Math.max(R.maxY,A.o==='h'?A.k:0)+0.6;
+    const s=Math.min(W/(x1-x0),H/(y1-y0)), ox=(W-s*(x1-x0))/2, oy=(H-s*(y1-y0))/2;
+    const X=x=>ox+(x-x0)*s, Y=y=>H-oy-(y-y0)*s;
+    g.clearRect(0,0,W,H); g.fillStyle=tok('--panel'); g.fillRect(0,0,W,H);
+    g.strokeStyle=tok('--muted'); g.lineWidth=1.5; g.beginPath(); g.moveTo(X(x0),Y(0)); g.lineTo(X(x1),Y(0)); g.moveTo(X(0),Y(y0)); g.lineTo(X(0),Y(y1)); g.stroke();
+    g.fillStyle=tok('--solid'); g.globalAlpha=0.35; g.beginPath();
+    for(let j=0;j<=60;j++){ const x=R.a+(R.b-R.a)*j/60; j?g.lineTo(X(x),Y(R.U(x))):g.moveTo(X(x),Y(R.U(x))); }
+    for(let j=60;j>=0;j--){ const x=R.a+(R.b-R.a)*j/60; g.lineTo(X(x),Y(R.L(x))); }
+    g.closePath(); g.fill(); g.globalAlpha=1; g.strokeStyle=tok('--curve'); g.lineWidth=2.5; g.stroke();
+    g.strokeStyle=tok('--axis'); g.lineWidth=3; g.setLineDash([9,7]); g.beginPath();
+    if(A.o==='h'){ g.moveTo(X(x0),Y(A.k)); g.lineTo(X(x1),Y(A.k)); } else { g.moveTo(X(A.k),Y(y0)); g.lineTo(X(A.k),Y(y1)); }
+    g.stroke(); g.setLineDash([]);
+  });
+}
+function buildGame(){
+  disposeGroup(gameG);
+  const {ri,A}=game.round, R=REGIONS[ri], P=(x,y,phi)=>ptG(A,x,y,phi);
+  const span=Math.max(R.b-R.a, R.maxY-R.minY, 2); lw=span*0.009;
+  gameG.add(sweep(P,R.a,R.b,R.L,R.U,game.theta, game.answered?M.solid:M.opaque, game.answered?M.face:false, 64));
+  // coordinate axes so students can locate the solid
+  const ext=bounds(); const e=ext.rad*1.15;
+  gameG.add(lineG(new V(ext.c.x-e,0,0),new V(ext.c.x+e,0,0)), lineG(new V(0,ext.c.y-e,0),new V(0,ext.c.y+e,0)));
+  lab.gx.pos=new V(ext.c.x+e,0,0); lab.gy.pos=new V(0,ext.c.y+e,0);
+  // after answering: show the axis of rotation and the flat region being swept
+  if(game.answered){
+    const a0=A.o==='h'?new V(ext.c.x-e,A.k,0):new V(A.k,ext.c.y-e,0), a1=A.o==='h'?new V(ext.c.x+e,A.k,0):new V(A.k,ext.c.y+e,0);
+    gameG.add(dashed(a0,a1,lw*0.8,M.axis,lw*4.5));
+  }
+}
+function bounds(){
+  const {ri,A}=game.round, R=REGIONS[ri];
+  if(A.o==='h'){ let Rm=0; for(let i=0;i<=60;i++){ const x=R.a+(R.b-R.a)*i/60; Rm=Math.max(Rm,Math.abs(R.U(x)-A.k),Math.abs(R.L(x)-A.k)); }
+    const half=(R.b-R.a)/2; return {c:new V((R.a+R.b)/2,A.k,0), rad:Math.sqrt(half*half+Rm*Rm)}; }
+  const Rm=Math.max(Math.abs(R.a-A.k),Math.abs(R.b-A.k)), half=(R.maxY-R.minY)/2;
+  return {c:new V(A.k,(R.maxY+R.minY)/2,0), rad:Math.sqrt(half*half+Rm*Rm)};
+}
+function fitGame(){ const b=bounds(); fitTo(b.c,b.rad*1.05,new V(0.8,0.55,1)); }
+function answer(i){
+  if(game.answered) return;
+  const o=game.round.opts[i], ok=!!o.correct, R=REGIONS[game.round.ri], A=game.round.A;
+  game.answered=true; game.total++;
+  if(ok){ game.right++; game.streak++; if(game.streak>game.best){ game.best=game.streak; store.set('sts-best',game.best); } } else game.streak=0;
+  [...$('opts').children].forEach((b,j)=>{ const c=game.round.opts[j].correct; if(c) b.classList.add('right'); else if(j===i) b.classList.add('wrong'); b.disabled=true; });
+  const hole=hasHole(R,A);
+  const why=(hole?'There is a gap between the region and the axis, so the solid has a hole through the middle. ':'The region touches the axis, so the solid is filled in all the way to the center. ')+
+    (A.o==='h'?'The axis is horizontal, so the solid lies along the x-direction.':'The axis is vertical, so the solid stands upright along the y-direction.');
+  const v=$('gameVerdict'); v.hidden=false;
+  v.innerHTML=`<p class="verdict ${ok?'ok':'no'}"><b>${ok?'✓ Yes!':'✗ Not that one.'}</b> <span>It was ${R.name} ${axisLabel(A)}. ${why} Watch it form.</span></p>`;
+  $('streak').textContent=game.streak; $('best').textContent=game.best; $('gscore').textContent=game.right+'/'+game.total;
+  controls.autoRotate=false; game.theta=0; game.animating=!reduce; if(reduce) game.theta=TAU;
+  buildGame();
+}
+$('nextSolid').addEventListener('click',newRound);
+
+function setMode(m){
+  st.mode=m; st.playing=false;
+  if(m==='game'){
+    staticG.visible=false; dynG.visible=false; gameG.visible=true;
+    for(const k in lab) if(k!=='gx'&&k!=='gy') lab[k].pos=null;
+    if(!game.round) newRound(); else { buildGame(); fitGame(); controls.autoRotate=!game.answered && !reduce; }
+  } else {
+    gameG.visible=false; staticG.visible=true; dynG.visible=true; controls.autoRotate=false;
+    lab.gx.pos=null; lab.gy.pos=null; buildStatic(); setSceneLabels(); fitCamera();
+  }
+  sync();
+}
+$('tabExplore').addEventListener('click',()=>setMode('explore'));
+$('tabGame').addEventListener('click',()=>setMode('game'));
+$('best').textContent=game.best;
+
+// ---------- loop ----------
 let last=performance.now();
 function frame(now){
   const dtm=Math.min(0.05,(now-last)/1000); last=now;
-  if(st.playing){ st.theta+=dtm*TAU/4.5; if(st.theta>=TAU){st.theta=TAU; st.playing=false;} sync(); }
-  if(dirty){ buildDyn(); dirty=false; }
+  if(st.mode==='explore'){
+    if(st.playing){ st.theta+=dtm*TAU/4.5; if(st.theta>=TAU){st.theta=TAU; st.playing=false; finishSpin();} sync(); }
+    if(dirty){ buildDyn(); dirty=false; }
+  } else if(game.animating){
+    game.theta+=dtm*TAU/3.5; if(game.theta>=TAU){ game.theta=TAU; game.animating=false; }
+    buildGame();
+  }
   controls.update(); renderer.render(scene,camera); placeLabels();
   requestAnimationFrame(frame);
 }
