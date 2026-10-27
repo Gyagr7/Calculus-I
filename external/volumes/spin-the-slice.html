@@ -165,8 +165,8 @@ button:disabled{cursor:not-allowed;opacity:.45}
           <div style="font-size:14px">What will this rectangle become?</div>
           <div class="chips" id="shapeChips"></div>
           <div class="row">
-            <label for="guessR" style="font-size:14px">Drag the purple line to the outer edge</label>
-            <input type="range" id="guessR" min="0" max="1000" value="0">
+            <label for="guessR" style="font-size:14px">Slide the purple line to the outer edge of the rectangle</label>
+            <input type="range" id="guessR" min="0" max="1000" value="500">
             <span class="num" id="guessOut">?</span>
           </div>
           <div class="row">
@@ -480,7 +480,7 @@ function captionFor(i){
     `The solid is approximately a stack of thin ${sh}s. Each one has volume ≈ <i>A</i>(<i>${v}</i>)Δ<i>${v}</i>. Add them up, then let Δ<i>${v}</i> → 0.`
   ][i];
 }
-function resetPred(){ st.pred={shape:null,g:null,locked:false,done:false}; $('guessR').value=0; st.theta=0; st.playing=false; }
+function resetPred(){ st.pred={shape:null,g:500,locked:false,done:false}; $('guessR').value=500; st.theta=0; st.playing=false; }
 function goStep(i){
   st.step=i; st.playing=false;
   const set=[{theta:0,solid:true,slice:false,slabs:0},{theta:0,solid:true,slice:true,slabs:0},
@@ -546,8 +546,8 @@ function sync(){
   [...$('shapeChips').children].forEach(b=>{ b.setAttribute('aria-pressed',b.dataset.s===st.pred.shape); b.disabled=st.pred.locked; });
   $('guessR').disabled=st.pred.locked;
   const g=guessVal(); $('guessOut').textContent=g===null?'?':fmt(g);
-  $('lockIn').disabled=!(st.pred.shape && st.pred.g!==null) || st.pred.locked;
-  $('lockHint').textContent=st.pred.locked?(st.pred.done?'':'Watch the purple line.'):(!st.pred.shape?'Pick a shape.':(st.pred.g===null?'Now set the radius.':'Ready.'));
+  $('lockIn').disabled=!st.pred.shape || st.pred.locked;
+  $('lockHint').textContent=st.pred.locked?(st.pred.done?'':'Watch the purple line.'):(st.pred.shape?'Ready — or adjust the purple line first.':'Pick a shape.');
   $('verdict').hidden=!st.pred.done; $('againRow').hidden=!st.pred.done;
   $('predScore').textContent=st.predTotal?`Right ${st.predRight} of ${st.predTotal}`:'';
   $('banner').hidden=!waiting; $('banner').textContent='Predict first, then spin';
