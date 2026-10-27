@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-5-5-substitution" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Substitution Rule</title>
+  <!-- Sessions 12-13 . Thu Oct 1 and Tue Oct 6 . Stewart Sec. 5.5 . Quiz 4 on Oct 6 (Skills 14-15).
+       Built from the Section 5.5 instructor handout ("Finding the Hidden Antiderivative")
+       and its companion "More Substitution Puzzles" practice handout, in the
+       conversational handout voice. Written 2026-10-22.
+       Order matters: Guess, differentiate, adjust FIRST. The name u-substitution is held
+       back until subsec-5-5-name-u, after students have already solved the puzzle. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-substitution">
+      <title>Today's Question</title>
+      <p>
+        Can a complicated integral hide a familiar derivative?
+      </p>
+    </assemblage>
+    <p>
+      Every integral in this section is a puzzle with the same shape. Somewhere
+      inside it, the Chain Rule has already happened. Our job is to spot it and
+      run it backward.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-5-5-looking-for">
+    <title>Before anything new: what are we looking for?</title>
+
+    <p>
+      Compare these two questions:
+      <md>
+        \text{A. } \int 3x^2\,dx \qquad\qquad \text{B. } \int_0^2 3x^2\,dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-5-5-kind-of-answer" label="check-5-5-kind-of-answer">
+      <title>What kind of answer?</title>
+      <statement>
+        <p>Which question asks for a fixed number?</p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>A</p></statement>
+          <feedback><p>Not quite. A has no bounds, so it asks for every antiderivative of <m>3x^2</m>. That is a family of functions.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>B</p></statement>
+          <feedback><p>Yes. Fixed bounds, fixed number.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <p>
+      The most general antiderivative of <m>3x^2</m> is <m>x^3 + C</m>. So
+      question A has the answer <m>x^3 + C</m>.
+    </p>
+
+    <exercise xml:id="check-5-5-evaluate-b" label="check-5-5-evaluate-b">
+      <title>Now question B</title>
+      <statement>
+        <p>
+          Use that antiderivative to evaluate <m>\int_0^2 3x^2\,dx</m>.
+        </p>
+        <p>
+          <m>\int_0^2 3x^2\,dx =</m> <fillin answer="8" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>(8 + C) - (0 + C) = 8</m>. Remember this number. 8.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Why does A need <m>+C</m> but B does not? Every vertical shift of
+      <m>x^3</m> has the same derivative, so <m>C</m> describes the whole family.
+      In B, the same <m>C</m> shows up at both endpoints and cancels.
+    </p>
+
+    <assemblage xml:id="assemblage-two-kinds-of-answers">
+      <title>Two kinds of answers</title>
+      <p>
+        An <term>indefinite integral</term> describes a family of antiderivatives.
+        A <term>definite integral</term> with fixed bounds gives a number.
+      </p>
+    </assemblage>
+
+    <p>
+      Either way, the hard part is the same: finding an antiderivative. That is
+      what today's new technique helps with.
+    </p>
+
+    <exercise xml:id="check-5-5-quick-check" label="check-5-5-quick-check">
+      <title>Quick check</title>
+      <statement>
+        <p>
+          (a) Find <m>\int (4x^3 + 2)\,dx</m>. (b) Evaluate
+          <m>\int_0^1 (4x^3 + 2)\,dx</m>. Before you compute, say what kind of
+          answer each one should be.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          (a) A family of functions: <m>x^4 + 2x + C</m>.
+          (b) A number: <m>\left[x^4 + 2x\right]_0^1 = 1 + 2 = 3</m>.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-harder-to-see">
+    <title>When the antiderivative is harder to see</title>
+
+    <p>
+      Consider
+      <md>
+        \int 2x(x^2 + 1)^3\,dx.
+      </md>
+      First idea: expand, then integrate term by term. Since
+      <m>(x^2 + 1)^3 = x^6 + 3x^4 + 3x^2 + 1</m>,
+      <md>
+        2x(x^2 + 1)^3 = 2x^7 + 6x^5 + 6x^3 + 2x,
+      </md>
+      and that integrates to <m>\tfrac14 x^8 + x^6 + \tfrac32 x^4 + x^2 + C</m>.
+      That works. Expanding is a perfectly valid method.
+    </p>
+    <p>
+      Now imagine the problem were
+      <md>
+        \int 2x(x^2 + 1)^{100}\,dx.
+      </md>
+      Expanding is still possible. It would give you <m>101</m> terms before you
+      even multiply by <m>2x</m>. No thanks.
+    </p>
+
+    <assemblage xml:id="assemblage-today-substitution">
+      <title>The real question</title>
+      <p>
+        Can we use the <em>structure</em> of the expression to find an
+        antiderivative, without expanding everything?
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-guess-adjust">
+    <title>Try a guess. Differentiate it. Adjust it.</title>
+
+    <p>
+      Back to <m>\int 2x(x^2 + 1)^3\,dx</m>. The integrand has a third power in
+      it. Antiderivatives raise the power by one, so try the guess
+      <md>
+        H(x) = (x^2 + 1)^4.
+      </md>
+      Differentiate it with the Chain Rule:
+      <md>
+        H'(x) = 4(x^2 + 1)^3 \cdot 2x = 8x(x^2 + 1)^3.
+      </md>
+    </p>
+
+    <exercise xml:id="check-5-5-what-matched" label="check-5-5-what-matched">
+      <title>What matched?</title>
+      <statement>
+        <p>
+          Compare <m>H'(x) = 8x(x^2 + 1)^3</m> with the integrand
+          <m>2x(x^2 + 1)^3</m>. What matches, and what is off?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The inside expression <m>x^2 + 1</m>, its third power, and the factor
+          <m>x</m> all match. The only problem is a constant: <m>H'</m> is
+          <m>4</m> times too big.
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      A constant is easy to fix. Divide the guess by <m>4</m>:
+      <md>
+        F(x) = \frac14 (x^2 + 1)^4.
+      </md>
+      Check: <m>F'(x) = \frac14 \cdot 4(x^2 + 1)^3 \cdot 2x = 2x(x^2 + 1)^3</m>.
+      Exactly right. So
+      <md>
+        \int 2x(x^2 + 1)^3\,dx = \frac14 (x^2 + 1)^4 + C.
+      </md>
+    </p>
+
+    <exercise xml:id="check-5-5-power-100" label="check-5-5-power-100">
+      <title>Try one</title>
+      <statement>
+        <p>
+          Use the same guess-differentiate-adjust idea on
+          <m>\int 2x(x^2 + 1)^{100}\,dx</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Guess <m>(x^2 + 1)^{101}</m>. Its derivative is
+          <m>101(x^2 + 1)^{100} \cdot 2x</m>, which is <m>101</m> times too big. So
+          <m>\int 2x(x^2 + 1)^{100}\,dx = \frac{1}{101}(x^2 + 1)^{101} + C</m>.
+          No expanding needed.
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      Notice something. The expanded answer from before and the compact answer
+      <m>\frac14(x^2+1)^4 + C</m> look different. They differ by a constant, so
+      they describe the same family.
+    </p>
+
+    <assemblage xml:id="assemblage-chain-backward">
+      <title>What just happened</title>
+      <p>
+        We used a rule we already knew: the <alert>Chain Rule</alert>. This time,
+        we ran it backward.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-small-change">
+    <title>Same puzzle, one small change</title>
+
+    <p>
+      Now try <m>\int 3x(x^2 + 1)^3\,dx</m>. Changing <m>2x</m> to <m>3x</m> does
+      not change the inside expression. It is still <m>x^2 + 1</m>. Only the
+      constant out front changed, and
+      <md>
+        3x = \frac32 (2x).
+      </md>
+    </p>
+
+    <exercise xml:id="check-5-5-three-x" label="check-5-5-three-x">
+      <title>Use the last puzzle</title>
+      <statement>
+        <p>
+          <m>\int 3x(x^2 + 1)^3\,dx = k\,(x^2 + 1)^4 + C</m>. What is <m>k</m>?
+          Give a decimal.
+        </p>
+        <p>
+          <m>k =</m> <fillin answer="0.375" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.001"/>
+            <feedback><p>Yes. <m>\frac32 \cdot \frac14 = \frac38</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="0.25" tolerance="0.001"/>
+            <feedback><p>That is the answer for <m>2x</m>. Here you have <m>\frac32</m> times as much.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-find-the-clue">
+    <title>Find the clue: an inside expression and its derivative</title>
+
+    <exercise xml:id="check-5-5-derivative-column" label="check-5-5-derivative-column">
+      <title>Fill in the derivative column</title>
+      <statement>
+        <p>
+          Find the derivative of each inside expression:
+          <m>x^2 + 1</m>, <m>\;3x^2 + 2</m>, <m>\;5x</m>, <m>\;\sin x</m>.
+        </p>
+      </statement>
+      <solution>
+        <tabular halign="center">
+          <row header="yes" bottom="minor">
+            <cell>Inside expression</cell>
+            <cell>Its derivative</cell>
+          </row>
+          <row><cell><m>x^2 + 1</m></cell><cell><m>2x</m></cell></row>
+          <row><cell><m>3x^2 + 2</m></cell><cell><m>6x</m></cell></row>
+          <row><cell><m>5x</m></cell><cell><m>5</m></cell></row>
+          <row><cell><m>\sin x</m></cell><cell><m>\cos x</m></cell></row>
+        </tabular>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-5-5-spot-the-pair" label="check-5-5-spot-the-pair">
+      <title>Spot the pair</title>
+      <statement>
+        <p>
+          In each integral, find an inside expression and a factor that matches
+          its derivative, possibly up to a constant.
+          (a) <m>\int 6x(3x^2 + 2)^4\,dx</m>
+          (b) <m>\int e^{5x}\,dx</m>
+          (c) <m>\int \cos x\,(\sin x)^3\,dx</m>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          (a) Inside: <m>3x^2 + 2</m>. Matching factor: <m>6x</m>.
+          (b) Inside: <m>5x</m>. Its derivative is the constant <m>5</m>, which
+          is not there. Since <m>\frac{d}{dx}e^{5x} = 5e^{5x}</m>, adjust with a
+          factor of <m>\frac15</m>.
+          (c) Inside: <m>\sin x</m>. Matching factor: <m>\cos x</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-5-5-contrast" label="check-5-5-contrast">
+      <title>A useful contrast</title>
+      <statement>
+        <p>
+          Does the same simple guess work for <m>\int (x^2 + 1)^3\,dx</m>?
+          (Differentiate <m>\frac14(x^2 + 1)^4</m> and compare.)
+        </p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Yes, adjust by a constant</p></statement>
+          <feedback><p>Differentiate it: you get <m>2x(x^2+1)^3</m>. The extra factor is <m>2x</m>, which is a variable. No constant can cancel it.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>No, the matching derivative is missing</p></statement>
+          <feedback><p>Right. The extra factor <m>2x</m> is a variable, so a constant adjustment cannot remove it. This integral is still doable by expanding: <m>\frac17x^7 + \frac35x^5 + x^3 + x + C</m>.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <assemblage xml:id="assemblage-look-for-the-pair">
+      <title>Look for the pair</title>
+      <p>
+        An inside expression, and its derivative. A constant mismatch can be
+        adjusted. A variable mismatch cannot.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-name-u">
+    <title>Give the inside expression a shorter name</title>
+
+    <p>
+      We have already solved <m>\int 2x(x^2 + 1)^3\,dx</m>. Now let us organize
+      the same reasoning. Call the inside expression <m>u</m>:
+      <md>
+        u = x^2 + 1.
+      </md>
+      Then <m>\frac{du}{dx} = 2x</m>, and we write
+      <md>
+        du = 2x\,dx.
+      </md>
+      The notation <m>du = 2x\,dx</m> records the derivative of our inside
+      expression. It tells us how to replace the matching factor
+      <em>together with</em> <m>dx</m>:
+      <md>
+        \int \underbrace{(x^2 + 1)^3}_{u^3}\,\underbrace{2x\,dx}_{du}
+        = \int u^3\,du = \frac14 u^4 + C.
+      </md>
+      Our question was about <m>x</m>, so put <m>u = x^2 + 1</m> back:
+      <md>
+        \int 2x(x^2 + 1)^3\,dx = \frac14(x^2 + 1)^4 + C.
+      </md>
+      Same answer as before. This way of rewriting an integral is called
+      <term>substitution</term>, or <term><m>u</m>-substitution</term>.
+    </p>
+
+    <exercise xml:id="check-5-5-du-replaces" label="check-5-5-du-replaces">
+      <title>What does <m>du</m> replace?</title>
+      <statement>
+        <p>In the rewrite above, the single symbol <m>du</m> replaces what?</p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>Just <m>dx</m></p></statement>
+          <feedback><p>Not quite. If <m>du</m> only replaced <m>dx</m>, the <m>2x</m> would still be hanging around.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Just <m>2x</m></p></statement>
+          <feedback><p>Close. But the <m>dx</m> goes with it.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>The whole piece <m>2x\,dx</m></p></statement>
+          <feedback><p>Yes. <m>du</m> swallows the whole piece.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-why">
+    <title>Why does it work?</title>
+
+    <p>
+      If <m>F'(u) = f(u)</m>, the Chain Rule says
+      <md>
+        \frac{d}{dx}\bigl[F(g(x))\bigr] = f(g(x))\,g'(x).
+      </md>
+      Read it backward:
+      <md>
+        \int f(g(x))\,g'(x)\,dx = F(g(x)) + C.
+      </md>
+      Writing <m>u = g(x)</m> and <m>du = g'(x)\,dx</m> makes the familiar
+      integral visible.
+    </p>
+
+    <fact xml:id="fact-substitution-rule">
+      <title>The Substitution Rule</title>
+      <statement>
+        <p>
+          If <m>u = g(x)</m> is differentiable and <m>f</m> is continuous on the
+          range of <m>g</m>, then
+          <md>
+            \int f(g(x))\,g'(x)\,dx = \int f(u)\,du.
+          </md>
+        </p>
+      </statement>
+    </fact>
+
+    <assemblage xml:id="assemblage-substitution-organizes">
+      <title>Remember</title>
+      <p>
+        Substitution organizes the reverse Chain Rule. The name <m>u</m> helps us
+        see a familiar integral inside a complicated one.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-we-do">
+    <title>We do: account for the constant</title>
+
+    <p>
+      Evaluate <m>\int x(3x^2 + 2)^4\,dx</m>.
+      <ol>
+        <li><p><alert>Choose.</alert> <m>u = 3x^2 + 2</m>, so <m>du = 6x\,dx</m>.</p></li>
+        <li><p><alert>Match.</alert> The integral has <m>x\,dx</m>, not <m>6x\,dx</m>. So <m>x\,dx = \frac16\,du</m>.</p></li>
+        <li><p><alert>Rewrite everything in <m>u</m>.</alert> <m>\int x(3x^2 + 2)^4\,dx = \frac16\int u^4\,du</m>.</p></li>
+        <li><p><alert>Integrate and go back.</alert> <m>\frac16 \cdot \frac{u^5}{5} + C = \frac{1}{30}(3x^2 + 2)^5 + C</m>.</p></li>
+      </ol>
+      Check by differentiating: <m>\frac{1}{30}\cdot 5(3x^2 + 2)^4 \cdot 6x = x(3x^2 + 2)^4</m>.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-you-do">
+    <title>You do: make the familiar integral visible</title>
+
+    <p>
+      For each puzzle: choose <m>u</m>, find <m>du</m> and account for any
+      constant, rewrite the <em>entire</em> integral in <m>u</m>, integrate,
+      substitute back, and check by differentiating.
+    </p>
+
+    <exercise xml:id="ex-5-5-puzzle-a" label="ex-5-5-puzzle-a">
+      <title>Puzzle A</title>
+      <statement><p><m>\int 6x(3x^2 + 2)^4\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = 3x^2 + 2</m>, <m>du = 6x\,dx</m>. No adjustment needed this time:
+          <m>\int u^4\,du = \frac15 u^5 + C = \frac15(3x^2 + 2)^5 + C</m>.
+          Compare with the We Do problem: there the factor was <m>x</m>, so the
+          coefficient was <m>\frac{1}{30}</m> instead of <m>\frac15</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-puzzle-b" label="ex-5-5-puzzle-b">
+      <title>Puzzle B</title>
+      <statement><p><m>\int e^{5x}\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = 5x</m>, <m>du = 5\,dx</m>, so <m>dx = \frac15\,du</m>.
+          <m>\frac15\int e^u\,du = \frac15 e^{5x} + C</m>.
+          Check: <m>\frac15 e^{5x}\cdot 5 = e^{5x}</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-puzzle-c" label="ex-5-5-puzzle-c">
+      <title>Puzzle C</title>
+      <statement><p><m>\int \cos x\,(\sin x)^3\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = \sin x</m>, <m>du = \cos x\,dx</m>.
+          <m>\int u^3\,du = \frac14 u^4 + C = \frac14\sin^4 x + C</m>.
+          Check: <m>\frac14 \cdot 4\sin^3 x\cos x = \cos x\,(\sin x)^3</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage xml:id="assemblage-check-puzzle-pieces">
+      <title>Check the puzzle pieces</title>
+      <p>
+        After rewriting, the integral should use one variable throughout.
+        After integrating, differentiate your answer to check it.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-definite">
+    <title>Same antiderivative, different kind of answer</title>
+
+    <p>
+      Compare <m>\int 2x(x^2 + 1)^3\,dx</m> and <m>\int_0^1 2x(x^2 + 1)^3\,dx</m>.
+      The first is a family. The second is a number. There are two routes to
+      that number.
+    </p>
+
+    <paragraphs>
+      <title>Route A: go back to <m>x</m>, then evaluate</title>
+      <p>
+        We already have the antiderivative <m>F(x) = \frac14(x^2 + 1)^4</m>. Use
+        the original <m>x</m>-bounds:
+        <md>
+          \int_0^1 2x(x^2 + 1)^3\,dx = \left[\frac14(x^2 + 1)^4\right]_0^1 = \frac14(16 - 1) = \frac{15}{4}.
+        </md>
+        No <m>+C</m>: it would appear at both endpoints and cancel.
+      </p>
+    </paragraphs>
+
+    <paragraphs>
+      <title>Route B: stay in <m>u</m></title>
+      <p>
+        Let <m>u = x^2 + 1</m>, <m>du = 2x\,dx</m>. The old bounds <m>0</m> and
+        <m>1</m> are values of <m>x</m>. What are the matching values of <m>u</m>?
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-5-5-new-bounds" label="check-5-5-new-bounds">
+      <title>Translate the endpoints</title>
+      <statement>
+        <p>
+          When <m>x = 0</m>, <m>u =</m> <fillin answer="1" mode="number"/>.
+          When <m>x = 1</m>, <m>u =</m> <fillin answer="2" mode="number"/>.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>0^2 + 1 = 1</m>.</p></feedback>
+          </test>
+        </evaluate>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>1^2 + 1 = 2</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      So
+      <md>
+        \int_0^1 2x(x^2 + 1)^3\,dx = \int_1^2 u^3\,du = \left[\frac14 u^4\right]_1^2 = \frac14(16 - 1) = \frac{15}{4}.
+      </md>
+      Same answer. Both routes compute the same accumulation.
+    </p>
+
+    <assemblage xml:id="assemblage-variable-and-bounds">
+      <title>Keep the variable and its bounds together</title>
+      <p>
+        An expression in <m>x</m> uses <m>x</m>-bounds. An expression in
+        <m>u</m> uses the matching <m>u</m>-bounds.
+      </p>
+    </assemblage>
+
+    <exercise xml:id="check-5-5-e-2x" label="check-5-5-e-2x">
+      <title>Your turn</title>
+      <statement>
+        <p>
+          Evaluate <m>\int_0^1 e^{2x}\,dx</m> by changing both the variable and
+          the bounds. Give a decimal to three places.
+        </p>
+        <p>
+          <fillin answer="3.195" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.002"/>
+            <feedback><p>Yes. <m>u = 2x</m>, <m>dx = \frac12\,du</m>, bounds <m>0</m> to <m>2</m>: <m>\frac12\left[e^u\right]_0^2 = \frac{e^2 - 1}{2} \approx 3.195</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="6.389" tolerance="0.002"/>
+            <feedback><p>Close. You found <m>e^2 - 1</m>. Where did the <m>\frac12</m> from <m>dx = \frac12\,du</m> go?</p></feedback>
+          </test>
+          <test>
+            <numcmp value="0.859" tolerance="0.002"/>
+            <feedback><p>It looks like you kept the old bound <m>1</m> while working in <m>u</m>. When <m>x = 1</m>, <m>u = 2</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-bugs">
+    <title>Find the bug and fix it</title>
+
+    <exercise xml:id="ex-5-5-bug-a" label="ex-5-5-bug-a">
+      <title>Bug A: an adjustment is missing</title>
+      <statement>
+        <p>
+          A student writes <m>\int x(x^2 + 1)^3\,dx = \frac14(x^2 + 1)^4 + C</m>.
+          Differentiate the answer. What is wrong? Fix it.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>\frac{d}{dx}\left[\frac14(x^2 + 1)^4\right] = 2x(x^2 + 1)^3</m>, which is
+          twice the integrand. With <m>u = x^2 + 1</m> we need
+          <m>x\,dx = \frac12\,du</m>, so
+          <m>\int x(x^2 + 1)^3\,dx = \frac12\int u^3\,du = \frac18(x^2 + 1)^4 + C</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-bug-b" label="ex-5-5-bug-b">
+      <title>Bug B: the variable changed, but the bounds did not</title>
+      <statement>
+        <p>
+          A student sets <m>u = x^2 + 1</m> and writes
+          <m>\int_0^1 2x(x^2 + 1)^3\,dx = \int_0^1 u^3\,du</m>. What went wrong?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The bounds <m>0</m> and <m>1</m> are <m>x</m>-values. They match
+          <m>u = 1</m> and <m>u = 2</m>. Correct version:
+          <m>\int_1^2 u^3\,du</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-5-5-bug-c" label="check-5-5-bug-c">
+      <title>Bug C: only part of the integral was rewritten</title>
+      <statement>
+        <p>
+          A student sets <m>u = x^2 + 1</m>, finds <m>du = 2x\,dx</m>, and writes
+          <m>\int 2x(x^2 + 1)^3\,dx = \int 2x\,u^3\,du</m>. What is the problem?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>The <m>2x</m> was counted twice</p></statement>
+          <feedback><p>Yes. <m>du</m> already replaced the whole piece <m>2x\,dx</m>. The correct rewrite is <m>\int u^3\,du</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>Nothing. It is fine to leave some <m>x</m> in</p></statement>
+          <feedback><p>Not here. An integral in <m>u</m> with an <m>x</m> still inside cannot be integrated with respect to <m>u</m>. And this <m>2x</m> has already been used up by <m>du</m>.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>The student should have chosen <m>u = 2x</m></p></statement>
+          <feedback><p><m>u = x^2 + 1</m> is a fine choice. The issue is what happened to <m>2x</m>.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-more-practice">
+    <title>More substitution puzzles</title>
+
+    <paragraphs>
+      <title>Find the pair before you integrate</title>
+      <p>
+        For each one, name <m>u</m> and <m>du</m> only. No integrating yet.
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="ex-5-5-pairs" label="ex-5-5-pairs">
+      <statement>
+        <p>
+          (a) <m>\int x^2(x^3 + 2)^4\,dx</m>
+          (b) <m>\int \frac{(\ln x)^2}{x}\,dx</m>, <m>x \gt 0</m>
+          (c) <m>\int \frac{\sin x}{2 + \cos x}\,dx</m>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          (a) <m>u = x^3 + 2</m>, <m>du = 3x^2\,dx</m>, so <m>x^2\,dx = \frac13\,du</m>.
+          (b) <m>u = \ln x</m>, <m>du = \frac1x\,dx</m>.
+          (c) <m>u = 2 + \cos x</m>, <m>du = -\sin x\,dx</m>, so <m>\sin x\,dx = -du</m>.
+          Watch the constant and the sign.
+        </p>
+      </solution>
+    </exercise>
+
+    <paragraphs>
+      <title>Solve, then check</title>
+      <p>Integrate. Then differentiate your answer to check it.</p>
+    </paragraphs>
+
+    <exercise xml:id="ex-5-5-solve-a" label="ex-5-5-solve-a">
+      <statement><p><m>\int (2x - 3)^6\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = 2x - 3</m>, <m>du = 2\,dx</m>.
+          <m>\frac12\int u^6\,du = \frac{(2x - 3)^7}{14} + C</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-solve-b" label="ex-5-5-solve-b">
+      <statement><p><m>\int \sin x\,e^{\cos x}\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = \cos x</m>, <m>du = -\sin x\,dx</m>.
+          <m>-\int e^u\,du = -e^{\cos x} + C</m>.
+          Check: <m>-e^{\cos x}(-\sin x) = \sin x\,e^{\cos x}</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-solve-c" label="ex-5-5-solve-c">
+      <statement><p><m>\int \frac{x}{x^2 + 4}\,dx</m></p></statement>
+      <solution>
+        <p>
+          <m>u = x^2 + 4</m>, <m>du = 2x\,dx</m>.
+          <m>\frac12\int \frac1u\,du = \frac12\ln(x^2 + 4) + C</m>.
+          Since <m>x^2 + 4 \gt 0</m>, no absolute value is needed.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-solve-d" label="ex-5-5-solve-d">
+      <statement><p><m>\int \frac{(\ln x)^2}{x}\,dx</m>, <m>x \gt 0</m></p></statement>
+      <solution>
+        <p>
+          <m>u = \ln x</m>, <m>du = \frac1x\,dx</m>.
+          <m>\int u^2\,du = \frac{(\ln x)^3}{3} + C</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-leftover-x" label="ex-5-5-leftover-x">
+      <title>One piece is still in <m>x</m></title>
+      <statement>
+        <p>
+          Evaluate <m>\int x\sqrt{x + 3}\,dx</m>. Hint: with <m>u = x + 3</m>,
+          there is a leftover <m>x</m>. Can you write it in terms of <m>u</m> too?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <m>u = x + 3</m>, <m>du = dx</m>, and <m>x = u - 3</m>. So
+          <m>\int (u - 3)u^{1/2}\,du = \int \left(u^{3/2} - 3u^{1/2}\right)du
+          = \frac25(x + 3)^{5/2} - 2(x + 3)^{3/2} + C</m>.
+          A leftover <m>x</m> does not mean the substitution failed. It means one
+          more piece needs rewriting.
+        </p>
+      </solution>
+    </exercise>
+
+    <paragraphs>
+      <title>Definite integrals: keep the variable and bounds together</title>
+      <p>
+        With <m>u = \ln x</m> on <m>1 \le x \le e</m>, the <m>u</m>-bounds are
+        <m>0</m> and <m>1</m>. With <m>u = \cos x</m> on
+        <m>0 \le x \le \frac{\pi}{2}</m>, the <m>u</m>-bounds go from <m>1</m>
+        <em>down to</em> <m>0</m>. Keep them in that order. Do not swap them just
+        to put the smaller number on the bottom.
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-5-5-change-bounds-a" label="check-5-5-change-bounds-a">
+      <statement>
+        <p>
+          Evaluate <m>\int_0^1 x(x^2 + 2)^2\,dx</m>. Give a decimal to three places.
+        </p>
+        <p><fillin answer="3.167" mode="number"/></p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.002"/>
+            <feedback><p>Yes. <m>u = x^2 + 2</m>, bounds <m>2</m> to <m>3</m>: <m>\frac12\int_2^3 u^2\,du = \frac16\left[u^3\right]_2^3 = \frac{19}{6}</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <exercise xml:id="check-5-5-change-bounds-b" label="check-5-5-change-bounds-b">
+      <statement>
+        <p>
+          Evaluate <m>\int_0^{\pi/2} \sin x\cos^2 x\,dx</m>. Give a decimal to three places.
+        </p>
+        <p><fillin answer="0.333" mode="number"/></p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.002"/>
+            <feedback><p>Yes. <m>u = \cos x</m>, <m>du = -\sin x\,dx</m>, bounds <m>1</m> to <m>0</m>: <m>-\int_1^0 u^2\,du = \frac13</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="-0.333" tolerance="0.002"/>
+            <feedback><p>The sign is off. The integrand is positive on this interval, so the answer must be positive. Check the minus sign from <m>du = -\sin x\,dx</m>, and the order of the bounds.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-bug-e" label="ex-5-5-bug-e">
+      <title>Find the bug by differentiating</title>
+      <statement>
+        <p>A student claims <m>\int e^{-3x}\,dx = -3e^{-3x} + C</m>. Check it.</p>
+      </statement>
+      <solution>
+        <p>
+          <m>\frac{d}{dx}\left[-3e^{-3x}\right] = 9e^{-3x}</m>. That is <m>9</m>
+          times too big. The Chain Rule produces a factor of <m>-3</m>, so the
+          antiderivative needs <m>-\frac13</m>:
+          <m>\int e^{-3x}\,dx = -\frac13 e^{-3x} + C</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-5-5-pump" label="check-5-5-pump">
+      <title>A rate becomes an amount</title>
+      <statement>
+        <p>
+          A pump delivers water at <m>r(t) = 4te^{-t^2}</m> liters per minute.
+          How many liters does it deliver in the first minute? Give a decimal to
+          two places.
+        </p>
+        <p><fillin answer="1.26" mode="number"/> liters</p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.01"/>
+            <feedback><p>Yes. <m>u = -t^2</m>, <m>4t\,dt = -2\,du</m>, bounds <m>0</m> to <m>-1</m>: <m>-2\left[e^u\right]_0^{-1} = 2(1 - e^{-1}) \approx 1.26</m> L. Liters per minute times minutes gives liters.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-5-5-exit">
+    <title>Exit ticket</title>
+
+    <exercise xml:id="ex-5-5-exit-chain" label="ex-5-5-exit-chain">
+      <statement>
+        <p>In one sentence: why is substitution connected to the Chain Rule?</p>
+      </statement>
+      <solution>
+        <p>
+          The Chain Rule produces an outer derivative times an inner derivative.
+          Substitution recognizes that pattern and runs it backward.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-5-5-exit-cos" label="ex-5-5-exit-cos">
+      <statement>
+        <p>
+          (a) Find <m>\int 2x\cos(x^2 + 1)\,dx</m>.
+          (b) For <m>\int_0^2 2x\cos(x^2 + 1)\,dx</m>, use <m>u = x^2 + 1</m> and
+          write the new definite integral. Do not evaluate.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          (a) <m>u = x^2 + 1</m>, <m>du = 2x\,dx</m>:
+          <m>\int \cos u\,du = \sin(x^2 + 1) + C</m>.
+          (b) At <m>x = 0</m>, <m>u = 1</m>. At <m>x = 2</m>, <m>u = 5</m>. So
+          <m>\int_1^5 \cos u\,du</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage xml:id="assemblage-5-5-main-idea">
+      <title>Main idea</title>
+      <p>
+        Look for a familiar derivative hiding inside the integral. Recognize the
+        inside expression, match its derivative, and adjust constants.
+      </p>
+      <p>
+        <alert>Guess. Differentiate. Adjust. Then organize with <m>u</m>.</alert>
+      </p>
+    </assemblage>
+  </subsection>
+</section>

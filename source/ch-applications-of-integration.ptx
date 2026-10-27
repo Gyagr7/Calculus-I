@@ -5,13 +5,8 @@
     <p>[TODO: overview -- each section here is the same move: translate a geometric or physical description into a definite integral, then evaluate it. Stewart Sec. 6.1-6.5. Note: the Oct 27 midterm covers everything through Sec. 5.5 (Skills 1-20) -- plan a review session before it.]</p>
   </introduction>
 
-  <section xml:id="sec-6-1-areas-between-curves">
-    <title>Areas Between Curves</title>
-    <!-- Session 14 . Tue Oct 13 . Stewart Sec. 6.1 -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+  <!-- Session 14 . Tue Oct 13 . Stewart Sec. 6.1 -->
+  <xi:include href="./sec-6-1-areas-between-curves.ptx"/>
 
   <!-- Sessions 15-16 . Thu Oct 15 and Tue Oct 20 . Stewart Sec. 6.2 -->
   <xi:include href="./sec-6-2-volumes.ptx"/>

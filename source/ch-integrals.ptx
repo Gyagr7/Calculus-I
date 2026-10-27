@@ -13,12 +13,7 @@
 
   <xi:include href="./sec-5-4-indefinite-net-change.ptx"/>
 
-  <section xml:id="sec-5-5-substitution">
-    <title>The Substitution Rule</title>
-    <!-- Sessions 12-13 . Thu Oct 1 & Tue Oct 6 . Stewart Sec. 5.5 . HW4 assigned Oct 1, Quiz 4 on Oct 6 (Skills 14-15) -->
-    <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
-    <p>[Problem -- TODO: a guiding worked example]</p>
-    <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
-  </section>
+  <!-- Sessions 12-13 . Thu Oct 1 and Tue Oct 6 . Stewart Sec. 5.5 -->
+  <xi:include href="./sec-5-5-substitution.ptx"/>
 
 </chapter>

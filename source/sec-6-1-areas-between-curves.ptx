@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xml:id="sec-6-1-areas-between-curves" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Areas Between Curves</title>
+  <!-- Session 14 . Tue Oct 13 . Stewart Sec. 6.1 .
+       Built from the Section 6.1 instructor handout ("From an Integral to a Picture, and Back")
+       in the conversational handout voice. Written 2026-10-22.
+       Key move: the strip height is a DISTANCE between boundaries, not a coordinate and not
+       "subtract the curve names by habit". Do not open with "split at every intersection";
+       let the x vs x^3 contradiction create the need.
+       Interactives: assets/jsxgraph/strip-floor.js, strip-between-curves.js,
+       signed-cancel.js, strip-direction.js. -->
+
+  <introduction>
+    <assemblage xml:id="assemblage-question-areas-between">
+      <title>Today's Question</title>
+      <p>
+        What does one thin piece measure?
+      </p>
+    </assemblage>
+    <p>
+      An integral is not just something to compute. It is a description of a
+      picture: what we are adding up, where we start and stop, and which
+      variable is changing. Today we read integrals as pictures, and then we go
+      backward, from a picture to an integral.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-6-1-familiar">
+    <title>A familiar integral: can we see its meaning?</title>
+
+    <p>
+      Consider
+      <md>
+        \int_0^2 (3 - x)\,dx.
+      </md>
+      Read it as the area under <m>y = 3 - x</m>, above the <m>x</m>-axis,
+      from <m>x = 0</m> to <m>x = 2</m>. <alert>Do not evaluate yet.</alert>
+    </p>
+
+    <figure xml:id="fig-strip-floor">
+      <caption>One thin strip under <m>y = 3 - x</m>.</caption>
+      <interactive xml:id="interactive-strip-floor" label="interactive-strip-floor"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/strip-floor.js">
+        <slate xml:id="interactive-strip-floor-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            Drag <m>x</m> to slide the strip across the region. Read off its top,
+            its bottom, and its height. Leave the checkbox alone for now.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="check-6-1-bounds-mean" label="check-6-1-bounds-mean">
+      <title>What do the bounds tell us?</title>
+      <statement>
+        <p>In <m>\int_0^2 (3 - x)\,dx</m>, what are the numbers <m>0</m> and <m>2</m>?</p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>Where the strips start and stop along the <m>x</m>-axis</p></statement>
+          <feedback><p>Yes. The bounds say where the accumulation begins and ends.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>The smallest and largest heights of the region</p></statement>
+          <feedback><p>Not quite. The heights run from <m>1</m> to <m>3</m>. The bounds are <m>x</m>-values, not heights.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <p>
+      A typical strip has height <m>(3 - x) - 0 = 3 - x</m> and width
+      <m>\Delta x</m>.
+    </p>
+
+    <exercise xml:id="ex-6-1-predict-trapezoid" label="ex-6-1-predict-trapezoid">
+      <title>Predict</title>
+      <statement>
+        <p>
+          Is the area bigger than <m>2</m> and smaller than <m>6</m>? Explain
+          using the picture, not a calculation.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Yes. The width is <m>2</m> and every height is between <m>1</m> and
+          <m>3</m>. So the region contains the <m>2</m>-by-<m>1</m> rectangle and
+          fits inside the <m>2</m>-by-<m>3</m> rectangle: <m>2 \lt A \lt 6</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-6-1-trapezoid" label="check-6-1-trapezoid">
+      <title>Now evaluate</title>
+      <statement>
+        <p>
+          <m>\int_0^2 (3 - x)\,dx =</m> <fillin answer="4" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. <m>\left[3x - \frac{x^2}{2}\right]_0^2 = 6 - 2 = 4</m>. Check with geometry: a trapezoid with parallel sides <m>3</m> and <m>1</m>, width <m>2</m>, has area <m>\frac12(3 + 1)(2) = 4</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage xml:id="assemblage-integral-information">
+      <title>What just happened</title>
+      <p>
+        An integral tells us <alert>what we accumulate</alert>,
+        <alert>where we begin and end</alert>, and <alert>which variable changes</alert>.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-bottom-moves">
+    <title>What changes when the bottom boundary moves?</title>
+
+    <p>
+      Now consider
+      <md>
+        \int_0^2 \bigl[(3 - x) - 1\bigr]\,dx.
+      </md>
+      The region now sits between <m>y = 3 - x</m> and <m>y = 1</m>. Check the
+      box in <xref ref="fig-strip-floor"/> to raise the floor.
+    </p>
+
+    <exercise xml:id="check-6-1-strip-at-half" label="check-6-1-strip-at-half">
+      <title>Read the strip</title>
+      <statement>
+        <p>
+          Put the strip at <m>x = \frac12</m>. Its height is
+          <fillin answer="1.5" mode="number"/>.
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.001"/>
+            <feedback><p>Yes. The top is at <m>y = \frac52</m>, the bottom at <m>y = 1</m>, so the height is <m>\frac32</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="2.5" tolerance="0.001"/>
+            <feedback><p>That is where the top of the strip is. The strip no longer starts at <m>y = 0</m>. How long is it?</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      So <m>(3 - x) - 1</m> measures the vertical distance from the lower
+      boundary to the upper one. <m>3 - x</m> alone is only the top coordinate.
+      The part from <m>y = 0</m> to <m>y = 1</m> is no longer in the region.
+    </p>
+
+    <exercise xml:id="check-6-1-floor-area" label="check-6-1-floor-area">
+      <title>Predict, then check</title>
+      <statement>
+        <p>
+          Should this area be bigger or smaller than <m>4</m>? Then evaluate:
+          <m>\int_0^2 \bigl[(3 - x) - 1\bigr]\,dx =</m> <fillin answer="2" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes. Smaller: we removed the <m>2</m>-by-<m>1</m> rectangle underneath, and <m>4 - 2 = 2</m>. It is also a triangle with base <m>2</m> and height <m>2</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-coordinate-not-length">
+    <title>A coordinate is not a length</title>
+
+    <p>
+      A vertical segment runs from <m>y = -3</m> to <m>y = -1</m>. Its length is
+      <m>(-1) - (-3) = 2</m>. Both ends have negative coordinates. The length is
+      still positive.
+    </p>
+
+    <exercise xml:id="check-6-1-below-axis" label="check-6-1-below-axis">
+      <title>True or false?</title>
+      <statement correct="no">
+        <p>A region that sits below the <m>x</m>-axis has negative area.</p>
+      </statement>
+      <feedback>
+        <p>
+          False. Geometric area is never negative. Negative coordinates tell us
+          <em>where</em> the boundaries are. The difference, top minus bottom,
+          tells us how long the strip is.
+        </p>
+      </feedback>
+    </exercise>
+
+    <p>
+      One more thing. On <m>[0, 2]</m>, the region between <m>y = 3 - x</m> and
+      <m>y = 0</m>, and the region between <m>y = 4 - x</m> and <m>y = 1</m>,
+      have the same strip height:
+      <m>(3 - x) - 0 = (4 - x) - 1 = 3 - x</m>. The second region is the first
+      one shifted up. Same strips, same area.
+    </p>
+
+    <assemblage xml:id="assemblage-height-is-distance">
+      <title>Remember</title>
+      <p>
+        The height of a vertical strip is the <alert>distance between its
+        boundaries</alert>. Ask <q>Where is it?</q> and <q>How long is it?</q>
+        as two separate questions.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-picture-to-integral">
+    <title>Can we go backward? From a picture to an integral</title>
+
+    <p>
+      Find the area of the region enclosed by
+      <md>
+        y = x^2 \qquad\text{and}\qquad y = 2x - x^2.
+      </md>
+      First describe the region. Then build the integral.
+    </p>
+
+    <figure xml:id="fig-strip-between">
+      <caption>A strip between <m>y = 2x - x^2</m> and <m>y = x^2</m>.</caption>
+      <interactive xml:id="interactive-strip-between" label="interactive-strip-between"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/strip-between-curves.js">
+        <slate xml:id="interactive-strip-between-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            Slide the strip. Which curve is always on top? Where does the strip
+            shrink to nothing?
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <paragraphs>
+      <title>1. My prediction</title>
+      <p>
+        The region fits inside a unit square, and it does not fill it. So
+        <m>0 \lt A \lt 1</m>.
+      </p>
+    </paragraphs>
+
+    <paragraphs>
+      <title>2. My strip</title>
+      <p>
+        At <m>x = \frac12</m>, the strip runs from <m>y = \frac14</m> up to
+        <m>y = \frac34</m>. Its height is <m>\frac12</m>. In general:
+        <md>
+          \text{height} = (2x - x^2) - x^2 = 2x - 2x^2, \qquad \text{width} = \Delta x.
+        </md>
+      </p>
+    </paragraphs>
+
+    <paragraphs>
+      <title>3. My endpoints</title>
+      <p>
+        The strip shrinks to nothing where the curves meet:
+        <md>
+          x^2 = 2x - x^2 \;\Longrightarrow\; 2x(x - 1) = 0 \;\Longrightarrow\; x = 0, 1.
+        </md>
+        So the strips run from <m>x = 0</m> to <m>x = 1</m>, and in between,
+        <m>2x - x^2</m> is on top.
+      </p>
+    </paragraphs>
+
+    <paragraphs>
+      <title>4. My small piece and my integral</title>
+      <p>
+        One strip has area about <m>(2x - 2x^2)\,\Delta x</m>. Add them up:
+        <md>
+          A = \int_0^1 \bigl[(2x - x^2) - x^2\bigr]\,dx = \int_0^1 (2x - 2x^2)\,dx.
+        </md>
+      </p>
+    </paragraphs>
+
+    <exercise xml:id="check-6-1-lens-area" label="check-6-1-lens-area">
+      <title>Evaluate</title>
+      <statement>
+        <p>
+          <m>A =</m> <fillin answer="0.3333" mode="number"/> (a decimal is fine).
+          Does it fit your prediction?
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.002"/>
+            <feedback><p>Yes. <m>\left[x^2 - \frac23 x^3\right]_0^1 = \frac13</m>, and <m>0 \lt \frac13 \lt 1</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="-0.3333" tolerance="0.002"/>
+            <feedback><p>A negative area means the subtraction went the wrong way. Which curve is on top?</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage xml:id="assemblage-picture-strip-integral">
+      <title>Remember</title>
+      <p>
+        <alert>Picture <m>\to</m> strip <m>\to</m> dimensions <m>\to</m> integral.</alert>
+        The integral records how the small pieces build the whole region.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-zero">
+    <title>Two shaded pieces: why might an integral give zero?</title>
+
+    <p>
+      Look at the region between <m>y = x</m> and <m>y = x^3</m> on
+      <m>[-1, 1]</m>. It comes in two pieces. Make a prediction before you
+      integrate anything.
+    </p>
+
+    <figure xml:id="fig-signed-cancel">
+      <caption>The two pieces between <m>y = x</m> and <m>y = x^3</m>.</caption>
+      <interactive xml:id="interactive-signed-cancel" label="interactive-signed-cancel"
+                   platform="jsxgraph" width="100%" aspect="1:1"
+                   source="jsxgraph/signed-cancel.js">
+        <slate xml:id="interactive-signed-cancel-slate" surface="jsxboard" aspect="1:1"/>
+        <instructions>
+          <p>
+            Slide the strip from the right piece into the left piece. Watch the
+            value of <m>x - x^3</m>, and watch which curve is on top.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="ex-6-1-two-pieces" label="ex-6-1-two-pieces">
+      <title>Predict</title>
+      <statement>
+        <p>
+          Do the two pieces have the same area? Could the total area be zero?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Same area: rotating the picture <m>180^\circ</m> about the origin swaps
+          the two pieces. But the total cannot be zero. Each piece is made of
+          strips with positive length.
+        </p>
+      </solution>
+    </exercise>
+
+    <p>
+      Now read two strips off the picture:
+    </p>
+
+    <tabular halign="center">
+      <row header="yes" bottom="minor">
+        <cell><m>x</m></cell>
+        <cell>top</cell>
+        <cell>bottom</cell>
+        <cell>strip height</cell>
+      </row>
+      <row>
+        <cell><m>-\frac12</m></cell>
+        <cell><m>y = -\frac18</m> (on <m>y = x^3</m>)</cell>
+        <cell><m>y = -\frac12</m> (on <m>y = x</m>)</cell>
+        <cell><m>\frac38</m></cell>
+      </row>
+      <row>
+        <cell><m>\frac12</m></cell>
+        <cell><m>y = \frac12</m> (on <m>y = x</m>)</cell>
+        <cell><m>y = \frac18</m> (on <m>y = x^3</m>)</cell>
+        <cell><m>\frac38</m></cell>
+      </row>
+    </tabular>
+
+    <p>
+      A student proposes
+      <md>
+        A = \int_{-1}^{1} (x - x^3)\,dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-6-1-signed-zero" label="check-6-1-signed-zero">
+      <title>What does the student's integral give?</title>
+      <statement>
+        <p>
+          <m>\int_{-1}^{1} (x - x^3)\,dx =</m> <fillin answer="0" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.0001"/>
+            <feedback><p>Right, <m>\left[\frac{x^2}{2} - \frac{x^4}{4}\right]_{-1}^{1} = \frac14 - \frac14 = 0</m>. But the picture clearly has area. Something is wrong with the setup, not the arithmetic.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <exercise xml:id="check-6-1-what-cancelled" label="check-6-1-what-cancelled">
+      <title>What cancelled?</title>
+      <statement>
+        <p>Why did the student's integral come out to <m>0</m>?</p>
+      </statement>
+      <choices>
+        <choice correct="no">
+          <statement><p>The region really has no area</p></statement>
+          <feedback><p>Look at the picture. Both pieces have strips with positive length.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>On the left piece, <m>x - x^3</m> is negative, so it cancels the right piece</p></statement>
+          <feedback><p>Yes. On <m>(-1, 0)</m> the curves trade places: <m>x^3</m> is on top. So <m>x - x^3</m> is bottom minus top there, a negative number. At <m>x = -\frac12</m> it is <m>-\frac38</m>, while the strip is <m>\frac38</m> long.</p></feedback>
+        </choice>
+        <choice correct="no">
+          <statement><p>The bounds should have been <m>0</m> and <m>1</m></p></statement>
+          <feedback><p>That would only count the right piece. The left piece is part of the region too.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <assemblage xml:id="assemblage-strip-nonnegative">
+      <title>Remember</title>
+      <p>
+        A strip has a nonnegative height. Before you use one subtraction
+        everywhere, check whether the boundaries trade roles.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-split">
+    <title>Let the picture tell us where to split</title>
+
+    <p>
+      Solve <m>x = x^3</m>: <m>x(x - 1)(x + 1) = 0</m>, so <m>x = -1, 0, 1</m>.
+      At the inside intersection, <m>x = 0</m>, the top and bottom curves swap.
+      So describe each piece separately:
+    </p>
+
+    <tabular halign="center">
+      <row header="yes" bottom="minor">
+        <cell>interval</cell>
+        <cell>top curve</cell>
+        <cell>bottom curve</cell>
+        <cell>height</cell>
+      </row>
+      <row>
+        <cell><m>[-1, 0]</m></cell>
+        <cell><m>x^3</m></cell>
+        <cell><m>x</m></cell>
+        <cell><m>x^3 - x</m></cell>
+      </row>
+      <row>
+        <cell><m>[0, 1]</m></cell>
+        <cell><m>x</m></cell>
+        <cell><m>x^3</m></cell>
+        <cell><m>x - x^3</m></cell>
+      </row>
+    </tabular>
+
+    <p>
+      Then add the areas:
+      <md>
+        A = \int_{-1}^{0} (x^3 - x)\,dx + \int_{0}^{1} (x - x^3)\,dx.
+      </md>
+    </p>
+
+    <exercise xml:id="check-6-1-split-area" label="check-6-1-split-area">
+      <title>Use the symmetry, then evaluate</title>
+      <statement>
+        <p>
+          <m>A =</m> <fillin answer="0.5" mode="number"/>
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.001"/>
+            <feedback><p>Yes. The two pieces match, so <m>A = 2\int_0^1 (x - x^3)\,dx = 2\left(\frac14\right) = \frac12</m>.</p></feedback>
+          </test>
+          <test>
+            <numcmp value="0.25" tolerance="0.001"/>
+            <feedback><p>That is one piece. There are two.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <fact xml:id="fact-area-between-curves">
+      <title>Area between curves</title>
+      <statement>
+        <p>
+          If <m>f</m> and <m>g</m> are continuous and <m>f(x) \ge g(x)</m> on
+          <m>[a, b]</m>, the area between them is
+          <md>
+            A = \int_a^b \underbrace{\bigl[f(x) - g(x)\bigr]}_{\text{strip height}}\,dx.
+          </md>
+          If the curves trade places, describe each piece separately and add the
+          areas.
+        </p>
+      </statement>
+    </fact>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-below-axis">
+    <title>Your turn: both boundaries below the axis</title>
+
+    <exercise xml:id="ex-6-1-below-axis" label="ex-6-1-below-axis">
+      <statement>
+        <p>
+          The region lies between <m>y = -x^2 - 1</m> and <m>y = -3</m> for
+          <m>-1 \le x \le 1</m>. Sketch it and draw a strip. Should the area be
+          positive or negative? Write an integral for the area and explain why
+          your strip height is never negative. Do not evaluate.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The curve <m>y = -x^2 - 1</m> is on top. Height
+          <m>= (-x^2 - 1) - (-3) = 2 - x^2</m>, so
+          <md>
+            A = \int_{-1}^{1} (2 - x^2)\,dx.
+          </md>
+          Since <m>x^2 \le 1</m> on <m>[-1, 1]</m>, every strip is at least
+          <m>1</m> long. The area is positive even though every coordinate is
+          negative. Note the side boundaries are the given lines <m>x = \pm 1</m>,
+          not where the curves cross.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-direction">
+    <title>Does the direction of the strip matter?</title>
+
+    <p>
+      Consider the region enclosed by
+      <md>
+        x = y^2 \qquad\text{and}\qquad x = y + 2.
+      </md>
+      Try strips in both directions.
+    </p>
+
+    <figure xml:id="fig-strip-direction">
+      <caption>The region between <m>x = y^2</m> and <m>x = y + 2</m>, sliced two ways.</caption>
+      <interactive xml:id="interactive-strip-direction" label="interactive-strip-direction"
+                   platform="jsxgraph" width="100%" aspect="4:3"
+                   source="jsxgraph/strip-direction.js">
+        <slate xml:id="interactive-strip-direction-slate" surface="jsxboard" aspect="4:3"/>
+        <instructions>
+          <p>
+            Start with vertical strips and slide all the way across. Watch what
+            the bottom of the strip lands on. Then check the box for horizontal
+            strips and slide again.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+
+    <exercise xml:id="ex-6-1-vertical-strips" label="ex-6-1-vertical-strips">
+      <title>Vertical strips</title>
+      <statement>
+        <p>
+          Look at vertical strips at <m>x = \frac12</m> and at <m>x = 2</m>.
+          Which curve gives the top of each strip? Which gives the bottom? Does
+          the bottom stay on the same curve all the way across?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          At <m>x = \frac12</m>, both ends are on the parabola:
+          <m>y = \pm\frac{1}{\sqrt2}</m>. At <m>x = 2</m>, the bottom is on the
+          line (<m>y = 0</m>) and the top is on the parabola (<m>y = \sqrt2</m>).
+          The top is always <m>y = \sqrt{x}</m>. The bottom is
+          <m>y = -\sqrt{x}</m> for <m>0 \le x \le 1</m>, then <m>y = x - 2</m>
+          for <m>1 \le x \le 4</m>. It changes at <m>(1, -1)</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="check-6-1-horizontal-length" label="check-6-1-horizontal-length">
+      <title>Horizontal strips</title>
+      <statement>
+        <p>
+          A horizontal strip at <m>y = 1</m> runs from <m>x = 1</m> to
+          <m>x = 3</m>. Its length is <fillin answer="2" mode="number"/>.
+          Do the left and right curves ever trade places as you slide from
+          bottom to top?
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes"/>
+            <feedback><p>Yes, <m>3 - 1 = 2</m>. And no, they never trade places: from <m>y = -1</m> to <m>y = 2</m> the left end is always on <m>x = y^2</m> and the right end is always on <m>x = y + 2</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <assemblage xml:id="assemblage-both-directions">
+      <title>Remember</title>
+      <p>
+        Both directions can work. Choose the one that makes the dimensions of
+        the pieces easier to describe.
+      </p>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-horizontal">
+    <title>Build an integral from horizontal pieces</title>
+
+    <p>
+      Stay with <m>x = y^2</m> and <m>x = y + 2</m>, and use horizontal strips.
+      <ol>
+        <li><p><alert>Dimensions.</alert> Length <m>= x_{\text{right}} - x_{\text{left}} = (y + 2) - y^2</m>. Thickness <m>= \Delta y</m>.</p></li>
+        <li><p><alert>Small piece.</alert> Area <m>\approx \bigl[(y + 2) - y^2\bigr]\,\Delta y</m>.</p></li>
+        <li><p><alert>Bounds.</alert> <m>y^2 = y + 2</m> gives <m>(y - 2)(y + 1) = 0</m>, so <m>y = -1</m> and <m>y = 2</m>. The variable changing is <m>y</m>, so these are the bounds.</p></li>
+        <li><p><alert>Integral.</alert> <m>A = \int_{-1}^{2} \bigl[(y + 2) - y^2\bigr]\,dy</m>.</p></li>
+      </ol>
+    </p>
+
+    <exercise xml:id="check-6-1-horizontal-area" label="check-6-1-horizontal-area">
+      <title>Evaluate</title>
+      <statement>
+        <p>
+          <m>A =</m> <fillin answer="4.5" mode="number"/>. The region fits in a
+          <m>4</m>-by-<m>3</m> box. Does your answer fit too?
+        </p>
+      </statement>
+      <evaluation>
+        <evaluate>
+          <test correct="yes">
+            <numcmp use-answer="yes" tolerance="0.001"/>
+            <feedback><p>Yes. <m>\left[\frac{y^2}{2} + 2y - \frac{y^3}{3}\right]_{-1}^{2} = \frac{10}{3} + \frac76 = \frac92</m>, and <m>0 \lt \frac92 \lt 12</m>.</p></feedback>
+          </test>
+        </evaluate>
+      </evaluation>
+    </exercise>
+
+    <p>
+      Vertical strips work too. They just need two integrals, because the bottom
+      curve changes at <m>x = 1</m>:
+      <md>
+        A = \int_0^1 2\sqrt{x}\,dx + \int_1^4 \bigl[\sqrt{x} - (x - 2)\bigr]\,dx = \frac43 + \frac{19}{6} = \frac92.
+      </md>
+      Same region, same area. The two setups only reflect how the strip
+      boundaries are described.
+    </p>
+
+    <assemblage xml:id="assemblage-dx-dy-table">
+      <title>Same reasoning, a different direction</title>
+      <tabular halign="center">
+        <row header="yes" bottom="minor">
+          <cell>strip</cell>
+          <cell>length</cell>
+          <cell>thickness</cell>
+        </row>
+        <row>
+          <cell>vertical</cell>
+          <cell><m>y_{\text{top}} - y_{\text{bottom}}</m></cell>
+          <cell><m>dx</m></cell>
+        </row>
+        <row>
+          <cell>horizontal</cell>
+          <cell><m>x_{\text{right}} - x_{\text{left}}</m></cell>
+          <cell><m>dy</m></cell>
+        </row>
+      </tabular>
+    </assemblage>
+  </subsection>
+
+  <subsection xml:id="subsec-6-1-exit">
+    <title>Exit ticket: make the geometry visible</title>
+
+    <exercise xml:id="ex-6-1-exit" label="ex-6-1-exit">
+      <statement>
+        <p>
+          The region is enclosed by <m>x = 1 + y^2</m> and <m>x = 3 - y^2</m>.
+          Do not evaluate.
+          <ol>
+            <li><p>Can the area be negative or zero? Explain without calculating.</p></li>
+            <li><p>Choose a strip direction and say why.</p></li>
+            <li><p>Write both dimensions of your strip.</p></li>
+            <li><p>Find the bounds.</p></li>
+            <li><p>Write an integral for the area. Do you need more than one?</p></li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The area is positive: the region has positive width and height.
+          Horizontal strips are easiest, because the left curve is always
+          <m>x = 1 + y^2</m> and the right curve is always <m>x = 3 - y^2</m>.
+          Length <m>= (3 - y^2) - (1 + y^2) = 2 - 2y^2</m>, thickness
+          <m>\Delta y</m>. The curves meet where <m>y^2 = 1</m>, at
+          <m>(2, -1)</m> and <m>(2, 1)</m>. One integral is enough:
+          <md>
+            A = \int_{-1}^{1} (2 - 2y^2)\,dy.
+          </md>
+          A vertical setup also works, but needs two integrals split at
+          <m>x = 2</m>: <m>\int_1^2 2\sqrt{x - 1}\,dx + \int_2^3 2\sqrt{3 - x}\,dx</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-6-1-final-question" label="ex-6-1-final-question">
+      <title>One final question</title>
+      <statement>
+        <p>
+          Why can an integral equal zero even though the area between two curves
+          is positive?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          An integral of one fixed difference can have positive and negative parts
+          that cancel. Area adds up strip lengths, which are never negative, using
+          the correct top and bottom on each part.
+        </p>
+      </solution>
+    </exercise>
+
+    <assemblage xml:id="assemblage-6-1-main-idea">
+      <title>Main idea</title>
+      <p>
+        Read the picture. Draw a piece. Describe its dimensions. Check whether
+        that description works across the whole region. Then write the integral
+        that adds the pieces.
+      </p>
+    </assemblage>
+  </subsection>
+</section>
