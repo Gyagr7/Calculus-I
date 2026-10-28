@@ -5,19 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peel the Solid</title>
 <!-- Pre-assignment animation for Sec 6.3 (cylindrical shells). Students play with it, tick off the
-     "things to try", then write a short reflection on the second tab and download it.
+     "things to try", then answer the questions on the second tab ON PAPER (nothing is typed, saved or submitted here).
      Plain language on purpose: "layers" (shells) and "slices" (washers), no integrals.
      Embedded via <interactive iframe="volumes/peel-the-solid.html"> in source/ch-pre-assignments.ptx.
      Shares shell-core.js and shell-style.css with wrap-the-rectangle.html (the in-class version). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="shell-style.css">
+<style>
+.qs{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:12px}
+.qs li{font-size:15.5px;line-height:1.45}
+.qs .hintq{color:var(--muted)}
+</style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>Peel the Solid</h1>
-    <p>Peel a solid like an onion, one thin layer at a time. Play with it first. Then write down what you noticed.</p>
+    <p>Peel a solid like an onion, one thin layer at a time. Play with it first. Then answer the questions on paper.</p>
   </header>
 
   <div class="main">
@@ -42,7 +47,7 @@
     <div class="rail">
       <div class="tabs wide" role="tablist" aria-label="Part of the assignment">
         <button class="tab" role="tab" id="tabPlay" type="button" aria-selected="true">1 · Play</button>
-        <button class="tab" role="tab" id="tabNotes" type="button" aria-selected="false">2 · My reflection</button>
+        <button class="tab" role="tab" id="tabNotes" type="button" aria-selected="false">2 · Questions for your paper</button>
       </div>
 
       <!-- ===== Play ===== -->
@@ -91,16 +96,11 @@
         <dl class="read" id="total"></dl>
       </section>
 
-      <!-- ===== Reflection ===== -->
+      <!-- ===== Questions (answered on paper) ===== -->
       <section class="card nt wide" hidden>
-        <span class="eyebrow">Write what you noticed</span>
-        <p class="note">Short answers are fine. Use what you saw in the animation. Your words stay in this page until you download them, and they are saved on this device if your browser allows it.</p>
-        <div class="refl" id="refl"></div>
-        <div class="row">
-          <button class="btn" id="download" type="button">Download my reflection</button>
-          <button class="btn ghost" id="copy" type="button">Copy it</button>
-          <span class="note" id="saveNote"></span>
-        </div>
+        <span class="eyebrow">Write your answers on paper</span>
+        <p class="note">Put your name at the top of your paper. Write the question number next to each answer. Short answers are fine. Use what you saw in the animation. Go back to the Play tab any time to look again.</p>
+        <ol class="qs" id="qs"></ol>
       </section>
     </div>
   </div>
@@ -113,7 +113,6 @@
 (function(){
 const K=ShellKit, TAU=K.TAU, V=K.V, fmt=K.fmt, $=id=>document.getElementById(id);
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } } };
 const S=K.makeStage($('gl'),$('stagebox'),$('labels'));
 ['rad','h','around','thick','R','r'].forEach(k=>S.mkLabel(k,'dim',''));
 
@@ -259,58 +258,18 @@ function setDimLabels(){
   S.setLabel('r', (!shell&&d.r)?off(d.r,0,-lw*8):null, 'hole');
 }
 
-/* ---------- reflection ---------- */
+/* ---------- questions (answered on paper) ---------- */
 const QS=[
- {id:'q1', q:'Peel one layer, then slide it from the middle out to the edge. Where is the layer tallest? Where is it shortest? What does that tell you about the shape of the solid?', hint:'Say which solid you used.'},
- {id:'q2', q:'Unroll a layer until it lies flat. What shape do you get? Name its three measurements. As you slide the layer away from the middle, which of the three change and which stay the same?', hint:''},
- {id:'q3', q:'Add 3 layers, then 30. What happened to the gaps? Why does using thinner layers help?', hint:''},
- {id:'q4', q:'You can cut a solid into layers (like an onion) or into slices (like bread). For one solid, which way looked simpler to describe? Point to something you actually saw.', hint:'Look at the hole in each slice.'},
- {id:'q5', q:'In one sentence, explain what a “layer” of a solid is to a roommate who took Math 1530 but not Math 1540. No formulas.', hint:'', short:true},
- {id:'q6', q:'One thing that surprised you:', hint:'', short:true},
- {id:'q7', q:'One question you still have:', hint:'', short:true},
- {id:'q8', q:'How sure do you feel about the layer idea, from 1 (lost) to 5 (could teach it)?', hint:'', conf:true}
+ {q:'Peel one layer, then slide it from the middle out to the edge. Where is the layer tallest? Where is it shortest? What does that tell you about the shape of the solid?', hint:'Say which solid you used.'},
+ {q:'Unroll a layer until it lies flat. What shape do you get? Name its three measurements. As you slide the layer away from the middle, which of the three change and which stay the same?', hint:''},
+ {q:'Add 3 layers, then 30. What happened to the gaps? Why does using thinner layers help?', hint:''},
+ {q:'You can cut a solid into layers (like an onion) or into slices (like bread). For one solid, which way looked simpler to describe? Point to something you actually saw.', hint:'Look at the hole in each slice.'},
+ {q:'In one sentence, explain what a \u201clayer\u201d of a solid is to a roommate who took Math 1530 but not Math 1540. No formulas.', hint:''},
+ {q:'One thing that surprised you.', hint:''},
+ {q:'One question you still have.', hint:''},
+ {q:'How sure do you feel about the layer idea, from 1 (lost) to 5 (could teach it)? Write one number.', hint:''}
 ];
-const KEY='peel-the-solid-reflection-v1';
-let saved={}; try{ saved=JSON.parse(store.get(KEY)||'{}')||{}; }catch(e){ saved={}; }
-(function buildRefl(){
-  const box=$('refl');
-  const nm=document.createElement('div'); nm.innerHTML='<label class="q" for="nm">Your name</label><input type="text" id="nm" autocomplete="name">'; box.appendChild(nm);
-  QS.forEach((x,i)=>{
-    const w=document.createElement('div');
-    if(x.conf){
-      w.innerHTML=`<label class="q">${i+1}. ${x.q}</label><div class="chips" id="conf" role="group" aria-label="Confidence"></div>`;
-      box.appendChild(w);
-      [1,2,3,4,5].forEach(v=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=v; b.dataset.v=v;
-        b.addEventListener('click',()=>{ saved.conf=v; persist(); paintConf(); }); w.querySelector('#conf').appendChild(b); });
-    } else {
-      w.innerHTML=`<label class="q" for="${x.id}">${i+1}. ${x.q} ${x.hint?`<span class="hintq">${x.hint}</span>`:''}</label>`+
-        (x.short?`<input type="text" id="${x.id}">`:`<textarea id="${x.id}"></textarea>`);
-      box.appendChild(w);
-    }
-  });
-  const fields=['nm',...QS.filter(x=>!x.conf).map(x=>x.id)];
-  fields.forEach(id=>{ const el=$(id); if(saved[id]) el.value=saved[id]; el.addEventListener('input',()=>{ saved[id]=el.value; persist(); }); });
-  paintConf();
-})();
-function paintConf(){ const c=$('conf'); if(!c) return; [...c.children].forEach(b=>b.setAttribute('aria-pressed',saved.conf==b.dataset.v)); }
-function persist(){ const ok=store.set(KEY,JSON.stringify(saved)); $('saveNote').textContent=ok?'Saved on this device.':'Not saved automatically. Download when you finish.'; }
-function reflectionText(){
-  const L=['Math 1540 — Pre-assignment: Peel the Solid','Name: '+(saved.nm||''),'Date: '+new Date().toLocaleString(),
-    'Solids I looked at: '+SCN.filter(s=>seen.scenes.has(s.id)).map(s=>s.tab).join(', '),
-    'Things to try completed: '+triesDone()+' of '+TODO.length,'',''];
-  QS.forEach((x,i)=>{ L.push((i+1)+'. '+x.q); L.push(x.conf?String(saved.conf||''):(saved[x.id]||'')); L.push(''); });
-  return L.join('\n');
-}
-$('download').addEventListener('click',()=>{
-  const blob=new Blob([reflectionText()],{type:'text/plain;charset=utf-8'}), a=document.createElement('a');
-  a.href=URL.createObjectURL(blob); a.download='peel-the-solid-reflection'+(saved.nm?'-'+saved.nm.replace(/[^A-Za-z0-9]+/g,'-'):'')+'.txt';
-  document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500);
-  $('saveNote').textContent='Downloaded. Turn it in the way your instructor asked.';
-});
-$('copy').addEventListener('click',async()=>{
-  try{ await navigator.clipboard.writeText(reflectionText()); $('saveNote').textContent='Copied. Paste it where your instructor asked.'; }
-  catch(e){ $('saveNote').textContent='Copy was blocked here. Use Download instead.'; }
-});
+QS.forEach(x=>{ const li=document.createElement('li'); li.textContent=x.q; if(x.hint){ const sp=document.createElement('span'); sp.className='hintq'; sp.textContent=' '+x.hint; li.appendChild(sp); } $('qs').appendChild(li); });
 
 /* ---------- loop ---------- */
 let last=performance.now();
