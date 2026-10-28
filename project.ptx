@@ -7,11 +7,11 @@
 <project ptx-version="2">
   <targets>
     <!-- Web/HTML version: what students will read online -->
-    <target name="web" format="html" />
+    <target name="web" format="html" xsl="stewart-html.xsl" />
     <!-- Print/PDF version: a printable or downloadable copy -->
     <target name="print" format="pdf" />
     <!-- SCORM package: upload the resulting zip straight into Moodle's -->
     <!-- "SCORM package" activity for an embedded, self-contained copy. -->
-    <target name="scorm" format="html" compression="scorm" />
+    <target name="scorm" format="html" compression="scorm" xsl="stewart-html.xsl" />
   </targets>
 </project>

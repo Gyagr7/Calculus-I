@@ -232,7 +232,7 @@
   </section>
 
   <section xml:id="sec-pre-assignment-oct-22">
-    <title>Thu Oct 22: Volumes: The Shell Method</title>
+    <title>Thu Oct 29: Volumes: The Shell Method</title>
     <p>
       Today in class: <xref ref="sec-6-3-cylindrical-shells" text="title"/> (Stewart 6.3).
     </p>
@@ -242,13 +242,33 @@
       <p>Could that ever be easier? Disks and shells can both work on the same solid -- what would make you pick one over the other?</p>
     </assemblage>
     <p>
-      <alert>Link coming soon.</alert> The Doenet warm-up will appear here before class.
-      About 10 minutes, completion credit.
+      Play with the animation below first. Then open the <q>My reflection</q> tab,
+      write your answers, and download them. About 15 minutes, completion credit.
+    </p>
+    <figure xml:id="fig-peel-the-solid">
+      <caption>
+        Peel the Solid. Peel one thin layer off a solid, unroll it, and add more
+        layers until they fill the solid.
+      </caption>
+      <interactive xml:id="interactive-peel-the-solid" label="interactive-peel-the-solid"
+                   iframe="volumes/peel-the-solid.html" width="100%" aspect="1:2">
+        <instructions>
+          <p>
+            Pick a solid. Slide the layer, change how thick it is, and spin it.
+            Unroll it to see its shape. Add more layers and watch the total.
+            Switch to slices to compare. Then open the <q>My reflection</q> tab.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+    <p>
+      <url href="https://gyagr7.github.io/Calculus-I/external/volumes/peel-the-solid.html"
+           visual="gyagr7.github.io/Calculus-I/external/volumes/peel-the-solid.html">Open animation in a new tab</url>
     </p>
   </section>
 
   <section xml:id="sec-pre-assignment-oct-27">
-    <title>Tue Oct 27: Work</title>
+    <title>Thu Nov 5: Work</title>
     <p>
       Today in class: <xref ref="sec-6-4-work" text="title"/> (Stewart 6.4).
     </p>
@@ -264,7 +284,7 @@
   </section>
 
   <section xml:id="sec-pre-assignment-oct-29">
-    <title>Thu Oct 29: Average Value of a Function</title>
+    <title>Tue Nov 10: Average Value of a Function</title>
     <p>
       Today in class: <xref ref="sec-6-5-average-value" text="title"/> (Stewart 6.5).
     </p>

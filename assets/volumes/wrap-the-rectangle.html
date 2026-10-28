@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" class="embed">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrap the Rectangle</title>
+<!-- In-class 3D animation for Sec 6.3 (cylindrical shells). Follows the Section 6.3 handout:
+     hook -> slice the other way -> cut and unwrap -> nest the shells -> same solid, two methods.
+     Embedded via <interactive iframe="volumes/wrap-the-rectangle.html"> in source/ch-applications-of-integration.ptx.
+     Shares shell-core.js and shell-style.css with peel-the-solid.html (the pre-assignment version). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="shell-style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Wrap the Rectangle</h1>
+    <p>One thin rectangle, spun about the axis, becomes a thin washer or a thin shell. Cut the shell, unroll it, and its volume is easy to read off. Drag the picture to look around.</p>
+  </header>
+
+  <div class="main">
+    <div class="stagebox" id="stagebox">
+      <canvas id="gl" aria-label="3D view of the region rotating about its axis"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="hint">drag to orbit · scroll to zoom</div>
+      <div class="stagebar" id="stagebar">
+        <div class="grp">
+          <button class="btn" id="spin" type="button">Spin</button>
+          <label for="theta" class="num">θ</label>
+          <input type="range" id="theta" min="0" max="360" step="1" value="0">
+          <span class="num" id="thetaOut">0°</span>
+        </div>
+        <div class="grp" id="unwrapGrp">
+          <button class="btn" id="unwrap" type="button">Unwrap</button>
+          <input type="range" id="wsl" min="0" max="100" step="1" value="0" aria-label="How far the shell is unrolled">
+          <span class="num" id="wOut">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <section class="card">
+        <span class="eyebrow">Example</span>
+        <div class="chips" id="scenes"></div>
+        <div class="m big" id="sceneTitle"></div>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">Walk through it</span>
+        <div class="steps" id="steps"></div>
+        <p class="caption" id="caption"></p>
+        <p class="callout" id="why" hidden></p>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">The rectangle</span>
+        <div class="row">
+          <span style="font-size:14px">Direction</span>
+          <div class="chips" id="methods"></div>
+        </div>
+        <div class="row">
+          <label for="pos" id="posLab"></label>
+          <input type="range" id="pos" min="0" max="1000" value="550">
+          <span class="num" id="posOut"></span>
+        </div>
+        <div class="row">
+          <label for="dpf" id="dpfLab"></label>
+          <input type="range" id="dpf" min="0" max="1000" value="340">
+          <span class="num" id="dpfOut"></span>
+        </div>
+        <div class="row">
+          <label class="tog"><input type="checkbox" id="showSolid" checked> <span><span class="swatch" style="background:var(--solid)"></span>Whole region</span></label>
+          <label class="tog"><input type="checkbox" id="showPiece" checked> <span><span class="swatch" style="background:var(--slice)"></span>One rectangle</span></label>
+        </div>
+        <div class="row">
+          <span style="font-size:14px" id="stackLab">Nest all the shells</span>
+          <div class="chips" id="stack"></div>
+        </div>
+        <div class="row"><button class="btn ghost" id="resetView" type="button">Reset view</button></div>
+      </section>
+
+      <section class="card">
+        <span class="eyebrow">The rectangle in numbers</span>
+        <div class="xs">
+          <canvas id="xs" aria-label="What the rectangle becomes"></canvas>
+          <dl class="read" id="read"></dl>
+        </div>
+        <label class="tog"><input type="checkbox" id="hide"> Hide numbers (everyone fills in the handout first)</label>
+        <p class="note" id="sceneNote"></p>
+      </section>
+
+      <section class="card wide">
+        <span class="eyebrow">Add them up, and compare</span>
+        <div class="sumbar" aria-hidden="true"><div id="sumfill"></div></div>
+        <dl class="read" id="total"></dl>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="shell-core.js"></script>
+<script>
+(function(){
+const K=ShellKit, TAU=K.TAU, V=K.V, fmt=K.fmt, $=id=>document.getElementById(id);
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const S=K.makeStage($('gl'),$('stagebox'),$('labels'));
+['rad','h','around','thick','R','r'].forEach(k=>S.mkLabel(k,'dim',''));
+
+let sc=K.SCENES[0], dirty=true, sceneDirty=true, camMode='std', lastW=0;
+const fitStd=()=>{ camMode='std'; S.fit(sc); };
+const st={ theta:0, w:0, pos:0.55, dpf:0.34, method:'shell', n:0, showSolid:true, showPiece:true,
+           step:0, hide:false, spinning:false, unwrapDir:0 };
+
+const STEPS=[
+  {name:'Region',     set:{theta:0,   w:0, method:'shell',  showSolid:true,  showPiece:false, n:0}},
+  {name:'Washer way', set:{theta:0,   w:0, method:'washer', showSolid:false, showPiece:true,  n:0}, spin:true},
+  {name:'Shell way',  set:{theta:0,   w:0, method:'shell',  showSolid:false, showPiece:true,  n:0}, spin:true},
+  {name:'Unwrap',     set:{theta:TAU, w:0, method:'shell',  showSolid:false, showPiece:true,  n:0}, unwrap:true},
+  {name:'Add up',     set:{theta:TAU*0.75, w:0, method:'shell', showSolid:true, showPiece:false, n:8}}
+];
+
+/* ---------- controls ---------- */
+K.SCENES.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=s.tab;
+  b.addEventListener('click',()=>setScene(i)); $('scenes').appendChild(b); });
+[['shell','Parallel to the axis (shell)'],['washer','Perpendicular to the axis (washer)']].forEach(([m,t])=>{
+  const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=t; b.dataset.m=m;
+  b.addEventListener('click',()=>{ st.method=m; st.step=-1; st.w=0; st.unwrapDir=0; if(m==='washer'&&st.theta<=0) st.theta=0; leaveUnwrapCam(); sync(); }); $('methods').appendChild(b); });
+[0,4,8,16,32].forEach(n=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=n?n:'Off'; b.dataset.n=n;
+  b.addEventListener('click',()=>{ st.n=n; st.step=-1; if(n>0){ st.w=0; st.unwrapDir=0; leaveUnwrapCam(); if(st.theta>=TAU-1e-3) st.theta=TAU*0.75; } sync(); }); $('stack').appendChild(b); });
+STEPS.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='step'; b.textContent=(i+1)+' '+s.name;
+  b.addEventListener('click',()=>goStep(i)); $('steps').appendChild(b); });
+
+$('pos').addEventListener('input',e=>{ st.pos=e.target.value/1000; if(camMode==='unwrap') fitUnwrap(); sync(); });
+$('dpf').addEventListener('input',e=>{ st.dpf=e.target.value/1000; if(camMode==='unwrap') fitUnwrap(); sync(); });
+$('theta').addEventListener('input',e=>{ st.theta=e.target.value/360*TAU; st.spinning=false; sync(); });
+$('wsl').addEventListener('input',e=>{ st.w=e.target.value/100; st.unwrapDir=0; if(st.w>0) enterUnwrapCam(); sync(); });
+$('showSolid').addEventListener('change',e=>{ st.showSolid=e.target.checked; st.step=-1; sync(); });
+$('showPiece').addEventListener('change',e=>{ st.showPiece=e.target.checked; st.step=-1; sync(); });
+$('hide').addEventListener('change',e=>{ st.hide=e.target.checked; sync(); });
+$('resetView').addEventListener('click',()=>{ if(camMode==='unwrap') fitUnwrap(); else if(camMode==='flat'){ S.fitFlat(sc); } else fitStd(); });
+$('spin').addEventListener('click',()=>{ if(st.spinning){ st.spinning=false; } else startSpin(st.theta>=TAU-1e-3); sync(); });
+$('unwrap').addEventListener('click',()=>{ if(st.method!=='shell') return;
+  if(st.w>=1-1e-3) startUnwrap(-1); else { if(st.theta<TAU-1e-3) st.theta=TAU; startUnwrap(1); } sync(); });
+
+function startSpin(fromZero){ if(fromZero) st.theta=0; st.w=0; if(reduce){ st.theta=TAU; st.spinning=false; } else st.spinning=true; }
+function startUnwrap(dir){ enterUnwrapCam(); if(reduce){ st.w=dir>0?1:0; st.unwrapDir=0; } else st.unwrapDir=dir; }
+function fitUnwrap(){
+  // frame the shell as it opens: a closed tube at w = 0, a flat sheet 2πr wide at w = 1
+  const info=K.pieceParams(sc,st), r=Math.max(info.r||0,sc.Rmax*0.15), h=info.h||sc.Hmax, w=st.w;
+  const halfW=r*(1.75+(Math.PI*1.3-1.75)*w), halfH=h*0.85+r*0.5*(1-w)+r*0.1;
+  const mid=K.axisPt(sc,((info.lo||0)+(info.hi||0))/2).add(new V(0,0,r*w));
+  // vertical axis: the sheet's width runs across the screen; horizontal axis: it runs up the screen
+  if(sc.vert) S.fitBox(mid,halfW,halfH,new V(0.2,0.55,1)); else S.fitBox(mid,halfH,halfW,new V(0.2,0.55,1));
+  camMode='unwrap'; lastW=st.w;
+}
+function enterUnwrapCam(){ fitUnwrap(); }
+function leaveUnwrapCam(){ if(camMode==='unwrap') fitStd(); }
+
+function setScene(i){ sc=K.SCENES[i]; sceneDirty=true; fitStd(); if(st.step>=0) goStep(st.step); else { st.w=0; sync(); } }
+function goStep(i){
+  st.step=i; st.spinning=false; st.unwrapDir=0;
+  Object.assign(st,STEPS[i].set);
+  if(i===0){ S.fitFlat(sc); camMode='flat'; }
+  else if(i!==3 && camMode!=='std') fitStd();
+  if(STEPS[i].spin) startSpin(true);
+  if(STEPS[i].unwrap){ fitUnwrap(); startUnwrap(1); }
+  sync();
+}
+
+/* ---------- text ---------- */
+const axisText=()=> sc.vert ? (sc.k===0?'the <i>y</i>-axis':`the line <i>x</i> = ${sc.k}`) : (sc.k===0?'the <i>x</i>-axis':`the line <i>y</i> = ${sc.k}`);
+function caption(i){
+  const ax=axisText(), pn=sc.pn;
+  return [
+    `This is the flat region. Nothing is 3D yet. The dashed line is ${ax}, the axis we will spin around. Whole region on, one rectangle off.`,
+    `Start with the rectangle we already know: <b>perpendicular</b> to the axis. Spun about ${ax}, it becomes a thin <b>washer</b>. Look at the two radii, <i>R</i> and <i>r</i>.`,
+    `Same region, other direction. This rectangle is <b>parallel</b> to the axis. What does it become when it spins? Its radius is the distance from the axis to the rectangle.`,
+    `Cut the shell along its seam and unroll it. It becomes (almost) a thin box: <b>2π<i>r</i></b> long, <b><i>h</i></b> tall, <b>Δ${pn}</b> thick. So <span class="m">ΔV ≈ (circumference)(height)(thickness)</span>.`,
+    `Nest all the shells, ${st.method==='shell'?'one inside the next':'or stack the washers'}. Each has volume ≈ 2π<i>r</i>·<i>h</i>·Δ${pn}. Add them up, then let Δ${pn} → 0. A wedge is cut away so you can see inside.`
+  ][i];
+}
+
+/* ---------- mini picture of what the rectangle becomes ---------- */
+function drawXS(info){
+  const cv=$('xs'), dpr=Math.min(window.devicePixelRatio||1,2), W=132; cv.width=W*dpr; cv.height=W*dpr;
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W,W);
+  const tok=S.tok;
+  if(st.hide){ g.fillStyle=tok('--muted'); g.font='600 30px "Source Sans 3", sans-serif'; g.textAlign='center'; g.fillText('?',W/2,W/2+10); return; }
+  if(st.method==='shell'){
+    // the unrolled box seen face-on: width 2πr, height h, on a common scale
+    const sx=(W-16)/(TAU*sc.Rmax), sy=Math.min(sx,(W-44)/sc.Hmax), s=Math.min(sx,sy);
+    const w=info.around*s, h=Math.max(2,info.h*s), x0=(W-w)/2, y0=(W-h)/2-6;
+    g.fillStyle=tok('--slice'); g.fillRect(x0,y0,w,h);
+    g.strokeStyle=tok('--ink'); g.lineWidth=1; g.strokeRect(x0,y0,w,h);
+    g.fillStyle=tok('--ink'); g.font='italic 13px "STIX Two Text", serif'; g.textAlign='center';
+    g.fillText('2πr',W/2,y0+h+15); g.textAlign='right'; g.fillText('h',x0-4,y0+h/2+4);
+  } else {
+    const k=(W/2-8)/sc.Rmax, cx=W/2, cy=W/2;
+    g.strokeStyle=tok('--muted'); g.setLineDash([3,3]); g.beginPath(); g.arc(cx,cy,sc.Rmax*k,0,TAU); g.stroke(); g.setLineDash([]);
+    g.fillStyle=tok('--slice'); g.beginPath(); g.arc(cx,cy,info.R*k,0,TAU); if(info.r>1e-3) g.arc(cx,cy,info.r*k,0,TAU,true); g.fill('evenodd');
+    g.fillStyle=tok('--axis'); g.beginPath(); g.arc(cx,cy,2.5,0,TAU); g.fill();
+    g.strokeStyle=tok('--ink'); g.lineWidth=1.5; g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+info.R*k*0.71,cy-info.R*k*0.71); g.stroke();
+    g.font='italic 14px "STIX Two Text", serif'; g.fillStyle=tok('--ink'); g.textAlign='start'; g.fillText('R',cx+info.R*k*0.4+4,cy-info.R*k*0.4-2);
+    if(info.r>1e-3){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx-info.r*k,cy); g.stroke(); g.fillText('r',cx-info.r*k/2-3,cy+14); }
+  }
+}
+S.onTheme=()=>{ dirty=true; if(lastInfo) drawXS(lastInfo); };
+
+/* ---------- sync UI with state ---------- */
+let lastInfo=null;
+function sync(){
+  dirty=true;
+  const info=K.pieceParams(sc,st); lastInfo=info;
+  const shell=st.method==='shell', pn=sc.pn, tn=sc.tn, q=x=>st.hide?'?':fmt(x);
+  [...$('scenes').children].forEach((b,i)=>b.setAttribute('aria-pressed',K.SCENES[i]===sc));
+  [...$('methods').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===st.method));
+  [...$('stack').children].forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===st.n));
+  [...$('steps').children].forEach((b,i)=>b.setAttribute('aria-pressed',i===st.step));
+  $('stackLab').textContent=shell?'Nest all the shells':'Stack all the washers';
+  $('sceneTitle').innerHTML=sc.title;
+  $('caption').innerHTML=st.step>=0?caption(st.step):'Pick a step above, or explore with the controls.';
+  $('showSolid').checked=st.showSolid; $('showPiece').checked=st.showPiece;
+  $('hide').checked=st.hide;
+  // washer difficulty callout: the heart of the handout's hook
+  const showWhy=!shell && sc.wa.hard && st.n===0 && st.showPiece;
+  $('why').hidden=!showWhy; if(showWhy) $('why').innerHTML='<b>The catch.</b> '+sc.wa.why;
+  // sliders
+  const v=shell?pn:tn;
+  $('posLab').innerHTML=`Rectangle at <span class="m"><i>${v}</i></span>`; $('posOut').textContent=v+' = '+fmt(info.c);
+  $('pos').value=Math.round(st.pos*1000);
+  $('dpfLab').innerHTML=`Thickness <span class="m">Δ<i>${v}</i></span>`; $('dpfOut').textContent=fmt(info.d);
+  $('dpf').value=Math.round(st.dpf*1000);
+  const th=Math.round(st.theta/TAU*360);
+  $('theta').value=th; $('thetaOut').textContent=th+'°';
+  $('spin').textContent=st.spinning?'Pause':(st.theta>=TAU-1e-3?'Replay':'Spin');
+  $('spin').disabled=st.w>0.002;
+  $('theta').disabled=st.w>0.002;
+  const canUnwrap=shell && st.showPiece && st.n===0;
+  $('unwrapGrp').hidden=!canUnwrap;
+  $('unwrap').textContent=st.w>=1-1e-3?'Wrap':'Unwrap';
+  $('wsl').value=Math.round(st.w*100); $('wOut').textContent=Math.round(st.w*100)+'%';
+  // numbers
+  if(shell){
+    $('read').innerHTML=
+      `<dt>radius</dt><dd><span class="m"><i>r</i> = ${st.hide?'?':sc.sh.rad}</span> <span class="val">= ${q(info.r)}</span></dd>`+
+      `<dt>height</dt><dd><span class="m"><i>h</i> = ${st.hide?'?':sc.sh.hgt}</span> <span class="val">= ${q(info.h)}</span></dd>`+
+      `<dt>thickness</dt><dd><span class="m">Δ<i>${pn}</i></span> <span class="val">= ${fmt(info.d)}</span></dd>`+
+      `<dt>around</dt><dd><span class="m">2π<i>r</i></span> <span class="val">= ${q(info.around)}</span></dd>`+
+      `<dt>volume</dt><dd><span class="m">ΔV ≈ 2π<i>r</i>·<i>h</i>·Δ<i>${pn}</i></span> <span class="val hot">= ${q(info.dV)}</span></dd>`;
+  } else {
+    $('read').innerHTML=
+      `<dt>outer</dt><dd><span class="m"><i>R</i> = ${st.hide?'?':sc.wa.R}</span> <span class="val">= ${q(info.R)}</span></dd>`+
+      `<dt>inner</dt><dd><span class="m"><i>r</i> = ${st.hide?'?':sc.wa.r}</span> <span class="val">= ${q(info.r)}</span></dd>`+
+      `<dt>thickness</dt><dd><span class="m">Δ<i>${tn}</i></span> <span class="val">= ${fmt(info.d)}</span></dd>`+
+      `<dt>volume</dt><dd><span class="m">ΔV ≈ π(<i>R</i>² − <i>r</i>²)·Δ<i>${tn}</i></span> <span class="val hot">= ${q(info.dV)}</span></dd>`;
+  }
+  $('sceneNote').innerHTML=st.hide?'Numbers are hidden. Uncheck the box to reveal them.':sc.note;
+  drawXS(info);
+  // totals
+  const exactNum=sc.vShell;
+  let rows='';
+  if(st.n>0){ const s=K.sumStack(sc,st.method,st.n);
+    rows+=`<dt>${st.n} ${shell?'shells':'washers'}</dt><dd><span class="m">Σ ${shell?'2π<i>r</i><sub>i</sub><i>h</i><sub>i</sub>Δ'+pn:'π(<i>R</i>²−<i>r</i>²)Δ'+tn}</span> <span class="val hot">≈ ${st.hide?'?':s.toFixed(3)}</span></dd>`;
+    $('sumfill').style.width=st.hide?'0%':Math.min(100,100*s/exactNum)+'%';
+  } else $('sumfill').style.width='0%';
+  rows+=`<dt>shells</dt><dd><span class="m"><i>V</i> = ${st.hide?'?':sc.sh.int}</span></dd>`;
+  rows+=`<dt>washers</dt><dd><span class="m"><i>V</i> = ${st.hide?'?':sc.wa.int}</span></dd>`;
+  rows+=`<dt>exact</dt><dd><span class="m">${st.hide?'?':sc.exact}</span> <span class="val">${st.hide?'':'≈ '+exactNum.toFixed(3)}</span></dd>`;
+  $('total').innerHTML=rows;
+}
+
+/* ---------- labels ---------- */
+function setDimLabels(){
+  const d=S.dim||{}, pn=sc.pn, shell=st.method==='shell', unrolled=shell&&st.w>0.9;
+  const off=(p,x,y)=>p?p.clone().add(new V(x,y,0)):null, lw=sc.lw;
+  const side=sc.vert?1:0;
+  S.setLabel('axis', st.w>0.9&&shell&&st.showPiece&&st.n===0 ? null : S.axisPos);
+  S.setLabel('rad', (shell&&!unrolled&&d.rad)?off(d.rad,0,-lw*7):null, 'radius');
+  S.setLabel('h',   (shell&&d.h)?(unrolled?off(d.h,-lw*12,0):off(d.h,lw*(sc.vert?14:0),lw*(sc.vert?0:12))):null, unrolled?'<i>h</i>':'height');
+  S.setLabel('around', unrolled&&d.around?off(d.around,0,-lw*9):null, '2π<i>r</i>');
+  S.setLabel('thick',  unrolled&&d.thick?off(d.thick,lw*16,0):null, 'Δ<i>'+pn+'</i>');
+  S.setLabel('R', (!shell&&d.R)?off(d.R,0,lw*8):null, '<i>R</i>');
+  S.setLabel('r', (!shell&&d.r)?off(d.r,0,-lw*8):null, '<i>r</i>');
+}
+
+/* ---------- loop ---------- */
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  if(st.spinning){ st.theta+=dt*TAU/4.5; if(st.theta>=TAU){ st.theta=TAU; st.spinning=false; } sync(); }
+  if(st.unwrapDir){ st.w+=st.unwrapDir*dt/3.2; if(st.w>=1){ st.w=1; st.unwrapDir=0; } if(st.w<=0){ st.w=0; st.unwrapDir=0; } fitUnwrap(); sync(); }
+  if(camMode==='unwrap' && Math.abs(st.w-lastW)>1e-4) fitUnwrap();
+  if(sceneDirty){ K.buildStatic(S,sc); sceneDirty=false; dirty=true; }
+  if(dirty){ K.buildDyn(S,sc,st); setDimLabels(); dirty=false; }
+  S.render(); requestAnimationFrame(frame);
+}
+S.applyTheme(); S.resize(); goStep(0);
+window.__wrap={st,K,S,goStep,setScene:i=>setScene(i),sync,get sc(){return sc;}};
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

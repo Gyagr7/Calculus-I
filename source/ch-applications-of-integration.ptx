@@ -17,6 +17,28 @@
     <p>[Motivation -- TODO: the question or problem that makes this worth learning]</p>
     <p>[Problem -- TODO: a guiding worked example]</p>
     <p>[Abstraction -- TODO: the general rule, definition, or theorem this section establishes]</p>
+
+    <figure xml:id="fig-wrap-the-rectangle">
+      <caption>
+        Wrap the Rectangle. One thin strip of the region spins into a thin
+        cylindrical shell. Cut the shell open and it lies flat as a rectangle.
+        Then compare with slicing the same solid into washers.
+      </caption>
+      <interactive xml:id="interactive-wrap-the-rectangle" label="interactive-wrap-the-rectangle"
+                   iframe="volumes/wrap-the-rectangle.html" width="100%" aspect="2:3">
+        <instructions>
+          <p>
+            Click through steps 1 to 5. Drag the picture to look around the solid.
+            Use the sliders to move the strip and change its thickness. Switch
+            between the examples with the buttons at the top of the panel.
+          </p>
+        </instructions>
+      </interactive>
+    </figure>
+    <p>
+      <url href="https://gyagr7.github.io/Calculus-I/external/volumes/wrap-the-rectangle.html"
+           visual="gyagr7.github.io/Calculus-I/external/volumes/wrap-the-rectangle.html">Open animation in a new tab</url>
+    </p>
   </section>
 
   <section xml:id="sec-6-4-work">

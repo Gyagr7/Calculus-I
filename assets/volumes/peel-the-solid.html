@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" class="embed">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peel the Solid</title>
+<!-- Pre-assignment animation for Sec 6.3 (cylindrical shells). Students play with it, tick off the
+     "things to try", then write a short reflection on the second tab and download it.
+     Plain language on purpose: "layers" (shells) and "slices" (washers), no integrals.
+     Embedded via <interactive iframe="volumes/peel-the-solid.html"> in source/ch-pre-assignments.ptx.
+     Shares shell-core.js and shell-style.css with wrap-the-rectangle.html (the in-class version). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Source+Sans+3:wght@400;600&family=STIX+Two+Text:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="shell-style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Peel the Solid</h1>
+    <p>Peel a solid like an onion, one thin layer at a time. Play with it first. Then write down what you noticed.</p>
+  </header>
+
+  <div class="main">
+    <div class="stagebox" id="stagebox">
+      <canvas id="gl" aria-label="3D view of a solid and one thin layer of it"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="hint">drag to turn it · scroll to zoom</div>
+      <div class="stagebar" id="stagebar">
+        <div class="grp">
+          <button class="btn" id="spin" type="button">Spin</button>
+          <input type="range" id="theta" min="0" max="360" step="1" value="360" aria-label="How far around the layer has turned">
+          <span class="num" id="thetaOut">360°</span>
+        </div>
+        <div class="grp" id="unwrapGrp">
+          <button class="btn" id="unwrap" type="button">Unroll</button>
+          <input type="range" id="wsl" min="0" max="100" step="1" value="0" aria-label="How far the layer is unrolled">
+          <span class="num" id="wOut">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="tabs wide" role="tablist" aria-label="Part of the assignment">
+        <button class="tab" role="tab" id="tabPlay" type="button" aria-selected="true">1 · Play</button>
+        <button class="tab" role="tab" id="tabNotes" type="button" aria-selected="false">2 · My reflection</button>
+      </div>
+
+      <!-- ===== Play ===== -->
+      <section class="card pl">
+        <span class="eyebrow">Pick a solid</span>
+        <div class="chips" id="scenes"></div>
+        <p class="note" id="what"></p>
+      </section>
+
+      <section class="card pl">
+        <span class="eyebrow">Things to try</span>
+        <ul class="todo" id="todo"></ul>
+      </section>
+
+      <section class="card pl">
+        <span class="eyebrow">How to cut it</span>
+        <div class="chips" id="methods"></div>
+        <div class="row">
+          <label for="pos" id="posLab"></label>
+          <input type="range" id="pos" min="0" max="1000" value="550">
+        </div>
+        <div class="row">
+          <label for="dpf" id="dpfLab"></label>
+          <input type="range" id="dpf" min="0" max="1000" value="340">
+        </div>
+        <label class="tog"><input type="checkbox" id="showSolid" checked> <span><span class="swatch" style="background:var(--solid)"></span>Show the whole solid</span></label>
+        <div class="row">
+          <span style="font-size:14px" id="stackLab">Add layers</span>
+          <div class="chips" id="stack"></div>
+        </div>
+        <div class="row"><button class="btn ghost" id="resetView" type="button">Reset view</button></div>
+      </section>
+
+      <section class="card pl">
+        <span class="eyebrow" id="oneLab">One layer, in numbers</span>
+        <div class="xs">
+          <canvas id="xs" aria-label="What the layer looks like unrolled"></canvas>
+          <dl class="read" id="read"></dl>
+        </div>
+        <p class="note" id="sliceNote" hidden>The hole gets bigger or smaller from slice to slice. Could you write down a rule for it?</p>
+      </section>
+
+      <section class="card pl wide">
+        <span class="eyebrow">All the pieces together</span>
+        <div class="sumbar" aria-hidden="true"><div id="sumfill"></div></div>
+        <dl class="read" id="total"></dl>
+      </section>
+
+      <!-- ===== Reflection ===== -->
+      <section class="card nt wide" hidden>
+        <span class="eyebrow">Write what you noticed</span>
+        <p class="note">Short answers are fine. Use what you saw in the animation. Your words stay in this page until you download them, and they are saved on this device if your browser allows it.</p>
+        <div class="refl" id="refl"></div>
+        <div class="row">
+          <button class="btn" id="download" type="button">Download my reflection</button>
+          <button class="btn ghost" id="copy" type="button">Copy it</button>
+          <span class="note" id="saveNote"></span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="shell-core.js"></script>
+<script>
+(function(){
+const K=ShellKit, TAU=K.TAU, V=K.V, fmt=K.fmt, $=id=>document.getElementById(id);
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } } };
+const S=K.makeStage($('gl'),$('stagebox'),$('labels'));
+['rad','h','around','thick','R','r'].forEach(k=>S.mkLabel(k,'dim',''));
+
+const SCN=K.PEEL;
+let sc=SCN[0], dirty=true, sceneDirty=true, camMode='std', lastW=0;
+const st={ theta:TAU, w:0, pos:0.55, dpf:0.34, method:'shell', n:0, showSolid:true, showPiece:true, spinning:false, unwrapDir:0 };
+const fitStd=()=>{ camMode='std'; S.fit(sc); };
+
+/* ---------- what the student has tried ---------- */
+const seen={ scenes:new Set([SCN[0].id]), posMin:0.55, posMax:0.55, unrolled:false, ns:new Set(), slices:false };
+const TODO=[
+  {t:'Slide the layer from near the middle out to the edge.', ok:()=>seen.posMax-seen.posMin>=0.6},
+  {t:'Unroll a layer until it lies flat.', ok:()=>seen.unrolled},
+  {t:'Add layers: try 3, then 30.', ok:()=>seen.ns.has(3)&&seen.ns.has(30)},
+  {t:'Switch to slices and look at a few.', ok:()=>seen.slices},
+  {t:'Go back and try a second solid.', ok:()=>seen.scenes.size>=2}
+];
+TODO.forEach(()=>{ const li=document.createElement('li'); li.innerHTML='<span class="box"></span><span></span>'; $('todo').appendChild(li); });
+function drawTodo(){ [...$('todo').children].forEach((li,i)=>{ li.lastChild.textContent=TODO[i].t; li.classList.toggle('done',!!TODO[i].ok()); }); }
+const triesDone=()=>TODO.filter(x=>x.ok()).length;
+
+/* ---------- controls ---------- */
+SCN.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=s.tab;
+  b.addEventListener('click',()=>setScene(i)); $('scenes').appendChild(b); });
+[['shell','Layers (peel like an onion)'],['washer','Slices (cut like bread)']].forEach(([m,t])=>{
+  const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=t; b.dataset.m=m;
+  b.addEventListener('click',()=>{ st.method=m; if(m==='washer') seen.slices=true; st.w=0; st.unwrapDir=0; if(camMode==='unwrap') fitStd(); sync(); }); $('methods').appendChild(b); });
+[0,3,6,12,30].forEach(n=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=n?n:'None'; b.dataset.n=n;
+  b.addEventListener('click',()=>{ st.n=n; if(n>0){ if(st.method==='shell') seen.ns.add(n); st.w=0; st.unwrapDir=0; if(camMode==='unwrap') fitStd(); if(st.theta>=TAU-1e-3) st.theta=TAU*0.75; } sync(); }); $('stack').appendChild(b); });
+
+$('pos').addEventListener('input',e=>{ st.pos=e.target.value/1000; if(st.method==='shell'){ seen.posMin=Math.min(seen.posMin,st.pos); seen.posMax=Math.max(seen.posMax,st.pos); } if(camMode==='unwrap') fitUnwrap(); sync(); });
+$('dpf').addEventListener('input',e=>{ st.dpf=e.target.value/1000; if(camMode==='unwrap') fitUnwrap(); sync(); });
+$('theta').addEventListener('input',e=>{ st.theta=e.target.value/360*TAU; st.spinning=false; sync(); });
+$('wsl').addEventListener('input',e=>{ st.w=e.target.value/100; st.unwrapDir=0; if(st.w>0){ if(st.theta<TAU) st.theta=TAU; fitUnwrap(); } else if(camMode==='unwrap') fitStd(); if(st.w>=0.99) seen.unrolled=true; sync(); });
+$('showSolid').addEventListener('change',e=>{ st.showSolid=e.target.checked; sync(); });
+$('resetView').addEventListener('click',()=>{ camMode==='unwrap'?fitUnwrap():fitStd(); });
+$('spin').addEventListener('click',()=>{ if(st.spinning){ st.spinning=false; } else startSpin(); sync(); });
+$('unwrap').addEventListener('click',()=>{ if(st.method!=='shell') return;
+  if(st.w>=1-1e-3){ startUnwrap(-1); } else { if(st.theta<TAU-1e-3) st.theta=TAU; startUnwrap(1); } sync(); });
+function startSpin(){ st.theta=0; st.w=0; if(camMode==='unwrap') fitStd(); if(reduce){ st.theta=TAU; st.spinning=false; } else st.spinning=true; }
+function startUnwrap(dir){ fitUnwrap(); if(reduce){ st.w=dir>0?1:0; st.unwrapDir=0; if(st.w>=1) seen.unrolled=true; } else st.unwrapDir=dir; }
+function fitUnwrap(){
+  const info=K.pieceParams(sc,st), r=Math.max(info.r||0,sc.Rmax*0.15), h=info.h||sc.Hmax, w=st.w;
+  const halfW=r*(1.75+(Math.PI*1.3-1.75)*w), halfH=h*0.85+r*0.5*(1-w)+r*0.1;
+  const mid=K.axisPt(sc,((info.lo||0)+(info.hi||0))/2).add(new V(0,0,r*w));
+  if(sc.vert) S.fitBox(mid,halfW,halfH,new V(0.2,0.55,1)); else S.fitBox(mid,halfH,halfW,new V(0.2,0.55,1));
+  camMode='unwrap'; lastW=st.w;
+}
+function setScene(i){ sc=SCN[i]; seen.scenes.add(sc.id); sceneDirty=true; st.w=0; st.unwrapDir=0; fitStd(); sync(); }
+
+/* ---------- tabs ---------- */
+function setTab(t){
+  const play=t==='play';
+  document.querySelectorAll('.pl').forEach(e=>e.hidden=!play);
+  document.querySelectorAll('.nt').forEach(e=>e.hidden=play);
+  $('tabPlay').setAttribute('aria-selected',play); $('tabNotes').setAttribute('aria-selected',!play);
+}
+$('tabPlay').addEventListener('click',()=>setTab('play'));
+$('tabNotes').addEventListener('click',()=>setTab('notes'));
+
+/* ---------- mini picture ---------- */
+let lastInfo=null;
+function drawXS(info){
+  const cv=$('xs'), dpr=Math.min(window.devicePixelRatio||1,2), W=132; cv.width=W*dpr; cv.height=W*dpr;
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W,W); const tok=S.tok;
+  if(st.method==='shell'){
+    const sx=(W-16)/(TAU*sc.Rmax), s=Math.min(sx,(W-44)/sc.Hmax);
+    const w=info.around*s, h=Math.max(2,info.h*s), x0=(W-w)/2, y0=(W-h)/2-6;
+    g.fillStyle=tok('--slice'); g.fillRect(x0,y0,w,h); g.strokeStyle=tok('--ink'); g.lineWidth=1; g.strokeRect(x0,y0,w,h);
+    g.fillStyle=tok('--ink'); g.font='13px "Source Sans 3", sans-serif'; g.textAlign='center';
+    g.fillText('around',W/2,y0+h+15); g.textAlign='right'; g.fillText('tall',x0-4,y0+h/2+4);
+  } else {
+    const k=(W/2-8)/sc.Rmax, cx=W/2, cy=W/2;
+    g.strokeStyle=tok('--muted'); g.setLineDash([3,3]); g.beginPath(); g.arc(cx,cy,sc.Rmax*k,0,TAU); g.stroke(); g.setLineDash([]);
+    g.fillStyle=tok('--slice'); g.beginPath(); g.arc(cx,cy,info.R*k,0,TAU); if(info.r>1e-3) g.arc(cx,cy,info.r*k,0,TAU,true); g.fill('evenodd');
+    g.fillStyle=tok('--axis'); g.beginPath(); g.arc(cx,cy,2.5,0,TAU); g.fill();
+    g.fillStyle=tok('--ink'); g.font='13px "Source Sans 3", sans-serif'; g.textAlign='center';
+    g.fillText('slice, seen from above',W/2,W-3);
+  }
+}
+S.onTheme=()=>{ dirty=true; if(lastInfo) drawXS(lastInfo); };
+
+/* ---------- sync ---------- */
+function sync(){
+  dirty=true;
+  const info=K.pieceParams(sc,st); lastInfo=info;
+  const shell=st.method==='shell', n=st.n;
+  [...$('scenes').children].forEach((b,i)=>b.setAttribute('aria-pressed',SCN[i]===sc));
+  [...$('methods').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===st.method));
+  [...$('stack').children].forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===st.n));
+  $('what').textContent=sc.what;
+  $('stackLab').textContent=shell?'Add layers':'Add slices';
+  $('posLab').textContent=shell?'Which layer? (middle → edge)':'Which slice? (bottom → top)';
+  $('dpfLab').textContent=shell?'How thick is the layer?':'How thick is the slice?';
+  $('pos').value=Math.round(st.pos*1000); $('dpf').value=Math.round(st.dpf*1000);
+  $('showSolid').checked=st.showSolid;
+  const th=Math.round(st.theta/TAU*360);
+  $('theta').value=th; $('thetaOut').textContent=th+'°';
+  $('spin').textContent=st.spinning?'Pause':'Spin'; $('spin').disabled=st.w>0.002; $('theta').disabled=st.w>0.002;
+  $('unwrapGrp').hidden=!(shell&&n===0);
+  $('unwrap').textContent=st.w>=1-1e-3?'Roll up':'Unroll';
+  $('wsl').value=Math.round(st.w*100); $('wOut').textContent=Math.round(st.w*100)+'%';
+  $('oneLab').textContent=shell?'One layer, in numbers':'One slice, in numbers';
+  $('sliceNote').hidden=shell;
+  if(shell){
+    $('read').innerHTML=
+      `<dt>from the middle</dt><dd><span class="val hot">${fmt(info.r)}</span><span class="note">the radius</span></dd>`+
+      `<dt>how tall</dt><dd><span class="val hot">${fmt(info.h)}</span></dd>`+
+      `<dt>around</dt><dd><span class="val hot">${fmt(info.around)}</span><span class="note">2 × π × radius</span></dd>`+
+      `<dt>how thick</dt><dd><span class="val hot">${fmt(info.d)}</span></dd>`+
+      `<dt>material</dt><dd><span class="val hot">≈ ${fmt(info.dV)}</span><span class="note">around × tall × thick</span></dd>`;
+  } else {
+    $('read').innerHTML=
+      `<dt>edge</dt><dd><span class="val hot">${fmt(info.R)}</span><span class="note">outer radius</span></dd>`+
+      `<dt>hole</dt><dd><span class="val hot">${fmt(info.r)}</span><span class="note">inner radius</span></dd>`+
+      `<dt>how thick</dt><dd><span class="val hot">${fmt(info.d)}</span></dd>`+
+      `<dt>material</dt><dd><span class="val hot">≈ ${fmt(info.dV)}</span><span class="note">area of the ring × thick</span></dd>`;
+  }
+  drawXS(info);
+  const whole=sc.vShell, word=shell?'layers':'slices';
+  if(n>0){ const s=K.sumStack(sc,st.method,n);
+    $('total').innerHTML=
+      `<dt>${n} ${word}</dt><dd><span class="val hot">≈ ${s.toFixed(2)}</span><span class="note">all added up</span></dd>`+
+      `<dt>whole solid</dt><dd><span class="val hot">${whole.toFixed(2)}</span><span class="note">the true amount</span></dd>`+
+      `<dt>off by</dt><dd><span class="val hot">${(100*Math.abs(whole-s)/whole).toFixed(1)}%</span></dd>`;
+    $('sumfill').style.width=Math.min(100,100*s/whole)+'%';
+  } else {
+    $('total').innerHTML=`<dt>whole solid</dt><dd><span class="val hot">${whole.toFixed(2)}</span><span class="note">the true amount. Add ${word} above to see them add up to it.</span></dd>`;
+    $('sumfill').style.width='0%';
+  }
+  drawTodo();
+}
+
+function setDimLabels(){
+  const d=S.dim||{}, shell=st.method==='shell', unrolled=shell&&st.w>0.9, lw=sc.lw;
+  const off=(p,x,y)=>p?p.clone().add(new V(x,y,0)):null;
+  S.setLabel('axis', unrolled&&st.showPiece&&st.n===0 ? null : S.axisPos);
+  S.setLabel('rad', (shell&&!unrolled&&d.rad)?off(d.rad,0,-lw*13):null, 'from the middle');
+  S.setLabel('h',   (shell&&d.h)?(unrolled?off(d.h,-lw*12,0):off(d.h,lw*(sc.vert?14:0),lw*(sc.vert?0:12))):null, 'tall');
+  S.setLabel('around', unrolled&&d.around?off(d.around,0,-lw*9):null, 'around');
+  S.setLabel('thick',  unrolled&&d.thick?off(d.thick,lw*16,0):null, 'thick');
+  S.setLabel('R', (!shell&&d.R)?off(d.R,0,lw*8):null, 'edge');
+  S.setLabel('r', (!shell&&d.r)?off(d.r,0,-lw*8):null, 'hole');
+}
+
+/* ---------- reflection ---------- */
+const QS=[
+ {id:'q1', q:'Peel one layer, then slide it from the middle out to the edge. Where is the layer tallest? Where is it shortest? What does that tell you about the shape of the solid?', hint:'Say which solid you used.'},
+ {id:'q2', q:'Unroll a layer until it lies flat. What shape do you get? Name its three measurements. As you slide the layer away from the middle, which of the three change and which stay the same?', hint:''},
+ {id:'q3', q:'Add 3 layers, then 30. What happened to the gaps? Why does using thinner layers help?', hint:''},
+ {id:'q4', q:'You can cut a solid into layers (like an onion) or into slices (like bread). For one solid, which way looked simpler to describe? Point to something you actually saw.', hint:'Look at the hole in each slice.'},
+ {id:'q5', q:'In one sentence, explain what a “layer” of a solid is to a roommate who took Math 1530 but not Math 1540. No formulas.', hint:'', short:true},
+ {id:'q6', q:'One thing that surprised you:', hint:'', short:true},
+ {id:'q7', q:'One question you still have:', hint:'', short:true},
+ {id:'q8', q:'How sure do you feel about the layer idea, from 1 (lost) to 5 (could teach it)?', hint:'', conf:true}
+];
+const KEY='peel-the-solid-reflection-v1';
+let saved={}; try{ saved=JSON.parse(store.get(KEY)||'{}')||{}; }catch(e){ saved={}; }
+(function buildRefl(){
+  const box=$('refl');
+  const nm=document.createElement('div'); nm.innerHTML='<label class="q" for="nm">Your name</label><input type="text" id="nm" autocomplete="name">'; box.appendChild(nm);
+  QS.forEach((x,i)=>{
+    const w=document.createElement('div');
+    if(x.conf){
+      w.innerHTML=`<label class="q">${i+1}. ${x.q}</label><div class="chips" id="conf" role="group" aria-label="Confidence"></div>`;
+      box.appendChild(w);
+      [1,2,3,4,5].forEach(v=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=v; b.dataset.v=v;
+        b.addEventListener('click',()=>{ saved.conf=v; persist(); paintConf(); }); w.querySelector('#conf').appendChild(b); });
+    } else {
+      w.innerHTML=`<label class="q" for="${x.id}">${i+1}. ${x.q} ${x.hint?`<span class="hintq">${x.hint}</span>`:''}</label>`+
+        (x.short?`<input type="text" id="${x.id}">`:`<textarea id="${x.id}"></textarea>`);
+      box.appendChild(w);
+    }
+  });
+  const fields=['nm',...QS.filter(x=>!x.conf).map(x=>x.id)];
+  fields.forEach(id=>{ const el=$(id); if(saved[id]) el.value=saved[id]; el.addEventListener('input',()=>{ saved[id]=el.value; persist(); }); });
+  paintConf();
+})();
+function paintConf(){ const c=$('conf'); if(!c) return; [...c.children].forEach(b=>b.setAttribute('aria-pressed',saved.conf==b.dataset.v)); }
+function persist(){ const ok=store.set(KEY,JSON.stringify(saved)); $('saveNote').textContent=ok?'Saved on this device.':'Not saved automatically. Download when you finish.'; }
+function reflectionText(){
+  const L=['Math 1540 — Pre-assignment: Peel the Solid','Name: '+(saved.nm||''),'Date: '+new Date().toLocaleString(),
+    'Solids I looked at: '+SCN.filter(s=>seen.scenes.has(s.id)).map(s=>s.tab).join(', '),
+    'Things to try completed: '+triesDone()+' of '+TODO.length,'',''];
+  QS.forEach((x,i)=>{ L.push((i+1)+'. '+x.q); L.push(x.conf?String(saved.conf||''):(saved[x.id]||'')); L.push(''); });
+  return L.join('\n');
+}
+$('download').addEventListener('click',()=>{
+  const blob=new Blob([reflectionText()],{type:'text/plain;charset=utf-8'}), a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='peel-the-solid-reflection'+(saved.nm?'-'+saved.nm.replace(/[^A-Za-z0-9]+/g,'-'):'')+'.txt';
+  document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500);
+  $('saveNote').textContent='Downloaded. Turn it in the way your instructor asked.';
+});
+$('copy').addEventListener('click',async()=>{
+  try{ await navigator.clipboard.writeText(reflectionText()); $('saveNote').textContent='Copied. Paste it where your instructor asked.'; }
+  catch(e){ $('saveNote').textContent='Copy was blocked here. Use Download instead.'; }
+});
+
+/* ---------- loop ---------- */
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  if(st.spinning){ st.theta+=dt*TAU/4.5; if(st.theta>=TAU){ st.theta=TAU; st.spinning=false; } sync(); }
+  if(st.unwrapDir){ st.w+=st.unwrapDir*dt/3.2; if(st.w>=1){ st.w=1; st.unwrapDir=0; seen.unrolled=true; } if(st.w<=0){ st.w=0; st.unwrapDir=0; fitStd(); } else fitUnwrap(); sync(); }
+  if(camMode==='unwrap' && Math.abs(st.w-lastW)>1e-4) fitUnwrap();
+  if(sceneDirty){ K.buildStatic(S,sc); sceneDirty=false; dirty=true; }
+  if(dirty){ K.buildDyn(S,sc,st); setDimLabels(); dirty=false; }
+  S.render(); requestAnimationFrame(frame);
+}
+S.applyTheme(); S.resize(); fitStd(); sync(); setTab('play');
+window.__peel={st,seen,K,S,sync,setScene:i=>setScene(i),setTab,get sc(){return sc;},fitUnwrap};
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
