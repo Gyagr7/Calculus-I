@@ -125,7 +125,7 @@ const fitStd=()=>{ camMode='std'; S.fit(sc); };
 const seen={ scenes:new Set([SCN[0].id]), posMin:0.55, posMax:0.55, unrolled:false, ns:new Set(), slices:false };
 const TODO=[
   {t:'Slide the layer from near the middle out to the edge.', ok:()=>seen.posMax-seen.posMin>=0.6},
-  {t:'Unroll a layer until it lies flat.', ok:()=>seen.unrolled},
+  {t:'Unroll a layer until it lies flat (use the Unroll button under the picture, in Layers mode).', ok:()=>seen.unrolled},
   {t:'Add layers: try 3, then 30.', ok:()=>seen.ns.has(3)&&seen.ns.has(30)},
   {t:'Switch to slices and look at a few.', ok:()=>seen.slices},
   {t:'Go back and try a second solid.', ok:()=>seen.scenes.size>=2}
@@ -146,11 +146,11 @@ SCN.forEach((s,i)=>{ const b=document.createElement('button'); b.type='button'; 
 $('pos').addEventListener('input',e=>{ st.pos=e.target.value/1000; if(st.method==='shell'){ seen.posMin=Math.min(seen.posMin,st.pos); seen.posMax=Math.max(seen.posMax,st.pos); } if(camMode==='unwrap') fitUnwrap(); sync(); });
 $('dpf').addEventListener('input',e=>{ st.dpf=e.target.value/1000; if(camMode==='unwrap') fitUnwrap(); sync(); });
 $('theta').addEventListener('input',e=>{ st.theta=e.target.value/360*TAU; st.spinning=false; sync(); });
-$('wsl').addEventListener('input',e=>{ st.w=e.target.value/100; st.unwrapDir=0; if(st.w>0){ if(st.theta<TAU) st.theta=TAU; fitUnwrap(); } else if(camMode==='unwrap') fitStd(); if(st.w>=0.99) seen.unrolled=true; sync(); });
+$('wsl').addEventListener('input',e=>{ st.n=0; st.w=e.target.value/100; st.unwrapDir=0; if(st.w>0){ if(st.theta<TAU) st.theta=TAU; fitUnwrap(); } else if(camMode==='unwrap') fitStd(); if(st.w>=0.99) seen.unrolled=true; sync(); });
 $('showSolid').addEventListener('change',e=>{ st.showSolid=e.target.checked; sync(); });
 $('resetView').addEventListener('click',()=>{ camMode==='unwrap'?fitUnwrap():fitStd(); });
 $('spin').addEventListener('click',()=>{ if(st.spinning){ st.spinning=false; } else startSpin(); sync(); });
-$('unwrap').addEventListener('click',()=>{ if(st.method!=='shell') return;
+$('unwrap').addEventListener('click',()=>{ if(st.method!=='shell') return; st.n=0;
   if(st.w>=1-1e-3){ startUnwrap(-1); } else { if(st.theta<TAU-1e-3) st.theta=TAU; startUnwrap(1); } sync(); });
 function startSpin(){ st.theta=0; st.w=0; if(camMode==='unwrap') fitStd(); if(reduce){ st.theta=TAU; st.spinning=false; } else st.spinning=true; }
 function startUnwrap(dir){ fitUnwrap(); if(reduce){ st.w=dir>0?1:0; st.unwrapDir=0; if(st.w>=1) seen.unrolled=true; } else st.unwrapDir=dir; }
@@ -212,7 +212,7 @@ function sync(){
   const th=Math.round(st.theta/TAU*360);
   $('theta').value=th; $('thetaOut').textContent=th+'°';
   $('spin').textContent=st.spinning?'Pause':'Spin'; $('spin').disabled=st.w>0.002; $('theta').disabled=st.w>0.002;
-  $('unwrapGrp').hidden=!(shell&&n===0);
+  $('unwrapGrp').hidden=!shell;
   $('unwrap').textContent=st.w>=1-1e-3?'Roll up':'Unroll';
   $('wsl').value=Math.round(st.w*100); $('wOut').textContent=Math.round(st.w*100)+'%';
   $('oneLab').textContent=shell?'One layer, in numbers':'One slice, in numbers';
