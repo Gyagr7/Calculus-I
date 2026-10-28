@@ -124,7 +124,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "P.13",
   "title": "Thu Oct 29: Volumes: The Shell Method",
-  "body": " Thu Oct 29: Volumes: The Shell Method  Today in class: (Stewart 6.3).   Think about this  So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?  Could that ever be easier? Disks and shells can both work on the same solid -- what would make you pick one over the other?   Play with the animation below first. Then open the My reflection tab, write your answers, and download them. About 15 minutes, completion credit.   Peel the Solid. Peel one thin layer off a solid, unroll it, and add more layers until they fill the solid.     Open animation in a new tab   "
+  "body": " Thu Oct 29: Volumes: The Shell Method  Today in class: (Stewart 6.3).   Think about this  So far we sliced solids like bread. What if we peeled them like an onion instead, one thin layer at a time?  Could that ever be easier? Disks and shells can both work on the same solid -- what would make you pick one over the other?   Play with the animation below first. Then open the Questions for your paper tab and write your answers on paper. About 15 minutes, completion credit.   Peel the Solid. Peel one thin layer off a solid, unroll it, and add more layers until they fill the solid.     Open animation in a new tab   "
 },
 {
   "id": "fig-peel-the-solid",
